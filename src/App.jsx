@@ -1,4 +1,4 @@
-import './App.css';
+import './styles/App.css';
 import AppRoute from './route/app.route';
 
 const App = () => (
