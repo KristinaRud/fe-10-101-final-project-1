@@ -3,7 +3,7 @@ import NotPage from '../pages/NotPage/NotPage';
 
 const AppRoute = () => (
   <Routes>
-    <Route path="/" element={<div>Home</div>} />
+    <Route path="/" element={<div>Home page</div>} />
     <Route path="*" element={<NotPage />} />
   </Routes>
 );
