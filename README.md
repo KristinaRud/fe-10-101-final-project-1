@@ -2,6 +2,11 @@
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
+# Actions Status
+
+![Continuous Integration](https://github.com/KristinaRud/fe-10-101-final-project-1/actions/workflows/CI.yml/badge.svg)
+![Continuous Deployment](https://github.com/KristinaRud/fe-10-101-final-project-1/actions/workflows/CD.yml/badge.svg)
+
 ## Available Scripts
 
 In the project directory, you can run:
