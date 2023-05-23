@@ -1,5 +1,3 @@
-const NotPage = () => (
-  <div>Not Page</div>
-);
+const NotPage = () => <div>Not Page</div>;
 
 export default NotPage;
