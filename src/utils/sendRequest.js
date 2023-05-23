@@ -7,4 +7,4 @@ const sendRequest = async (url) => {
   }
 };
 
-export default sendRequest
+export default sendRequest;
