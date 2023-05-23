@@ -3,7 +3,7 @@
 
 npm test
 npx eslint src/**/*.js --fix
-npx stylelint "**/*.css" --fix
+npx stylelint "**/*.scss" --fix
 
 
 
