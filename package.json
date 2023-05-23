@@ -30,8 +30,11 @@
   },
   "eslintConfig": {
     "extends": [
+      "react-app",
+      "react-app/jest",
       "airbnb",
-      "airbnb/hooks"
+      "airbnb/hooks",
+      "plugin:prettier/recommended"
     ],
     "env": {
       "jest": true,
@@ -39,13 +42,27 @@
       "node": true
     },
     "parserOptions": {
+      "ecmaFeatures": {
+        "jsx": true
+      },
       "ecmaVersion": 11
     },
+    "plugins": [
+      "react",
+      "prettier"
+    ],
     "rules": {
       "linebreak-style": [
         "error",
         "windows"
       ],
+      "react/jsx-uses-react": [
+        "off"
+      ],
+      "react/jsx-props-no-spreading": [
+        "warm"
+      ],
+      "no-shadow": "off",
       "react/react-in-jsx-scope": 0,
       "react/jsx-filename-extension": [
         1,
@@ -81,11 +98,14 @@
   "devDependencies": {
     "eslint": "^8.2.0",
     "eslint-config-airbnb": "^19.0.4",
+    "eslint-config-prettier": "^8.8.0",
     "eslint-plugin-import": "^2.25.3",
     "eslint-plugin-jsx-a11y": "^6.5.1",
+    "eslint-plugin-prettier": "^4.2.1",
     "eslint-plugin-react": "^7.28.0",
     "eslint-plugin-react-hooks": "^4.3.0",
     "husky": "^8.0.0",
+    "prettier": "^2.8.8",
     "stylelint": "^15.6.2",
     "stylelint-config-standard": "^33.0.0"
   }
