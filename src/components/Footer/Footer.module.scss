@@ -1,3 +1,42 @@
-.footer{
-    color: red;
+.footer {
+    background-color: #020203;
+    color: #fff;
 }
+
+.container {
+    margin: 0 auto;
+    max-width: 1398px;
+}
+
+.header {
+    .header-title {
+        display: flex;
+        flex-direction: column;
+        font-family: 'Poppins';
+        font-style: normal;
+
+        h3 {
+            font-weight: 500;
+            font-size: 38px;
+            line-height: 1.31;
+        }
+
+        p {
+            font-weight: 300;
+            font-size: 16px;
+            line-height: 1.31;
+        }
+    }
+}
+
+
+.links {
+    border-bottom: 1px solid #fff;
+    opacity: 0.2;
+}
+
+.utility {
+    display: flex;
+    justify-content: space-between;
+}
+    

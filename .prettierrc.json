@@ -5,5 +5,10 @@
   "singleQuote": false,
   "trailingComma": "all",
   "printWidth": 80,
-  "endOfLine": "auto"
+  "endOfLine": "auto",
+  "bracketSpacing": true,
+  "jsxBracketSameLine": false,
+  "arrowParens": "always",
+  "requirePragma": false,
+  "insertPragma": false
 }
