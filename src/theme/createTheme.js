@@ -6,7 +6,7 @@ import "@fontsource/poppins/400-italic.css";
 import "@fontsource/poppins/500-italic.css";
 import "@fontsource/poppins/600-italic.css";
 import "@fontsource/poppins/700-italic.css";
-import { createTheme } from "@mui/material";
+import { createTheme } from "@mui/material/styles";
 import { enUS } from "@mui/material/locale";
 
 const theme = createTheme(
@@ -40,7 +40,7 @@ const theme = createTheme(
         contrastText: "#fff",
       },
       text: {
-        primary: "#000",
+        main: "#000",
         secondary: "#A2A6B0",
       },
       background: {
