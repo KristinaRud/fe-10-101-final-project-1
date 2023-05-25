@@ -1,5 +1,5 @@
 const SortList = () => {
-  return <div />;
+  return <div>test</div>;
 };
 
 export default SortList;
