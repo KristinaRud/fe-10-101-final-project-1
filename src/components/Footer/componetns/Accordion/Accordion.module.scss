@@ -1,0 +1,57 @@
+.item {
+    border-bottom: 1px solid #a2a6b0;
+    padding: 11px 5px;
+    font-family: "Poppins";
+    font-style: normal;
+    font-weight: 300;
+    font-size: 12px;
+    line-height: 1.7;
+    margin: 0 11px;
+}
+
+.header {
+    a {
+        color: rgba(255, 255, 255, 1);
+    }
+}
+
+.header::after {
+    content: "";
+    float: right;
+    position: relative;
+    top: 5px;
+    background: transparent url("data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNyIgaGVpZ2h0PSI1IiB2aWV3Qm94PSIwIDAgNyA1IiBmaWxsPSJub25lIiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciPgo8cGF0aCBkPSJNNS41IDEuNzY5MjNMMy41IDMuNzY5MjNMMS41IDEuNzY5MjMiIHN0cm9rZT0iI0U1RUNGMSIgc3Ryb2tlLXdpZHRoPSIxLjYiIHN0cm9rZS1saW5lY2FwPSJyb3VuZCIvPgo8L3N2Zz4K") no-repeat 50% 50%;
+    background-size: auto;
+    background-size: 100%;
+    width: 0px;
+    height: 0px;
+    width: 8px;
+    height: 4px;
+    transition: 300ms;
+    transform: rotate(0deg);
+}
+
+.active.header::after {
+    content: "";
+    float: right;
+    position: relative;
+    top: 5px;
+    background: transparent url("data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNyIgaGVpZ2h0PSI1IiB2aWV3Qm94PSIwIDAgNyA1IiBmaWxsPSJub25lIiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciPgo8cGF0aCBkPSJNNS41IDEuNzY5MjNMMy41IDMuNzY5MjNMMS41IDEuNzY5MjMiIHN0cm9rZT0iI0U1RUNGMSIgc3Ryb2tlLXdpZHRoPSIxLjYiIHN0cm9rZS1saW5lY2FwPSJyb3VuZCIvPgo8L3N2Zz4K") no-repeat 50% 50%;
+    background-size: auto;
+    background-size: 100%;
+    width: 0px;
+    height: 0px;
+    width: 8px;
+    height: 4px;
+    transition: 300ms;
+    transform: rotate(180deg);
+}
+
+.summary {
+    display: none;
+
+    &.active {
+        display: block;
+        margin-left: 11px;
+    }
+}
