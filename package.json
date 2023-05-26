@@ -5,22 +5,20 @@
   "dependencies": {
     "@emotion/react": "^11.11.0",
     "@emotion/styled": "^11.11.0",
-    "@mui/icons-material": "^5.11.16",
     "@mui/material": "^5.13.1",
     "@reduxjs/toolkit": "^1.9.5",
     "@testing-library/jest-dom": "^5.16.5",
     "@testing-library/react": "^13.4.0",
     "@testing-library/user-event": "^13.5.0",
     "classnames": "^2.3.2",
-    "eslint-plugin-flowtype": "^8.0.3",
     "formik": "^2.2.9",
-    "or": "^0.2.0",
     "prop-types": "^15.8.1",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-redux": "^8.0.5",
     "react-router-dom": "^6.11.2",
     "react-scripts": "5.0.1",
+    "react-uid": "^2.3.2",
     "web-vitals": "^2.1.4",
     "yup": "^1.1.1"
   },
@@ -42,8 +40,7 @@
     "env": {
       "jest": true,
       "browser": true,
-      "node": true,
-      "bem-xjst/bemhtml": true
+      "node": true
     },
     "parserOptions": {
       "ecmaFeatures": {
@@ -53,12 +50,10 @@
     },
     "plugins": [
       "react",
-      "prettier",
-      "bem-xjst"
+      "prettier"
     ],
     "rules": {
       "jsx-a11y/click-events-have-key-events": 0,
-      "jsx-a11y/no-noninteractive-element-interactions": 0,
       "jsx-a11y/no-static-element-interactions": 0,
       "linebreak-style": [
         "error",
@@ -84,7 +79,8 @@
         }
       ],
       "import/no-named-as-default": 0,
-      "import/no-named-as-default-member": 0
+      "import/no-named-as-default-member": 0,
+      "import/prefer-default-export": "off"
     }
   },
   "browserslist": {
@@ -103,11 +99,10 @@
     "eslint": "^8.2.0",
     "eslint-config-airbnb": "^19.0.4",
     "eslint-config-prettier": "^8.8.0",
-    "eslint-plugin-bem-xjst": "^2.3.0",
-    "eslint-plugin-import": "^2.27.5",
-    "eslint-plugin-jsx-a11y": "^6.7.1",
+    "eslint-plugin-import": "^2.25.3",
+    "eslint-plugin-jsx-a11y": "^6.5.1",
     "eslint-plugin-prettier": "^4.2.1",
-    "eslint-plugin-react": "^7.32.2",
+    "eslint-plugin-react": "^7.28.0",
     "eslint-plugin-react-hooks": "^4.3.0",
     "husky": "^8.0.0",
     "prettier": "^2.8.8",
