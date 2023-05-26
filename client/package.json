@@ -1,4 +1,8 @@
 {
+<<<<<<< HEAD
+<<<<<<<< HEAD:client/package.json
+=======
+>>>>>>> main
   "name": "project",
   "version": "0.1.0",
   "private": true,
@@ -18,7 +22,23 @@
     "react-redux": "^8.0.5",
     "react-router-dom": "^6.11.2",
     "react-scripts": "5.0.1",
+<<<<<<< HEAD
     "react-uid": "^2.3.2",
+    "web-vitals": "^2.1.4",
+    "yup": "^1.1.1"
+  },
+========
+  "name": "fe-final-backend",
+  "version": "1.0.0",
+  "description": "Back End code for final projects of Front End groups\u001b[D\u001b[D\u001b[D\u001b[D\u001b[D\u001b[D\u001b[D\u001b[D\u001b[D\u001b[D\u001b[D\u001b[D\u001b[D\u001b[D\u001b[D\u001b[DDANIT\u001b[3~ Front End groups",
+  "main": "server.js",
+>>>>>>>> main:package.json
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "server": "nodemon server.js"
+  },
+<<<<<<<< HEAD:client/package.json
+=======
     "web-vitals": "^2.1.4",
     "yup": "^1.1.1"
   },
@@ -29,6 +49,7 @@
     "eject": "react-scripts eject",
     "prepare": "husky install"
   },
+>>>>>>> main
   "eslintConfig": {
     "extends": [
       "react-app",
@@ -53,9 +74,16 @@
       "prettier"
     ],
     "rules": {
+<<<<<<< HEAD
       "jsx-a11y/click-events-have-key-events": 0,
       "jsx-a11y/no-static-element-interactions": 0,
       "linebreak-style": 0,
+=======
+      "linebreak-style": [
+        "error",
+        "windows"
+      ],
+>>>>>>> main
       "react/jsx-uses-react": 0,
       "react/jsx-props-no-spreading": 1,
       "no-shadow": 0,
@@ -76,8 +104,39 @@
         }
       ],
       "import/no-named-as-default": 0,
+<<<<<<< HEAD
       "import/no-named-as-default-member": 0,
       "import/prefer-default-export": "off"
+    }
+========
+  "repository": {
+    "type": "git",
+    "url": "https://gitlab.com/dan-it/js-course-development/fe-final-backend.git"
+>>>>>>>> main:package.json
+  },
+  "author": "Saribeg",
+  "license": "ISC",
+  "dependencies": {
+    "bcryptjs": "^2.4.3",
+    "body-parser": "^1.19.0",
+    "dotenv": "^8.1.0",
+    "express": "^4.17.1",
+    "fs-extra": "^8.1.0",
+    "jsonwebtoken": "^8.5.1",
+    "lodash": "^4.17.15",
+    "moment": "^2.24.0",
+    "mongoose": "^5.6.10",
+    "multer": "^1.4.2",
+    "nodemailer": "^6.3.0",
+    "passport": "^0.4.0",
+    "passport-jwt": "^4.0.0",
+    "unique-random": "^2.1.0",
+    "validator": "^11.1.0"
+  },
+  "devDependencies": {
+<<<<<<<< HEAD:client/package.json
+=======
+      "import/no-named-as-default-member": 0
     }
   },
   "browserslist": {
@@ -93,6 +152,7 @@
     ]
   },
   "devDependencies": {
+>>>>>>> main
     "eslint": "^8.2.0",
     "eslint-config-airbnb": "^19.0.4",
     "eslint-config-prettier": "^8.8.0",
@@ -103,9 +163,19 @@
     "eslint-plugin-react-hooks": "^4.3.0",
     "husky": "^8.0.0",
     "prettier": "^2.8.8",
+<<<<<<< HEAD
     "sass": "^1.62.1",
+    "stylelint": "^15.6.2",
+    "stylelint-config-standard": "^33.0.0"
+========
+    "nodemon": "^1.19.1"
+>>>>>>>> main:package.json
+  }
+}
+
+=======
     "stylelint": "^15.6.2",
     "stylelint-config-standard": "^33.0.0"
   }
 }
-
+>>>>>>> main
