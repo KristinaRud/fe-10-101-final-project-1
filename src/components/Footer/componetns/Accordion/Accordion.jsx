@@ -5,17 +5,14 @@ import styles from "./Accordion.module.scss";
 
 const Accordion = ({ title, details }) => {
   const [isAccordion, setAccordion] = useState(false);
-  const toggleAccordion = () => {
-    setAccordion((prev) => !prev);
-  };
+
   return (
     <div className={styles.item}>
-      {/* eslint-disable jsx-a11y/click-events-have-key-events, jsx-a11y/no-noninteractive-element-interactions */}
       <div
-        role="button"
-        tabIndex={0}
         className={cx(isAccordion && styles.active, styles.header)}
-        onClick={toggleAccordion}
+        onClick={() => {
+          setAccordion((prev) => !prev);
+        }}
       >
         {title}
       </div>
