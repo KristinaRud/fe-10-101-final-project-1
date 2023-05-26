@@ -3,6 +3,3 @@
 
 npx eslint src/**/*.js --fix
 npx stylelint "**/*.css" --fix
-
-
-
