@@ -1,7 +1,11 @@
 .features {
     background: radial-gradient(50% 50% at 50% 50%, #242528 0%, #040404 100%);
     &__inner {
-        padding: 75px 15px 95px;
+        padding: 75px 20px 95px;
+        @media screen and (max-width: 810px) {
+            padding-top: 30px;
+            padding-bottom: 40px;
+        }
     }
 
     &__header {
@@ -9,6 +13,9 @@
         padding-bottom: 60px;
         text-align: center;
         margin: 0 auto;
+        @media screen and (max-width: 480px) {
+            padding-bottom: 30px;
+        }
     }
 
     &__title {
@@ -17,6 +24,10 @@
         line-height: 1.5;
         color: #FFF;
         padding-bottom: 30px;
+        @media screen and (max-width: 810px) {
+            font-size: 32px;
+            padding-bottom: 15px;
+        }
     }
 
     &__subtitle {
@@ -24,6 +35,9 @@
         font-size: 18px;
         line-height: 1.44;
         color: #FFF;
+        @media screen and (max-width: 810px) {
+            font-size: 16px;
+        }
     }
 }
 
@@ -38,6 +52,11 @@
     @media screen and (max-width: 810px) {
         grid-template-columns: repeat(auto-fit, minmax(245px, 1fr));
         gap: 30px;
+    }
+
+    @media screen and (max-width: 480px) {
+        grid-template-columns: repeat(auto-fit, minmax(220px, 280px));
+        gap: 20px;
     }
 
     &__item-heading {
