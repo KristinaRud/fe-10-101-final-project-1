@@ -7,17 +7,20 @@ import {
 } from "@mui/material";
 import AppRoute from "./route/app.route";
 import store from "./store";
+import Footer from "./components/Footer/Footer";
 import theme from "./theme/createTheme";
 
 const App = () => (
   <Provider store={store}>
     <BrowserRouter>
+      <AppRoute />
       <ThemeProvider theme={theme}>
         <StyledEngineProvider injectFirst>
           <CssBaseline />
           <AppRoute />
         </StyledEngineProvider>
       </ThemeProvider>
+      <Footer />
     </BrowserRouter>
   </Provider>
 );
