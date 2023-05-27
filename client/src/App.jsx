@@ -14,13 +14,13 @@ const App = () => (
   <Provider store={store}>
     <BrowserRouter>
       <AppRoute />
-      <Footer />
       <ThemeProvider theme={theme}>
         <StyledEngineProvider injectFirst>
           <CssBaseline />
           <AppRoute />
         </StyledEngineProvider>
       </ThemeProvider>
+      <Footer />
     </BrowserRouter>
   </Provider>
 );
