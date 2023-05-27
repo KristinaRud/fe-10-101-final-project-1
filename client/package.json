@@ -71,6 +71,7 @@
             ".js",
             ".jsx"
           ]
+
         }
       ],
       "react/function-component-definition": [
