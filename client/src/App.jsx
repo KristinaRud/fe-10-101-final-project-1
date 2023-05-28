@@ -13,7 +13,6 @@ import theme from "./theme/createTheme";
 const App = () => (
   <Provider store={store}>
     <BrowserRouter>
-      <AppRoute />
       <ThemeProvider theme={theme}>
         <StyledEngineProvider injectFirst>
           <CssBaseline />

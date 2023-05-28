@@ -1,6 +1,6 @@
 import { uid } from "react-uid";
 import styles from "./Support.module.scss";
-import LinkItem from "./Link/Link";
+import LinkItem from "./components/Link";
 
 const SUPPORT_LINKS_DATA = ["Product Support", "FAQ", "Our Buyer Guide"];
 
