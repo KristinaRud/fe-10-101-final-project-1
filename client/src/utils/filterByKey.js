@@ -1,4 +1,3 @@
-// eslint-disable-next-line import/prefer-default-export
 export const filterByKey = (data, key) => {
   const counterMap = {};
 

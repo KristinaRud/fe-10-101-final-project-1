@@ -1,34 +1,50 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import {
   Accordion,
   AccordionSummary,
   Typography,
   AccordionDetails,
+  CircularProgress,
 } from "@mui/material";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 import PropTypes from "prop-types";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import { useEffect } from "react";
+import { useLocation, useNavigate } from "react-router-dom";
 import { filterByKey } from "../../../../utils/filterByKey";
 import { formatString } from "../../../../utils/formatString";
 import { filterByPrice } from "../../../../utils/filterByPrice";
-import { setFilters } from "../../../../store/slices/filters.slice";
+import {
+  selectFilters,
+  setCategory,
+  setFilters,
+} from "../../../../store/slices/filters.slice";
+import { deleteAllQueryFilters } from "../../../../utils/deleteAllQueryFilters";
+import { fetchProductsByCategory } from "../../../../store/actionCreator/filters.actionCreator";
 import s from "./FilterItem.module.scss";
 
-const FilterByKey = ({ filterOptions = [], keyOption }) => {
+const FilterByKey = ({ keyOption }) => {
+  const location = useLocation();
+  const searchParams = new URLSearchParams(location.search);
+  const categories = searchParams.get("categories");
   const dispatch = useDispatch();
+  const navigate = useNavigate();
+  const filters = useSelector(selectFilters);
+  const query = filters.filters;
+
   const handleAddFilers = (event) => {
     dispatch(setFilters({ name: keyOption, value: [event.target.innerText] }));
   };
 
   const renderOptions = () => {
-    let filterArr = [];
+    let filterArr;
     if (keyOption === "currentPrice") {
-      filterArr = filterByPrice(filterOptions);
+      filterArr = filterByPrice(filters.productsOfCategory.products);
     } else {
-      filterArr = filterByKey(filterOptions, keyOption);
+      filterArr = filterByKey(filters.productsOfCategory.products, keyOption);
     }
-    return filterArr.map((obj, index) => (
-      // eslint-disable-next-line react/no-array-index-key
-      <div key={index} className={s.filter_item}>
+    return filterArr.map((obj) => (
+      <div key={obj.range || obj[keyOption]} className={s.filter_item}>
         <Typography
           variant="h6"
           component="span"
@@ -44,6 +60,14 @@ const FilterByKey = ({ filterOptions = [], keyOption }) => {
     ));
   };
 
+  useEffect(() => {
+    if (categories !== filters.category) {
+      deleteAllQueryFilters(query, searchParams, navigate, dispatch);
+    }
+    dispatch(setCategory(categories));
+    dispatch(fetchProductsByCategory(categories));
+  }, [dispatch, categories]);
+
   return (
     <Accordion className={s.wrapper}>
       <AccordionSummary
@@ -56,15 +80,17 @@ const FilterByKey = ({ filterOptions = [], keyOption }) => {
         </Typography>
       </AccordionSummary>
       <AccordionDetails className={s.content}>
-        {renderOptions()}
+        {Object.keys(filters.productsOfCategory).length > 0 ? (
+          renderOptions()
+        ) : (
+          <CircularProgress />
+        )}
       </AccordionDetails>
     </Accordion>
   );
 };
 
 FilterByKey.propTypes = {
-  // eslint-disable-next-line react/forbid-prop-types
-  filterOptions: PropTypes.arrayOf(PropTypes.object).isRequired,
   keyOption: PropTypes.string.isRequired,
 };
 export default FilterByKey;

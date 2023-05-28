@@ -1,4 +1,3 @@
-// eslint-disable-next-line import/prefer-default-export
 export const filterByPrice = (data) => {
   const minPrice = Math.min(...data.map((obj) => obj.currentPrice));
   const maxPrice = Math.max(...data.map((obj) => obj.currentPrice));

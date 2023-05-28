@@ -1,12 +1,26 @@
-import { useState } from "react";
+import { useEffect } from "react";
+import { useLocation } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
+import { catalogSelector } from "../../../store/slices/catalog.slice";
+import { fetchCategory } from "../../../store/actionCreator/catalog.actionCreator";
 import s from "./CategoryImg.module.scss";
 
 const CategoryImg = () => {
-  // eslint-disable-next-line no-unused-vars
-  const [category, setCategory] = useState({}); // зчитуєм з url категорію і робим гет на отримання її з бекенду
+  const location = useLocation();
+  const searchParams = new URLSearchParams(location.search);
+  const categories = searchParams.get("categories");
+  const category = useSelector(catalogSelector);
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    dispatch(fetchCategory(categories));
+  }, [dispatch, categories]);
+
   return (
     <div className={s.wrapper}>
-      <img className={s.img} src={category.img} alt="category" />
+      {category.length > 0 && (
+        <img className={s.img} src={category.imgUrl} alt="category" />
+      )}
     </div>
   );
 };

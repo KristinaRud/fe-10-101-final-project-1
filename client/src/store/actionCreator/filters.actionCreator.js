@@ -1,11 +1,11 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
 
-const fetchProducts = createAsyncThunk(
-  "products/fetchProducts",
-  async (queryStr, thunkAPI) => {
+export const fetchProductsByCategory = createAsyncThunk(
+  "filters/fetchProductsByCategory",
+  async (categories, thunkAPI) => {
     try {
       const response = await fetch(
-        `http://localhost:4000/api/products/filter${queryStr}`,
+        `http://localhost:4000/api/products/filter?categories=${categories}`,
       );
       const data = await response.json();
       return data;
@@ -14,5 +14,3 @@ const fetchProducts = createAsyncThunk(
     }
   },
 );
-
-export { fetchProducts };

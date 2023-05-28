@@ -1,14 +1,16 @@
 import { Typography } from "@mui/material";
 import PropTypes from "prop-types";
+import { useSelector } from "react-redux";
 import ListWrapper from "../ListWrapper/ListWrapper";
 import CompareProductsItem from "./CompareProductsItem/CompareProductsItem";
+import { selectWishList } from "../../../store/slices/wishList.slice";
 
 const CompareProducts = ({ isFavourite }) => {
-  const data = []; // дістаєм масив з файворіта з поміткою compare. так як такої колекції немає, або фейворіте. якщо є пропс тру
+  const data = useSelector(selectWishList); // TODO: коли визначимось з механізмом отримання товарів для повірняння
   return (
     <ListWrapper title={isFavourite ? "My Wish List" : "Compare Products"}>
-      {data.length > 0 ? (
-        data.map((item) => (
+      {Object.keys(data).length > 0 ? (
+        data.products.map((item) => (
           <CompareProductsItem
             key={item.itemNo}
             name={item.name}

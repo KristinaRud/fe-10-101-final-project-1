@@ -4,26 +4,25 @@ import { fetchProducts } from "../actionCreator/products.actionCreator";
 const productsSlice = createSlice({
   name: "products",
   initialState: {
-    products: [],
+    products: {},
     isLoading: false,
     error: null,
   },
   reducers: {},
-  extraReducers: {
-    [fetchProducts.fulfilled.type]: (state, action) => {
-      state.products = action.payload;
-      state.isLoading = false;
-      state.error = null;
-    },
-    [fetchProducts.pending.type]: (state) => {
+  extraReducers: (builder) => {
+    builder.addCase(fetchProducts.pending, (state) => {
       state.isLoading = true;
-    },
-    [fetchProducts.rejected.type]: (state, action) => {
+    });
+    builder.addCase(fetchProducts.fulfilled, (state, action) => {
+      state.isLoading = false;
+      state.products = action.payload;
+    });
+    builder.addCase(fetchProducts.rejected, (state, action) => {
       state.isLoading = false;
       state.error = action.payload;
-    },
+    });
   },
 });
 
-export const selectProducts = (state) => state.products;
+export const selectProducts = (state) => state.products.products;
 export default productsSlice.reducer;
