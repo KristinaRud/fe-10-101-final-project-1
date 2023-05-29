@@ -20,6 +20,7 @@
     "react-redux": "^8.0.5",
     "react-router-dom": "^6.11.2",
     "react-scripts": "5.0.1",
+    "react-uid": "^2.3.3",
     "sass": "^1.62.1",
     "web-vitals": "^2.1.4",
     "yup": "^1.1.1"
@@ -27,60 +28,10 @@
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
-    "test": "react-scripts test",
-    "eject": "react-scripts eject",
-    "prepare": "husky install"
-  },
-  "eslintConfig": {
-    "extends": [
-      "react-app",
-      "react-app/jest",
-      "airbnb",
-      "airbnb/hooks",
-      "plugin:prettier/recommended"
-    ],
-    "env": {
-      "jest": true,
-      "browser": true,
-      "node": true
-    },
-    "parserOptions": {
-      "ecmaFeatures": {
-        "jsx": true
-      },
-      "ecmaVersion": 11
-    },
-    "plugins": [
-      "react",
-      "prettier"
-    ],
-    "rules": {
-      "linebreak-style": [
-        "error",
-        "windows"
-      ],
-      "react/jsx-uses-react": 0,
-      "react/jsx-props-no-spreading": 1,
-      "no-shadow": 0,
-      "react/react-in-jsx-scope": 0,
-      "react/jsx-filename-extension": [
-        1,
-        {
-          "extensions": [
-            ".js",
-            ".jsx"
-          ]
-        }
-      ],
-      "react/function-component-definition": [
-        2,
-        {
-          "namedComponents": "arrow-function"
-        }
-      ],
-      "import/no-named-as-default": 0,
-      "import/no-named-as-default-member": 0
-    }
+    "test": "react-scripts test --watchAll",
+    "eject": "react-scripts eject --watchAll",
+    "prepare": "husky install",
+    "pre-push": "cd client && npm-run-all pre-push:test lint"
   },
   "browserslist": {
     "production": [
@@ -103,8 +54,9 @@
     "eslint-plugin-prettier": "^4.2.1",
     "eslint-plugin-react": "^7.28.0",
     "eslint-plugin-react-hooks": "^4.3.0",
-    "husky": "^8.0.0",
+    "husky": "^8.0.3",
     "prettier": "^2.8.8",
+    "sass": "^1.62.1",
     "stylelint": "^15.6.2",
     "stylelint-config-standard": "^33.0.0"
   }

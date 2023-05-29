@@ -1,0 +1,152 @@
+.navigation {
+  display: flex;
+  list-style: none;
+  margin: 16px 0 16px 16px;
+  padding: 0;
+  gap: 10px;
+  & a {
+    color: rgba(0, 0, 0, 0.87);
+  }
+  & li {
+    font-weight: 400;
+    font-size: 12px;
+    line-height: 18px;
+  }
+}
+
+.blue {
+  color: #0156ff;
+}
+
+.title {
+  font-weight: 600;
+  font-size: 18px;
+  line-height: 27px;
+  margin-left: 16px;
+  margin-bottom: 21px;
+
+  @media (min-width: 1400px) {
+    font-size: 32px;
+    line-height: 48px;
+  }
+}
+
+.section {
+  padding-bottom: 26px;
+  display: flex;
+  flex-direction: column;
+
+  & .container {
+    margin-right: 16px;
+    margin-left: 33px;
+  }
+
+  & img {
+    width: 100%;
+    max-width: 250px;
+    max-height: 200px;
+    margin: auto;
+  }
+
+  & h2 {
+    font-size: 32px;
+    line-height: 42px;
+    margin-bottom: 16px;
+    margin-top: 0;
+  }
+  .top {
+    margin-top: 17px;
+  }
+  & p {
+    font-size: 14px;
+    line-height: 20px;
+    font-weight: 300;
+    margin-bottom: 26px;
+  }
+
+  & .wrapper-icon {
+    position: relative;
+    width: 30px;
+    height: 30px;
+  }
+
+  & .icon-drop {
+    width: 30px;
+    height: 30px;
+  }
+
+  & .icon {
+    margin-top: 8px;
+    position: absolute;
+    left: 40px;
+    width: 14px;
+    height: 14px;
+    fill: white;
+  }
+
+  @media (min-width: 768px) {
+    flex-direction: row;
+    padding: 48px 33px 48px 0;
+
+    & h2 {
+      font-size: 32px;
+      line-height: 42px;
+    }
+    & img {
+      max-width: 376px;
+      max-height: 308px;
+    }
+
+    & .container {
+      margin-right: 49px;
+      margin-left: 36px;
+    }
+
+    & .icon {
+      left: 44px;
+    }
+    .left {
+      left: 420px;
+    }
+  }
+  @media (min-width: 1400px) {
+    padding: 150px  0;
+    & h2 {
+      font-size: 44px;
+      line-height: 58px;
+    }
+
+    & p {
+      font-size: 18px;
+      line-height: 26px;
+    }
+
+    & .container {
+      margin-right: 82px;
+    }
+  }
+}
+
+.black {
+  background: black;
+  color: white;
+  @media (min-width: 768px) {
+
+    padding: 58px 99px 58px 0;
+  }
+}
+
+.full {
+  min-width: 100%;
+  @media (min-width: 768px) {
+    min-width: 260px;
+  }
+}
+
+.reverse {
+  @media (min-width: 768px) {
+    flex-direction: row-reverse;
+  }
+}
+
+
