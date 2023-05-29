@@ -1,0 +1,38 @@
+.comments_slider {
+  width: 100%;
+  max-width: 1160px;
+  margin: 0 auto;
+  background: #F5F7FF;
+  padding: 0 20px;
+}
+
+.comments_inner {
+  padding: 49px 119px;
+}
+
+.text_comment {
+  font-weight: 400;
+  font-size: 18px;
+  line-height: 27px;
+  display: flex;
+  padding-left: 50px;
+  position: relative;
+  &:before {
+    content: '"';
+    font-weight: 400;
+    font-size: 96px;
+    line-height: 144px;
+    font-style: italic;
+    position: absolute;
+    top: -25px;
+    left: 0;
+  }
+}
+
+.text_author {
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 21px;
+  text-align: right;
+  padding-bottom: 30px;
+}
