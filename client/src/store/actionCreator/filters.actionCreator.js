@@ -1,6 +1,6 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
 
-export const fetchProductsByCategory = createAsyncThunk(
+const fetchProductsByCategory = createAsyncThunk(
   "filters/fetchProductsByCategory",
   async (categories, thunkAPI) => {
     try {
@@ -14,3 +14,18 @@ export const fetchProductsByCategory = createAsyncThunk(
     }
   },
 );
+
+const fetchFiltersData = createAsyncThunk(
+  "filters/fetchFiltersData",
+  async (_, thunkAPI) => {
+    try {
+      const response = await fetch(`http://localhost:4000/api/filters`);
+      const data = await response.json();
+      return data;
+    } catch (error) {
+      return thunkAPI.rejectWithValue(error);
+    }
+  },
+);
+
+export { fetchProductsByCategory, fetchFiltersData };

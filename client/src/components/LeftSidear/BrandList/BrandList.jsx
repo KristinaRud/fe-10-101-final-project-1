@@ -4,16 +4,17 @@ import BrandItem from "./BrandItem/BrandItem";
 import ListWrapper from "../ListWrapper/ListWrapper";
 import FilterButton from "../FilterList/FilterButton/FilterButton";
 import { selectPartners } from "../../../store/slices/partners.slice";
-import { selectProducts } from "../../../store/slices/products.slice";
 import s from "./BrandList.module.scss";
 import { fetchPartners } from "../../../store/actionCreator/partners.actionCreator";
+import { selectFilters } from "../../../store/slices/filters.slice";
 
 const BrandList = () => {
   const [brands, setBrands] = useState([]);
   const [limit, setLimit] = useState(6);
   const dispatch = useDispatch();
   const data = useSelector(selectPartners);
-  const products = useSelector(selectProducts);
+  const filterData = useSelector(selectFilters);
+  const products = filterData.productsOfCategory;
 
   const handleShowAllBrands = () => setLimit(brands.length);
 
@@ -36,11 +37,11 @@ const BrandList = () => {
   }, [dispatch]);
 
   return (
-    <>
+    <div className={s.wrapper}>
       <ListWrapper title="Partners">
         <FilterButton onClick={handleShowAllBrands}>All Brands</FilterButton>
       </ListWrapper>
-      <div className={s.wrapper}>
+      <div className={s.brands}>
         {brands.map((item, index) => {
           if (index < limit) {
             return (
@@ -50,7 +51,7 @@ const BrandList = () => {
           return null;
         })}
       </div>
-    </>
+    </div>
   );
 };
 

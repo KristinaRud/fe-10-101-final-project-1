@@ -9,7 +9,8 @@ export const urlParser = () => {
       if (name === "minPrice" || name === "maxPrice") {
         price.push(value);
       } else {
-        filter.push({ name, value: [value] });
+        const valueArr = value.split(",");
+        filter.push({ name, value: valueArr });
       }
     }
   });

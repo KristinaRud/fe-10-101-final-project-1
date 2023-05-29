@@ -4,7 +4,7 @@ import { Box, FormControl, InputLabel, MenuItem, Select } from "@mui/material";
 import s from "./PageParams.module.scss";
 
 const PageParams = () => {
-  const [page, setPage] = useState(20);
+  const [page, setPage] = useState(5);
   const navigate = useNavigate();
   const location = useLocation();
 
@@ -15,11 +15,10 @@ const PageParams = () => {
   useEffect(() => {
     const searchParams = new URLSearchParams(location.search);
     searchParams.set("perPage", page);
-    navigate(`?${searchParams}`);
   }, [location.search, navigate, page]);
 
   return (
-    <Box>
+    <Box className={s.wrapper}>
       <FormControl className={s.form}>
         <InputLabel id="select-page">Show:</InputLabel>
         <Select
@@ -30,14 +29,14 @@ const PageParams = () => {
           sx={{ fontSize: 13, fontWeight: 600 }}
           onChange={handleChange}
         >
+          <MenuItem value={5} className={s.item}>
+            5 pear page
+          </MenuItem>
           <MenuItem value={10} className={s.item}>
             10 pear page
           </MenuItem>
-          <MenuItem value={20} className={s.item}>
-            20 pear page
-          </MenuItem>
-          <MenuItem value={30} className={s.item}>
-            30 pear page
+          <MenuItem value={15} className={s.item}>
+            15 pear page
           </MenuItem>
         </Select>
       </FormControl>

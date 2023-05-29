@@ -8,3 +8,12 @@
   padding: 16px;
   background-color: #F5F7FF;
 }
+
+.title{
+  @media (max-width: 480px) {
+    border-bottom: 1px solid #CACDD8;
+    padding-bottom: 16px;
+    width: 100%;
+    align-self: start;
+  }
+}

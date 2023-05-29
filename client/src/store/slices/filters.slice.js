@@ -1,12 +1,16 @@
 import { createSlice } from "@reduxjs/toolkit";
 import { urlParser } from "../../utils/urlParser";
-import { fetchProductsByCategory } from "../actionCreator/filters.actionCreator";
+import {
+  fetchFiltersData,
+  fetchProductsByCategory,
+} from "../actionCreator/filters.actionCreator";
 
 const searchParams = new URLSearchParams(window.location.search);
 const initialState = {
   filters: urlParser() || [],
   productsOfCategory: {},
   category: searchParams.get("categories"),
+  filtersData: [],
 };
 
 const filtersSlice = createSlice({
@@ -32,15 +36,16 @@ const filtersSlice = createSlice({
         }
       }
     },
-    deleteFilters: (state, action) => {
-      return state.filters.filter((filter) => {
-        if (
-          action.payload.value.length > 1 &&
-          action.payload.name === filter.name
-        ) {
-          return filter.value !== action.payload.value;
+    deleteFilter: (state, action) => {
+      state.filters = state.filters.filter((filter) => {
+        if (filter.name === action.payload.name) {
+          filter.value = filter.value.filter(
+            (value) => value !== action.payload.value,
+          );
+
+          return filter.value.length > 0;
         }
-        return filter.name !== action.payload.name;
+        return true;
       });
     },
     deleteAllFilters: (state) => {
@@ -55,10 +60,22 @@ const filtersSlice = createSlice({
     builder.addCase(fetchProductsByCategory.fulfilled, (state, action) => {
       state.productsOfCategory = action.payload;
     });
+    builder.addCase(fetchFiltersData.fulfilled, (state, action) => {
+      const objByType = {};
+      action.payload.forEach((obj) => {
+        const { type } = obj;
+        if (type in objByType) {
+          objByType[type].push(obj);
+        } else {
+          objByType[type] = [obj];
+        }
+      });
+      state.filtersData = Object.values(objByType);
+    });
   },
 });
 
 export const selectFilters = (state) => state.filters;
-export const { setFilters, deleteFilters, deleteAllFilters, setCategory } =
+export const { setFilters, deleteFilter, deleteAllFilters, setCategory } =
   filtersSlice.actions;
 export default filtersSlice.reducer;

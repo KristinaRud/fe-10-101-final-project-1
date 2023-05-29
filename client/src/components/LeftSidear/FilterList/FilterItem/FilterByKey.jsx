@@ -23,7 +23,7 @@ import { deleteAllQueryFilters } from "../../../../utils/deleteAllQueryFilters";
 import { fetchProductsByCategory } from "../../../../store/actionCreator/filters.actionCreator";
 import s from "./FilterItem.module.scss";
 
-const FilterByKey = ({ keyOption }) => {
+const FilterByKey = ({ keyOption, filterData }) => {
   const location = useLocation();
   const searchParams = new URLSearchParams(location.search);
   const categories = searchParams.get("categories");
@@ -41,7 +41,11 @@ const FilterByKey = ({ keyOption }) => {
     if (keyOption === "currentPrice") {
       filterArr = filterByPrice(filters.productsOfCategory.products);
     } else {
-      filterArr = filterByKey(filters.productsOfCategory.products, keyOption);
+      filterArr = filterByKey(
+        filters.productsOfCategory.products,
+        keyOption,
+        filterData,
+      );
     }
     return filterArr.map((obj) => (
       <div key={obj.range || obj[keyOption]} className={s.filter_item}>
@@ -92,5 +96,14 @@ const FilterByKey = ({ keyOption }) => {
 
 FilterByKey.propTypes = {
   keyOption: PropTypes.string.isRequired,
+  filterData: PropTypes.arrayOf(
+    PropTypes.shape({
+      date: PropTypes.string,
+      name: PropTypes.string,
+      type: PropTypes.string,
+      _id: PropTypes.string,
+    }),
+  ),
 };
+
 export default FilterByKey;

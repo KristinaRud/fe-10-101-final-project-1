@@ -1,5 +1,12 @@
+.wrapper {
+  @media (max-width: 768px) {
+    display: none;
+  }
+}
+
+
 .form {
-  & :global .MuiSelect-select-MuiInputBase-input-MuiOutlinedInput-input{
+  & :global .MuiSelect-select-MuiInputBase-input-MuiOutlinedInput-input {
     width: 176px;
     max-height: 50px;
     border: 2px solid #CACDD8;
@@ -8,7 +15,7 @@
   }
 }
 
-.item{
+.item {
   font-size: 13px;
   font-weight: 600;
 }

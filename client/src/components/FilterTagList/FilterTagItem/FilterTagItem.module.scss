@@ -5,11 +5,6 @@
   width: fit-content;
 }
 
-.counter {
-  color: #A2A6B0;
-  font-size: 13px;
-}
-
 .btn {
   font-size: 10px;
   min-width: 20px;
@@ -29,4 +24,9 @@
   &:hover {
     background-color: #C94D3F;
   }
+}
+
+.delete{
+  width: 14px;
+  height: 14px;
 }

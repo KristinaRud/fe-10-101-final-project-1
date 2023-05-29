@@ -14,7 +14,7 @@ const SortItem = () => {
   useEffect(() => {
     const searchParams = new URLSearchParams(location.search);
     searchParams.set("sort", sort);
-    navigate(`?${searchParams}`);
+    navigate(`?${searchParams.toString()}`);
   }, [sort, navigate, location.search]);
 
   return (
@@ -32,10 +32,10 @@ const SortItem = () => {
           <MenuItem value="-rating" className={s.item}>
             By rating
           </MenuItem>
-          <MenuItem value="-price" className={s.item}>
+          <MenuItem value="+currentPrice" className={s.item}>
             From cheap to expensive
           </MenuItem>
-          <MenuItem value="+price" className={s.item}>
+          <MenuItem value="-currentPrice" className={s.item}>
             From expensive to cheap
           </MenuItem>
         </Select>
