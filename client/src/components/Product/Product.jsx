@@ -1,10 +1,16 @@
-import { Typography } from "@mui/material";
+import {
+  Card,
+  CardActionArea,
+  CardContent,
+  CardMedia,
+  Typography,
+} from "@mui/material";
 
 const Product = () => {
   return (
     <Card>
-      <Typography />
       <CardActionArea>
+        <Typography>in stock</Typography>
         <CardMedia
           component="img"
           height="140"
