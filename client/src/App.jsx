@@ -7,7 +7,7 @@ import {
 } from "@mui/material";
 import AppRoute from "./route/app.route";
 import store from "./store";
-import Footer from "./components/Footer/Footer";
+// import Footer from "./components/Footer/Footer";
 import theme from "./theme/createTheme";
 
 const App = () => (
@@ -19,7 +19,7 @@ const App = () => (
           <AppRoute />
         </StyledEngineProvider>
       </ThemeProvider>
-      <Footer />
+      {/* <Footer /> */}
     </BrowserRouter>
   </Provider>
 );
