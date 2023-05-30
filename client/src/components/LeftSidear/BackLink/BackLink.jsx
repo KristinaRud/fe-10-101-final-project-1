@@ -5,7 +5,7 @@ import s from "./BackLink.module.scss";
 const BackLink = () => {
   return (
     <Typography variant="h6" component="div" className={s.link}>
-      <Link to="/">‹ Back</Link>
+      <Link to="/">Back</Link>
     </Typography>
   );
 };

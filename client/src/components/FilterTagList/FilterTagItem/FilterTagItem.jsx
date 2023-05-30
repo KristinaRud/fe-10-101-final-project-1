@@ -37,6 +37,7 @@ const FilterTagItem = ({ title, name }) => {
       dispatch(deleteFilter({ value: title, name: "currentPrice" }));
     }
   };
+
   return (
     <Box className={s.wrapper}>
       <Typography variant="h6" component="span" fontSize={13} fontWeight={600}>
