@@ -8,7 +8,7 @@ const AppRoute = () => (
   <Routes>
     <Route path="/" element={<HomePage />} />
     <Route path="/login" element={<LoginPage />} />
-    <Route path="about" element={<AboutUsPage />} />
+    <Route path="/about" element={<AboutUsPage />} />
     <Route path="*" element={<NotPage />} />
   </Routes>
 );
