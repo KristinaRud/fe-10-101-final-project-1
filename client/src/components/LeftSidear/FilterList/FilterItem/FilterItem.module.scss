@@ -1,0 +1,47 @@
+.wrapper {
+  width: 100%;
+  background-color: transparent;
+}
+
+.content {
+  display: flex;
+  flex-direction: column;
+}
+
+.filter_item {
+  display: flex;
+  justify-content: space-between;
+  color: #000;
+  cursor: pointer;
+}
+
+.colors {
+  display: flex;
+  gap: 7px;
+  flex-wrap: wrap;
+}
+
+.round {
+  border-radius: 20px;
+  width: 24px;
+  height: 24px;
+  transition: all 0.3s ease;
+  border: 2px solid #F5F7FF;
+  cursor: pointer;
+  position: relative;
+}
+
+.roundWrapper {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 27px;
+  height: 27px;
+  border-radius: 20px;
+  border: 2px solid transparent;
+
+  &:hover {
+    border: 2px solid #0156FF;
+  }
+
+}

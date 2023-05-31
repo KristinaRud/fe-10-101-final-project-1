@@ -1,0 +1,30 @@
+.form {
+  & :global .MuiSelect-select-MuiInputBase-input-MuiOutlinedInput-input {
+    width: 176px;
+    max-height: 50px;
+    border: 2px solid #CACDD8;
+    border-radius: 2px;
+    padding: 8px 0;
+  }
+
+  & div, & label {
+    @media (max-width: 480px) {
+      font-size: 11px;
+    }
+  }
+
+  & div > div {
+    @media (max-width: 480px) {
+      padding: 10px;
+    }
+  }
+}
+
+.item {
+  font-size: 13px;
+  font-weight: 600;
+
+  @media (max-width: 480px) {
+    font-size: 11px;
+  }
+}
