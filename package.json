@@ -29,12 +29,8 @@
     "passport": "^0.6.0",
     "passport-jwt": "^4.0.0",
     "unique-random": "^2.1.0",
-<<<<<<< HEAD
     "validator": "^11.1.0",
     "cors": "^2.8.5"
-=======
-    "validator": "^13.9.0"
->>>>>>> ea3483ead26de5a370d122eb45b1f6501c2b1abb
   },
   "devDependencies": {
     "nodemon": "^2.0.22"

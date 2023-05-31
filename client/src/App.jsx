@@ -19,9 +19,9 @@ const App = () => (
           <CssBaseline />
           <Header />
           <AppRoute />
+          <Footer />
         </StyledEngineProvider>
       </ThemeProvider>
-      <Footer />
     </BrowserRouter>
   </Provider>
 );
