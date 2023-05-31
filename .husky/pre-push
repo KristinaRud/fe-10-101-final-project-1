@@ -1,0 +1,6 @@
+#!/usr/bin/env sh
+. "$(dirname -- "$0")/_/husky.sh"
+
+npm test
+npx eslint "src/**/*.js" "src/**/*.jsx" --fix
+npx stylelint "**/*.scss" "**/*.css" --fix
