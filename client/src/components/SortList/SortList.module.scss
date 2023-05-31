@@ -1,0 +1,20 @@
+.wrapper{
+  width: 100%;
+  max-width: 1165px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  @media (max-width: 768px) {
+    max-width: 497px;
+  }
+  @media (max-width: 480px) {
+    display: none;
+  }
+}
+
+.sortWrapper{
+  display: flex;
+  gap:11px;
+  align-items: center;
+}

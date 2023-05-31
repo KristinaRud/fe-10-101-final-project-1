@@ -83,6 +83,10 @@
       "import/no-named-as-default-member": 0,
       "import/prefer-default-export": 0
     }
+    "test": "react-scripts test --watchAll",
+    "eject": "react-scripts eject --watchAll",
+    "prepare": "husky install",
+    "pre-push": "cd client && npm-run-all pre-push:test lint"
   },
   "browserslist": {
     "production": [
