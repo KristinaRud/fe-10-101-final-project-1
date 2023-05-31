@@ -1,0 +1,32 @@
+.wrapper {
+  min-width: 233px;
+  max-width: 233px;
+  height: 350px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center;
+  position: relative;
+}
+
+.name{
+  font-weight: 700;
+  font-size: 22px;
+  line-height: 130%;
+  color: #ffffff;
+  text-align: center;
+}
+
+.link{
+  font-weight: 400;
+  font-size: 13px;
+  line-height: 115%;
+  display: block;
+  color: #fff;
+  text-decoration: underline;
+  position: absolute;
+  bottom: 30px;
+}
