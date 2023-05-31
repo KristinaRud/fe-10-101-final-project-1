@@ -2,6 +2,12 @@
   width: 100%;
   max-width: 1400px;
   margin: 0 auto;
+  @media (max-width: 768px) {
+    padding: 20px;
+  }
+  @media (max-width: 375px) {
+    padding: 12px 14px;
+  }
 }
 
 .slick-slide img {
