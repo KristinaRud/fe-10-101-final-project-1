@@ -6,10 +6,6 @@ import styles from "./FadeTextBlock.module.scss";
 const FadeTextBlock = ({ text, maxLength }) => {
   const [expanded, setExpanded] = useState(false);
 
-  const handleToggle = () => {
-    setExpanded(!expanded);
-  };
-
   return (
     <div className={styles.container}>
       <div
@@ -18,7 +14,10 @@ const FadeTextBlock = ({ text, maxLength }) => {
         {expanded ? text : text.slice(0, maxLength)}
       </div>
       {!expanded && (
-        <Button className={styles["expand-button"]} onClick={handleToggle}>
+        <Button
+          className={styles["expand-button"]}
+          onClick={() => setExpanded(!expanded)}
+        >
           More
         </Button>
       )}
