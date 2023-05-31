@@ -2,31 +2,12 @@ import Slider from "react-slick";
 import styles from "./AboutProductSlider.module.scss";
 import "./AboutProduct.scss";
 import aboutData from "./AboutProductSliderConfig";
+import { AboutProductConfig } from "../slidersConfig";
 
 const AboutProductSlider = () => {
-  const settings = {
-    dots: true,
-    dotsClass: "slick-dots slick-left",
-    arrows: false,
-    infinite: true,
-    slidesToShow: 1,
-    slidesToScroll: 1,
-    autoplay: true,
-    speed: 500,
-    adaptiveHeight: true,
-    responsive: [
-      {
-        breakpoint: 860,
-        settings: {
-          dots: false,
-        },
-      },
-    ],
-  };
-
   return (
     <div className={styles.about_slider}>
-      <Slider {...settings}>
+      <Slider {...AboutProductConfig}>
         {aboutData.map((item) => (
           <div key={item.id}>
             <div className={styles.about_container}>

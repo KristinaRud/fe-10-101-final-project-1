@@ -5,24 +5,14 @@ import { Button } from "@mui/material";
 import styles from "./CommentsSlider.module.scss";
 import "./CommentsSlider.scss";
 import commentsData from "./CommentsSliderConfig";
+import { CommentsConfig } from "../slidersConfig";
 
 const CommentsSlider = () => {
-  const settings = {
-    dots: true,
-    dotsClass: "slick-dots slick-right",
-    arrows: false,
-    infinite: true,
-    speed: 500,
-    slidesToShow: 1,
-    slidesToScroll: 1,
-    autoplay: true,
-  };
-
   return (
     <div className={styles.comments_container}>
       <div className={styles.comments_slider}>
         <div className={styles.comments_inner}>
-          <Slider {...settings}>
+          <Slider {...CommentsConfig}>
             {commentsData.map((item) => (
               <div key={item.id}>
                 <div className={styles.text_comment}>{item.text}</div>

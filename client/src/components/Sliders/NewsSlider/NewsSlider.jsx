@@ -4,20 +4,12 @@ import "slick-carousel/slick/slick-theme.css";
 import styles from "./NewsSlider.module.scss";
 import "./NewsSlider.scss";
 import newsData from "./NewsSliderConfig";
+import { NewsConfig } from "../slidersConfig";
 
 const NewsSlider = () => {
-  const settings = {
-    dots: false,
-    infinite: true,
-    slidesToShow: 1,
-    slidesToScroll: 1,
-    autoplay: true,
-    speed: 500,
-  };
-
   return (
     <div className={styles.news_slider}>
-      <Slider {...settings}>
+      <Slider {...NewsConfig}>
         {newsData.map((news) => (
           <div key={news.id}>
             <div>

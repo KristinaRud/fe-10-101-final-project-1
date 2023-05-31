@@ -8,23 +8,16 @@ import {
 } from "@mui/material";
 import CheckCircleIcon from "@mui/icons-material/CheckCircle";
 import PhoneIcon from "@mui/icons-material/Phone";
+import PropTypes from "prop-types";
 
 const ProductCard = ({
-  // eslint-disable-next-line react/prop-types
   image,
-  // eslint-disable-next-line react/prop-types
   alt,
-  // eslint-disable-next-line react/prop-types
   title,
-  // eslint-disable-next-line react/prop-types
   description,
-  // eslint-disable-next-line react/prop-types
   oldPrice,
-  // eslint-disable-next-line react/prop-types
   currentPrice,
-  // eslint-disable-next-line react/prop-types
   available,
-  // eslint-disable-next-line react/prop-types
   rating,
 }) => {
   return (
@@ -85,3 +78,14 @@ const ProductCard = ({
 };
 
 export default ProductCard;
+
+ProductCard.propTypes = {
+  image: PropTypes.string.isRequired,
+  alt: PropTypes.string.isRequired,
+  title: PropTypes.string.isRequired,
+  description: PropTypes.string.isRequired,
+  oldPrice: PropTypes.string.isRequired,
+  currentPrice: PropTypes.string.isRequired,
+  available: PropTypes.bool.isRequired,
+  rating: PropTypes.string.isRequired,
+};

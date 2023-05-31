@@ -4,8 +4,7 @@ import product3Img from "../../../assets/images/sliders/product_3.png";
 import product4Img from "../../../assets/images/sliders/product_4.png";
 import product5Img from "../../../assets/images/sliders/product_5.png";
 
-// eslint-disable-next-line import/prefer-default-export
-export const productsData = [
+const productsData = [
   {
     img_url: product1Img,
     id: "1",
@@ -91,3 +90,5 @@ export const productsData = [
     rating: 4,
   },
 ];
+
+export default productsData;
