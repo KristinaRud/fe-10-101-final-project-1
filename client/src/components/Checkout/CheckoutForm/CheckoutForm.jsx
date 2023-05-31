@@ -10,34 +10,7 @@ import {
 import Text from "@mui/material/TextField";
 import cn from "classnames";
 import s from "./CheckoutForm.module.scss";
-
-const validate = (values) => {
-  const errors = {};
-  if (!values.email) {
-    errors.email = "Required";
-  }
-  return errors;
-};
-
-const allRegions = [
-  {
-    name: "Kyiv region",
-  },
-  {
-    name: "Kharkiv region",
-  },
-  {
-    name: "Dnipro region",
-  },
-];
-const allCities = [
-  { name: "Kyiv" },
-  { name: "Kharkiv" },
-  { name: "Dnipro" },
-  { name: "Odesa" },
-];
-
-const allPostOfficeBranch = [{ numberPostOffice: 1 }, { numberPostOffice: 2 }];
+import { allCities, allPostOfficeBranch, allRegions, validate } from "./const";
 
 const CheckoutForm = () => {
   const handleSubmit = async (values) => {
