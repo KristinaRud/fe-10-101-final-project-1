@@ -1,0 +1,32 @@
+.wrapper {
+  padding: 3px 17px;
+  border: 1px solid #CACDD8;
+  border-radius: 2px;
+  width: fit-content;
+}
+
+.btn {
+  font-size: 10px;
+  min-width: 20px;
+  max-width: 20px;
+  margin-left: 5px;
+  padding: 0;
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  background-color: #C94D3F;
+  color: #fff;
+  border: none;
+  outline: none;
+  cursor: pointer;
+  transition: all 0.3s ease-in-out;
+
+  &:hover {
+    background-color: #C94D3F;
+  }
+}
+
+.delete{
+  width: 14px;
+  height: 14px;
+}

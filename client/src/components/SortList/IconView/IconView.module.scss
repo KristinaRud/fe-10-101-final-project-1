@@ -1,0 +1,18 @@
+.wrapper {
+  display: flex;
+  gap: 9px;
+}
+
+.active {
+  width: 32px;
+  height: 32px;
+  cursor: pointer;
+  fill: #000;
+}
+
+.icon {
+  width: 32px;
+  height: 32px;
+  cursor: pointer;
+  fill: #A2A6B0;
+}
