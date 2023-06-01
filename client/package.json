@@ -31,7 +31,8 @@
     "test": "react-scripts test --watchAll",
     "eject": "react-scripts eject --watchAll",
     "prepare": "husky install",
-    "pre-push": "cd client && npm-run-all pre-push:test lint"
+    "pre-push": "cd client && husky install frontend/.husky pre-push:test lint",
+    "lint-front": "lint-staged"
   },
   "browserslist": {
     "production": [
