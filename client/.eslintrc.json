@@ -7,15 +7,6 @@
     "plugin:react/recommended",
     "plugin:prettier/recommended"
   ],
-  "lint-staged": {
-    "*.{js,ts,tsx, jsx}": [
-      "eslint --quiet --fix",
-      "stylelint --fix"
-    ],
-    "*.{json,md,html,js,jsx,ts,tsx}": [
-      "prettier --write"
-    ]
-  },
   "env": {
     "jest": true,
     "browser": true,
