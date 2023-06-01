@@ -1,6 +1,6 @@
 import { uid } from "react-uid";
 import styles from "./Features.module.scss";
-import { featuresConfig } from './FeaturesConfig';
+import { featuresConfig } from "./FeaturesConfig";
 
 const Features = () => {
   const featuresList = featuresConfig.map((feature) => (
