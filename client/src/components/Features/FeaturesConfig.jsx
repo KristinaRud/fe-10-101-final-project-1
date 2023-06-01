@@ -3,6 +3,7 @@ import nvidiaIcon from "../../assets/images/features/nvidia.png";
 import ramIcon from "../../assets/images/features/ram.png";
 import ssdIcon from "../../assets/images/features/ssd.png";
 
+// eslint-disable-next-line import/prefer-default-export
 export const featuresConfig = [
   {
     image: intelIcon,
