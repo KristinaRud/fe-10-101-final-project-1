@@ -4,7 +4,10 @@
   gap: 30px
 }
 
-.wrapper{
+.wrapper {
   display: flex;
-  gap: 4px;
+
+  @media (max-width: 480px) {
+   display: block;
+  }
 }

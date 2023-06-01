@@ -46,7 +46,7 @@ const ProductCard = ({
         </Typography>
         <CardMedia component="img" height="200" image={image} alt={alt} />
         <Box display="flex" alignItems="center" mt={2}>
-          <Rating name="products-small" value={rating} readOnly size="small" />
+          <Rating name="products-small" value={+rating} readOnly size="small" />
           <Typography variant="body2" ml={1}>
             Reviews (4)
           </Typography>

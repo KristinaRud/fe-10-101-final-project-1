@@ -1,17 +1,18 @@
-import { List } from "@mui/material";
 import { useDispatch, useSelector } from "react-redux";
 import { useEffect, useState } from "react";
 import PropTypes from "prop-types";
+import Slider from "react-slick";
 import { selectProducts } from "../../../../store/slices/products.slice";
 import { fetchProducts } from "../../../../store/actionCreator/products.actionCreator";
-import Product from "../../../Product/Product";
+import ProductCard from "../../../ProductCard/ProductCard";
+import { CategoriesProducts } from "../../../Sliders/slidersConfig";
 import s from "./ProductsList.module.scss";
 
 const ProductsList = ({ category }) => {
-  const [limit] = useState(5);
   const products = useSelector(selectProducts);
   const dispatch = useDispatch();
   const [productsCategory, setProductsCategory] = useState([]);
+
   useEffect(() => {
     dispatch(fetchProducts(""));
   }, [dispatch]);
@@ -26,19 +27,23 @@ const ProductsList = ({ category }) => {
   }, [category, products]);
 
   return (
-    <List className={s.wrapper}>
+    <Slider className={s.slider} {...CategoriesProducts}>
       {productsCategory.length > 0 &&
-        productsCategory.map(
-          (product, index) =>
-            index < limit && (
-              <Product
-                key={product.name}
-                imageUrl={product.imageUrls[0]}
-                {...product}
-              />
-            ),
-        )}
-    </List>
+        productsCategory.map((item) => (
+          <div key={item.itemNo}>
+            <ProductCard
+              image={item.imageUrls[0]}
+              title=" "
+              description={item.name}
+              oldPrice={item.previousPrice.toString()}
+              currentPrice={item.currentPrice.toString()}
+              available={item.quantity > 5}
+              rating={item.rating.toString()}
+              alt={item.name}
+            />
+          </div>
+        ))}
+    </Slider>
   );
 };
 

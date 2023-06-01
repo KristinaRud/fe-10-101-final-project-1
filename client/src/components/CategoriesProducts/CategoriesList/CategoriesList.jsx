@@ -10,14 +10,15 @@ import ProductsList from "./ProductsList/ProductsList";
 const CategoriesList = () => {
   const catalog = useSelector(allCategoriesSelector);
   const dispatch = useDispatch();
-  console.log(catalog);
+
   useEffect(() => {
     dispatch(fetchCategories());
   }, [dispatch]);
+
   return (
     <List className={s.list}>
       {catalog.length > 0 &&
-        catalog.map(({ name, imgUrl, id }) => (
+        catalog.map(({ id, name, imgUrl }) => (
           <div key={id} className={s.wrapper}>
             <CategoryItem name={name} imgUrl={imgUrl} />
             <ProductsList category={id} />
