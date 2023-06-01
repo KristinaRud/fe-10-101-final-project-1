@@ -1,7 +1,6 @@
 .item {
     border-bottom: 1px solid #a2a6b0;
     padding: 11px 5px;
-    font-family: "Poppins";
     font-style: normal;
     font-weight: 300;
     font-size: 12px;
@@ -10,7 +9,7 @@
 }
 
 a {
-    color: rgba(255, 255, 255, 1);
+    color: rgb(255 255 255 / 100%);
 }
 
 .header::after {
@@ -43,6 +42,7 @@ a {
 
 .summary {
     display: none;
+
     &.active {
         display: block;
         margin-left: 11px;

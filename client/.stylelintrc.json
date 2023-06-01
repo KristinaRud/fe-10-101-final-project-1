@@ -35,7 +35,6 @@
     "selector-pseudo-element-no-unknown": true,
     "selector-type-no-unknown": true,
     "string-no-newline": true,
-    "unit-no-unknown": true
-
-  }
+    "unit-no-unknown": true,
+   }
 }

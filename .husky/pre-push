@@ -7,3 +7,5 @@
 cd client
 npm run lint-front
 npm test
+npx eslint "**/*.js" --fix
+npx stylelint "**/*.scss" --fix
