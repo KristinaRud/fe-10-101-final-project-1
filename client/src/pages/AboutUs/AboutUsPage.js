@@ -1,4 +1,4 @@
-import { Link } from "react-router-dom";
+import { Link } from 'react-router-dom';
 import cx from "classnames";
 import StarIcon from "@mui/icons-material/Star";
 import LocalShippingIcon from "@mui/icons-material/LocalShipping";
