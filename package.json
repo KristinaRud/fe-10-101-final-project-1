@@ -5,7 +5,18 @@
   "main": "server.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "server": "nodemon server.js"
+    "server": "nodemon server.js",
+    "prepush": "cd client && lint-staged && husky install .husky"
+  },
+  "lint-staged": {
+    "client/**/*.{js,jsx,ts,tsx}": [
+      "eslint --fix",
+      "stylelint -- fix",
+      "git add"
+    ],
+    "client/**/*.{json,md,html,js,jsx,ts,tsx}": [
+      "prettier --write"
+    ]
   },
   "repository": {
     "type": "git",
@@ -29,9 +40,11 @@
     "passport": "^0.6.0",
     "passport-jwt": "^4.0.0",
     "unique-random": "^2.1.0",
-    "validator": "^11.1.0"
+    "validator": "^13.9.0"
   },
   "devDependencies": {
+    "husky": "^8.0.3",
+    "lint-staged": "^13.2.2",
     "nodemon": "^2.0.22"
   }
 }
