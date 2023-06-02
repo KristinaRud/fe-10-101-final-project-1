@@ -7,5 +7,6 @@
 cd client
 npm run lint-front
 npm test
-npx eslint "**/*.js" --fix
-npx stylelint "**/*.scss" --fix
+npx eslint "**/*.js" "**/*.jsx" --fix
+npx stylelint "**/*.scss" "**/*.css" --fix
+npx prettier "**/*.js" "**/*.jsx" --write
