@@ -21,6 +21,7 @@
     "express": "^4.17.1",
     "fs-extra": "^8.1.0",
     "jsonwebtoken": "^9.0.0",
+    "lint-staged": "^13.2.2",
     "lodash": "^4.17.15",
     "moment": "^2.24.0",
     "mongoose": "^5.6.10",
@@ -29,12 +30,10 @@
     "passport": "^0.6.0",
     "passport-jwt": "^4.0.0",
     "unique-random": "^2.1.0",
-    "validator": "^11.1.0",
-    "cors": "^2.8.5"
+    "validator": "^11.1.0"
   },
   "devDependencies": {
     "husky": "^8.0.3",
     "nodemon": "^2.0.22"
-  },
-  "type": "module"
+  }
 }
