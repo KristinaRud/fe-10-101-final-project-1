@@ -6,12 +6,11 @@
   background: #252931;
   opacity: 0.5;
   z-index: 2;
-}
 
-.slick-prev:hover,
-.slick-next:hover {
-  background: #252931;
-  opacity: 0.75;
+  &:hover {
+    background: #252931;
+    opacity: 0.75;
+  }
 }
 
 .slick-prev::before,
