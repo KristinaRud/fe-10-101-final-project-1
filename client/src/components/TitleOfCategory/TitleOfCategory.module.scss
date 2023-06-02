@@ -1,0 +1,14 @@
+.title {
+  margin: 20px;
+  font-weight: 600;
+  font-size: 32px;
+
+  @media (max-width: 768px) {
+    margin: 16px 20px;
+    font-size: 18px;
+  }
+
+  @media (max-width: 480px) {
+    margin: 11px 20px;
+  }
+}
