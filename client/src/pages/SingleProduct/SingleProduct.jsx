@@ -9,8 +9,8 @@ import productImg from "../../assets/images/single-product.png";
 
 const SingleProduct = () => {
   const [isActiveTab, setIsActiveTab] = useState({
-    status: false,
-    title: "",
+    status: true,
+    title: "About Product",
   });
 
   const tabToggle = (event) => {
