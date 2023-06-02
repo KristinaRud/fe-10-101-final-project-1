@@ -65,7 +65,7 @@ const AboutUsPage = () => {
             <FavoriteIcon className={styles.icon} />
           </div>
 
-          <h2>You're In Safe Hands</h2>
+          <h2>You&apos;re In Safe Hands</h2>
           <p>
             Experience a 40% boost in computing from last generation. MSI
             Desktop equips the 10th Gen. Intel® Core™ i7 processor with the

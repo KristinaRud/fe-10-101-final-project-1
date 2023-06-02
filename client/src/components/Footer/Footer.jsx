@@ -1,6 +1,14 @@
-import { useRef } from "react";
-import { Link } from "react-router-dom";
-import Accordion from "./componetns/Accordion/Accordion";
+import { useState, useEffect } from "react";
+import {
+  Typography,
+  Container,
+  Grid,
+  Accordion,
+  AccordionSummary,
+  AccordionDetails,
+} from "@mui/material";
+import { makeStyles } from "@mui/styles";
+import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 import styles from "./Footer.module.scss";
 import Fb from "../../assets/images/footer/social/fb_icon.png";
 import Insta from "../../assets/images/footer/social/in_icon.png";
@@ -11,44 +19,159 @@ import Disc from "../../assets/images/footer/payment/discover.png";
 import AmEx from "../../assets/images/footer/payment/american-express.png";
 import data from "../../utils/footerData";
 
-const Footer = () => {
-  const windowSize = useRef([window.innerWidth, window.innerHeight]);
-  const linkItems = data.map(({ title, details }) => {
-    const result =
-      windowSize.current[0] <= 1397 ? (
-        <Accordion
-          key={title}
-          title={
-            <span className={styles["link-list-header"]}>
-              <Link to="/">{title}</Link>
-            </span>
-          }
-          details={<ul className={styles["link-list-group"]}>{details}</ul>}
-        />
-      ) : (
-        <div key={title} className={styles["links-item"]}>
-          <span className={styles["link-list-header"]}>
-            <Link to="/">{title}</Link>
-          </span>
-          <ul className={styles["link-list-group"]}>{details}</ul>
-        </div>
-      );
+const useStyles = makeStyles((theme) => ({
+  footer: {
+    backgroundColor: "#020203",
+    paddingTop: "47px",
+    [theme.breakpoints.down("md")]: {
+      paddingTop: "35px",
+    },
+  },
+  headerTitle: {
+    color: "#FFFFFF",
+    fontWeight: "500",
+    fontSize: "18px",
+    lineHeight: "132.5%",
+    marginBottom: "15px",
+    [theme.breakpoints.up("md")]: {
+      fontWeight: "500",
+      lineHeight: "132.5%",
+      marginBottom: "45px",
+      fontSize: "38px",
+    },
+    [theme.breakpoints.down("sm")]: {
+      fontSize: "18px",
+      lineHeight: "132.5%",
+      textAlign: "center",
+    },
+  },
+  paragraph: {
+    color: "#FFFFFF",
+    fontWeight: 300,
+    fontSize: "12px",
+    lineHeight: "132.5%",
+    [theme.breakpoints.up("md")]: {
+      fontSize: "16px",
+    },
+    [theme.breakpoints.down("sm")]: {
+      fontSize: "12px",
+    },
+  },
+  list: {
+    fontWeight: 400,
+    fontSize: "13px",
+    lineHeight: "140%",
+    color: "#FFFFFF",
+  },
+  listItemTitle: {
+    fontWeight: "700",
+    fontSize: "14px",
+    lineHeight: "100%",
+    [theme.breakpoints.up("md")]: {
+      paddingBottom: "16px",
+    },
+  },
+}));
 
-    return result;
-  });
+const Footer = () => {
+  const [isMobile, setIsMobile] = useState(false);
+  const classes = useStyles();
+
+  useEffect(() => {
+    const handleResize = () => {
+      setIsMobile(window.innerWidth <= 768);
+    };
+
+    window.addEventListener("resize", handleResize);
+    handleResize();
+
+    return () => {
+      window.removeEventListener("resize", handleResize);
+    };
+  }, []);
+
+  const renderListItems = (details, margin) => (
+    <ul style={{ marginLeft: margin }}>{details}</ul>
+  );
+
+  const getMargin = () => {
+    if (isMobile) {
+      return "8px";
+    }
+    if (window.innerWidth <= 1024) {
+      return "15px";
+    }
+    return "0px";
+  };
+
+  function renderAccordionItems() {
+    return data.map((item) => (
+      <Accordion
+        key={item.title}
+        sx={{
+          background: "transparent",
+          border: "none",
+          borderBottom: "1px solid #A2A6B0",
+        }}
+      >
+        <AccordionSummary
+          expandIcon={<ExpandMoreIcon sx={{ color: "#E5ECF1" }} />}
+        >
+          <Typography
+            variant="h6"
+            color={isMobile ? "#E5ECF1" : "rgba(255, 255, 255, 0.5)"}
+          >
+            {item.title}
+          </Typography>
+        </AccordionSummary>
+        <AccordionDetails sx={{ color: "#FFF" }}>
+          {renderListItems(item.details, getMargin())}
+        </AccordionDetails>
+      </Accordion>
+    ));
+  }
+
+  const renderFooterContent = () => {
+    if (isMobile) {
+      return renderAccordionItems(data);
+    }
+
+    return (
+      <Grid container spacing={3}>
+        {data.map((item) => (
+          <Grid
+            item
+            xs={12}
+            sm={6}
+            md={2.4}
+            key={item.title}
+            className={classes.list}
+          >
+            <Typography
+              variant="h6"
+              className={classes.listItemTitle}
+              color={isMobile ? "#E5ECF1" : "rgba(255, 255, 255, 0.5)"}
+              gutterBottom
+            >
+              {item.title}
+            </Typography>
+            {renderListItems(item.details, getMargin())}
+          </Grid>
+        ))}
+      </Grid>
+    );
+  };
 
   return (
-    <footer className={styles.footer}>
-      <div className={styles.container}>
-        <div className={styles.header}>
-          <div className={styles["header-title"]}>
-            <h3>Sign Up To Our Newsletter.</h3>
-            <p>Be the first to hear about the latest offers.</p>
-          </div>
+    <footer className={classes.footer}>
+      <Container maxWidth="lg">
+        <div className={classes.headerTitle}>
+          <h3>Sign Up To Our Newsletter.</h3>
+          <p className={classes.paragraph}>
+            Be the first to hear about the latest offers.
+          </p>
         </div>
-
-        <div className={styles.links}>{linkItems}</div>
-
+        {renderFooterContent()}
         <div className={styles.utility}>
           <div className={`${styles["utility-social"]} ${styles.social}`}>
             <div className={styles["utility-social-item"]}>
@@ -121,7 +244,7 @@ const Footer = () => {
             <p>Copyright © 2020 Shop Pty. Ltd.</p>
           </div>
         </div>
-      </div>
+      </Container>
     </footer>
   );
 };

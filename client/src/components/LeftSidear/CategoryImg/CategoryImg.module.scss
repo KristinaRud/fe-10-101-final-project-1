@@ -3,7 +3,7 @@
   width: 100%;
   max-width: 233px;
 
-  @media (max-width: 480px) {
+  @media (width <= 480px) {
     height: 312px;
     max-width: 100%;
   }

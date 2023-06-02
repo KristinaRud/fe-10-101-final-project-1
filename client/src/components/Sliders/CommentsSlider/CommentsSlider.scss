@@ -8,19 +8,21 @@
   margin: 0;
 }
 
-.slick-dots li.slick-active button:before {
-  opacity: .75;
-  color: #0156FF;
+.slick-dots li button::before {
   font-size: 12px;
-  @media (max-width: 375px){
+  color: #CACDD8;
+
+  @media (width <= 375px){
     font-size: 9px;
   }
 }
 
-.slick-dots li button:before {
+.slick-dots li.slick-active button::before {
+  opacity: .75;
+  color: #0156FF;
   font-size: 12px;
-  color: #CACDD8;
-  @media (max-width: 375px){
+
+  @media (width <= 375px){
     font-size: 9px;
   }
 }
@@ -34,9 +36,10 @@
   line-height: 21px;
   text-transform: capitalize;
   padding: 8px 26px;
+
   &:hover{
     background: #0156FF;
-    color:#FFFFFF;
+    color:#FFF;
     border: 2px solid #0156FF;
   }
 }
