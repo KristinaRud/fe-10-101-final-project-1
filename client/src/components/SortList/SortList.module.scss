@@ -4,11 +4,14 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
+  margin: 20px 0;
 
-  @media (max-width: 768px) {
+  @media (width <= 768px) {
     max-width: 497px;
+    gap: 5px;
   }
-  @media (max-width: 480px) {
+
+  @media (width <= 480px) {
     display: none;
   }
 }

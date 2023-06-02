@@ -7,13 +7,18 @@ const SortItem = () => {
   const [sort, setSort] = useState("-rating");
   const navigate = useNavigate();
   const location = useLocation();
+
   const handleChange = (event) => {
+    const searchParams = new URLSearchParams(location.search);
     setSort(event.target.value);
+    searchParams.set("sort", event.target.value);
+    searchParams.set("startPage", "1");
+    navigate(`?${searchParams.toString()}`);
   };
 
   useEffect(() => {
     const searchParams = new URLSearchParams(location.search);
-    searchParams.set("sort", sort);
+    setSort(searchParams.get("sort"));
     navigate(`?${searchParams.toString()}`);
   }, [sort, navigate, location.search]);
 
@@ -45,5 +50,3 @@ const SortItem = () => {
 };
 
 export default SortItem;
-
-// TODO: Перевірити чи з беку price спрацьовує

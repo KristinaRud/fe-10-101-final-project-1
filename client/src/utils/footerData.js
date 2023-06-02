@@ -6,31 +6,49 @@ const data = [
     details: (
       <>
         <li>
-          <Link to="/">About Us</Link>
+          <Link to="/" color="inherit">
+            About Us
+          </Link>
         </li>
         <li>
-          <Link to="/">About Zip</Link>
+          <Link to="/" color="inherit">
+            About Zip
+          </Link>
         </li>
         <li>
-          <Link to="/">Privacy Policy</Link>
+          <Link to="/" color="inherit">
+            Privacy Policy
+          </Link>
         </li>
         <li>
-          <Link to="/">Search</Link>
+          <Link to="/" color="inherit">
+            Search
+          </Link>
         </li>
         <li>
-          <Link to="/">Terms</Link>
+          <Link to="/" color="inherit">
+            Terms
+          </Link>
         </li>
         <li>
-          <Link to="/">Orders and Returns</Link>
+          <Link to="/" color="inherit">
+            Orders and Returns
+          </Link>
         </li>
         <li>
-          <Link to="/">Contact Us</Link>
+          <Link to="/" color="inherit">
+            Contact Us
+          </Link>
         </li>
         <li>
-          <Link to="/">Advanced Search</Link>
+          <Link to="/" color="inherit">
+            Advanced Search
+          </Link>
         </li>
         <li>
-          <Link to="/">Newsletter Subscription</Link>
+          <Link to="/" color="inherit">
+            Newsletter Subscription
+          </Link>
         </li>
       </>
     ),
@@ -40,34 +58,54 @@ const data = [
     details: (
       <>
         <li>
-          <Link to="/">CPUS</Link>
+          <Link to="/" color="inherit">
+            CPUS
+          </Link>
         </li>
         <li>
-          <Link to="/">Add On Cards</Link>
+          <Link to="/" color="inherit">
+            Add On Cards
+          </Link>
         </li>
         <li>
-          <Link to="/">Hard Drives (Internal)</Link>
+          <Link to="/" color="inherit">
+            Hard Drives (Internal)
+          </Link>
         </li>
         <li>
-          <Link to="/">Graphic Cards</Link>
+          <Link to="/" color="inherit">
+            Graphic Cards
+          </Link>
         </li>
         <li>
-          <Link to="/">Keyboards / Mice</Link>
+          <Link to="/" color="inherit">
+            Keyboards / Mice
+          </Link>
         </li>
         <li>
-          <Link to="/">Cases / Power Supplies / Cooling</Link>
+          <Link to="/" color="inherit">
+            Cases / Power Supplies / Cooling
+          </Link>
         </li>
         <li>
-          <Link to="/">RAM (Memory)</Link>
+          <Link to="/" color="inherit">
+            RAM (Memory)
+          </Link>
         </li>
         <li>
-          <Link to="/">Software</Link>
+          <Link to="/" color="inherit">
+            Software
+          </Link>
         </li>
         <li>
-          <Link to="/">Speakers / Headsets</Link>
+          <Link to="/" color="inherit">
+            Speakers / Headsets
+          </Link>
         </li>
         <li>
-          <Link to="/">Motherboards</Link>
+          <Link to="/" color="inherit">
+            Motherboards
+          </Link>
         </li>
       </>
     ),
@@ -77,22 +115,34 @@ const data = [
     details: (
       <>
         <li>
-          <Link to="/">Custom PCs</Link>
+          <Link to="/" color="inherit">
+            Custom PCs
+          </Link>
         </li>
         <li>
-          <Link to="/">Servers</Link>
+          <Link to="/" color="inherit">
+            Servers
+          </Link>
         </li>
         <li>
-          <Link to="/">MSI All-In-One PCs</Link>
+          <Link to="/" color="inherit">
+            MSI All-In-One PCs
+          </Link>
         </li>
         <li>
-          <Link to="/">HP/Compaq PCs</Link>
+          <Link to="/" color="inherit">
+            HP/Compaq PCs
+          </Link>
         </li>
         <li>
-          <Link to="/">ASUS PCs</Link>
+          <Link to="/" color="inherit">
+            ASUS PCs
+          </Link>
         </li>
         <li>
-          <Link to="/">Tecs PCs</Link>
+          <Link to="/" color="inherit">
+            Tecs PCs
+          </Link>
         </li>
       </>
     ),
@@ -102,22 +152,34 @@ const data = [
     details: (
       <>
         <li>
-          <Link to="/">Everyday Use Notebooks</Link>
+          <Link to="/" color="inherit">
+            Everyday Use Notebooks
+          </Link>
         </li>
         <li>
-          <Link to="/">MSI Workstation Series</Link>
+          <Link to="/" color="inherit">
+            MSI Workstation Series
+          </Link>
         </li>
         <li>
-          <Link to="/">MSI Prestige Series</Link>
+          <Link to="/" color="inherit">
+            MSI Prestige Series
+          </Link>
         </li>
         <li>
-          <Link to="/">Tablets and Pads</Link>
+          <Link to="/" color="inherit">
+            Tablets and Pads
+          </Link>
         </li>
         <li>
-          <Link to="/">Netbooks</Link>
+          <Link to="/" color="inherit">
+            Netbooks
+          </Link>
         </li>
         <li>
-          <Link to="/">Infinity Gaming Notebooks</Link>
+          <Link to="/" color="inherit">
+            Infinity Gaming Notebooks
+          </Link>
         </li>
       </>
     ),
@@ -127,22 +189,54 @@ const data = [
     details: (
       <>
         <li>
-          <Link to="/">Address: 1234 Street Adress City Address, 1234</Link>
+          <Link to="/" color="inherit">
+            Address: 1234 Street Adress City Address, 1234
+          </Link>
         </li>
         <li>
-          <Link to="/">Phones: (00) 1234 5678</Link>
+          Phones:&nbsp;
+          <Link
+            to="tel:(00) 1234 5678"
+            style={{
+              textDecoration: "underline",
+              color: "#01A4FF",
+              "&:hover": {
+                textDecoration: "none",
+              },
+            }}
+          >
+            (00) 1234 5678
+          </Link>
         </li>
         <li>
-          <Link to="/">We are open: Monday-Thursday: 9:00 AM - 5:30 PM</Link>
+          <Link to="/" color="inherit">
+            We are open: Monday-Thursday: 9:00 AM - 5:30 PM
+          </Link>
         </li>
         <li>
-          <Link to="/">Friday: 9:00 AM - 6:00 PM</Link>
+          <Link to="/" color="inherit">
+            Friday: 9:00 AM - 6:00 PM
+          </Link>
         </li>
         <li>
-          <Link to="/">Saturday: 11:00 AM - 5:00 PM</Link>
+          <Link to="/" color="inherit">
+            Saturday: 11:00 AM - 5:00 PM
+          </Link>
         </li>
         <li>
-          <Link to="/">E-mail: shop@email.com</Link>
+          E-mail:&nbsp;
+          <Link
+            to="mailto:shop@email.com"
+            style={{
+              textDecoration: "underline",
+              color: "#01A4FF",
+              "&:hover": {
+                textDecoration: "none",
+              },
+            }}
+          >
+            shop@email.com
+          </Link>
         </li>
       </>
     ),

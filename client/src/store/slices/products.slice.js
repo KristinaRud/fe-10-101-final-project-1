@@ -5,10 +5,15 @@ const productsSlice = createSlice({
   name: "products",
   initialState: {
     products: {},
+    productsView: window.localStorage.getItem("productsView") || "grid",
     isLoading: false,
     error: null,
   },
-  reducers: {},
+  reducers: {
+    setProductsView: (state, action) => {
+      state.productsView = action.payload;
+    },
+  },
   extraReducers: (builder) => {
     builder.addCase(fetchProducts.pending, (state) => {
       state.isLoading = true;
@@ -25,4 +30,6 @@ const productsSlice = createSlice({
 });
 
 export const selectProducts = (state) => state.products.products;
+export const selectProductsView = (state) => state.products.productsView;
+export const { setProductsView } = productsSlice.actions;
 export default productsSlice.reducer;
