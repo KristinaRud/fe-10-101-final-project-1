@@ -8,7 +8,7 @@
   }
 
   & div, & label {
-    @media (max-width: 480px) {
+    @media (width <= 480px) {
       font-size: 13px;
     }
   }

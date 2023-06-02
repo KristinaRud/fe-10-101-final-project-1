@@ -4,30 +4,37 @@
   align-items: center;
   gap: 10px;
   border-bottom: 1px solid #ececec;;
+
   &__counter {
     margin-left: 15px;
     min-width: 20px;
+
     & span {
       margin-left: 3px;
       font-size: 14px;
     }
   }
+
   &__img {
     width: 65px;
     height: 65px;
   }
+
   &__title {
     text-align: left;
     flex: 60%;
   }
+
   &__icons-wrapper {
     width: 20px;
     margin-right: 10px;
     color: #A2A6B0;
+
     & svg {
       width: 20px;
       height: 20px;
       transition: .3s;
+
       &:hover {
         color: #72747c;
         cursor: pointer;
