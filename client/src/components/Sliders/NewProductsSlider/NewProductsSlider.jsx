@@ -26,6 +26,7 @@ const NewProductSlider = () => {
               currentPrice={item.currentPrice}
               available={item.available}
               rating={item.rating}
+              alt={item.title}
             />
           </div>
         ))}
