@@ -19,7 +19,7 @@ const CategoryImg = () => {
   return (
     <div className={s.wrapper}>
       {category.length > 0 && (
-        <img className={s.img} src={category.imgUrl} alt="category" />
+        <img className={s.img} src={category[0].imgUrl} alt="category" />
       )}
     </div>
   );

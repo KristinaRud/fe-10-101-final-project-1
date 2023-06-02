@@ -62,14 +62,14 @@ const ProductCard = ({
             <Typography
               variant="body2"
               color="text.secondary"
-              textDecoration="line-through"
+              sx={{ textDecoration: "line-through" }}
               mr={2}
             >
-              ${oldPrice}.00
+              {oldPrice}.00 ₴
             </Typography>
           )}
           <Typography variant="h6" component="div">
-            ${currentPrice}.00
+            {currentPrice}.00 ₴
           </Typography>
         </Box>
       </CardContent>
