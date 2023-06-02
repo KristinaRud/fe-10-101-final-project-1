@@ -1,9 +1,7 @@
 import { Typography } from "@mui/material";
 import { useLocation } from "react-router-dom";
-import { useDispatch, useSelector } from "react-redux";
-import { useEffect } from "react";
+import { useSelector } from "react-redux";
 import { selectProducts } from "../../../store/slices/products.slice";
-import { fetchProducts } from "../../../store/actionCreator/products.actionCreator";
 
 const ItemsPageInfo = () => {
   const location = useLocation();

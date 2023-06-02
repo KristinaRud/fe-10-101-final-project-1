@@ -8,20 +8,20 @@
   justify-content: center;
 
   & a {
-    color: #000000;
+    color: #000;
     text-decoration: none;
 
-    &:before {
+    &::before {
       content: "<";
       margin-right: 5px;
     }
 
     &:visited {
-      color: #000000;
+      color: #000;
     }
   }
 
-  @media (max-width: 768px) {
+  @media (width <= 768px) {
     display: none;
   }
 }

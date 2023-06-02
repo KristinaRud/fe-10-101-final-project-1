@@ -3,10 +3,12 @@
   max-width: 1400px;
   margin: 0 auto;
   padding: 37px 0;
-  @media (max-width: 768px) {
+
+  @media (width <= 768px) {
     padding: 16px 20px 0;
   }
-  @media (max-width: 375px) {
+
+  @media (width <= 375px) {
     padding: 19px 14px;
   }
 }
