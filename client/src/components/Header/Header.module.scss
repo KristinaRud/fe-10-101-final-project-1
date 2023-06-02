@@ -1,0 +1,272 @@
+.container {
+  margin: 0 15px;
+
+  @media (width >= 768px) {
+    margin: 0 20px;
+  }
+}
+
+
+.header {
+  background-color: #020202;
+  color: white;
+
+  & .menu {
+    list-style: none;
+    display: flex;
+    justify-content: space-between;
+    gap: 7px;
+    font-weight: 600;
+    font-size: 11px;
+    line-height: 16px;
+    margin-top: 0;
+    padding: 12px 0;
+    align-items: center;
+
+    & .end {
+      margin-left: auto;
+    }
+
+    & .item__logo {
+      margin-bottom: -24px;
+    }
+  }
+
+  & .border {
+    border-radius: 15px;
+    border: 1px solid #ACACAC;
+    padding-left: 5px;
+  }
+
+  & .menu__item {
+    display: flex;
+    gap: 5px;
+    align-items: center;
+
+  }
+
+  @media (width >= 1200px) {
+    font-size: 12px;
+    line-height: 18px;
+
+    & .menu {
+      justify-content: space-between;
+
+      & .end {
+        margin-left: 0;
+      }
+    }
+  }
+}
+
+.btn-logo {
+  background: #0156FF;
+  width: 60px;
+  height: 46px;
+  padding: 11px 22px;
+  border-radius: 50px 50px 0 0;
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+}
+
+.logo {
+  width: 18px;
+  height: 24px;
+}
+
+.gray {
+  color: #acacac;
+}
+
+.underline {
+  border-bottom: 2px solid white;
+}
+
+.navbar {
+  background: #0156FF;
+
+  & .icon {
+    width: 22px;
+    height: 28px;
+
+  }
+
+  & .navbar-list {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 12px 0;
+    gap: 12px;
+
+    @media (width >= 768px) {
+      gap: 30px;
+    }
+  }
+
+  & .btn-menu {
+    fill: white;
+  }
+
+  & .icon-logo {
+    width: 40px;
+    height: 40px;
+    background: none;
+    border: none;
+    margin-bottom: -10px;
+  }
+
+  & .wrapper-shop {
+    background: none;
+    border: none;
+    position: relative;
+    margin-bottom: -5px;
+
+    & .wrapper-counter {
+      width: 17px;
+      height: 17px;
+      background: #FFF;
+      border-radius: 50px;
+      position: absolute;
+      top: -8px;
+      right: -6px;
+
+      & p {
+        font-weight: 700;
+        font-size: 10px;
+        line-height: 15px;
+        color: #0156FF;
+      }
+
+      @media (width >= 1200px) {
+        gap: 0;
+        background: #0156FF;
+
+        & p {
+          color: #FFF;
+        }
+      }
+    }
+  }
+
+  & .btn-account {
+    width: 34px;
+    height: 34px;
+    background: none;
+    border: 2px solid #FFF;
+    border-radius: 50px;
+    padding: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  & .wrapper-input {
+    position: relative;
+    width: 100%;
+  }
+
+  & .btn-search__input {
+    position: absolute;
+    top: 25%;
+    right: 5px;
+    background: none;
+    border: none;
+
+  }
+
+  & .input-search {
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 18px;
+    padding: 12px 15px;
+    margin: 10px 0;
+    width: 100%;
+    border-radius: 25px;
+    outline: none;
+    border: none;
+  }
+
+  & .input-search__desktop {
+    background: #F5F7FF;
+    border-radius: 31px;
+    width: 100%;
+    outline: none;
+    border: none;
+    padding: 18px 30px;
+  }
+
+  & .navbar-menu {
+    display: flex;
+    gap: 25px;
+    font-weight: 600;
+    font-size: 14px;
+    line-height: 21px;
+  }
+
+  @media (width >= 1200px) {
+    background: #FFF;
+    padding: 28px 0;
+    justify-content: start;
+
+    & .btn-account {
+      border: 2px solid #000;
+    }
+
+    & .icon-logo {
+      margin-left: 40px;
+      margin-bottom: 0;
+    }
+  }
+}
+
+.btn-deals {
+  background: none;
+  font-size: 14px;
+  line-height: 21px;
+  padding: 5px 15px;
+  color: #FFF;
+  border: 2px solid #FFF;
+  border-radius: 25px;
+
+  @media (width >= 1200px) {
+    color: #0156FF;
+    border: 2px solid #0156FF;
+    margin-right: auto;
+  }
+
+}
+
+.blue {
+  color: #0156FF;
+  border: 2px solid #0156FF;
+  margin: 16px;
+}
+
+.btn-search, .btn-close {
+  background: none;
+  border: none;
+
+}
+
+.wrapper-appbar__icons {
+  display: flex;
+  justify-content: space-between;
+  margin: 16px;
+  padding-bottom: 15px;
+  align-items: center;
+  border-bottom: 1px solid #CACDD8;
+
+  & .icon-appbar {
+    width: 27px;
+    height: 33px;
+  }
+}
+
+
+
+
+
+
+
+

@@ -1,0 +1,37 @@
+.new_products_slider {
+  width: 100%;
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 37px 0;
+
+  @media (width <= 768px) {
+    padding: 16px 20px 0;
+  }
+
+  @media (width <= 375px) {
+    padding: 19px 14px;
+  }
+}
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 10px 14px;
+}
+
+.header_title {
+  text-transform: capitalize;
+  font-weight: 600;
+  font-size: 22px;
+  line-height: 33px;
+}
+
+.header_link {
+  text-transform: capitalize;
+  color: #0156FF;
+  text-decoration: underline;
+  font-weight: 400;
+  font-size: 13px;
+  line-height: 115%;
+}

@@ -1,0 +1,26 @@
+.btn {
+  width: 208px;
+  height: 50px;
+  border: 2px solid #0156FF;
+  border-radius: 50px;
+
+  &:hover {
+    border: 2px solid #0156FF;
+  }
+
+  & a {
+    color: #0156FF;
+    font-weight: 600;
+    font-size: 14px;
+    line-height: 21px;
+  }
+
+  @media (width <= 768px) {
+    width: 147px;
+    height: 38px;
+
+    & a {
+      font-size: 13px;
+    }
+  }
+}

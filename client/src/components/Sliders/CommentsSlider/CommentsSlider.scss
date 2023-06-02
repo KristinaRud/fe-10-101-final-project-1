@@ -1,0 +1,45 @@
+/* Custom Dots */
+.slick-dots.slick-right {
+  text-align: end;
+  bottom: -30px;
+}
+
+.slick-dots li {
+  margin: 0;
+}
+
+.slick-dots li button::before {
+  font-size: 12px;
+  color: #CACDD8;
+
+  @media (width <= 375px){
+    font-size: 9px;
+  }
+}
+
+.slick-dots li.slick-active button::before {
+  opacity: .75;
+  color: #0156FF;
+  font-size: 12px;
+
+  @media (width <= 375px){
+    font-size: 9px;
+  }
+}
+
+.MuiButton-outlined {
+  border: 2px solid #0156FF;
+  border-radius: 50px;
+  color: #0156FF;
+  font-weight: 600;
+  font-size: 14px;
+  line-height: 21px;
+  text-transform: capitalize;
+  padding: 8px 26px;
+
+  &:hover{
+    background: #0156FF;
+    color:#FFF;
+    border: 2px solid #0156FF;
+  }
+}

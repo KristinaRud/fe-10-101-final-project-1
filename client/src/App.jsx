@@ -8,6 +8,7 @@ import {
 import AppRoute from "./route/app.route";
 import store from "./store";
 import Footer from "./components/Footer/Footer";
+import Header from "./components/Header/Header";
 import theme from "./theme/createTheme";
 
 const App = () => (
@@ -16,10 +17,11 @@ const App = () => (
       <ThemeProvider theme={theme}>
         <StyledEngineProvider injectFirst>
           <CssBaseline />
+          <Header />
           <AppRoute />
+          <Footer />
         </StyledEngineProvider>
       </ThemeProvider>
-      <Footer />
     </BrowserRouter>
   </Provider>
 );

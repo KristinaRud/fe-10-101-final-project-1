@@ -1,0 +1,27 @@
+.wrapper{
+  width: 100%;
+  display: flex;
+  gap: 6px;
+  flex-wrap: wrap;
+
+  @media (max-width: 480px){
+    margin-top: 10px;
+    justify-content: center;
+    align-items: center;
+  }
+}
+
+.btn{
+  padding: 3px 17px;
+  border: 1px solid #CACDD8;
+  border-radius: 2px;
+  background-color: #fff;
+  font-weight: 600;
+  font-size: 13px;
+  line-height: 210%;
+
+  &:hover{
+    background-color: #fff;
+    border: 1px solid #CACDD8;
+  }
+}
