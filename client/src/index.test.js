@@ -1,3 +1,4 @@
+import "./utils/matchMedia";
 import ReactDom from "react-dom";
 import App from "./App";
 
@@ -8,17 +9,3 @@ it("successfully render", () => {
   global.document.getElementById = (id) => id === "root" && div;
   expect(ReactDom.render).toHaveBeenCalledWith(<App />, div);
 });
-
-/**
- * fix: `matchMedia` not present, legacy browsers require a polyfill
- */
-window.matchMedia =
-  window.matchMedia ||
-  // eslint-disable-next-line func-names
-  function () {
-    return {
-      matches: false,
-      addListener() {},
-      removeListener() {},
-    };
-  };
