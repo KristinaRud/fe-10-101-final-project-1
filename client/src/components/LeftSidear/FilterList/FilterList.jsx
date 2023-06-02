@@ -28,6 +28,7 @@ const FilterList = ({ className, closeModal }) => {
 
   const handleSendFilter = () => {
     closeModal();
+    searchParams.set("startPage", "1");
     setFilterQueryParams(query, searchParams, navigate);
   };
 

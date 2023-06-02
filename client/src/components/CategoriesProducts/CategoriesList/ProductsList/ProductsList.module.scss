@@ -1,0 +1,12 @@
+.wrapper{
+  display: flex;
+  padding: 0;
+}
+
+.slider{
+  width: 83%;
+
+  @media (width <= 480px) {
+    width: 100%;
+  }
+}

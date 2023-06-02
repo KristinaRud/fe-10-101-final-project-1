@@ -5,12 +5,13 @@
     background-size: contain;
     background-position: 65% bottom;
     background-repeat: no-repeat;
-    @media screen and (max-width: 810px) {
+
+    @media screen and (width <= 810px) {
         background-position-x: right;
         background-size: 375px;
     }
 
-    @media screen and (max-width: 480px) {
+    @media screen and (width <= 480px) {
         min-height: 310px;
         background-position-x: 50px;
         background-size: cover;
@@ -23,7 +24,8 @@
     width: 100%;
     max-width: 870px;
     margin: 0 auto;
-    @media screen and (max-width: 810px) {
+
+    @media screen and (width <= 810px) {
         max-width: 600px;
     }
 }

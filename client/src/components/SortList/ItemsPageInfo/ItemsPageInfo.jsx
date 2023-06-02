@@ -1,9 +1,8 @@
 import { Typography } from "@mui/material";
 import { useLocation } from "react-router-dom";
-import { useDispatch, useSelector } from "react-redux";
-import { useEffect } from "react";
+import { useSelector } from "react-redux";
 import { selectProducts } from "../../../store/slices/products.slice";
-import { fetchProducts } from "../../../store/actionCreator/products.actionCreator";
+import s from "./ItemsPageInfo.module.scss";
 
 const ItemsPageInfo = () => {
   const location = useLocation();
@@ -15,16 +14,21 @@ const ItemsPageInfo = () => {
   const data = useSelector(selectProducts);
 
   return (
-    <div>
+    <div className={s.wrapper}>
       {Object.keys(data).length > 0 && (
         <Typography
           variant="h6"
           component="div"
           color="text.secondary"
-          fontSize="13px"
           fontWeight={400}
         >
-          Items {`${pageItemsStart}-${pageItemsEnd}`} of {data.productsQuantity}
+          Items{" "}
+          {`${pageItemsStart}-${
+            pageItemsEnd < data.productsQuantity
+              ? pageItemsEnd
+              : data.productsQuantity
+          }`}{" "}
+          of {data.productsQuantity}
         </Typography>
       )}
     </div>

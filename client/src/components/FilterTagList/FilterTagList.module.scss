@@ -3,6 +3,12 @@
   display: flex;
   gap: 6px;
   flex-wrap: wrap;
+
+  @media (width <= 480px){
+    margin-top: 10px;
+    justify-content: center;
+    align-items: center;
+  }
 }
 
 .btn{

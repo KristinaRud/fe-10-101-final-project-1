@@ -13,5 +13,3 @@ const MobileCompareProducts = () => {
 };
 
 export default MobileCompareProducts;
-
-// TODO: вставити вниз під продукти для мобілки

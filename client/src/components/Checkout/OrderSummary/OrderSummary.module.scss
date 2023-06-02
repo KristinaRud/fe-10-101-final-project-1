@@ -2,7 +2,7 @@
   width: 100%;
   max-width: 446px;
 
-  @media (max-width: 768px) {
+  @media (width <= 768px) {
     max-width: 343px;
   }
 }
@@ -12,7 +12,7 @@
   max-width: 388px;
   margin-bottom: 60px;
 
-  @media (max-width: 768px) {
+  @media (width <= 768px) {
     margin-bottom: 26px;
     max-width: 320px;
   }
@@ -25,7 +25,7 @@
     fill: #fff;
   }
 
-  @media (max-width: 480px) {
+  @media (width <= 480px) {
     display: none;
   }
 }
@@ -34,9 +34,9 @@
   font-weight: 400;
   font-size: 16px;
   line-height: 20px;
-  color: #000000;
+  color: #000;
 
-  @media (max-width: 768px) {
+  @media (width <= 768px) {
     font-size: 12px;
   }
 }
@@ -46,7 +46,7 @@
   background: #F5F7FF;
   padding: 18px 30px 30px 32px;
 
-  @media (max-width: 768px) {
+  @media (width <= 768px) {
     font-size: 12px;
     padding: 18px 24px;
   }
@@ -56,12 +56,12 @@
   font-weight: 600;
   font-size: 24px;
   line-height: 36px;
-  color: #000000;
+  color: #000;
   padding-bottom: 22px;
   border-bottom: 1px solid #CACDD8;
   margin-bottom: 16px;
 
-  @media (max-width: 768px) {
+  @media (width <= 768px) {
     font-size: 14px;
     padding-bottom: 18px;
     margin-bottom: 10px;
@@ -73,7 +73,7 @@
   font-size: 14px;
   line-height: 21px;
 
-  @media (max-width: 768px) {
+  @media (width <= 768px) {
     font-size: 10px;
   }
 }
@@ -98,7 +98,7 @@
 .product-name {
   font-size: 14px;
 
-  @media (max-width: 768px) {
+  @media (width <= 768px) {
     font-size: 10px;
   }
 }
@@ -107,9 +107,9 @@
   font-weight: 600;
   font-size: 14px;
   line-height: 140%;
-  color: #000000;
+  color: #000;
 
-  @media (max-width: 768px) {
+  @media (width <= 768px) {
     font-size: 12px;
   }
 }
@@ -121,7 +121,7 @@
   color: #A2A6B0;
   margin-right: 12px;
 
-  @media (max-width: 768px) {
+  @media (width <= 768px) {
     font-size: 12px;
   }
 }
