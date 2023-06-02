@@ -8,3 +8,17 @@ it("successfully render", () => {
   global.document.getElementById = (id) => id === "root" && div;
   expect(ReactDom.render).toHaveBeenCalledWith(<App />, div);
 });
+
+/**
+ * fix: `matchMedia` not present, legacy browsers require a polyfill
+ */
+global.matchMedia =
+  global.matchMedia ||
+  // eslint-disable-next-line func-names
+  function () {
+    return {
+      matches: false,
+      addListener() {},
+      removeListener() {},
+    };
+  };
