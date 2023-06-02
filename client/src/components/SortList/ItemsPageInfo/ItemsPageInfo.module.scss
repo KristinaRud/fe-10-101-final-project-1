@@ -1,7 +1,8 @@
 .wrapper{
   & :global .MuiTypography-root{
     font-size: 13px;
-    @media (max-width: 540px) {
+
+    @media (width <= 540px) {
       font-size: 13px;
       text-align: center;
       margin: 10px;
