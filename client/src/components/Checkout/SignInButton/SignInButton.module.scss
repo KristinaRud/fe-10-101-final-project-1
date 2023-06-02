@@ -15,7 +15,7 @@
     line-height: 21px;
   }
 
-  @media (max-width: 768px) {
+  @media (width <= 768px) {
     width: 147px;
     height: 38px;
 

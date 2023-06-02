@@ -2,7 +2,7 @@
   width: 100%;
   max-width: 565px;
 
-  @media (max-width: 768px) {
+  @media (width <= 768px) {
     max-width: 340px;
   }
 }
@@ -20,30 +20,30 @@
   }
 
   & :global input {
-    @media (max-width: 768px) {
+    @media (width <= 768px) {
       font-size: 12px;
       padding: 12px 13px;
     }
   }
 
   & :global label {
-    @media (max-width: 768px) {
+    @media (width <= 768px) {
       font-size: 13px;
     }
   }
 
   & :global legend {
-    @media (max-width: 768px) {
+    @media (width <= 768px) {
       font-size: 13px;
     }
   }
 
-  @media (max-width: 768px) {
+  @media (width <= 768px) {
     font-size: 13px;
   }
 
   & :global .MuiTypography-root {
-    @media (max-width: 768px) {
+    @media (width <= 768px) {
       font-size: 13px;
     }
   }
@@ -52,7 +52,7 @@
 .hint {
   display: inline-block;
   width: 100%;
-  color: #666666;
+  color: #666;
   font-weight: 400;
   font-size: 13px;
   line-height: 210%;
@@ -60,7 +60,7 @@
   padding-top: 11px;
   border-bottom: 1px solid #CACDD8;
 
-  @media (max-width: 768px) {
+  @media (width <= 768px) {
     font-size: 11px;
   }
 }
@@ -74,9 +74,9 @@
   font-weight: 600;
   font-size: 14px;
   line-height: 21px;
-  color: #FFFFFF;
+  color: #FFF;
 
-  @media (max-width: 768px) {
+  @media (width <= 768px) {
     width: 133px;
     height: 38px;
     font-size: 13px;
