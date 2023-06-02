@@ -1,0 +1,122 @@
+b {
+    color: #000;
+    margin-top: 9px;
+}
+
+.shop__info-wrapper {
+    margin-top: 20px;
+    max-width: 262px;
+    max-height: 233px;
+    background-color: #fff;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    margin-bottom: 7px;
+    border: 1px solid #ececec;
+
+    @media (max-width: 768px) {
+        max-width: 283px;
+        max-height: 233px;
+    }
+
+    @media (max-width: 375px) {
+        max-width: 375px;
+        max-height: 233px;
+    }
+
+    &>div:first-child {
+        width: 100%;
+        border-bottom: 1px solid #ececec;
+    }
+        &::before, &::after {
+                    content: '';
+                    border: solid transparent;
+                    position: absolute;
+                    right: 88%;
+                        margin-right: -12px;
+                        top: -24px;
+                    width: 0;
+                    @media (max-width: 768px) {
+                                    right: 28%;
+                                }
+                    
+                                @media (max-width: 375px) {
+                                   right: 33%;
+                                }
+        }
+                 &::before{
+                    border-bottom-color: #ececec;
+                        border-width: 12px;
+                 }
+                                  &::after {
+                                    border-bottom-color: #fff;
+                                        border-width: 14px;
+                                        margin-right: -14px;
+                                  }
+}
+
+.shop__working-time {
+    margin-bottom: 10px;
+}
+
+.shop__time-wrapper {
+    display: flex;
+}
+
+.timer__logo {
+    width: 35px;
+    height: 35px;
+    margin-left: 13px;
+    margin-right: 12px;
+
+    @media (max-width: 768px) {
+        width: 30px;
+        height: 30px;
+        margin-left: 29px;
+    }
+
+    @media (max-width: 375px) {
+        margin-left: 64px;
+    }
+}
+
+.shop-adress {
+    display: flex;
+    width: 100%;
+    border-bottom: 1px solid #ececec;
+    margin-top: 11px;
+    padding-bottom: 10px;
+}
+
+.location__logo {
+    margin-left: 13px;
+    margin-right: 9px;
+
+    @media (max-width: 768px) {
+        width: 30px;
+        height: 30px;
+        margin-left: 29px;
+        margin-right: 12px;
+    }
+
+    @media (max-width: 375px) {
+        margin-left: 64px;
+    }
+}
+
+.shop__contacts-info {
+    margin-top: 6px;
+    width: 100%;
+    padding-left: 21px;
+
+    @media (max-width: 768px) {
+        padding-left: 33px;
+    }
+
+    @media (max-width: 375px) {
+        padding-left: 68px;
+    }
+}
