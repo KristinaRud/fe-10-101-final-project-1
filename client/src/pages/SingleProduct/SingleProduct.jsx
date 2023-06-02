@@ -4,14 +4,35 @@ import { Link } from "react-router-dom";
 import FavoriteBorderIcon from "@mui/icons-material/FavoriteBorder";
 import Button from "@mui/material/Button";
 import cn from "classnames";
+import { getDetailsList } from "./utils";
 import styles from "./SingleProduct.module.scss";
 import productImg from "../../assets/images/single-product.png";
+
+const characteristics = {
+  typeOfWorkingSurface: "Graphics tablet",
+  size: "200 х 160 х 8.8 mm",
+  weight: "230 g",
+  activeArea: "152 х 95 mm",
+  resolution: "2540 lpi",
+  numberOfButtons: "4",
+  readingSpeed: "133 pps",
+  connectionInterface: "micro USB",
+  numberOfButtonsOnThePen: "1",
+  material: "ABS plastic",
+  typeOfPowerSupply: "accumulator",
+  batteryCapacity: "1100 mAh",
+  technology: "Electromagnetic resonance",
+  powerConsumption: "0.35 W",
+  more: "OS support: Windows 7, mac OS 10.1 2 and above",
+};
 
 const SingleProduct = () => {
   const [isActiveTab, setIsActiveTab] = useState({
     status: true,
     title: "About Product",
   });
+
+  const list = getDetailsList(characteristics);
 
   const tabToggle = (event) => {
     const title = event.target.innerText;
@@ -99,11 +120,15 @@ const SingleProduct = () => {
               <p className={styles["product-info__subtitle"]}>
                 Be the first to review this product
               </p>
-              <p className={styles["product-info__description"]}>
-                MSI MPG Trident 3 10SC-005AU Intel i7 10700F, 2060 SUPER, 16GB
-                RAM, 512GB SSD, 2TB HDD, Windows 10 Home, Gaming Keyboard and
-                Mouse 3 Mouse 3 Years Warranty Gaming Desktop
-              </p>
+              {isActiveTab.title === "About Product" ? (
+                <p className={styles["product-info__description"]}>
+                  MSI MPG Trident 3 10SC-005AU Intel i7 10700F, 2060 SUPER, 16GB
+                  RAM, 512GB SSD, 2TB HDD, Windows 10 Home, Gaming Keyboard and
+                  Mouse 3 Mouse 3 Years Warranty Gaming Desktop
+                </p>
+              ) : (
+                <ul className={styles["details-list"]}>{list}</ul>
+              )}
               <div className={styles["product-info__footer"]}>
                 <p className={styles["product-info__support"]}>
                   Have a Question?{" "}

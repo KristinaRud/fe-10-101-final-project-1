@@ -383,3 +383,22 @@
         background-color: #2F6FEE;
     }
 }
+
+.details-list {
+    padding-bottom: 30px;
+    padding-left: 15px;
+    @media screen and (max-width: 768px) {
+        padding-bottom: 15px;
+    }
+
+    &__item {
+        list-style: disc;
+        font-weight: 300;
+        font-size: 14px;
+        line-height: 1.7;
+        color: #000;
+        &::marker {
+            font-size: 12px;
+        }
+    }
+}
