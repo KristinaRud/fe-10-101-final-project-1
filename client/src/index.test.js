@@ -12,8 +12,8 @@ it("successfully render", () => {
 /**
  * fix: `matchMedia` not present, legacy browsers require a polyfill
  */
-global.matchMedia =
-  global.matchMedia ||
+window.matchMedia =
+  window.matchMedia ||
   // eslint-disable-next-line func-names
   function () {
     return {
