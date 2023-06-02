@@ -4,6 +4,8 @@ import HomePage from "../pages/Home/Home";
 import LoginPage from "../pages/Login/Login";
 import AboutUsPage from "../pages/AboutUs/AboutUsPage";
 import ContactUs from "../pages/ContactUs/ContactUs";
+import Category from "../pages/Category/Category";
+import SingleProduct from "../pages/SingleProduct/SingleProduct";
 
 const AppRoute = () => (
   <Routes>
@@ -11,6 +13,8 @@ const AppRoute = () => (
     <Route path="/login" element={<LoginPage />} />
     <Route path="/about" element={<AboutUsPage />} />
     <Route path="/contact" element={<ContactUs />} />
+    <Route path="/singleProduct" element={<SingleProduct />} />
+    <Route path="/:category" element={<Category />} />
     <Route path="*" element={<NotPage />} />
   </Routes>
 );

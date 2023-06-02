@@ -45,7 +45,12 @@ const BrandList = () => {
         {brands.map((item, index) => {
           if (index < limit) {
             return (
-              <BrandItem key={item.name} url={item.imageUrl} href={item.url} />
+              <BrandItem
+                key={item.name}
+                url={item.imageUrl}
+                href={item.url}
+                heightImg="46"
+              />
             );
           }
           return null;

@@ -1,0 +1,13 @@
+.list {
+  display: flex;
+  flex-direction: column;
+  gap: 30px
+}
+
+.wrapper {
+  display: flex;
+
+  @media (width <= 480px) {
+   display: block;
+  }
+}

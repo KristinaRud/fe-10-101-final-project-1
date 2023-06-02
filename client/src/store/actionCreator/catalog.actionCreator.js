@@ -15,4 +15,17 @@ const fetchCategory = createAsyncThunk(
   },
 );
 
-export { fetchCategory };
+const fetchCategories = createAsyncThunk(
+  "catalog/fetchCategories",
+  async (_, thunkAPI) => {
+    try {
+      const response = await fetch(`http://localhost:4000/api/catalog`);
+      const data = await response.json();
+      return data;
+    } catch (error) {
+      return thunkAPI.rejectWithValue({ error: error.message });
+    }
+  },
+);
+
+export { fetchCategory, fetchCategories };

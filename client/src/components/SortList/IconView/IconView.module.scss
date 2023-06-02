@@ -1,6 +1,10 @@
 .wrapper {
   display: flex;
   gap: 9px;
+
+  @media (width <= 665px) {
+    display: none;
+  }
 }
 
 .active {
