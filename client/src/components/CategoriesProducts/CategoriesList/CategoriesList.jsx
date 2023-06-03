@@ -20,7 +20,7 @@ const CategoriesList = () => {
       {catalog.length > 0 &&
         catalog.map(({ id, name, imgUrl }) => (
           <div key={id} className={s.wrapper}>
-            <CategoryItem name={name} imgUrl={imgUrl} />
+            <CategoryItem name={name} imgUrl={imgUrl} id={id} />
             <ProductsList category={id} />
           </div>
         ))}
