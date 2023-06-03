@@ -7,7 +7,7 @@
 
   .fade-text {
     padding: 10px;
-    background: linear-gradient(to bottom, transparent, #ffffff);
+    background: linear-gradient(to bottom, transparent, #fff);
     font-size: 12px;
     line-height: 18px;
 
@@ -18,7 +18,7 @@
       left: 0;
       width: 100%;
       height: 100%;
-      background: linear-gradient(to top, #fff 50%, rgba(255, 255, 255, 0) 100%);
+      background: linear-gradient(to top, #fff 50%, rgb(255 255 255 / 0%) 100%);
     }
 
     &.expanded {
