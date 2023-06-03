@@ -1,0 +1,26 @@
+.link {
+  color: #000000;
+  font-weight: 400;
+  font-size: 12px;
+  line-height: 18px;
+  cursor: pointer;
+
+  &:hover {
+    color: #0156FF;
+    text-decoration: underline;
+  }
+}
+
+.list {
+  padding: 20px 20px 0 20px;
+
+  li:last-child a {
+    color: #A2A6B0;
+    cursor: default;
+
+    &:hover {
+      color: #A2A6B0;
+      text-decoration: none;
+    }
+  }
+}
