@@ -10,7 +10,7 @@ import Typography from "@mui/material/Typography";
 import Menu from "@mui/material/Menu";
 import MenuIcon from "@mui/icons-material/Menu";
 import PersonIcon from "@mui/icons-material/Person";
-import MenuItem from "@mui/material/MenuItem";
+// import Item from "@mui/material/Item";
 import ShoppingCartOutlinedIcon from "@mui/icons-material/ShoppingCartOutlined";
 import SearchOutlinedIcon from "@mui/icons-material/SearchOutlined";
 import CloseRoundedIcon from "@mui/icons-material/CloseRounded";
@@ -19,6 +19,7 @@ import { ReactComponent as VecIcon } from "../../pages/AboutUs/icons/vec.svg";
 import { ReactComponent as LogoBlue } from "./icons/logo-blue.svg";
 import Button from "../Button/Button";
 import styles from "./Header.module.scss";
+import Item from "./Item/Item";
 
 const Header = () => {
   const [isOpenListItem, setIsOpenListItem] = useState(false);
@@ -27,16 +28,7 @@ const Header = () => {
   const mediaDesktop = useMediaQuery("(min-width: 1200px)");
   const mediaTablet = useMediaQuery("(min-width: 768px)");
 
-  const navbarItems = [
-    "Laptops",
-    "Desktop PCs",
-    "Networking Devices",
-    "Networking Devices",
-    "Printers & Scanners",
-    "PC Parts",
-    "All Other Products",
-    "Repairs",
-  ];
+  const navbarItems = ["Laptops", "Graphic Tablets", "Tablets", "Smartphones"];
 
   const openSearchInput = () => {
     setIsOpenListItem(true);
@@ -159,7 +151,7 @@ const Header = () => {
                 </div>
 
                 {navbarItems.map((item) => (
-                  <MenuItem
+                  <Menu
                     key={item}
                     onClick={handleCloseNavMenu}
                     sx={{
@@ -167,17 +159,17 @@ const Header = () => {
                       display: "flex",
                       justifyContent: "space-between",
                     }}
+                    id="basic-menu"
+                    MenuListProps={{
+                      "aria-labelledby": "basic-button",
+                    }}
                   >
                     <Typography textAlign="center">{item}</Typography>
                     <ArrowForwardIosIcon
                       sx={{ marginLeft: "30px", height: "8px" }}
                     />
-                  </MenuItem>
+                  </Menu>
                 ))}
-
-                <Button className={cx(styles["btn-deals"], styles.blue)}>
-                  Our deals
-                </Button>
               </Menu>
             </Box>
 
@@ -223,15 +215,9 @@ const Header = () => {
             {mediaDesktop && !isOpenListItem && (
               <ul className={styles["navbar-menu"]}>
                 {navbarItems.map((item) => (
-                  <li key={item} onClick={handleCloseNavMenu}>
-                    {item}
-                  </li>
+                  <Item title={item} key={item} />
                 ))}
               </ul>
-            )}
-            {((mediaDesktop && !isOpenListItem) ||
-              (!mediaTablet && isOpenListItem)) && (
-              <Button className={styles["btn-deals"]}>Our deals</Button>
             )}
             {!isOpenListItem && (
               <Button

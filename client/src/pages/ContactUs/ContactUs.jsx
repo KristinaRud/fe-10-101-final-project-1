@@ -1,6 +1,7 @@
 import Typography from "@mui/material/Typography";
 import { Form, Formik } from "formik";
 import { Button, TextField } from "@mui/material";
+import BreadcrumbsApp from "../../components/BreadcrumbsApp/BreadcrumbsApp";
 import { initialValues } from "./ContactUs.helpers-config";
 import styles from "./ContactUs.module.scss";
 
@@ -9,8 +10,8 @@ const ContactUs = () => {
     console.log(values);
   };
   return (
-    <>
-      <div>breadcrumbs</div>
+    <div className={styles.container}>
+      <BreadcrumbsApp />
       <div className={styles.wrapper}>
         <div className={styles.form}>
           <Typography
@@ -85,7 +86,7 @@ const ContactUs = () => {
         </div>
         <div className={styles.details} />
       </div>
-    </>
+    </div>
   );
 };
 
