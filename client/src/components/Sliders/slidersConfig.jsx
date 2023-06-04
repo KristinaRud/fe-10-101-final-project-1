@@ -62,9 +62,15 @@ export const NewProductsConfig = {
       },
     },
     {
-      breakpoint: 510,
+      breakpoint: 600,
       settings: {
-        slidesToShow: 1,
+        slidesToShow: 3,
+      },
+    },
+    {
+      breakpoint: 560,
+      settings: {
+        slidesToShow: 2,
       },
     },
   ],
