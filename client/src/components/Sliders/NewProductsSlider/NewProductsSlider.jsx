@@ -20,6 +20,7 @@ const NewProductSlider = () => {
           <div key={item.id} className={styles.card}>
             <ProductCard
               image={item.img_url}
+              alt={item.alt}
               title={item.title}
               description={item.description}
               oldPrice={item.oldPrice}

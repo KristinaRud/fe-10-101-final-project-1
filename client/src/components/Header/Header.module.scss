@@ -6,7 +6,6 @@
   }
 }
 
-
 .header {
   background-color: #020202;
   color: white;
@@ -149,6 +148,7 @@
     }
   }
 
+<<<<<<< HEAD
   & .btn-account {
     width: 34px;
     height: 34px;
@@ -161,6 +161,8 @@
     justify-content: center;
   }
 
+=======
+>>>>>>> volodymyr-features
   & .wrapper-input {
     position: relative;
     width: 100%;
@@ -208,11 +210,14 @@
     background: #FFF;
     padding: 28px 0;
     justify-content: start;
+<<<<<<< HEAD
 
     & .btn-account {
       border: 2px solid #000;
     }
 
+=======
+>>>>>>> volodymyr-features
     & .icon-logo {
       margin-left: 40px;
       margin-bottom: 0;
@@ -262,11 +267,4 @@
     height: 33px;
   }
 }
-
-
-
-
-
-
-
 

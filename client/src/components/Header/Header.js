@@ -2,14 +2,12 @@ import { useState } from "react";
 import FacebookIcon from "@mui/icons-material/Facebook";
 import InstagramIcon from "@mui/icons-material/Instagram";
 import useMediaQuery from "@mui/material/useMediaQuery";
-import ExpandMoreRoundedIcon from "@mui/icons-material/ExpandMoreRounded";
 import cx from "classnames";
 import Box from "@mui/material/Box";
 import IconButton from "@mui/material/IconButton";
 import Typography from "@mui/material/Typography";
 import Menu from "@mui/material/Menu";
 import MenuIcon from "@mui/icons-material/Menu";
-import PersonIcon from "@mui/icons-material/Person";
 import MenuItem from "@mui/material/MenuItem";
 import ShoppingCartOutlinedIcon from "@mui/icons-material/ShoppingCartOutlined";
 import SearchOutlinedIcon from "@mui/icons-material/SearchOutlined";
@@ -18,6 +16,8 @@ import ArrowForwardIosIcon from "@mui/icons-material/ArrowForwardIos";
 import { ReactComponent as VecIcon } from "../../pages/AboutUs/icons/vec.svg";
 import { ReactComponent as LogoBlue } from "./icons/logo-blue.svg";
 import Button from "../Button/Button";
+import ShopInfoDropDown from "../ShopInfoDropDown/ShopInfoDropDown";
+import AccBurgerMenu from "../AccBurgerMenu/AccBurgerMenu";
 import styles from "./Header.module.scss";
 
 const Header = () => {
@@ -30,7 +30,6 @@ const Header = () => {
   const navbarItems = [
     "Laptops",
     "Desktop PCs",
-    "Networking Devices",
     "Networking Devices",
     "Printers & Scanners",
     "PC Parts",
@@ -63,15 +62,17 @@ const Header = () => {
                 </Button>
               </li>
             )}
-            <li
-              className={cx(
-                styles.menu__item,
-                isOpenListItem && !mediaTablet ? styles.border : null,
-              )}
-            >
-              <span className={styles.gray}>Mon-Thu:</span> 9:00 AM - 5:30 PM{" "}
-              <ExpandMoreRoundedIcon className={styles.icon} />
-            </li>
+            <Box>
+              <li
+                className={cx(
+                  styles.menu__item,
+                  isOpenListItem && !mediaTablet ? styles.border : null,
+                )}
+              >
+                <span className={styles.gray}>Mon-Thu:</span> 9:00 AM - 5:30 PM{" "}
+                <ShopInfoDropDown />
+              </li>
+            </Box>
             {(!isOpenListItem && mediaDesktop) || mediaDesktop ? (
               <li className={cx(styles.menu__item, styles.end)}>
                 <span className={styles.gray}>
@@ -266,11 +267,9 @@ const Header = () => {
                 <p>10</p>
               </div>
             </Button>
-            <Button className={styles["btn-account"]}>
-              <PersonIcon
-                sx={{ color: { xs: "#FFFFFF", md: "#FFFFFF", lg: "#000000" } }}
-              />
-            </Button>
+            <Box>
+              <AccBurgerMenu />
+            </Box>
           </div>
           {isOpenListItem && !mediaTablet && (
             <input
