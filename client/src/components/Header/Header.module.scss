@@ -1,6 +1,7 @@
 .container {
   margin: 0 15px;
-  @media (min-width: 768px) {
+
+  @media (max-width: 768px) {
     margin: 0 20px;
   }
 }
@@ -97,7 +98,7 @@
     padding: 12px 0;
     gap: 12px;
 
-    @media (min-width: 768px) {
+    @media (max-width: 768px) {
       gap: 30px;
     }
   }
@@ -123,7 +124,7 @@
     & .wrapper-counter {
       width: 17px;
       height: 17px;
-      background: #FFFFFF;
+      background: #FFF;
       border-radius: 50px;
       position: absolute;
       top: -8px;
@@ -139,8 +140,9 @@
       @media (min-width: 1200px) {
         gap: 0;
         background: #0156FF;
+
         & p {
-          color: #FFFFFF;
+          color: #FFF;
         }
       }
     }
@@ -190,7 +192,7 @@
   }
 
   @media (min-width: 1200px) {
-    background: #FFFFFF;
+    background: #FFF;
     padding: 28px 0;
     justify-content: start;
     & .icon-logo {
@@ -205,9 +207,10 @@
   font-size: 14px;
   line-height: 21px;
   padding: 5px 15px;
-  color: #FFFFFF;
-  border: 2px solid #FFFFFF;
+  color: #FFF;
+  border: 2px solid #FFF;
   border-radius: 25px;
+
   @media (min-width: 1200px) {
     color: #0156FF;
     border: 2px solid #0156FF;
@@ -215,6 +218,7 @@
   }
 
 }
+
 .blue {
   color: #0156FF;
   border: 2px solid #0156FF;
@@ -236,7 +240,6 @@
   border-bottom: 1px solid #CACDD8;
 
   & .icon-appbar {
-
     width: 27px;
     height: 33px;
   }
