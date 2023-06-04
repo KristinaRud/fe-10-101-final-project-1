@@ -85,5 +85,5 @@ ProductCard.propTypes = {
   oldPrice: PropTypes.string.isRequired,
   currentPrice: PropTypes.string.isRequired,
   available: PropTypes.bool.isRequired,
-  rating: PropTypes.string.isRequired,
+  rating: PropTypes.number.isRequired,
 };
