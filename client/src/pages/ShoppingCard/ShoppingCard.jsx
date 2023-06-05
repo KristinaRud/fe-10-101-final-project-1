@@ -1,24 +1,27 @@
 import { useState } from "react";
 import {
-  Table,
-  TableBody,
-  TableCell,
-  TableContainer,
-  TableHead,
-  TableRow,
   Typography,
   Button,
   IconButton,
   Box,
   Container,
   Divider,
-} from "@material-ui/core";
-import { makeStyles } from "@material-ui/core/styles";
+  Table,
+  TableBody,
+  TableCell,
+  TableContainer,
+  TableHead,
+  TableRow,
+  TextField,
+  useMediaQuery,
+} from "@mui/material";
+import { makeStyles } from "@mui/styles";
 import HighlightOffIcon from "@mui/icons-material/HighlightOff";
 
 const useStyles = makeStyles((theme) => ({
   root: {
-    margin: theme.spacing(2),
+    maxWidth: "1160px",
+    margin: "0 auto",
   },
   deleteButton: {
     marginRight: theme.spacing(1),
@@ -28,13 +31,8 @@ const useStyles = makeStyles((theme) => ({
     display: "flex",
     flexDirection: "column",
     alignItems: "flex-end",
-    width: "446px",
-    height: "718px",
+    width: "100%",
     background: "#F5F7FF",
-    [theme.breakpoints.down("sm")]: {
-      width: "343px",
-      height: "615px",
-    },
   },
   summaryItem: {
     display: "flex",
@@ -52,6 +50,9 @@ const useStyles = makeStyles((theme) => ({
   },
   checkoutButton: {
     marginTop: theme.spacing(2),
+  },
+  tableContainer: {
+    width: "100%",
   },
 }));
 
@@ -115,13 +116,15 @@ const ShoppingCart = () => {
     return calculateSubtotal() + calculateTax() + calculateShipping();
   };
 
+  const isMobile = useMediaQuery((theme) => theme.breakpoints.down("sm"));
+
   return (
     <Container maxWidth="lg" className={classes.root}>
       <Typography variant="h5" component="div" gutterBottom>
         Shopping Cart
       </Typography>
-      <Box display="flex">
-        <TableContainer>
+      <Box display="flex" flexDirection={isMobile ? "column" : "row"}>
+        <TableContainer className={classes.tableContainer}>
           <Table>
             <TableHead>
               <TableRow>
@@ -152,10 +155,11 @@ const ShoppingCart = () => {
                   </TableCell>
                   <TableCell align="right">${item.price}</TableCell>
                   <TableCell align="right">
-                    <input
+                    <TextField
                       type="number"
                       value={item.quantity}
-                      min={1}
+                      inputProps={{ min: 1 }}
+                      className={classes.quantityInput}
                       onChange={(e) =>
                         handleQuantityChange(
                           item.id,
