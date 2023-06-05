@@ -30,9 +30,6 @@ const NewProductSlider = () => {
     <div className={styles.new_products_slider}>
       <div className={styles.header}>
         <div className={styles.header_title}>New Products</div>
-        <a className={styles.header_link} href="/">
-          See All New Products
-        </a>
       </div>
       <Slider {...NewProductsConfig}>
         {newProducts.map((item) => (
@@ -41,10 +38,10 @@ const NewProductSlider = () => {
               image={item.imageUrls[0]}
               title=""
               description={item.name}
-              oldPrice={item.previousPrice.toString()}
-              currentPrice={item.currentPrice.toString()}
+              oldPrice={item.previousPrice}
+              currentPrice={item.currentPrice}
               available={item.quantity > 5}
-              rating={item.rating.toString()}
+              rating={item.rating}
               alt={item.name}
             />
           </div>

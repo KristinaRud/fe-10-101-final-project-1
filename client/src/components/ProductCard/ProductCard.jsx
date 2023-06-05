@@ -158,8 +158,8 @@ ProductCard.propTypes = {
   image: PropTypes.string.isRequired,
   alt: PropTypes.string.isRequired,
   description: PropTypes.string.isRequired,
-  oldPrice: PropTypes.string.isRequired,
-  currentPrice: PropTypes.string.isRequired,
+  oldPrice: PropTypes.number,
+  currentPrice: PropTypes.number.isRequired,
   available: PropTypes.bool.isRequired,
-  rating: PropTypes.string.isRequired,
+  rating: PropTypes.number,
 };

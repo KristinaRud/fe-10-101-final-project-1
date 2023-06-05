@@ -7,7 +7,7 @@
   opacity: 0.5;
   z-index: 2;
 
-  &:hover {
+  &:hover, &:focus {
     background: #252931;
     opacity: 0.75;
   }
