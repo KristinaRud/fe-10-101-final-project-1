@@ -5,7 +5,7 @@ import {
   selectChosenPostOfficeBranch,
   selectPostOffice,
   selectPostOffices,
-} from "../../../../store/slices/postOffice.slice";
+} from "../../../../store/selectors/postOffice.selector";
 import ScheduleList from "./ScheduleList/ScheduleList";
 import Map from "../../../Map/Map";
 

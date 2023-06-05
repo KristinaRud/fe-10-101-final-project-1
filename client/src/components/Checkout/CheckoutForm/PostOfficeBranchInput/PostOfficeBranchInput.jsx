@@ -4,17 +4,17 @@ import { Field } from "formik";
 import { useDispatch, useSelector } from "react-redux";
 import { useEffect } from "react";
 import PropTypes from "prop-types";
+import { setChosenPostOffice } from "../../../../store/slices/postOffice.slice";
 import {
   selectPostOffice,
   selectPostOffices,
-  setChosenPostOffice,
-} from "../../../../store/slices/postOffice.slice";
+} from "../../../../store/selectors/postOffice.selector";
 import s from "../CheckoutForm.module.scss";
 import {
   fetchPostOfficesME,
   fetchPostOfficesNP,
 } from "../../../../store/actionCreator/postOffice.actionCreator";
-import { selectChosenCity } from "../../../../store/slices/city.slice";
+import { selectChosenCity } from "../../../../store/selectors/city.selector";
 
 const PostOfficeBranchInput = ({ setFieldValue }) => {
   const dispatch = useDispatch();

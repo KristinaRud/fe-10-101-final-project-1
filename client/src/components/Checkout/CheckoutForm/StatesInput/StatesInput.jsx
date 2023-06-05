@@ -4,12 +4,10 @@ import { Autocomplete } from "formik-mui";
 import Text from "@mui/material/TextField";
 import { Field } from "formik";
 import PropTypes from "prop-types";
-import {
-  selectStates,
-  setChosenState,
-} from "../../../../store/slices/city.slice";
+import { setChosenState } from "../../../../store/slices/city.slice";
 import { fetchAllStates } from "../../../../store/actionCreator/city.actionCreator";
 import s from "../CheckoutForm.module.scss";
+import { selectStates } from "../../../../store/selectors/city.selector";
 
 const StatesInput = ({ setFieldValue }) => {
   const dispatch = useDispatch();
