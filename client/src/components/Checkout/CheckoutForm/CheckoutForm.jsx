@@ -1,5 +1,5 @@
 import { Field, Form, Formik } from "formik";
-import { TextField, Autocomplete, RadioGroup } from "formik-mui";
+import { TextField, RadioGroup } from "formik-mui";
 import {
   FormControlLabel,
   Radio,
@@ -7,10 +7,15 @@ import {
   FormLabel,
   Button,
 } from "@mui/material";
-import Text from "@mui/material/TextField";
 import cn from "classnames";
+import { validationSchema } from "./utils";
+import StatesInput from "./StatesInput/StatesInput";
+import DistrictsInput from "./DistrictsInput/DistrictsInput";
+import CityInput from "./CityInput/CityInput";
 import s from "./CheckoutForm.module.scss";
-import { allCities, allPostOfficeBranch, allRegions, validate } from "./const";
+import PostOfficeRadio from "../PostOfficeRadio/PostOfficeRadio";
+import PostOfficeBranchInput from "./PostOfficeBranchInput/PostOfficeBranchInput";
+import PostOfficeDetails from "./PostOfficeDetails/PostOfficeDetails";
 
 const CheckoutForm = () => {
   const handleSubmit = async (values) => {
@@ -24,16 +29,17 @@ const CheckoutForm = () => {
         firstName: "",
         lastName: "",
         phoneNumber: "",
-        region: null,
+        state: null,
+        district: null,
         city: null,
         postOffice: "",
         postOfficeBranch: null,
         deliveryDetails: "",
       }}
-      validate={validate}
+      validationSchema={validationSchema}
       onSubmit={async (values) => handleSubmit(values)}
     >
-      {({ isSubmitting }) => (
+      {({ isSubmitting, setFieldValue }) => (
         <Form>
           <div className={s.form}>
             <Field
@@ -67,81 +73,15 @@ const CheckoutForm = () => {
               label="Phone Number *"
               className={s.input}
             />
-            <Field
-              name="region"
-              className={s.input}
-              component={Autocomplete}
-              options={allRegions}
-              getOptionLabel={(option) => option.name}
-              isOptionEqualToValue={(option, value) =>
-                option.name === value?.name
-              }
-              renderInput={(params) => (
-                <Text
-                  {...params}
-                  label="Choose region *"
-                  inputProps={{
-                    ...params.inputProps,
-                    autoComplete: "new-password",
-                  }}
-                />
-              )}
+            <StatesInput setFieldValue={setFieldValue} />
+            <DistrictsInput setFieldValue={setFieldValue} />
+            <CityInput setFieldValue={setFieldValue} />
+            <PostOfficeRadio
+              setFieldValue={setFieldValue}
+              isSubmitting={isSubmitting}
             />
-            <Field
-              name="city"
-              className={s.input}
-              component={Autocomplete}
-              options={allCities}
-              getOptionLabel={(option) => option.name}
-              isOptionEqualToValue={(option, value) =>
-                option.name === value?.name
-              }
-              renderInput={(params) => (
-                <Text
-                  {...params}
-                  label="Choose city *"
-                  inputProps={{
-                    ...params.inputProps,
-                    autoComplete: "new-password",
-                  }}
-                />
-              )}
-            />
-            <Field component={RadioGroup} name="postOffice" className={s.input}>
-              <FormLabel component="legend">Post Office *</FormLabel>
-              <FormControlLabel
-                value="novaPoshta"
-                control={<Radio disabled={isSubmitting} />}
-                label="Nova Poshta"
-                disabled={isSubmitting}
-              />
-              <FormControlLabel
-                value="mistExpress"
-                control={<Radio disabled={isSubmitting} />}
-                label="Mist Express"
-                disabled={isSubmitting}
-              />
-            </Field>
-            <Field
-              name="postOfficeBranch"
-              className={s.input}
-              component={Autocomplete}
-              options={allPostOfficeBranch}
-              getOptionLabel={(option) => option.numberPostOffice}
-              isOptionEqualToValue={(option, value) =>
-                option.numberPostOffice === value?.numberPostOffice
-              }
-              renderInput={(params) => (
-                <Text
-                  {...params}
-                  label="Choose post office branch *"
-                  inputProps={{
-                    ...params.inputProps,
-                    autoComplete: "new-password",
-                  }}
-                />
-              )}
-            />
+            <PostOfficeBranchInput setFieldValue={setFieldValue} />
+            <PostOfficeDetails />
           </div>
           <Field
             component={RadioGroup}
