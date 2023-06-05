@@ -5,19 +5,12 @@ import {
   selectChosenPostOfficeBranch,
   selectPostOffice,
 } from "../../../../../store/slices/postOffice.slice";
+import { scheduleData } from "./utils";
 
 const ScheduleList = () => {
   const postOffice = useSelector(selectPostOffice);
   const branch = useSelector(selectChosenPostOfficeBranch);
-  const [schedule, setSchedule] = useState([
-    { day: "Monday", workHours: "9:00 - 18:00" },
-    { day: "Tuesday", workHours: "9:00 - 18:00" },
-    { day: "Wednesday", workHours: "9:00 - 18:00" },
-    { day: "Thursday", workHours: "9:00 - 18:00" },
-    { day: "Friday", workHours: "9:00 - 18:00" },
-    { day: "Saturday", workHours: "9:00 - 18:00" },
-    { day: "Sunday", workHours: "9:00 - 17:00" },
-  ]);
+  const [schedule, setSchedule] = useState(scheduleData);
 
   useEffect(() => {
     if (Object.keys(branch) > 0) {
@@ -33,15 +26,7 @@ const ScheduleList = () => {
         ]);
       }
       if (postOffice === "meestExpress") {
-        setSchedule([
-          { day: "Monday", workHours: "9:00 - 18:00" },
-          { day: "Tuesday", workHours: "9:00 - 18:00" },
-          { day: "Wednesday", workHours: "9:00 - 18:00" },
-          { day: "Thursday", workHours: "9:00 - 18:00" },
-          { day: "Friday", workHours: "9:00 - 18:00" },
-          { day: "Saturday", workHours: "9:00 - 18:00" },
-          { day: "Sunday", workHours: "9:00 - 17:00" },
-        ]);
+        setSchedule(scheduleData);
       }
     }
   }, [branch, postOffice]);
@@ -49,9 +34,9 @@ const ScheduleList = () => {
     <Box sx={{ fontSize: "12px", margin: "15px 0" }}>
       {!!branch &&
         schedule.length > 0 &&
-        schedule.map((day) => (
-          <Box key={day.day}>
-            <span>{day.day}:</span> <span>{day.workHours}</span>
+        schedule.map(({ day, workHours }) => (
+          <Box key={day}>
+            <span>{day}:</span> <span>{workHours}</span>
           </Box>
         ))}
     </Box>
