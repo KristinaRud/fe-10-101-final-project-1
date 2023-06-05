@@ -6,6 +6,8 @@ import partnersReducer from "./slices/partners.slice";
 import colorsReducer from "./slices/colors.slice";
 import wishListReducer from "./slices/wishList.slice";
 import catalogReducer from "./slices/catalog.slice";
+import cityReducer from "./slices/city.slice";
+import postOfficeReducer from "./slices/postOffice.slice";
 
 const store = configureStore({
   reducer: {
@@ -16,6 +18,8 @@ const store = configureStore({
     colors: colorsReducer,
     wishList: wishListReducer,
     catalog: catalogReducer,
+    city: cityReducer,
+    postOffice: postOfficeReducer,
   },
 });
 
