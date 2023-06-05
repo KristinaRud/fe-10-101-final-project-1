@@ -1,9 +1,9 @@
 import NavigateNextIcon from "@mui/icons-material/NavigateNext";
 import { Breadcrumbs, Stack } from "@mui/material";
 import { Link, useLocation } from "react-router-dom";
-import { parseBreadcrumbUrl } from "../../utils/parseBreadcrumbUrl";
+import { parseBreadcrumbUrl } from "../../utils/queryParams/parseBreadcrumbUrl";
 import s from "./BreadcrumbsApp.module.scss";
-import { formatString } from "../../utils/formatString";
+import { formatString } from "../../utils/string/formatString";
 
 const BreadcrumbsApp = () => {
   const location = useLocation();

@@ -12,5 +12,4 @@ const colorsSlice = createSlice({
   },
 });
 
-export const selectColors = (state) => state.colors;
 export default colorsSlice.reducer;

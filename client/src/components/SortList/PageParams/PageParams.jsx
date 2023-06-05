@@ -3,8 +3,8 @@ import { useLocation, useNavigate } from "react-router-dom";
 import { Box, FormControl, InputLabel, MenuItem, Select } from "@mui/material";
 import { useSelector } from "react-redux";
 import s from "./PageParams.module.scss";
-import { selectProductsView } from "../../../store/slices/products.slice";
-import { condition } from "../../../utils/conditionPerPage";
+import { selectProductsView } from "../../../store/selectors/products.selector";
+import { condition } from "../../../utils/filter/conditionPerPage";
 
 const PageParams = () => {
   const productsView = useSelector(selectProductsView);

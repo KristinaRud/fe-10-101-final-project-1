@@ -1,7 +1,7 @@
 import { List } from "@mui/material";
 import { useDispatch, useSelector } from "react-redux";
 import { useEffect, useState } from "react";
-import { selectPartners } from "../../../store/slices/partners.slice";
+import { selectPartners } from "../../../store/selectors/partners.selector";
 import { fetchPartners } from "../../../store/actionCreator/partners.actionCreator";
 import BrandItem from "../../LeftSidear/BrandList/BrandItem/BrandItem";
 import s from "./PartnersList.module.scss";
