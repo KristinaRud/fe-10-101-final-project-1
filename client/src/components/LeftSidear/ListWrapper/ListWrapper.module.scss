@@ -8,7 +8,7 @@
   padding: 16px;
   background-color: #F5F7FF;
 
-  @media (max-width: 480px) {
+  @media (width <= 480px) {
     max-width: 100%;
   }
 }
