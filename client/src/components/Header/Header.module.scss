@@ -1,11 +1,10 @@
 .container {
   margin: 0 15px;
 
-  @media (width >= 768px) {
+  @media (max-width: 768px) {
     margin: 0 20px;
   }
 }
-
 
 .header {
   background-color: #020202;
@@ -45,7 +44,7 @@
 
   }
 
-  @media (width >= 1200px) {
+  @media (min-width: 1200px) {
     font-size: 12px;
     line-height: 18px;
 
@@ -99,7 +98,7 @@
     padding: 12px 0;
     gap: 12px;
 
-    @media (width >= 768px) {
+    @media (max-width: 768px) {
       gap: 30px;
     }
   }
@@ -138,7 +137,7 @@
         color: #0156FF;
       }
 
-      @media (width >= 1200px) {
+      @media (min-width: 1200px) {
         gap: 0;
         background: #0156FF;
 
@@ -147,18 +146,6 @@
         }
       }
     }
-  }
-
-  & .btn-account {
-    width: 34px;
-    height: 34px;
-    background: none;
-    border: 2px solid #FFF;
-    border-radius: 50px;
-    padding: 10px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
   }
 
   & .wrapper-input {
@@ -204,15 +191,10 @@
     line-height: 21px;
   }
 
-  @media (width >= 1200px) {
+  @media (min-width: 1200px) {
     background: #FFF;
     padding: 28px 0;
     justify-content: start;
-
-    & .btn-account {
-      border: 2px solid #000;
-    }
-
     & .icon-logo {
       margin-left: 40px;
       margin-bottom: 0;
@@ -229,7 +211,7 @@
   border: 2px solid #FFF;
   border-radius: 25px;
 
-  @media (width >= 1200px) {
+  @media (min-width: 1200px) {
     color: #0156FF;
     border: 2px solid #0156FF;
     margin-right: auto;
@@ -262,11 +244,4 @@
     height: 33px;
   }
 }
-
-
-
-
-
-
-
 
