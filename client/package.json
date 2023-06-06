@@ -40,17 +40,21 @@
     "build": "react-scripts build",
     "test": "react-scripts test --watchAll=false",
     "eject": "react-scripts eject --watchAll",
-    "prepare": "cd .. && husky install client/.husky",
+    "prepare": "cd .. && husky install .husky",
     "lint-front": "lint-staged",
-    "lint:all": "eslint src/**/*.{js,jsx,ts,tsx}"
+    "lint:all": "eslint \"./src/**/*.{js,jsx}\""
   },
   "lint-staged": {
-    "**/*.{js,ts,tsx, jsx}": [
-      "eslint --fix",
-      "stylelint --fix"
+    "./src/**/*.{js,jsx}": [
+      "eslint"
     ],
-    "**/*.{json,md,html,js,jsx,ts,tsx}": [
+    "./**/*.{json,md,html,js,jsx,ts,tsx}": [
       "prettier --write"
+    ]
+  },
+  "jest": {
+    "transformIgnorePatterns": [
+      "node_modules/(?!spacetime)"
     ]
   },
   "browserslist": {
@@ -66,6 +70,7 @@
     ]
   },
   "devDependencies": {
+    "babel-core": "^7.0.0-bridge.0",
     "eslint": "^8.2.0",
     "eslint-config-airbnb": "^19.0.4",
     "eslint-config-prettier": "^8.8.0",

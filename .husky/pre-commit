@@ -1,0 +1,12 @@
+#!/usr/bin/env sh
+. "$(dirname -- "$0")/_/husky.sh"
+
+
+# shellcheck disable=SC2164
+cd client
+npm run lint:all
+npm run lint-front
+npx stylelint "**/*.scss" "**/*.css" --fix
+#npm test
+
+
