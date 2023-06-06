@@ -5,11 +5,13 @@
   "main": "server.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "server": "nodemon server.js"
+    "server": "nodemon server.js",
+    "start": "node server.js",
+    "prepare": "husky install"
   },
   "repository": {
     "type": "git",
-    "url": "https://gitlab.com/dan-it/js-course-development/fe-final-backend.git"
+    "url": "git+https://gitlab.com/dan-it/js-course-development/fe-final-backend.git"
   },
   "author": "Saribeg",
   "license": "ISC",
@@ -33,7 +35,11 @@
     "validator": "^13.9.0"
   },
   "devDependencies": {
-    "husky": "^8.0.3",
+    "husky": "^8.0.0",
     "nodemon": "^2.0.22"
-  }
+  },
+  "bugs": {
+    "url": "https://gitlab.com/dan-it/js-course-development/fe-final-backend/issues"
+  },
+  "homepage": "https://gitlab.com/dan-it/js-course-development/fe-final-backend#readme"
 }
