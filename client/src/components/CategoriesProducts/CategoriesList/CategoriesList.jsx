@@ -1,7 +1,7 @@
 import { List } from "@mui/material";
 import { useDispatch, useSelector } from "react-redux";
 import { useEffect } from "react";
-import { allCategoriesSelector } from "../../../store/slices/catalog.slice";
+import { allCategoriesSelector } from "../../../store/selectors/catalog.selector";
 import { fetchCategories } from "../../../store/actionCreator/catalog.actionCreator";
 import CategoryItem from "./CategoryItem/CategoryItem";
 import s from "./CategoriesList.module.scss";

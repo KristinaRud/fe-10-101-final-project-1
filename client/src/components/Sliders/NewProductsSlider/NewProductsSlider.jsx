@@ -4,7 +4,7 @@ import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import { useDispatch, useSelector } from "react-redux";
 import { fetchProducts } from "../../../store/actionCreator/products.actionCreator";
-import { selectProducts } from "../../../store/slices/products.slice";
+import { selectProducts } from "../../../store/selectors/products.selector";
 import ProductCard from "../../ProductCard/ProductCard";
 import { NewProductsConfig } from "../slidersConfig";
 import styles from "./NewProductsSlider.module.scss";

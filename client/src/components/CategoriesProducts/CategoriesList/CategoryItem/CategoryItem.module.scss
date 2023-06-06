@@ -35,6 +35,10 @@
   position: absolute;
   bottom: 30px;
 
+  &:hover {
+    color: #c2c2c2;
+  }
+
   @media (width <= 480px) {
     bottom: 10px;
     position: relative;

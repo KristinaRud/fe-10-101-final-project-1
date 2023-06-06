@@ -30,7 +30,7 @@ const LoginPage = () => {
                 </li>
                 <li className={styles.list__item}>Track orders and more</li>
               </ul>
-              <Button variant="contained" size="large">
+              <Button variant="contained" size="large" className={styles.btn}>
                 Create An Account
               </Button>
             </div>

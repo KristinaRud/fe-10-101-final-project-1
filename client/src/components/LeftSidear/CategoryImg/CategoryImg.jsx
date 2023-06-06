@@ -1,7 +1,7 @@
 import { useEffect } from "react";
 import { useLocation } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-import { catalogSelector } from "../../../store/slices/catalog.slice";
+import { catalogSelector } from "../../../store/selectors/catalog.selector";
 import { fetchCategory } from "../../../store/actionCreator/catalog.actionCreator";
 import s from "./CategoryImg.module.scss";
 

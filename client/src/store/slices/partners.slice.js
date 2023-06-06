@@ -12,5 +12,4 @@ const partnersSlice = createSlice({
   },
 });
 
-export const selectPartners = (state) => state.partners;
 export default partnersSlice.reducer;

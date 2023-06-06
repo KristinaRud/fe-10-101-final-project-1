@@ -5,7 +5,7 @@ import { useEffect, useState } from "react";
 import {
   selectProducts,
   selectProductsView,
-} from "../../../store/slices/products.slice";
+} from "../../../store/selectors/products.selector";
 import { fetchProducts } from "../../../store/actionCreator/products.actionCreator";
 import ProductCard from "../../ProductCard/ProductCard";
 import ProductCardFull from "../../ProductCard/ProductCardFull/ProductCardFull";

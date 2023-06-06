@@ -29,7 +29,5 @@ const productsSlice = createSlice({
   },
 });
 
-export const selectProducts = (state) => state.products.products;
-export const selectProductsView = (state) => state.products.productsView;
 export const { setProductsView } = productsSlice.actions;
 export default productsSlice.reducer;

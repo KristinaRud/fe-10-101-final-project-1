@@ -5,11 +5,11 @@ import Text from "@mui/material/TextField";
 import { useEffect } from "react";
 import PropTypes from "prop-types";
 import { fetchAllDistrictsInState } from "../../../../store/actionCreator/city.actionCreator";
+import { setChosenDistrict } from "../../../../store/slices/city.slice";
 import {
   selectChosenState,
   selectDistricts,
-  setChosenDistrict,
-} from "../../../../store/slices/city.slice";
+} from "../../../../store/selectors/city.selector";
 import s from "../CheckoutForm.module.scss";
 
 const DistrictsInput = ({ setFieldValue }) => {

@@ -1,45 +1,39 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
+import request from "../../utils/api/request";
 
-const fetchAllStates = createAsyncThunk(
-  "city/fetchAllStates",
-  async (_, thunkAPI) => {
-    try {
-      const response = await fetch(`http://localhost:4000/api/city/states`);
-      const data = await response.json();
-      return data;
-    } catch (error) {
-      return thunkAPI.rejectWithValue({ error: error.message });
-    }
-  },
-);
+const fetchAllStates = createAsyncThunk("city/fetchAllStates", async () => {
+  const { res, err } = await request({
+    url: `/city/states`,
+  });
+  if (res) {
+    return res;
+  }
+  throw new Error(`Couldn't get states: ${err.data}`);
+});
 
 const fetchAllDistrictsInState = createAsyncThunk(
   "city/fetchAllDistrictsInState",
-  async (stateId, thunkAPI) => {
-    try {
-      const response = await fetch(
-        `http://localhost:4000/api/city/districts/${stateId}`,
-      );
-      const data = await response.json();
-      return data;
-    } catch (error) {
-      return thunkAPI.rejectWithValue({ error: error.message });
+  async (stateId) => {
+    const { res, err } = await request({
+      url: `/city/districts/${stateId}`,
+    });
+    if (res) {
+      return res;
     }
+    throw new Error(`Couldn't get states: ${err.data}`);
   },
 );
 
 const fetchAllCitiesInDistrict = createAsyncThunk(
   "city/fetchAllCitiesInDistrict",
-  async (districtId, thunkAPI) => {
-    try {
-      const response = await fetch(
-        `http://localhost:4000/api/city/cities/${districtId}`,
-      );
-      const data = await response.json();
-      return data;
-    } catch (error) {
-      return thunkAPI.rejectWithValue({ error: error.message });
+  async (districtId) => {
+    const { res, err } = await request({
+      url: `/city/cities/${districtId}`,
+    });
+    if (res) {
+      return res;
     }
+    throw new Error(`Couldn't get states: ${err.data}`);
   },
 );
 

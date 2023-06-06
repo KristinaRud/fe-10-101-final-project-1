@@ -3,8 +3,8 @@ import { useDispatch, useSelector } from "react-redux";
 import { useLocation, useNavigate } from "react-router-dom";
 import FilterTagItem from "./FilterTagItem/FilterTagItem";
 import s from "./FilterTagList.module.scss";
-import { selectFilters } from "../../store/slices/filters.slice";
-import { deleteAllQueryFilters } from "../../utils/deleteAllQueryFilters";
+import { selectFilters } from "../../store/selectors/filters.selector";
+import { deleteAllQueryFilters } from "../../utils/queryParams/deleteAllQueryFilters";
 
 const FilterTagList = () => {
   const filtersData = useSelector(selectFilters);

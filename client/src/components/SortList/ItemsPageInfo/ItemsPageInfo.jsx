@@ -1,7 +1,7 @@
 import { Typography } from "@mui/material";
 import { useLocation } from "react-router-dom";
 import { useSelector } from "react-redux";
-import { selectProducts } from "../../../store/slices/products.slice";
+import { selectProducts } from "../../../store/selectors/products.selector";
 import s from "./ItemsPageInfo.module.scss";
 
 const ItemsPageInfo = () => {
