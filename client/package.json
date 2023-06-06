@@ -39,9 +39,14 @@
     "build": "react-scripts build",
     "test": "react-scripts test --watchAll=false",
     "eject": "react-scripts eject --watchAll",
-    "prepare": "cd .. && husky install client/.husky",
+    "pre-commit": "cd .. && husky install client/.husky",
     "lint-front": "lint-staged",
     "lint:all": "eslint src/**/*.{js,jsx,ts,tsx}"
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "lint:all"
+    }
   },
   "lint-staged": {
     "**/*.{js,ts,tsx, jsx}": [
