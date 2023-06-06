@@ -35,18 +35,10 @@ const NewProductSlider = () => {
         {newProducts.map((item) => (
           <div key={item.itemNo} className={styles.card}>
             <ProductCard
-<<<<<<< HEAD
-              image={item.img_url}
-              alt={item.alt}
-              title={item.title}
-              description={item.description}
-              oldPrice={item.oldPrice}
-=======
               image={item.imageUrls[0]}
               title=""
               description={item.name}
               oldPrice={item.previousPrice}
->>>>>>> 6590aab6b6779b846b45dfa0ada600ec5aa773c1
               currentPrice={item.currentPrice}
               available={item.quantity > 5}
               rating={item.rating}
