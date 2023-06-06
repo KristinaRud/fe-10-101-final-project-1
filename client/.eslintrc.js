@@ -5,12 +5,10 @@ module.exports = {
     "react-app/jest",
     "airbnb",
     "airbnb/hooks",
-    "plugin:react/recommended",
     "plugin:prettier/recommended",
     "eslint:recommended",
     "plugin:react/recommended",
     "plugin:react-hooks/recommended",
-    "plugin:prettier/recommended",
     "plugin:jsx-a11y/strict",
   ],
   env: {
