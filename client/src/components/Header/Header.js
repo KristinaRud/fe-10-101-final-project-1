@@ -31,7 +31,6 @@ const Header = () => {
     "Laptops",
     "Desktop PCs",
     "Networking Devices",
-    "Networking Devices",
     "Printers & Scanners",
     "PC Parts",
     "All Other Products",
