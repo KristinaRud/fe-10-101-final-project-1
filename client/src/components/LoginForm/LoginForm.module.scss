@@ -44,14 +44,21 @@
     }
 
     &__btn {
+        background: #0156FF;
+        border-radius: 50px;
+        color: #fff;
         flex-shrink: 0;
+
+        &:hover{
+            background: #0156FF;
+        }
     }
 
     &__link {
         font-weight: 300;
         font-size: 14px;
         line-height: 1.5;
-        color: #000;
+        color: #0156FF;
 
         @media screen and (width <= 360px) {
             font-size: 13px;
