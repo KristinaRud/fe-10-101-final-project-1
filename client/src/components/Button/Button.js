@@ -49,7 +49,7 @@ Button.defaultProps = {
   className: "",
   to: "",
   href: "",
-  target: "_blank",
+  target: "_self",
 };
 
 export default Button;

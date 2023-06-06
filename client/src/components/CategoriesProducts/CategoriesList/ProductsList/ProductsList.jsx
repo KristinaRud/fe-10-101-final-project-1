@@ -2,7 +2,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { useEffect, useState } from "react";
 import PropTypes from "prop-types";
 import Slider from "react-slick";
-import { selectProducts } from "../../../../store/slices/products.slice";
+import { selectProducts } from "../../../../store/selectors/products.selector";
 import { fetchProducts } from "../../../../store/actionCreator/products.actionCreator";
 import ProductCard from "../../../ProductCard/ProductCard";
 import { CategoriesProducts } from "../../../Sliders/slidersConfig";

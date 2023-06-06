@@ -19,6 +19,7 @@ import Button from "../Button/Button";
 import ShopInfoDropDown from "../ShopInfoDropDown/ShopInfoDropDown";
 import AccBurgerMenu from "../AccBurgerMenu/AccBurgerMenu";
 import styles from "./Header.module.scss";
+import TermsAndConditions from "../TermsAndConditions/TermsAndConditions";
 
 const Header = () => {
   const [isOpenListItem, setIsOpenListItem] = useState(false);
@@ -280,6 +281,7 @@ const Header = () => {
           )}
         </div>
       </div>
+      <TermsAndConditions />
     </>
   );
 };

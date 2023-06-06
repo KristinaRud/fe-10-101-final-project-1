@@ -6,16 +6,19 @@ import BackLink from "./BackLink/BackLink";
 import s from "./LeftSidebar.module.scss";
 
 const LeftSidebar = () => {
+  const data = {};
   return (
     <div className={s.wrapper}>
       <BackLink />
       <FilterList />
       <BrandList />
-      <CompareProducts />
-      <CompareProducts isFavourite />
+      <CompareProducts data={data} />
+      <CompareProducts isFavourite data={data} />
       <CategoryImg />
     </div>
   );
 };
 
 export default LeftSidebar;
+
+// TODO: замінити заглушки на реальні дані і взагалі відображати фаворити тільки при залогіненому користувачеві

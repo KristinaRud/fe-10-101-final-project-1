@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Divider, Typography } from "@mui/material";
+import { Typography } from "@mui/material";
 import Menu from "@mui/material/Menu";
 import ExpandMoreRoundedIcon from "@mui/icons-material/ExpandMoreRounded";
 import TimerLogo from "../../assets/images/shopInfo/dropdown__timer.svg";
@@ -54,59 +54,49 @@ const ShopInfoDropDown = () => {
         transformOrigin={{ horizontal: "right", vertical: "top" }}
         anchorOrigin={{ horizontal: "right", vertical: "bottom" }}
       >
-        <div className={styles["shop__time-wrapper"]}>
+        <div className={styles.info}>
           <img
-            className={styles.timer__logo}
+            className={styles.info__timerLogo}
             src={TimerLogo}
             alt="Timer Logo"
           />
-          <div className={styles["shop__working-time"]}>
-            <Typography
-              component="p"
-              fontSize={12}
-              fontWeight={400}
-              lineHeight="16.8px"
-              color="#000"
-            >
+          <div className={styles.info__workingTime}>
+            <Typography className={styles.info__scheduledTitle} component="p">
               We are open:
             </Typography>
-            <Typography component="span" fontSize={12} color="#A2A6B0">
-              Mon-Thu: <b> 9:00 AM - 5:30 PM</b>
+            <Typography component="span">
+              <text className={styles.info__scheduledText}>Mon-Thu: </text>
+              <b className={styles.info__scheduledTime}>9:00 AM - 5:30 PM</b>
               <br />
-              Fr: <b> 9:00 AM - 6:00 PM</b>
+              <text className={styles.info__scheduledText}>Fr: </text>
+              <b className={styles.info__scheduledTime}> 9:00 AM - 6:00 PM</b>
               <br />
-              Sat: <b> 11:00 AM - 5:00 PM</b>
+              <text className={styles.info__scheduledText}>Sat: </text>{" "}
+              <b className={styles.info__scheduledTime}> 11:00 AM - 5:00 PM</b>
             </Typography>
           </div>
         </div>
-        <Divider />
-        <div className={styles["shop-adress"]}>
+        <div className={styles.info__location}>
           <img
-            className={styles.location__logo}
+            className={styles.info__locationLogo}
             src={LocationLogo}
             alt="Timer Logo"
           />
-          <div className={styles["shop__adress-info"]}>
-            <Typography fontSize={13} fontWeight={400} color="#000">
+          <div>
+            <Typography className={styles.info__adress}>
               Address: 1234 Street Adress, <br /> City Address, 1234
             </Typography>
           </div>
         </div>
 
-        <div className={styles["shop__contacts-info"]}>
-          <Typography
-            fontSize={13}
-            fontWeight={400}
-            color="#000"
-            align="left"
-            component="span"
-          >
+        <div className={styles.info__contactsWrapper}>
+          <Typography className={styles.info__contacts} component="span">
             Phones:{" "}
-            <a href="(00) 1234 5678" style={{ color: "#0156FF" }}>
+            <a href="tel:(00) 1234 5678" style={{ color: "#0156FF" }}>
               (00) 1234 5678
             </a>{" "}
             <br /> E-mail:{" "}
-            <a href="shop@email.com" style={{ color: "#0156FF" }}>
+            <a href="mailto:shop@email.com" style={{ color: "#0156FF" }}>
               shop@email.com
             </a>
           </Typography>

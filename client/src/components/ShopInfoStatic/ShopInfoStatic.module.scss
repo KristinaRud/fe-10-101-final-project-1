@@ -1,50 +1,66 @@
-.shop__info-container {
-    margin-left: 30px;
-    background-color: #F5F7FF;
-    height: 404px;
-    width: 411px;
-    @media (max-width: 768px) {
-            max-width: 344px;
-            max-height: 326px;
-        }
-}
-.shop__info-wrapper {
+.staticInfo {
+  margin-left: 30px;
+  background-color: #f5f7ff;
+  height: 404px;
+  width: 411px;
+  @media (max-width: 768px) {
+    max-width: 344px;
+    max-height: 326px;
+  }
+  &__wrapper {
     padding-top: 11px;
     margin-left: 31px;
-}
-.shop__contacts-container {
+  }
+  &__contactsContainer {
     display: flex;
     margin-top: 15px;
-}
-
-.shop__contacts-wrapper {
+  }
+  &__contactsWrapper {
     display: inline;
-    padding-top: 8px;
+    // padding-top: 8px;
     margin-left: 10px;
-}
-img {
+  }
+  &__locationLogo,
+  &__phoneLogo,
+  &__timeLogo,
+  &__emailLogo {
     width: 35px;
     height: 35px;
+
     @media (max-width: 768px) {
-            width: 30px;
-                height: 35px;
-        }
-}
-text {
+      width: 30px;
+      height: 35px;
+    }
+  }
+
+  &__phone,
+  &__scheduleText,
+  &__email,
+  &__adressText {
     font-size: 13px;
     font-weight: 400;
     line-height: 19px;
     @media (max-width: 768px) {
-            font-size: 11px;
-            line-height: 16px;
-        }
-}
-b {
+      font-size: 11px;
+      line-height: 16px;
+    }
+  }
+  &__scheduleText {
+    margin-top: 5px;
+    margin-left: 45px;
+  }
+  &__email {
+    text-decoration: none;
+    color: blue;
+  }
+  &__contactsTitle {
     font-size: 18px;
     font-weight: 600;
     line-height: 27px;
+
     @media (max-width: 768px) {
-            font-size: 14px;
-                line-height: 21px;
-        }
+      font-size: 14px;
+      line-height: 21px;
+    }
+  }
 }

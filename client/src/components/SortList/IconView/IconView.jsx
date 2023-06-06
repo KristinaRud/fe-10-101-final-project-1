@@ -4,10 +4,8 @@ import { useDispatch, useSelector } from "react-redux";
 import useMediaQuery from "@mui/material/useMediaQuery";
 import { useEffect } from "react";
 import s from "./IconView.module.scss";
-import {
-  selectProductsView,
-  setProductsView,
-} from "../../../store/slices/products.slice";
+import { setProductsView } from "../../../store/slices/products.slice";
+import { selectProductsView } from "../../../store/selectors/products.selector";
 
 const IconView = () => {
   const iconView = useSelector(selectProductsView);

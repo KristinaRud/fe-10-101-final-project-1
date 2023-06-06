@@ -1,5 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { urlParser } from "../../utils/urlParser";
+import { urlParser } from "../../utils/queryParams/urlParser";
 import {
   fetchFiltersData,
   fetchProductsByCategory,
@@ -75,7 +75,6 @@ const filtersSlice = createSlice({
   },
 });
 
-export const selectFilters = (state) => state.filters;
 export const { setFilters, deleteFilter, deleteAllFilters, setCategory } =
   filtersSlice.actions;
 export default filtersSlice.reducer;

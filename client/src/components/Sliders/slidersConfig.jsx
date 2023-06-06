@@ -62,9 +62,15 @@ export const NewProductsConfig = {
       },
     },
     {
-      breakpoint: 510,
+      breakpoint: 600,
       settings: {
-        slidesToShow: 1,
+        slidesToShow: 3,
+      },
+    },
+    {
+      breakpoint: 560,
+      settings: {
+        slidesToShow: 2,
       },
     },
   ],
@@ -88,21 +94,21 @@ export const CategoriesProducts = {
   speed: 500,
   responsive: [
     {
-      breakpoint: 1150,
+      breakpoint: 1380,
       settings: {
         slidesToShow: 4,
         slidesToScroll: 1,
       },
     },
     {
-      breakpoint: 900,
+      breakpoint: 1100,
       settings: {
         slidesToShow: 3,
         slidesToScroll: 1,
       },
     },
     {
-      breakpoint: 710,
+      breakpoint: 840,
       settings: {
         slidesToShow: 2,
         slidesToScroll: 1,

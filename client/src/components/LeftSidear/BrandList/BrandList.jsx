@@ -3,10 +3,10 @@ import { useDispatch, useSelector } from "react-redux";
 import BrandItem from "./BrandItem/BrandItem";
 import ListWrapper from "../ListWrapper/ListWrapper";
 import FilterButton from "../FilterList/FilterButton/FilterButton";
-import { selectPartners } from "../../../store/slices/partners.slice";
+import { selectPartners } from "../../../store/selectors/partners.selector";
 import s from "./BrandList.module.scss";
 import { fetchPartners } from "../../../store/actionCreator/partners.actionCreator";
-import { selectFilters } from "../../../store/slices/filters.slice";
+import { selectFilters } from "../../../store/selectors/filters.selector";
 
 const BrandList = () => {
   const [brands, setBrands] = useState([]);
