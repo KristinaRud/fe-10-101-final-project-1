@@ -10,7 +10,6 @@ import store from "./store";
 import Footer from "./components/Footer/Footer";
 import Header from "./components/Header/Header";
 import theme from "./theme/createTheme";
-import ShoppingCart from "./pages/ShoppingCard/ShoppingCard";
 
 const App = () => (
   <Provider store={store}>
@@ -20,7 +19,6 @@ const App = () => (
           <CssBaseline />
           <Header />
           <AppRoute />
-          <ShoppingCart />
           <Footer />
         </StyledEngineProvider>
       </ThemeProvider>
