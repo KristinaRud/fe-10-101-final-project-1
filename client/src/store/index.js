@@ -8,6 +8,7 @@ import wishListReducer from "./slices/wishList.slice";
 import catalogReducer from "./slices/catalog.slice";
 import cityReducer from "./slices/city.slice";
 import postOfficeReducer from "./slices/postOffice.slice";
+import customersReducer from "./slices/customers.slice";
 
 const store = configureStore({
   reducer: {
@@ -20,6 +21,7 @@ const store = configureStore({
     catalog: catalogReducer,
     city: cityReducer,
     postOffice: postOfficeReducer,
+    customers: customersReducer,
   },
 });
 
