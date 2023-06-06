@@ -1,7 +1,9 @@
-import { Formik, Form } from "formik";
-import { Button, TextField } from "@mui/material";
+import { Formik, Form, Field } from "formik";
+import { Button } from "@mui/material";
 import { Link } from "react-router-dom";
+import { TextField } from "formik-mui";
 import styles from "./LoginForm.module.scss";
+import { validationSchema } from "./utils";
 
 const LoginForm = () => {
   const handleSubmit = (values) => {
@@ -10,28 +12,37 @@ const LoginForm = () => {
 
   return (
     <Formik
-      initialValues={{ name: "", email: "" }}
+      initialValues={{ password: "", email: "" }}
+      validationSchema={validationSchema}
       onSubmit={async (values) => handleSubmit(values)}
     >
       <Form className={styles.form}>
         <div className={styles.form__row}>
-          <TextField
-            id="standard-basic"
-            label="Email"
-            variant="standard"
+          <Field
+            component={TextField}
+            name="email"
             type="email"
+            label="Email Address *"
+            variant="standard"
           />
         </div>
         <div className={styles.form__row}>
-          <TextField
+          <Field
+            component={TextField}
+            name="password"
             id="standard-basic"
-            label="Password"
-            variant="standard"
             type="password"
+            label="Password *"
+            variant="standard"
           />
         </div>
         <div className={styles.form__control}>
-          <Button className={styles.form__btn} variant="contained" size="large">
+          <Button
+            className={styles.form__btn}
+            variant="contained"
+            size="large"
+            type="submit"
+          >
             Sign In
           </Button>
           <Link to="/" className={styles.form__link}>

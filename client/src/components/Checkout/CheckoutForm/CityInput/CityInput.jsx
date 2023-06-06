@@ -5,11 +5,11 @@ import Text from "@mui/material/TextField";
 import { Field } from "formik";
 import PropTypes from "prop-types";
 import s from "../CheckoutForm.module.scss";
+import { setChosenCity } from "../../../../store/slices/city.slice";
 import {
   selectChosenDistrict,
   selectCities,
-  setChosenCity,
-} from "../../../../store/slices/city.slice";
+} from "../../../../store/selectors/city.selector";
 import { fetchAllCitiesInDistrict } from "../../../../store/actionCreator/city.actionCreator";
 
 const CityInput = ({ setFieldValue }) => {

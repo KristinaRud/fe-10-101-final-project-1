@@ -1,6 +1,6 @@
 import { Typography } from "@mui/material";
 import { useLocation } from "react-router-dom";
-import { formatString } from "../../utils/formatString";
+import { formatString } from "../../utils/string/formatString";
 import s from "./TitleOfCategory.module.scss";
 
 const TitleOfCategory = () => {

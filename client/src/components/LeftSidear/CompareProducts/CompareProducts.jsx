@@ -3,7 +3,7 @@ import PropTypes from "prop-types";
 import { useSelector } from "react-redux";
 import ListWrapper from "../ListWrapper/ListWrapper";
 import CompareProductsItem from "./CompareProductsItem/CompareProductsItem";
-import { selectWishList } from "../../../store/slices/wishList.slice";
+import { selectWishList } from "../../../store/selectors/wishList.selector";
 
 const CompareProducts = ({ isFavourite }) => {
   const data = useSelector(selectWishList); // TODO: коли визначимось з механізмом отримання товарів для повірняння

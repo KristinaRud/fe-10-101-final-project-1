@@ -4,7 +4,7 @@ import { Box } from "@mui/material";
 import {
   selectChosenPostOfficeBranch,
   selectPostOffice,
-} from "../../../../../store/slices/postOffice.slice";
+} from "../../../../../store/selectors/postOffice.selector";
 import { scheduleData } from "./utils";
 
 const ScheduleList = () => {

@@ -7,10 +7,10 @@ import FilterButton from "./FilterButton/FilterButton";
 import FilterByKey from "./FilterItem/FilterByKey";
 import FilterByColor from "./FilterItem/FilterByColor";
 import ListWrapper from "../ListWrapper/ListWrapper";
-import { selectFilters } from "../../../store/slices/filters.slice";
+import { selectFilters } from "../../../store/selectors/filters.selector";
 import { fetchProducts } from "../../../store/actionCreator/products.actionCreator";
-import { deleteAllQueryFilters } from "../../../utils/deleteAllQueryFilters";
-import { setFilterQueryParams } from "../../../utils/setFilterQueryParams";
+import { deleteAllQueryFilters } from "../../../utils/queryParams/deleteAllQueryFilters";
+import { setFilterQueryParams } from "../../../utils/queryParams/setFilterQueryParams";
 import { fetchFiltersData } from "../../../store/actionCreator/filters.actionCreator";
 import s from "./FilterList.module.scss";
 
