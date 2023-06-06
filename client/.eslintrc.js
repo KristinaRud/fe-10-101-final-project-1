@@ -1,28 +1,27 @@
-{
-  "extends": [
+module.exports = {
+  root: true,
+  extends: [
     "react-app",
     "react-app/jest",
     "airbnb",
     "airbnb/hooks",
     "plugin:react/recommended",
-    "plugin:prettier/recommended"
+    "plugin:prettier/recommended",
   ],
-  "env": {
-    "jest": true,
-    "browser": true,
-    "node": true
+  env: {
+    jest: true,
+    browser: true,
+    node: true,
   },
-  "parserOptions": {
-    "ecmaFeatures": {
-      "jsx": true
+  parserOptions: {
+    ecmaVersion: 2021,
+    sourceType: "module",
+    ecmaFeatures: {
+      jsx: true,
     },
-    "ecmaVersion": 11
   },
-  "plugins": [
-    "react",
-    "prettier"
-  ],
-  "rules": {
+  plugins: ["react", "prettier"],
+  rules: {
     "import/no-extraneous-dependencies": 0,
     "no-param-reassign": 0,
     "import/prefer-default-export": 0,
@@ -35,17 +34,14 @@
     "react/jsx-filename-extension": [
       1,
       {
-        "extensions": [
-          ".js",
-          ".jsx"
-        ]
-      }
+        extensions: [".js", ".jsx"],
+      },
     ],
     "react/function-component-definition": [
       2,
       {
-        "namedComponents": "arrow-function"
-      }
+        namedComponents: "arrow-function",
+      },
     ],
     "import/no-named-as-default": 0,
     "import/no-named-as-default-member": 0,
@@ -54,6 +50,6 @@
     "ban-ts-comment": 0,
     "jsx-a11y/click-events-have-key-events": 0,
     "jsx-a11y/no-static-element-interactions": 0,
-    "react/require-default-props": 0
-  }
-}
+    "react/require-default-props": 0,
+  },
+};
