@@ -1,5 +1,4 @@
 import { useState } from "react";
-// eslint-disable-next-line import/no-extraneous-dependencies
 import {
   GoogleMap,
   InfoWindow,

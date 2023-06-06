@@ -1,5 +1,8 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { fetchWishList } from "../actionCreator/wishList.actionCreator";
+import {
+  createWishList,
+  fetchWishList,
+} from "../actionCreator/wishList.actionCreator";
 
 const wishListSlice = createSlice({
   name: "wishList",
@@ -7,6 +10,10 @@ const wishListSlice = createSlice({
   reducers: {},
   extraReducers: (builder) => {
     builder.addCase(fetchWishList.fulfilled, (state, action) => {
+      state = action.payload;
+      return state;
+    });
+    builder.addCase(createWishList.fulfilled, (state, action) => {
       state = action.payload;
       return state;
     });

@@ -1,17 +1,14 @@
 import axios from "axios";
-import jwtDecode from "jwt-decode";
-import { setAuthToken } from "./setAuthToken";
+import { checkToken } from "./checkToken";
 
 const request = async ({ url, method = "GET", body, headers } = {}) => {
   const token = window.localStorage.getItem("token");
-  const decoded = token ? jwtDecode(token) : null;
 
   axios.defaults.baseURL = "http://localhost:4000/api";
   axios.defaults.headers.post["Content-Type"] = "application/json";
 
   if (token) {
-    setAuthToken(token);
-    console.log(decoded);
+    checkToken(token);
   }
 
   const fetchData = () => {
@@ -21,7 +18,6 @@ const request = async ({ url, method = "GET", body, headers } = {}) => {
 
   try {
     const { data, status } = await fetchData();
-
     return { res: data, status };
   } catch ({ response }) {
     return { err: response };

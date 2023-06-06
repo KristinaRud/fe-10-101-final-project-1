@@ -1,12 +1,9 @@
 import { Typography } from "@mui/material";
 import PropTypes from "prop-types";
-import { useSelector } from "react-redux";
 import ListWrapper from "../ListWrapper/ListWrapper";
 import CompareProductsItem from "./CompareProductsItem/CompareProductsItem";
-import { selectWishList } from "../../../store/selectors/wishList.selector";
 
-const CompareProducts = ({ isFavourite }) => {
-  const data = useSelector(selectWishList); // TODO: коли визначимось з механізмом отримання товарів для повірняння
+const CompareProducts = ({ isFavourite, data }) => {
   return (
     <ListWrapper title={isFavourite ? "My Wish List" : "Compare Products"}>
       {Object.keys(data).length > 0 ? (
@@ -36,10 +33,14 @@ const CompareProducts = ({ isFavourite }) => {
 
 CompareProducts.propTypes = {
   isFavourite: PropTypes.bool,
+  // eslint-disable-next-line react/forbid-prop-types
+  data: PropTypes.object.isRequired,
 };
 
 CompareProducts.defaultProps = {
   isFavourite: false,
+  // eslint-disable-next-line react/default-props-match-prop-types
+  data: {},
 };
 
 export default CompareProducts;
