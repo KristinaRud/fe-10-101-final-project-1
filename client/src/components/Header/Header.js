@@ -2,7 +2,6 @@ import { useState } from "react";
 import FacebookIcon from "@mui/icons-material/Facebook";
 import InstagramIcon from "@mui/icons-material/Instagram";
 import useMediaQuery from "@mui/material/useMediaQuery";
-import ExpandMoreRoundedIcon from "@mui/icons-material/ExpandMoreRounded";
 import cx from "classnames";
 import { Box, MenuItem } from "@mui/material";
 import IconButton from "@mui/material/IconButton";
@@ -17,6 +16,8 @@ import ArrowForwardIosIcon from "@mui/icons-material/ArrowForwardIos";
 import { ReactComponent as VecIcon } from "../../pages/AboutUs/icons/vec.svg";
 import { ReactComponent as LogoBlue } from "./icons/logo-blue.svg";
 import Button from "../Button/Button";
+import ShopInfoDropDown from "../ShopInfoDropDown/ShopInfoDropDown";
+import AccBurgerMenu from "../AccBurgerMenu/AccBurgerMenu";
 import styles from "./Header.module.scss";
 
 const Header = () => {
@@ -61,15 +62,17 @@ const Header = () => {
                 </Button>
               </li>
             )}
-            <li
-              className={cx(
-                styles.menu__item,
-                isOpenListItem && !mediaTablet ? styles.border : null,
-              )}
-            >
-              <span className={styles.gray}>Mon-Thu:</span> 9:00 AM - 5:30 PM{" "}
-              <ExpandMoreRoundedIcon className={styles.icon} />
-            </li>
+            <Box>
+              <li
+                className={cx(
+                  styles.menu__item,
+                  isOpenListItem && !mediaTablet ? styles.border : null,
+                )}
+              >
+                <span className={styles.gray}>Mon-Thu:</span> 9:00 AM - 5:30 PM{" "}
+                <ShopInfoDropDown />
+              </li>
+            </Box>
             {(!isOpenListItem && mediaDesktop) || mediaDesktop ? (
               <li className={cx(styles.menu__item, styles.end)}>
                 <span className={styles.gray}>
@@ -272,6 +275,9 @@ const Header = () => {
                 }}
               />
             </Button>
+            <Box>
+              <AccBurgerMenu />
+            </Box>
           </div>
           {isOpenListItem && !mediaTablet && (
             <input
