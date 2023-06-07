@@ -1,30 +1,29 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
+import request from "../../utils/api/request";
 
 const fetchCategory = createAsyncThunk(
   "catalog/fetchCategory",
-  async (category, thunkAPI) => {
-    try {
-      const response = await fetch(
-        `http://localhost:4000/api/catalog/${category}`,
-      );
-      const data = await response.json();
-      return data;
-    } catch (error) {
-      return thunkAPI.rejectWithValue({ error: error.message });
+  async (category) => {
+    const { res, err } = await request({
+      url: `/catalog/${category}`,
+    });
+    if (res) {
+      return res;
     }
+    throw new Error(`Couldn't get category: ${err.data}`);
   },
 );
 
 const fetchCategories = createAsyncThunk(
   "catalog/fetchCategories",
-  async (_, thunkAPI) => {
-    try {
-      const response = await fetch(`http://localhost:4000/api/catalog`);
-      const data = await response.json();
-      return data;
-    } catch (error) {
-      return thunkAPI.rejectWithValue({ error: error.message });
+  async () => {
+    const { res, err } = await request({
+      url: `/catalog`,
+    });
+    if (res) {
+      return res;
     }
+    throw new Error(`Couldn't get category: ${err.data}`);
   },
 );
 

@@ -1,19 +1,18 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
-import { updatedQueryString } from "../../utils/updatedQueryString";
+import { updatedQueryString } from "../../utils/queryParams/updatedQueryString";
+import request from "../../utils/api/request";
 
 const fetchProducts = createAsyncThunk(
   "products/fetchProducts",
-  async (queryStr, thunkAPI) => {
-    try {
-      const parsedParams = updatedQueryString(queryStr);
-      const response = await fetch(
-        `http://localhost:4000/api/products/filter${parsedParams}`,
-      );
-      const data = await response.json();
-      return data;
-    } catch (error) {
-      return thunkAPI.rejectWithValue(error);
+  async (queryStr) => {
+    const parsedParams = updatedQueryString(queryStr);
+    const { res, err } = await request({
+      url: `/products/filter${parsedParams}`,
+    });
+    if (res) {
+      return res;
     }
+    throw new Error(`Couldn't get products: ${err.data}`);
   },
 );
 

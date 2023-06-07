@@ -1,16 +1,14 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
+import request from "../../utils/api/request";
 
-const fetchColors = createAsyncThunk(
-  "colors/fetchColors",
-  async (_, thunkAPI) => {
-    try {
-      const response = await fetch("http://localhost:4000/api/colors");
-      const data = await response.json();
-      return data;
-    } catch (error) {
-      return thunkAPI.rejectWithValue(error);
-    }
-  },
-);
+const fetchColors = createAsyncThunk("colors/fetchColors", async () => {
+  const { res, err } = await request({
+    url: `/colors`,
+  });
+  if (res) {
+    return res;
+  }
+  throw new Error(`Couldn't get colors: ${err.data}`);
+});
 
 export { fetchColors };

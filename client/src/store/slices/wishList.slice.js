@@ -1,5 +1,8 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { fetchWishList } from "../actionCreator/wishList.actionCreator";
+import {
+  createWishList,
+  fetchWishList,
+} from "../actionCreator/wishList.actionCreator";
 
 const wishListSlice = createSlice({
   name: "wishList",
@@ -10,8 +13,11 @@ const wishListSlice = createSlice({
       state = action.payload;
       return state;
     });
+    builder.addCase(createWishList.fulfilled, (state, action) => {
+      state = action.payload;
+      return state;
+    });
   },
 });
 
-export const selectWishList = (state) => state.wishList;
 export default wishListSlice.reducer;

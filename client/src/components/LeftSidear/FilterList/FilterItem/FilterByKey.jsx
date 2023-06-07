@@ -11,15 +11,15 @@ import PropTypes from "prop-types";
 import { useDispatch, useSelector } from "react-redux";
 import { useEffect } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
-import { filterByKey } from "../../../../utils/filterByKey";
-import { formatString } from "../../../../utils/formatString";
-import { filterByPrice } from "../../../../utils/filterByPrice";
+import { filterByKey } from "../../../../utils/filter/filterByKey";
+import { formatString } from "../../../../utils/string/formatString";
+import { filterByPrice } from "../../../../utils/filter/filterByPrice";
 import {
-  selectFilters,
   setCategory,
   setFilters,
 } from "../../../../store/slices/filters.slice";
-import { deleteAllQueryFilters } from "../../../../utils/deleteAllQueryFilters";
+import { selectFilters } from "../../../../store/selectors/filters.selector";
+import { deleteAllQueryFilters } from "../../../../utils/queryParams/deleteAllQueryFilters";
 import { fetchProductsByCategory } from "../../../../store/actionCreator/filters.actionCreator";
 import s from "./FilterItem.module.scss";
 

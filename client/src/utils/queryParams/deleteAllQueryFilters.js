@@ -1,4 +1,4 @@
-import { deleteAllFilters } from "../store/slices/filters.slice";
+import { deleteAllFilters } from "../../store/slices/filters.slice";
 
 export const deleteAllQueryFilters = (
   query,

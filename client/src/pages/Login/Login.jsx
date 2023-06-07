@@ -1,10 +1,12 @@
 import { Button } from "@mui/material";
 import LoginForm from "../../components/LoginForm/LoginForm";
 import styles from "./Login.module.scss";
+import BreadcrumbsApp from "../../components/BreadcrumbsApp/BreadcrumbsApp";
 
 const LoginPage = () => {
   return (
     <div className={styles.container}>
+      <BreadcrumbsApp />
       <div className={styles.login}>
         <h1 className={styles.login__title}>Customer Login</h1>
         <div className={styles.row}>
@@ -30,7 +32,7 @@ const LoginPage = () => {
                 </li>
                 <li className={styles.list__item}>Track orders and more</li>
               </ul>
-              <Button variant="contained" size="large">
+              <Button variant="contained" size="large" className={styles.btn}>
                 Create An Account
               </Button>
             </div>
