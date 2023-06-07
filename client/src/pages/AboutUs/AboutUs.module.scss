@@ -68,25 +68,6 @@
     margin-bottom: 26px;
   }
 
-  & .wrapper-icon {
-    position: relative;
-    width: 30px;
-    height: 30px;
-  }
-
-  & .icon-drop {
-    width: 30px;
-    height: 30px;
-  }
-
-  & .icon {
-    margin-top: 8px;
-    position: absolute;
-    left: 40px;
-    width: 14px;
-    height: 14px;
-    fill: white;
-  }
 
   @media (width >= 768px) {
     flex-direction: row;
@@ -106,14 +87,6 @@
       margin-right: 49px;
       margin-left: 36px;
     }
-
-    & .icon {
-      left: 44px;
-    }
-
-    .left {
-      left: 420px;
-    }
   }
 
   @media (width >= 1200px) {
@@ -121,18 +94,40 @@
 
     & h2 {
       font-size: 44px;
-         line-height: 58px;
+      line-height: 58px;
     }
 
     & p {
       font-size: 18px;
-            line-height: 26px;
+      line-height: 26px;
     }
 
     & .container {
       margin-right: 82px;
     }
   }
+}
+
+.wrapper-icon {
+  position: relative;
+  width: 30px;
+  height: 30px;
+
+}
+
+.icon-drop {
+  position: absolute;
+  width: 30px;
+  height: 30px;
+}
+
+.icon {
+  margin-top: 8px;
+  margin-left: 7px;
+  position: absolute;
+  width: 14px;
+  height: 14px;
+  fill: white;
 }
 
 .black {

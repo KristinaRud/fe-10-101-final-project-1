@@ -3,12 +3,11 @@ import FacebookIcon from "@mui/icons-material/Facebook";
 import InstagramIcon from "@mui/icons-material/Instagram";
 import useMediaQuery from "@mui/material/useMediaQuery";
 import cx from "classnames";
-import Box from "@mui/material/Box";
+import { Box, MenuItem } from "@mui/material";
 import IconButton from "@mui/material/IconButton";
 import Typography from "@mui/material/Typography";
 import Menu from "@mui/material/Menu";
 import MenuIcon from "@mui/icons-material/Menu";
-import MenuItem from "@mui/material/MenuItem";
 import ShoppingCartOutlinedIcon from "@mui/icons-material/ShoppingCartOutlined";
 import SearchOutlinedIcon from "@mui/icons-material/SearchOutlined";
 import CloseRoundedIcon from "@mui/icons-material/CloseRounded";
@@ -53,7 +52,7 @@ const Header = () => {
   return (
     <>
       <header className={styles.header}>
-        <div className={styles.container}>
+        <Box sx={{ margin: "0 auto", maxWidth: "1400px" }}>
           <ul className={styles.menu}>
             {!mediaDesktop && !isOpenListItem && (
               <li className={styles.item__logo}>
@@ -115,10 +114,11 @@ const Header = () => {
               )
             )}
           </ul>
-        </div>
+        </Box>
       </header>
+
       <div className={styles.navbar}>
-        <div className={styles.container}>
+        <Box sx={{ margin: "0 auto", maxWidth: "1400px" }}>
           <div className={styles["navbar-list"]}>
             <Box sx={{ display: { xs: "flex", lg: "none" } }}>
               <IconButton
@@ -278,7 +278,7 @@ const Header = () => {
               className={styles["input-search"]}
             />
           )}
-        </div>
+        </Box>
       </div>
     </>
   );
