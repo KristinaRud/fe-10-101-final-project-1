@@ -3,13 +3,16 @@
   min-width: 327px;
   justify-items: center;
   margin-left: 30px;
-  @media (max-width: 768px) {
+
+  @media (width <= 768px) {
     min-width: 262px;
     margin-left: 19px;
   }
-  @media (max-width: 375px) {
+
+  @media (width <= 375px) {
     display: none;
   }
+
   &__list {
     position: fixed;
     background-color: #f5f7ff;
@@ -24,7 +27,7 @@
     font-size: 14px;
     line-height: 18px;
 
-    @media (max-width: 768px) {
+    @media (width <= 768px) {
       font-size: 12px;
       line-height: 16px;
     }
