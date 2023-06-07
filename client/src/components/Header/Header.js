@@ -8,7 +8,6 @@ import IconButton from "@mui/material/IconButton";
 import Typography from "@mui/material/Typography";
 import Menu from "@mui/material/Menu";
 import MenuIcon from "@mui/icons-material/Menu";
-import PersonIcon from "@mui/icons-material/Person";
 import ShoppingCartOutlinedIcon from "@mui/icons-material/ShoppingCartOutlined";
 import SearchOutlinedIcon from "@mui/icons-material/SearchOutlined";
 import CloseRoundedIcon from "@mui/icons-material/CloseRounded";
@@ -267,13 +266,6 @@ const Header = () => {
               <div className={styles["wrapper-counter"]}>
                 <p>10</p>
               </div>
-            </Button>
-            <Button className={styles["btn-account"]}>
-              <PersonIcon
-                sx={{
-                  color: { xs: "#FFFFFF", md: "#FFFFFF", lg: "#000000" },
-                }}
-              />
             </Button>
             <Box>
               <AccBurgerMenu />
