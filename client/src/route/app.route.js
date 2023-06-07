@@ -7,6 +7,7 @@ import AboutUsPage from "../pages/AboutUs/AboutUsPage";
 import Category from "../pages/Category/Category";
 import SingleProduct from "../pages/SingleProduct/SingleProduct";
 import CheckoutPage from "../pages/Checkout/CheckoutPage";
+import ShoppingCart from "../pages/ShoppingCart/ShoppingCart";
 import { selectCustomers } from "../store/selectors/customers.selector";
 
 const AppRoute = () => {
@@ -19,6 +20,7 @@ const AppRoute = () => {
         path="/login"
         element={isLogin ? <Navigate to="/" /> : <LoginPage />}
       />
+      <Route path="/shoppingCart" element={<ShoppingCart />} />
       <Route path="/about" element={<AboutUsPage />} />
       <Route path="/singleProduct" element={<SingleProduct />} />
       <Route path="/:category" element={<Category />} />
