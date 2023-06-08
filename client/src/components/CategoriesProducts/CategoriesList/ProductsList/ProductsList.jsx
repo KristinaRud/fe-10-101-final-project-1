@@ -30,7 +30,7 @@ const ProductsList = ({ category }) => {
     <Slider className={s.slider} {...CategoriesProducts}>
       {productsCategory.length > 0 &&
         productsCategory.map((item) => (
-          <div key={item.itemNo}>
+          <div key={item._id}>
             <ProductCard
               image={item.imageUrls[0]}
               title=" "
@@ -40,6 +40,7 @@ const ProductsList = ({ category }) => {
               available={item.quantity > 5}
               rating={item.rating.toString()}
               alt={item.name}
+              id={item.id}
             />
           </div>
         ))}
