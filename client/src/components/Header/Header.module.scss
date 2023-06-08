@@ -1,3 +1,11 @@
+.container {
+  margin: 0 15px;
+
+  @media (width <= 768px) {
+    margin: 0 20px;
+  }
+}
+
 .header {
   background-color: #020202;
   color: white;
@@ -92,8 +100,13 @@
     padding: 12px 15px;
     gap: 20px;
 
+<<<<<<< HEAD
+    @media (width <= 768px) {
+      gap: 30px;
+=======
     @media (width >= 768px) {
       gap: 15px;
+>>>>>>> 675de4766b8ff2040febc5f25671d2768ecd6d3a
     }
   }
 

@@ -81,7 +81,7 @@ const LoginForm = () => {
               size="large"
               type="submit"
             >
-              Sign In
+              Log In
             </Button>
             <Link to="/" className={styles.form__link}>
               Forgot Your Password?
@@ -89,7 +89,13 @@ const LoginForm = () => {
           </div>
         </Form>
       </Formik>
-      <LoginSnackbar open={open} status={status} handleClose={handleClose} />
+      <LoginSnackbar
+        open={open}
+        status={status}
+        handleClose={handleClose}
+        textSuccess="Login success!"
+        textError="Login failed!"
+      />
     </>
   );
 };

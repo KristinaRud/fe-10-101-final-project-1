@@ -173,5 +173,4 @@ ProductCard.propTypes = {
   currentPrice: PropTypes.number.isRequired,
   available: PropTypes.bool.isRequired,
   rating: PropTypes.number,
-  id: PropTypes.number,
 };
