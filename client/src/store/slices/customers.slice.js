@@ -1,5 +1,9 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { login, logout } from "../actionCreator/customers.actionCreator";
+import {
+  getCustomer,
+  login,
+  logout,
+} from "../actionCreator/customers.actionCreator";
 import { checkToken } from "../../utils/api/checkToken";
 
 const customersSlice = createSlice({
@@ -18,6 +22,10 @@ const customersSlice = createSlice({
     builder.addCase(logout.fulfilled, (state) => {
       state.token = null;
       state.isLogin = false;
+      state.data = {};
+    });
+    builder.addCase(getCustomer.fulfilled, (state, action) => {
+      state.data = action.payload;
     });
   },
 });
