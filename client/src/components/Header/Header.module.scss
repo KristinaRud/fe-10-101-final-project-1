@@ -1,7 +1,7 @@
 .container {
   margin: 0 15px;
 
-  @media (max-width: 768px) {
+  @media (width <= 768px) {
     margin: 0 20px;
   }
 }
@@ -44,7 +44,7 @@
 
   }
 
-  @media (min-width: 1200px) {
+  @media (width >= 1200px) {
     font-size: 12px;
     line-height: 18px;
 
@@ -98,7 +98,7 @@
     padding: 12px 0;
     gap: 12px;
 
-    @media (max-width: 768px) {
+    @media (width <= 768px) {
       gap: 30px;
     }
   }
@@ -137,7 +137,7 @@
         color: #0156FF;
       }
 
-      @media (min-width: 1200px) {
+      @media (width >= 1200px) {
         gap: 0;
         background: #0156FF;
 
@@ -191,10 +191,11 @@
     line-height: 21px;
   }
 
-  @media (min-width: 1200px) {
+  @media (width >= 1200px) {
     background: #FFF;
     padding: 28px 0;
     justify-content: start;
+
     & .icon-logo {
       margin-left: 40px;
       margin-bottom: 0;
@@ -211,7 +212,7 @@
   border: 2px solid #FFF;
   border-radius: 25px;
 
-  @media (min-width: 1200px) {
+  @media (width >= 1200px) {
     color: #0156FF;
     border: 2px solid #0156FF;
     margin-right: auto;

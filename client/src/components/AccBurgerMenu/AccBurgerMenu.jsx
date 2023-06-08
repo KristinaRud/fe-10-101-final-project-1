@@ -50,7 +50,7 @@ const AccBurgerMenu = () => {
   useEffect(() => {
     dispatch(getCustomer());
   }, [dispatch]);
-  console.log(data);
+
   return (
     <>
       {isLogin ? (

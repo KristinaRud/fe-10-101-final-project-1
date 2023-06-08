@@ -44,7 +44,6 @@ const RegistrationForm = () => {
       }, 2000);
     }
     if (err) {
-      console.log(err);
       setTextError(err.request.responseText);
       setStatus("error");
       setOpenSnackbar(true);

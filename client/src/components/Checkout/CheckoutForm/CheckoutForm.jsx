@@ -18,9 +18,7 @@ import PostOfficeBranchInput from "./PostOfficeBranchInput/PostOfficeBranchInput
 import PostOfficeDetails from "./PostOfficeDetails/PostOfficeDetails";
 
 const CheckoutForm = () => {
-  const handleSubmit = async (values) => {
-    console.log(values);
-  };
+  const handleSubmit = async () => {};
 
   return (
     <Formik
