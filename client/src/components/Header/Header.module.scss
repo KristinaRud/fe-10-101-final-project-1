@@ -9,6 +9,7 @@
 .header {
   background-color: #020202;
   color: white;
+  padding: 0 15px;
 
   & .menu {
     list-style: none;
@@ -84,6 +85,7 @@
 
 .navbar {
   background: #0156FF;
+  border-bottom: 1px solid #CCC;
 
   & .icon {
     width: 22px;
@@ -95,11 +97,16 @@
     display: flex;
     align-items: center;
     justify-content: space-between;
-    padding: 12px 0;
-    gap: 12px;
+    padding: 12px 15px;
+    gap: 20px;
 
+<<<<<<< HEAD
     @media (width <= 768px) {
       gap: 30px;
+=======
+    @media (width >= 768px) {
+      gap: 15px;
+>>>>>>> 675de4766b8ff2040febc5f25671d2768ecd6d3a
     }
   }
 
@@ -197,7 +204,7 @@
     justify-content: start;
 
     & .icon-logo {
-      margin-left: 40px;
+      margin-left: 20px;
       margin-bottom: 0;
     }
   }
@@ -245,4 +252,3 @@
     height: 33px;
   }
 }
-

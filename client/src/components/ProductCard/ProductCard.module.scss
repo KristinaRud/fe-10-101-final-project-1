@@ -8,17 +8,16 @@
 .menu {
   position: absolute;
   top: 0;
-  right: 0;
   bottom: 0;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
   align-items: flex-end;
-  background: rgb(0 0 0 / 60%);
+  background: rgb(255 255 255 / 95%);
   z-index: 1;
   color: #fff;
   width: 30%;
-  transition: width 0.3s ease-in-out;
+  transition: right 0.3s ease-in-out;
 
   @media (width <= 600px) {
     width: 40%;
