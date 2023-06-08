@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom";
 import { Button } from "@mui/material";
 import LoginForm from "../../components/LoginForm/LoginForm";
 import styles from "./Login.module.scss";
@@ -32,9 +33,11 @@ const LoginPage = () => {
                 </li>
                 <li className={styles.list__item}>Track orders and more</li>
               </ul>
-              <Button variant="contained" size="large" className={styles.btn}>
-                Create An Account
-              </Button>
+              <Link to="/sign-in">
+                <Button variant="contained" size="large" className={styles.btn}>
+                  Create An Account
+                </Button>
+              </Link>
             </div>
           </div>
         </div>

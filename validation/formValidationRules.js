@@ -91,8 +91,8 @@ const formValidationRules = [
     field: "password",
     method: "matches",
     validWhen: true,
-    args: [/^[a-zA-Z0-9]+$/],
-    message: "Allowed characters for password is a-z, A-Z, 0-9."
+    args: [/^[a-zA-Z0-9$@$!%*?&]+$/],
+    message: "Allowed characters for password are a-z, A-Z, 0-9, and special characters $, @, !, %, *, ?, &."
   },
   {
     field: "password",
@@ -111,8 +111,8 @@ const formValidationRules = [
     field: "newPassword",
     method: "matches",
     validWhen: true,
-    args: [/^[a-zA-Z0-9]+$/],
-    message: "Allowed characters for password is a-z, A-Z, 0-9."
+    args: [/^[a-zA-Z0-9$@$!%*?&]+$/],
+    message: "Allowed characters for password are a-z, A-Z, 0-9, and special characters $, @, !, %, *, ?, &."
   },
   {
     field: "newPassword",
@@ -124,7 +124,7 @@ const formValidationRules = [
   {
     field: "telephone",
     method: "matches",
-    args: [/^\+380\d{3}\d{2}\d{2}\d{2}$/],
+    args: [/^(\+38)?\s?\(?\d{3}\)?\s?\d{3}(-|\s)?\d{2}(-|\s)?\d{2}$/],
     validWhen: true,
     message: "That is not a valid phone number."
   },
