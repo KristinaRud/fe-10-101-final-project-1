@@ -24,4 +24,15 @@ const logout = createAsyncThunk("customers/logout", async () => {
   window.localStorage.removeItem("token");
 });
 
-export { login, logout };
+const getCustomer = createAsyncThunk("customers/getCustomer", async () => {
+  const { res, err } = await request({
+    url: "/customers/customer",
+  });
+
+  if (res) {
+    return res;
+  }
+  throw new Error(`Couldn't get customer: ${err.data}`);
+});
+
+export { login, logout, getCustomer };

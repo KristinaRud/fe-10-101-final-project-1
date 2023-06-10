@@ -54,7 +54,8 @@
   },
   "jest": {
     "transformIgnorePatterns": [
-      "node_modules/(?!spacetime)"
+      "/node_modules/(?!spacetime)/",
+      "/node_modules/(?!slick-carousel)/"
     ]
   },
   "browserslist": {
