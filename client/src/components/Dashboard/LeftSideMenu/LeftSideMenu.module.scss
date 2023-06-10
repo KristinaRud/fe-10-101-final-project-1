@@ -1,0 +1,50 @@
+.dashboard-list {
+  background: #f5f7ff;
+  padding: 20px 20px 20px 0;
+  cursor: pointer;
+  max-width: 326px;
+}
+
+.item {
+  font-weight: 400;
+  font-size: 15px;
+  line-height: 22px;
+  margin: 20px 0;
+  padding-left: 15px;
+  border-left: 3px solid transparent;
+
+  &:nth-child(2) {
+    position: relative;
+    margin-bottom: 45px;
+    &::after{
+      content: "";
+      position: absolute;
+      left: 0;
+      bottom: -30px;
+      width: 100%;
+      height: 1px;
+      background: #cacdd8;
+    }
+
+  }
+
+}
+
+.active {
+  font-weight: 600;
+  border-left: 3px solid #0156ff;
+  padding-left: 15px;
+}
+.wrapper{
+  margin: 10px auto;
+  text-align: center;
+  padding: 15px 20px;
+  background: #F5F7FF;
+}
+.title {
+  font-weight: 700;
+  font-size: 16px;
+  line-height: 24px;
+  margin-bottom: 15px;
+
+ }

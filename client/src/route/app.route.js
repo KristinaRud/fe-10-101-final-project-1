@@ -8,6 +8,7 @@ import Category from "../pages/Category/Category";
 import SingleProduct from "../pages/SingleProduct/SingleProduct";
 import CheckoutPage from "../pages/Checkout/CheckoutPage";
 import { selectCustomers } from "../store/selectors/customers.selector";
+import DashboardPage from "../pages/Dashboard/DashboardPage";
 
 const AppRoute = () => {
   const { isLogin } = useSelector(selectCustomers);
@@ -23,6 +24,7 @@ const AppRoute = () => {
       <Route path="/singleProduct" element={<SingleProduct />} />
       <Route path="/:category" element={<Category />} />
       <Route path="/checkout" element={<CheckoutPage />} />
+      <Route path="/dashboard" element={<DashboardPage />} />
       <Route path="*" element={<NotPage />} />
     </Routes>
   );

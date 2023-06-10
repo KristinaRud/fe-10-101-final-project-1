@@ -1,4 +1,3 @@
-import { Link } from "react-router-dom";
 import cx from "classnames";
 import { Container, Box } from "@mui/material";
 import StarIcon from "@mui/icons-material/Star";
@@ -17,13 +16,6 @@ const AboutUsPage = () => {
   return (
     <>
       <Box sx={{ margin: "0 auto", maxWidth: "1400px" }}>
-        <ul className={styles.navigation}>
-          <Link to="/">
-            <li>Home</li>
-          </Link>
-          <li className={styles.blue}> &gt; </li>
-          <li>About us</li>
-        </ul>
         <h1 className={styles.title}>About Us</h1>
       </Box>
       <section className={styles.black}>
