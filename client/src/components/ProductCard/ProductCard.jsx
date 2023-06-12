@@ -27,17 +27,21 @@ const ProductCard = ({
   currentPrice,
   available,
   rating,
+  categories,
   id,
 }) => {
   const [isHovered, setIsHovered] = useState(false);
+
   const handleMouseEnter = () => {
     setIsHovered(true);
   };
+
   const handleMouseLeave = () => {
     setIsHovered(false);
   };
+
   return (
-    <Link to={`/product/${id}`}>
+    <Link to={`/${categories.toLowerCase()}/${id}`}>
       <Card
         className={styles.card}
         sx={{ width: 235, height: 346, position: "relative" }}
@@ -173,4 +177,6 @@ ProductCard.propTypes = {
   currentPrice: PropTypes.number.isRequired,
   available: PropTypes.bool.isRequired,
   rating: PropTypes.number,
+  id: PropTypes.number.isRequired,
+  categories: PropTypes.string.isRequired,
 };

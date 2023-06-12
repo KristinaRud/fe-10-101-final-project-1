@@ -40,7 +40,9 @@ const ProductsList = ({ category }) => {
               available={item.quantity > 5}
               rating={item.rating.toString()}
               alt={item.name}
-              id={item.id}
+              id={item._id}
+              categories={item.categories}
+              name={item.name}
             />
           </div>
         ))}

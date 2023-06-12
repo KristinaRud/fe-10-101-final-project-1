@@ -34,6 +34,7 @@ module.exports = {
     "no-shadow": 0,
     "react/react-in-jsx-scope": 0,
     "react/jsx-no-useless-fragment": 0,
+    "no-underscore-dangle": "off",
     "react/jsx-filename-extension": [
       1,
       {
