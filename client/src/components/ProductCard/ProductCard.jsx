@@ -48,34 +48,35 @@ const ProductCard = ({
         onMouseEnter={handleMouseEnter}
         onMouseLeave={handleMouseLeave}
       >
-        {isHovered && (
-          <Box className={styles.menu}>
-            <Box className={styles.menu_top}>
-              <Button
-                sx={{
-                  "&:hover": { backgroundColor: "rgba(255, 255, 255, 0.2)" },
-                }}
-              >
-                <IconWishList />
-              </Button>
-              <Button
-                sx={{
-                  "&:hover": { backgroundColor: "rgba(255, 255, 255, 0.2)" },
-                }}
-              >
-                <IconCompare />
-              </Button>
-            </Box>
+        <Box
+          className={styles.menu}
+          style={{ right: isHovered ? "0" : "-40%" }}
+        >
+          <Box className={styles.menu_top}>
             <Button
               sx={{
                 "&:hover": { backgroundColor: "rgba(255, 255, 255, 0.2)" },
-                marginBottom: 2,
               }}
             >
-              <IconCart />
+              <IconWishList />
+            </Button>
+            <Button
+              sx={{
+                "&:hover": { backgroundColor: "rgba(255, 255, 255, 0.2)" },
+              }}
+            >
+              <IconCompare />
             </Button>
           </Box>
-        )}
+          <Button
+            sx={{
+              "&:hover": { backgroundColor: "rgba(255, 255, 255, 0.2)" },
+              marginBottom: 2,
+            }}
+          >
+            <IconCart />
+          </Button>
+        </Box>
         <CardContent sx={{ paddingTop: 1 }}>
           <Typography variant="caption" color={available ? "green" : "error"}>
             {available ? (

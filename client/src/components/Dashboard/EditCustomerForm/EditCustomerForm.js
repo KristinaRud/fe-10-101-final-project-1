@@ -100,7 +100,7 @@ const EditCustomerForm = () => {
         status={status}
         handleClose={handleClose}
         textSuccess="Edit successes!"
-        textError={"Edit error"}
+        textError="Edit error"
       />
     </>
   );

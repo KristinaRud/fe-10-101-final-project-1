@@ -83,7 +83,7 @@ const ProductsListView = () => {
                   currentPrice={currentPrice}
                   description={name}
                   title=""
-                  id={product._id}
+                  id={product.id}
                   categories={product.categories}
                   name={product.name}
                 />
