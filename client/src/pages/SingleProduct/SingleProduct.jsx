@@ -48,9 +48,7 @@ const SingleProduct = () => {
     { label: name },
   ];
 
-  const productCounterHandler = (event) => {
-    console.log(event.target.value);
-  };
+  const productCounterHandler = () => {};
 
   const tabToggle = (event) => {
     const title = event.target.innerText;
