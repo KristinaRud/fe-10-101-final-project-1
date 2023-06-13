@@ -9,6 +9,7 @@ import SingleProduct from "../pages/SingleProduct/SingleProduct";
 import CheckoutPage from "../pages/Checkout/CheckoutPage";
 import ShoppingCart from "../pages/ShoppingCart/ShoppingCart";
 import { selectCustomers } from "../store/selectors/customers.selector";
+import AccountPage from "../pages/Account/AccountPage";
 import Registration from "../pages/Registration/Registration";
 
 const AppRoute = () => {
@@ -26,6 +27,10 @@ const AppRoute = () => {
       <Route path="/:category/:id" element={<SingleProduct />} />
       <Route path="/:category" element={<Category />} />
       <Route path="/checkout" element={<CheckoutPage />} />
+      <Route
+        path="/account"
+        element={isLogin ? <AccountPage /> : <LoginPage />}
+      />
       <Route
         path="/sign-in"
         element={isLogin ? <Navigate to="/" /> : <Registration />}

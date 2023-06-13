@@ -1,0 +1,33 @@
+
+.title {
+  font-weight: 700;
+  font-size: 18px;
+  line-height: 148%;
+  border-bottom: 1px solid #cacdd8;
+  margin-bottom: 17px;
+  padding-bottom: 12px;
+}
+.description {
+  width: 120px;
+  font-weight: 500;
+  font-size: 16px;
+  line-height: 20px;
+  margin: 15px 0;
+}
+
+.item {
+  display: flex;
+  gap: 30px;
+  flex-wrap: wrap;
+  font-weight: 300;
+  font-size: 14px;
+  line-height: 20px;
+  color: #666;
+  margin-bottom: 15px;
+
+  & p {
+    width: 120px;
+    margin-left: 7px;
+  }
+
+}

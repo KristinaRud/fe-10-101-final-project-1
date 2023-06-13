@@ -1,0 +1,19 @@
+.title {
+  font-weight: 600;
+  font-size: 32px;
+  line-height: 48px;
+  margin-bottom: 21px;
+
+  @media (width <= 868px) {
+    font-size: 18px;
+    line-height: 27px;
+  }
+}
+.wrapper-compare {
+  margin: 10px auto;
+  text-align: center;
+  padding: 15px 20px;
+  background: #f5f7ff;
+  min-width: 300px;
+
+}
