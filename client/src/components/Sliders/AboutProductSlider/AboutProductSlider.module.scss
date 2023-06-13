@@ -1,6 +1,7 @@
 .about_slider {
   width: 100%;
   background: #040404;
+  overflow-x: hidden;
 }
 
 .about_container {
@@ -10,20 +11,23 @@
 }
 
 .about_image {
-  width: 100%;
+  width: 50%;
   object-fit: cover;
-  height: 50vw;
-  min-height: 394px;
+  min-height: 420px;
+  max-height: 520px;
+  margin: 0 0 0 auto;
 
   @media (width <= 480px) {
     min-height: 260px;
+    margin: 0 auto;
+    width: 100%;
   }
  }
 
 .about_content {
   position: absolute;
   top: 50%;
-  left: 15%;
+  left: 10%;
   max-width: 465px;
   transform: translateY(-50%);
 
@@ -51,7 +55,6 @@
 }
 
 .about_text {
-  padding-top: 36px;
   font-weight: 300;
   font-size: 18px;
   line-height: 26px;

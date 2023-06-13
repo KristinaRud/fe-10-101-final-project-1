@@ -1,24 +1,23 @@
 import Slider from "react-slick";
+import PropTypes from "prop-types";
 import styles from "./AboutProductSlider.module.scss";
 import "./AboutProduct.scss";
-import aboutData from "./AboutProductSliderConfig";
 import { AboutProductConfig } from "../slidersConfig";
 
-const AboutProductSlider = () => {
+const AboutProductSlider = ({ data }) => {
   return (
     <div className={styles.about_slider}>
       <Slider {...AboutProductConfig}>
-        {aboutData.map((item) => (
-          <div key={item.id}>
+        {data.map((item) => (
+          <div key={item.index}>
             <div className={styles.about_container}>
               <img
                 className={styles.about_image}
-                src={item.img_url}
-                alt={item.alt}
+                src={item.image}
+                alt="product"
               />
               <div className={styles.about_content}>
-                <div className={styles.about_title}>{item.header}</div>
-                <div className={styles.about_text}>{item.text}</div>
+                <div className={styles.about_text}>{item.title}</div>
               </div>
             </div>
           </div>
@@ -26,6 +25,15 @@ const AboutProductSlider = () => {
       </Slider>
     </div>
   );
+};
+
+AboutProductSlider.propTypes = {
+  data: PropTypes.arrayOf(
+    PropTypes.shape({
+      image: PropTypes.string.isRequired,
+      title: PropTypes.string.isRequired,
+    }),
+  ).isRequired,
 };
 
 export default AboutProductSlider;

@@ -10,6 +10,7 @@ import styles from "./SingleProduct.module.scss";
 import { fetchProducts } from "../../store/actionCreator/products.actionCreator";
 import { selectProducts } from "../../store/selectors/products.selector";
 import BreadcrumbsApp from "../../components/BreadcrumbsApp/BreadcrumbsApp";
+import AboutProductSlider from "../../components/Sliders/AboutProductSlider/AboutProductSlider";
 
 const SingleProduct = () => {
   const { id } = useParams();
@@ -161,6 +162,7 @@ const SingleProduct = () => {
           </div>
         </div>
       </div>
+      <AboutProductSlider data={description} />;
     </div>
   );
 };
