@@ -1,25 +1,31 @@
 import { Box } from "@mui/material";
-import styles from "./LeftSideMenu.module.scss";
+import PropTypes from "prop-types";
+import useMediaQuery from "@mui/material/useMediaQuery";
 import MenuDashboard from "./MenuDashboard";
+import CompareProducts from "../../LeftSidear/CompareProducts/CompareProducts";
+import styles from "./LeftSideMenu.module.scss";
 
-const LeftSideMenu = () => {
+const LeftSideMenu = ({ onItemClick }) => {
+  const mediaMobile = useMediaQuery("(max-width: 480px)");
   return (
-    <Box sx={{ marginBottom: "50px", minWidth: "300px" }}>
-      <MenuDashboard />
-      <div className={styles.wrapper}>
-        <h3 className={styles.title}>Compare Products</h3>
-        <div>
-          <p>You have no items to compare.</p>
-        </div>
-      </div>
-      <div>
-        <div className={styles.wrapper}>
-          <h3 className={styles.title}>My Wish List</h3>
-          <p>You have no items in your wish list.</p>
-        </div>
-      </div>
+    <Box className={styles.container}>
+      <MenuDashboard onItemClick={onItemClick} />
+      {!mediaMobile && (
+        <CompareProducts classname={styles["wrapper-compare"]} />
+      )}
+      {!mediaMobile && (
+        <CompareProducts isFavourite classname={styles["wrapper-compare"]} />
+      )}
     </Box>
   );
+};
+
+LeftSideMenu.propTypes = {
+  onItemClick: PropTypes.func,
+};
+
+LeftSideMenu.defaultProps = {
+  onItemClick: () => {},
 };
 
 export default LeftSideMenu;

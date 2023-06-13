@@ -1,6 +1,6 @@
 export const itemsDashboardConfig = [
-  { item: "Account Dashboard", onClick: () => {} },
-  { item: "Account Information", onClick: () => {} },
-  { item: "Address Book", onClick: () => {} },
-  { item: "My Orders", onClick: () => {} },
+  { item: "Account Dashboard" },
+  { item: "Account Information" },
+  { item: "Address Book" },
+  { item: "My Orders" },
 ];

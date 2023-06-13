@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
 import Menu from "@mui/material/Menu";
 import PersonIcon from "@mui/icons-material/Person";
 import MenuItem from "@mui/material/MenuItem";
@@ -24,6 +25,7 @@ const AccBurgerMenu = () => {
   const { isLogin, data } = useSelector(selectCustomers);
   const [openDialog, setOpenDialog] = useState(false);
   const dispatch = useDispatch();
+  const navigate = useNavigate();
 
   const handleClickOpenDialog = () => {
     setOpenDialog(true);
@@ -108,7 +110,12 @@ const AccBurgerMenu = () => {
             transformOrigin={{ horizontal: "right", vertical: "top" }}
             anchorOrigin={{ horizontal: "right", vertical: "bottom" }}
           >
-            <MenuItem onClick={handleCloseAccMenu}>
+            <MenuItem
+              onClick={() => {
+                handleCloseAccMenu();
+                navigate("/account");
+              }}
+            >
               <SettingsSuggestIcon sx={{ marginRight: "5px" }} />
               My Settings
             </MenuItem>
