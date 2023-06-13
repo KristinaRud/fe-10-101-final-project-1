@@ -34,7 +34,7 @@
 
   & .border {
     border-radius: 15px;
-    border: 1px solid #ACACAC;
+    border: 1px solid #acacac;
     padding-left: 5px;
   }
 
@@ -42,7 +42,6 @@
     display: flex;
     gap: 5px;
     align-items: center;
-
   }
 
   @media (width >= 1200px) {
@@ -60,7 +59,7 @@
 }
 
 .btn-logo {
-  background: #0156FF;
+  background: #0156ff;
   width: 60px;
   height: 46px;
   padding: 11px 22px;
@@ -84,13 +83,12 @@
 }
 
 .navbar {
-  background: #0156FF;
-  border-bottom: 1px solid #CCC;
+  background: #0156ff;
+  border-bottom: 1px solid #ccc;
 
   & .icon {
     width: 22px;
     height: 28px;
-
   }
 
   & .navbar-list {
@@ -100,13 +98,8 @@
     padding: 12px 15px;
     gap: 20px;
 
-<<<<<<< HEAD
-    @media (width <= 768px) {
-      gap: 30px;
-=======
     @media (width >= 768px) {
       gap: 15px;
->>>>>>> 675de4766b8ff2040febc5f25671d2768ecd6d3a
     }
   }
 
@@ -131,7 +124,7 @@
     & .wrapper-counter {
       width: 17px;
       height: 17px;
-      background: #FFF;
+      background: #fff;
       border-radius: 50px;
       position: absolute;
       top: -8px;
@@ -141,15 +134,15 @@
         font-weight: 700;
         font-size: 10px;
         line-height: 15px;
-        color: #0156FF;
+        color: #0156ff;
       }
 
       @media (width >= 1200px) {
         gap: 0;
-        background: #0156FF;
+        background: #0156ff;
 
         & p {
-          color: #FFF;
+          color: #fff;
         }
       }
     }
@@ -166,7 +159,6 @@
     right: 5px;
     background: none;
     border: none;
-
   }
 
   & .input-search {
@@ -182,7 +174,7 @@
   }
 
   & .input-search__desktop {
-    background: #F5F7FF;
+    background: #f5f7ff;
     border-radius: 31px;
     width: 100%;
     outline: none;
@@ -199,7 +191,7 @@
   }
 
   @media (width >= 1200px) {
-    background: #FFF;
+    background: #fff;
     padding: 28px 0;
     justify-content: start;
 
@@ -215,28 +207,27 @@
   font-size: 14px;
   line-height: 21px;
   padding: 5px 15px;
-  color: #FFF;
-  border: 2px solid #FFF;
+  color: #fff;
+  border: 2px solid #fff;
   border-radius: 25px;
 
   @media (width >= 1200px) {
-    color: #0156FF;
-    border: 2px solid #0156FF;
+    color: #0156ff;
+    border: 2px solid #0156ff;
     margin-right: auto;
   }
-
 }
 
 .blue {
-  color: #0156FF;
-  border: 2px solid #0156FF;
+  color: #0156ff;
+  border: 2px solid #0156ff;
   margin: 16px;
 }
 
-.btn-search, .btn-close {
+.btn-search,
+.btn-close {
   background: none;
   border: none;
-
 }
 
 .wrapper-appbar__icons {
@@ -245,7 +236,7 @@
   margin: 16px;
   padding-bottom: 15px;
   align-items: center;
-  border-bottom: 1px solid #CACDD8;
+  border-bottom: 1px solid #cacdd8;
 
   & .icon-appbar {
     width: 27px;
