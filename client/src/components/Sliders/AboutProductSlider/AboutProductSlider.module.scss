@@ -12,10 +12,12 @@
 
 .about_image {
   width: 50%;
-  object-fit: cover;
+  object-fit: contain;
   min-height: 420px;
   max-height: 520px;
+  height: 100%;
   margin: 0 0 0 auto;
+  padding-top: 5px;
 
   @media (width <= 480px) {
     min-height: 260px;
