@@ -3,6 +3,7 @@ import {
   getCustomer,
   login,
   logout,
+  editCustomer,
 } from "../actionCreator/customers.actionCreator";
 import { checkToken } from "../../utils/api/checkToken";
 
@@ -26,6 +27,9 @@ const customersSlice = createSlice({
     });
     builder.addCase(getCustomer.fulfilled, (state, action) => {
       state.data = action.payload;
+    });
+    builder.addCase(editCustomer.fulfilled, (state, action) => {
+      state.data = [...state.data, action.payload];
     });
   },
 });

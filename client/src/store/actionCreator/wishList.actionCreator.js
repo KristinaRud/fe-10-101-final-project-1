@@ -5,9 +5,8 @@ const fetchWishList = createAsyncThunk("wishList/fetchWishList", async () => {
   const { res, err } = await request({
     url: `/wishList`,
   });
-  if (res) {
-    return res;
-  }
+
+  if (res) return res;
   throw new Error(`Couldn't get wishList: ${err.data}`);
 });
 

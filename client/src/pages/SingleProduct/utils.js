@@ -1,10 +1,10 @@
 import styles from "./SingleProduct.module.scss";
 
 export const getDetailsList = (data) => {
-  const values = Object.values(data);
-  const listItems = values.map((value) => (
-    <li key={`${value}`} className={styles["details-list__item"]}>
-      {value}
+  const values = Object.entries(data);
+  const listItems = values.map(([key, value]) => (
+    <li key={`${key}`} className={styles["details-list__item"]}>
+      <strong>{key.toUpperCase()}</strong> {value}
     </li>
   ));
   return [...listItems];

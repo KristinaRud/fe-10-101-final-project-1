@@ -1,0 +1,38 @@
+.title {
+  font-weight: 700;
+  font-size: 18px;
+  line-height: 148%;
+  border-bottom: 1px solid #cacdd8;
+  margin-bottom: 17px;
+  padding-bottom: 12px;
+}
+
+.contact {
+  font-weight: 500;
+  font-size: 16px;
+  line-height: 20px;
+  margin: 15px 0;
+}
+
+.text {
+  font-weight: 300;
+  font-size: 14px;
+  line-height: 20px;
+  color: #666;
+}
+
+.btn-account {
+  margin: 34px 50px 44px 0;
+  color: #0156ff;
+  border-bottom: 1px solid #0156ff;
+  padding: 0;
+}
+.wrapper-add {
+  margin-bottom: 50px;
+}
+.wrapper-text {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 50px;
+}

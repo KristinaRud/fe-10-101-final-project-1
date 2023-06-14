@@ -36,6 +36,9 @@ const NewProductSlider = () => {
               available={item.quantity > 5}
               rating={item.rating}
               alt={item.name}
+              id={item._id}
+              categories={item.categories}
+              name={item.name}
             />
           </div>
         ))}

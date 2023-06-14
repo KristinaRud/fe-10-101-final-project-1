@@ -35,4 +35,20 @@ const getCustomer = createAsyncThunk("customers/getCustomer", async () => {
   throw new Error(`Couldn't get customer: ${err.data}`);
 });
 
-export { login, logout, getCustomer };
+const editCustomer = createAsyncThunk(
+  "customers/editCustomer",
+  async (values) => {
+    const { res, err } = await request({
+      url: "/customers/customer",
+      method: "PATCH",
+      body: values,
+    });
+
+    if (res) {
+      return res;
+    }
+    throw new Error(`Couldn't edit customer: ${err.data}`);
+  },
+);
+
+export { login, logout, getCustomer, editCustomer };
