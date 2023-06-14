@@ -21,7 +21,7 @@ const CategoriesList = () => {
         catalog.map(({ id, name, imgUrl }) => (
           <div key={id} className={s.wrapper}>
             <CategoryItem name={name} imgUrl={imgUrl} id={id} />
-            <ProductsList category={id} />
+            <ProductsList category={name} />
           </div>
         ))}
     </List>

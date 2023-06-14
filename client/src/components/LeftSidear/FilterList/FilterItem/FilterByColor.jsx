@@ -1,4 +1,3 @@
-/* eslint-disable react-hooks/exhaustive-deps */
 import {
   Accordion,
   AccordionDetails,
@@ -8,85 +7,46 @@ import {
 } from "@mui/material";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 import { useDispatch, useSelector } from "react-redux";
-import { useLocation, useNavigate } from "react-router-dom";
+import { useLocation } from "react-router-dom";
 import { useEffect } from "react";
-import {
-  setCategory,
-  setFilters,
-} from "../../../../store/slices/filters.slice";
-import { selectFilters } from "../../../../store/selectors/filters.selector";
-import { deleteAllQueryFilters } from "../../../../utils/queryParams/deleteAllQueryFilters";
-import { fetchProductsByCategory } from "../../../../store/actionCreator/filters.actionCreator";
 import { selectColors } from "../../../../store/selectors/colors.selector";
 import { fetchColors } from "../../../../store/actionCreator/colors.actionCreator";
 import s from "./FilterItem.module.scss";
+import ColorItem from "./ColorItem/ColorItem";
 
 const FilterByColor = () => {
   const location = useLocation();
   const searchParams = new URLSearchParams(location.search);
   const categories = searchParams.get("categories");
   const dispatch = useDispatch();
-  const navigate = useNavigate();
-  const filters = useSelector(selectFilters);
-  const query = filters.filters;
   const colorOptions = useSelector(selectColors);
 
   const renderOptions = () => {
-    const neededColors = [];
-    colorOptions.forEach((color) => {
-      filters.productsOfCategory.products.forEach((item) => {
-        if (item.color === color.name) {
-          neededColors.push(color);
-        }
-      });
+    return colorOptions.map((obj) => {
+      if (obj.count > 0) {
+        return <ColorItem key={obj._id} {...obj} />;
+      }
+      return null;
     });
-
-    const colors = [...new Set(neededColors)];
-    return colors.map((obj) => (
-      <span className={s.roundWrapper} key={obj.name}>
-        <Typography
-          sx={{ backgroundColor: obj.cssValue }}
-          variant="h6"
-          component="span"
-          className={s.round}
-          onClick={() =>
-            dispatch(setFilters({ name: "color", value: [obj.name] }))
-          }
-        />
-      </span>
-    ));
   };
 
   useEffect(() => {
-    if (categories !== filters.category) {
-      deleteAllQueryFilters(query, searchParams, navigate, dispatch);
-    }
-    dispatch(setCategory(categories));
-    dispatch(fetchProductsByCategory(categories));
-  }, [dispatch, categories]);
-
-  useEffect(() => {
-    dispatch(fetchColors());
-  }, []);
+    dispatch(fetchColors(`?categories=${categories}`));
+  }, [categories, dispatch]);
 
   return (
     <Accordion className={s.wrapper}>
       <AccordionSummary
         expandIcon={<ExpandMoreIcon />}
-        aria-controls="panel1a-content"
-        id="panel1a-header"
+        aria-controls="color-content"
+        id="color-header"
       >
         <Typography variant="h6" component="h5" fontWeight={600} fontSize={14}>
           Color
         </Typography>
       </AccordionSummary>
       <AccordionDetails className={s.colors}>
-        {Object.keys(filters.productsOfCategory).length > 0 &&
-        colorOptions.length > 0 ? (
-          renderOptions()
-        ) : (
-          <CircularProgress />
-        )}
+        {colorOptions.length > 0 ? renderOptions() : <CircularProgress />}
       </AccordionDetails>
     </Accordion>
   );
