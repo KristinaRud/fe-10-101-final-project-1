@@ -55,6 +55,7 @@ const ProductsListView = () => {
               rating,
               shortDescription,
               currentPrice,
+              _id,
             } = product;
             if (iconView === "list") {
               return (
@@ -75,6 +76,7 @@ const ProductsListView = () => {
             return (
               <Grid key={itemNo} item lg={3}>
                 <ProductCard
+                  id={_id}
                   image={imageUrls[0]}
                   oldPrice={previousPrice}
                   alt={name}

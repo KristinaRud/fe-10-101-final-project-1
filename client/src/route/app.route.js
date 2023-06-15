@@ -22,7 +22,7 @@ const AppRoute = () => {
         path="/login"
         element={isLogin ? <Navigate to="/" /> : <LoginPage />}
       />
-      <Route path="/shoppingCart" element={<ShoppingCart />} />
+      <Route path="/shopping-cart" element={<ShoppingCart />} />
       <Route path="/about" element={<AboutUsPage />} />
       <Route path="/singleProduct" element={<SingleProduct />} />
       <Route path="/:category" element={<Category />} />

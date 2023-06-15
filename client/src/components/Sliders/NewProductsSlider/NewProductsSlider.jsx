@@ -35,6 +35,7 @@ const NewProductSlider = () => {
         {newProducts.map((item) => (
           <div key={item.itemNo} className={styles.card}>
             <ProductCard
+              id={item._id}
               image={item.imageUrls[0]}
               title=""
               description={item.name}

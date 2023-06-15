@@ -7,6 +7,7 @@ import {
   Button,
   Rating,
 } from "@mui/material";
+import { useSelector, useDispatch } from "react-redux";
 import CheckCircleIcon from "@mui/icons-material/CheckCircle";
 import PhoneIcon from "@mui/icons-material/Phone";
 import PropTypes from "prop-types";
@@ -17,6 +18,8 @@ import {
   IconCart,
 } from "../../assets/images/products";
 import styles from "./ProductCard.module.scss";
+import { addToCart } from "../../store/slices/shoppingCart.slice";
+import { selectCustomers } from "../../store/selectors/customers.selector";
 
 const ProductCard = ({
   image,
@@ -26,14 +29,22 @@ const ProductCard = ({
   currentPrice,
   available,
   rating,
+  id,
 }) => {
   const [isHovered, setIsHovered] = useState(false);
+  const dispatch = useDispatch();
+  const { isLogin } = useSelector(selectCustomers);
+
   const handleMouseEnter = () => {
     setIsHovered(true);
   };
   const handleMouseLeave = () => {
     setIsHovered(false);
   };
+  const handleAddToCart = async (data) => {
+    dispatch(addToCart(data));
+  };
+
   return (
     <Card
       className={styles.card}
@@ -62,6 +73,16 @@ const ProductCard = ({
           sx={{
             "&:hover": { backgroundColor: "rgba(255, 255, 255, 0.2)" },
             marginBottom: 2,
+          }}
+          onClick={() => {
+            handleAddToCart({
+              id,
+              image,
+              alt,
+              description,
+              currentPrice,
+              isLogin,
+            });
           }}
         >
           <IconCart />
@@ -160,4 +181,5 @@ ProductCard.propTypes = {
   currentPrice: PropTypes.number.isRequired,
   available: PropTypes.bool.isRequired,
   rating: PropTypes.number,
+  id: PropTypes.string,
 };
