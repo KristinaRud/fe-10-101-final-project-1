@@ -1,38 +1,54 @@
-import { useState } from "react";
-import { Breadcrumbs, TextField, Typography } from "@mui/material";
-import { Link } from "react-router-dom";
+import { useEffect, useState } from "react";
+import { TextField } from "@mui/material";
+import { useParams } from "react-router-dom";
 import FavoriteBorderIcon from "@mui/icons-material/FavoriteBorder";
 import Button from "@mui/material/Button";
 import cn from "classnames";
+import { useDispatch, useSelector } from "react-redux";
 import { getDetailsList } from "./utils";
 import styles from "./SingleProduct.module.scss";
-import productImg from "../../assets/images/single-product.png";
-
-const characteristics = {
-  typeOfWorkingSurface: "Graphics tablet",
-  size: "200 х 160 х 8.8 mm",
-  weight: "230 g",
-  activeArea: "152 х 95 mm",
-  resolution: "2540 lpi",
-  numberOfButtons: "4",
-  readingSpeed: "133 pps",
-  connectionInterface: "micro USB",
-  numberOfButtonsOnThePen: "1",
-  material: "ABS plastic",
-  typeOfPowerSupply: "accumulator",
-  batteryCapacity: "1100 mAh",
-  technology: "Electromagnetic resonance",
-  powerConsumption: "0.35 W",
-  more: "OS support: Windows 7, mac OS 10.1 2 and above",
-};
+import { fetchProducts } from "../../store/actionCreator/products.actionCreator";
+import { selectProducts } from "../../store/selectors/products.selector";
+import BreadcrumbsApp from "../../components/BreadcrumbsApp/BreadcrumbsApp";
 
 const SingleProduct = () => {
+  const { id } = useParams();
+  const dispatch = useDispatch();
+  const { products } = useSelector(selectProducts);
+  const [currentProduct, setCurrentProduct] = useState(null);
+  const [detailsList, setDetailsList] = useState(null);
   const [isActiveTab, setIsActiveTab] = useState({
     status: true,
     title: "About Product",
   });
 
-  const list = getDetailsList(characteristics);
+  useEffect(() => {
+    dispatch(fetchProducts(""));
+  }, [dispatch]);
+
+  useEffect(() => {
+    if (products) {
+      const currentProduct = products.find((product) => product._id === id);
+      const list = getDetailsList(currentProduct.characteristics);
+      setCurrentProduct(currentProduct);
+      setDetailsList(list);
+    }
+  }, [id, products]);
+
+  if (!currentProduct) return "Loading...";
+  const { name, categories, currentPrice, description, itemNo } =
+    currentProduct;
+
+  const breadcrumbsCustomData = [
+    { label: "Home", url: "/" },
+    {
+      label: categories,
+      url: `/${categories}?categories=${categories}`,
+    },
+    { label: name },
+  ];
+
+  const productCounterHandler = () => {};
 
   const tabToggle = (event) => {
     const title = event.target.innerText;
@@ -70,18 +86,21 @@ const SingleProduct = () => {
             <div className={styles.count}>
               <p className={styles.count__text}>
                 On Sale from{" "}
-                <span className={styles["count__text--bold"]}>$3,299.00</span>
+                <span className={styles["count__text--bold"]}>
+                  ${currentPrice}
+                </span>
               </p>
               <TextField
                 type="number"
-                value={1}
+                defaultValue={1}
                 className={styles.count__field}
                 InputProps={{
                   inputProps: {
-                    max: 10,
+                    max: 20,
                     min: 1,
                   },
                 }}
+                onChange={productCounterHandler}
               />
             </div>
             <Button variant="contained" size="large" className={styles.button}>
@@ -94,40 +113,21 @@ const SingleProduct = () => {
         <div className={styles.col}>
           <div className={styles["product-info"]}>
             <div className={styles["product-info__inner"]}>
-              <Breadcrumbs
-                aria-label="breadcrumb"
-                className={styles.breadcrumb}
-              >
-                <Link to="/" className={styles.breadcrumb__item}>
-                  MUI
-                </Link>
-                <Link
-                  to="/material-ui/getting-started/installation/"
-                  className={styles.breadcrumb__item}
-                >
-                  Core
-                </Link>
-                <Typography
-                  color="text.primary"
-                  className={styles.breadcrumb__item}
-                >
-                  Breadcrumbs
-                </Typography>
-              </Breadcrumbs>
+              <div className={styles["product-info__breadcrumbs"]}>
+                <BreadcrumbsApp breadcrumbsCustomData={breadcrumbsCustomData} />
+              </div>
               <h1 className={styles["product-info__title"]}>
-                MSI MPG Trident 3
+                {currentProduct.name}
               </h1>
               <p className={styles["product-info__subtitle"]}>
                 Be the first to review this product
               </p>
               {isActiveTab.title === "About Product" ? (
                 <p className={styles["product-info__description"]}>
-                  MSI MPG Trident 3 10SC-005AU Intel i7 10700F, 2060 SUPER, 16GB
-                  RAM, 512GB SSD, 2TB HDD, Windows 10 Home, Gaming Keyboard and
-                  Mouse 3 Mouse 3 Years Warranty Gaming Desktop
+                  {description[0].title}
                 </p>
               ) : (
-                <ul className={styles["details-list"]}>{list}</ul>
+                <ul className={styles["details-list"]}>{detailsList}</ul>
               )}
               <div className={styles["product-info__footer"]}>
                 <p className={styles["product-info__support"]}>
@@ -139,7 +139,7 @@ const SingleProduct = () => {
                     Contact Us
                   </a>
                 </p>
-                <p className={styles["product-info__code"]}>SKU D5515AI</p>
+                <p className={styles["product-info__code"]}>{itemNo}</p>
               </div>
             </div>
           </div>
@@ -153,8 +153,8 @@ const SingleProduct = () => {
                 </li>
               </ul>
               <img
-                src={productImg}
-                alt="MSI MPG Trident 3"
+                src={description[0].image}
+                alt={name}
                 className={styles["product-picture__image"]}
               />
             </div>

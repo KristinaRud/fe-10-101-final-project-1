@@ -8,54 +8,71 @@ import FilterByKey from "./FilterItem/FilterByKey";
 import FilterByColor from "./FilterItem/FilterByColor";
 import ListWrapper from "../ListWrapper/ListWrapper";
 import { selectFilters } from "../../../store/selectors/filters.selector";
-import { fetchProducts } from "../../../store/actionCreator/products.actionCreator";
 import { deleteAllQueryFilters } from "../../../utils/queryParams/deleteAllQueryFilters";
 import { setFilterQueryParams } from "../../../utils/queryParams/setFilterQueryParams";
 import { fetchFiltersData } from "../../../store/actionCreator/filters.actionCreator";
 import s from "./FilterList.module.scss";
+import {
+  deleteAllFilters,
+  setCategory,
+} from "../../../store/slices/filters.slice";
+import FilterByPrice from "./FilterItem/FilterByPrice";
 
 const FilterList = ({ className, closeModal }) => {
   const dispatch = useDispatch();
-  const filter = useSelector(selectFilters);
-  const query = filter.filters;
+  const { filters, category, filtersData } = useSelector(selectFilters);
   const navigate = useNavigate();
   const location = useLocation();
   const searchParams = new URLSearchParams(location.search);
+  const categories = searchParams.get("categories");
+
+  const renderFilters = (arr) => {
+    if (arr[0].type === "price") {
+      return (
+        <FilterByPrice
+          key={arr[0]._id}
+          maxPriceData={arr[0].maxPrice}
+          minPriceData={arr[0].minPrice}
+        />
+      );
+    }
+    return <FilterByKey key={arr[0]._id} filterData={arr} />;
+  };
 
   const handleClearFilter = () => {
-    deleteAllQueryFilters(query, searchParams, navigate, dispatch);
+    deleteAllQueryFilters(filters, searchParams, navigate, dispatch);
+    dispatch(deleteAllFilters());
   };
 
   const handleSendFilter = () => {
     closeModal();
     searchParams.set("startPage", "1");
-    setFilterQueryParams(query, searchParams, navigate);
+    setFilterQueryParams(filters, searchParams, navigate);
   };
 
   useEffect(() => {
-    dispatch(fetchProducts(location.search));
-  }, [dispatch, location.search]);
+    dispatch(fetchFiltersData(`?categories=${categories}`));
+  }, [categories, dispatch]);
 
   useEffect(() => {
-    dispatch(fetchFiltersData());
-  }, [dispatch]);
+    if (categories !== category) {
+      dispatch(setCategory(categories));
+      dispatch(deleteAllFilters());
+    }
+  }, [dispatch, categories, category]);
 
   return (
     <ListWrapper title="Filters" className={className}>
-      <FilterButton onClick={handleClearFilter}>Clear Filter</FilterButton>
-      {filter.filtersData.length > 0 &&
-        filter.filtersData.map((arr) => (
-          <FilterByKey
-            key={arr[0].type}
-            keyOption={arr[0].type}
-            filterData={arr}
-          />
-        ))}
-      <FilterByKey keyOption="currentPrice" />
+      <FilterButton onClick={handleClearFilter}>Clear Filters</FilterButton>
+      {filtersData.length > 0 && filtersData.map((arr) => renderFilters(arr))}
       <FilterByColor />
-      <Button variant="contained" className={s.btn} onClick={handleSendFilter}>
-        Apply Filters{" "}
-        {filter.filters.length > 0 && `(${filter.filters.length})`}
+      <Button
+        variant="contained"
+        className={s.btn}
+        onClick={handleSendFilter}
+        disabled={filters.length === 0}
+      >
+        Apply Filters {filters.length > 0 && `(${filters.length})`}
       </Button>
     </ListWrapper>
   );

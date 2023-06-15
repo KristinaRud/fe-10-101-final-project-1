@@ -32,7 +32,6 @@ const ShoppingCart = () => {
   const { isLogin } = useSelector(selectCustomers);
 
   const handleQuantityChange = async (data, newQuantity) => {
-    console.log(data);
     const isIncrement =
       newQuantity > cartItems.find((item) => item.id === data.id)?.count;
 

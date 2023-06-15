@@ -1,7 +1,7 @@
 import { Typography } from "@mui/material";
 import { useLocation } from "react-router-dom";
-import { formatString } from "../../utils/string/formatString";
 import s from "./TitleOfCategory.module.scss";
+import { replaceDashWithSpace } from "../../utils/string/replaceDashWithSpace";
 
 const TitleOfCategory = () => {
   const location = useLocation();
@@ -10,7 +10,7 @@ const TitleOfCategory = () => {
 
   return (
     <Typography variant="h4" className={s.title}>
-      {formatString(category)}
+      {replaceDashWithSpace(category)}
     </Typography>
   );
 };

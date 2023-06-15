@@ -2,8 +2,7 @@ import { useEffect, useState } from "react";
 import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
-import { useDispatch, useSelector } from "react-redux";
-import { fetchProducts } from "../../../store/actionCreator/products.actionCreator";
+import { useSelector } from "react-redux";
 import { selectProducts } from "../../../store/selectors/products.selector";
 import ProductCard from "../../ProductCard/ProductCard";
 import { NewProductsConfig } from "../slidersConfig";
@@ -11,17 +10,11 @@ import styles from "./NewProductsSlider.module.scss";
 
 const NewProductSlider = () => {
   const [newProducts, setNewProducts] = useState([]);
-  const products = useSelector(selectProducts);
-  const dispatch = useDispatch();
+  const { products } = useSelector(selectProducts);
 
   useEffect(() => {
-    dispatch(fetchProducts(""));
-  }, [dispatch]);
-
-  useEffect(() => {
-    if (Object.keys(products).length > 0) {
-      const allProducts = products.products;
-      const lastProducts = allProducts.slice(-10);
+    if (products?.length > 0) {
+      const lastProducts = products.slice(-10);
       setNewProducts(lastProducts);
     }
   }, [products]);
@@ -44,6 +37,8 @@ const NewProductSlider = () => {
               available={item.quantity > 5}
               rating={item.rating}
               alt={item.name}
+              categories={item.categories}
+              name={item.name}
             />
           </div>
         ))}

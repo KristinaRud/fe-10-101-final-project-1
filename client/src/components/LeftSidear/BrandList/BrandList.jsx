@@ -6,31 +6,22 @@ import FilterButton from "../FilterList/FilterButton/FilterButton";
 import { selectPartners } from "../../../store/selectors/partners.selector";
 import s from "./BrandList.module.scss";
 import { fetchPartners } from "../../../store/actionCreator/partners.actionCreator";
-import { selectFilters } from "../../../store/selectors/filters.selector";
 
 const BrandList = () => {
-  const [brands, setBrands] = useState([]);
   const [limit, setLimit] = useState(6);
+  const [isShowAll, setIsShowAll] = useState(false);
   const dispatch = useDispatch();
-  const data = useSelector(selectPartners);
-  const filterData = useSelector(selectFilters);
-  const products = filterData.productsOfCategory;
+  const partners = useSelector(selectPartners);
 
-  const handleShowAllBrands = () => setLimit(brands.length);
-
-  useEffect(() => {
-    const brandsData = [];
-    if (data.length && Object.keys(products).length) {
-      data.forEach((item) => {
-        products.products.forEach((product) => {
-          if (item.name.toLowerCase() === product.brand.toLowerCase()) {
-            brandsData.push(item);
-          }
-        });
-      });
-      setBrands([...new Set(brandsData)]);
+  const handleShowAllBrands = () => {
+    if (isShowAll) {
+      setLimit(6);
+      setIsShowAll(false);
+    } else {
+      setLimit(partners.length);
+      setIsShowAll(true);
     }
-  }, [data, products]);
+  };
 
   useEffect(() => {
     dispatch(fetchPartners());
@@ -39,10 +30,12 @@ const BrandList = () => {
   return (
     <div className={s.wrapper}>
       <ListWrapper title="Partners">
-        <FilterButton onClick={handleShowAllBrands}>All Brands</FilterButton>
+        <FilterButton onClick={handleShowAllBrands}>
+          {isShowAll ? "Hide all partners" : "Show all Partners"}
+        </FilterButton>
       </ListWrapper>
       <div className={s.brands}>
-        {brands.map((item, index) => {
+        {partners.map((item, index) => {
           if (index < limit) {
             return (
               <BrandItem
