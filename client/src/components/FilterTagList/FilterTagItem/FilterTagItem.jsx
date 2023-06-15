@@ -5,6 +5,7 @@ import { useDispatch } from "react-redux";
 import { useLocation, useNavigate } from "react-router-dom";
 import s from "./FilterTagItem.module.scss";
 import { deleteFilter } from "../../../store/slices/filters.slice";
+import { formatString } from "../../../utils/string/formatString";
 
 const FilterTagItem = ({ title, name }) => {
   const dispatch = useDispatch();
@@ -13,35 +14,33 @@ const FilterTagItem = ({ title, name }) => {
   const searchParams = new URLSearchParams(location.search);
 
   const handleDeleteFilterOption = () => {
-    if (name !== "currentPrice") {
-      const query = searchParams.get(name);
-      if (query) {
-        const queryArr = query.split(",");
-        if (queryArr.length === 1) {
-          searchParams.delete(name);
-        } else {
-          const newParams = queryArr.filter((item) => item !== title).join(",");
-          searchParams.set(name, newParams);
-        }
-        navigate(`?${searchParams.toString()}`);
+    const query = searchParams.get(name);
+    const minPrice = searchParams.get("minPrice");
+    const maxPrice = searchParams.get("maxPrice");
+    if (minPrice && maxPrice) {
+      searchParams.delete("minPrice");
+      searchParams.delete("maxPrice");
+      dispatch(deleteFilter({ name: "minPrice", value: [minPrice] }));
+      dispatch(deleteFilter({ name: "maxPrice", value: [maxPrice] }));
+      navigate(`?${searchParams.toString()}`);
+    }
+    if (query) {
+      const queryArr = query.split(",");
+      if (queryArr.length === 1) {
+        searchParams.delete(name);
+      } else {
+        const newParams = queryArr.filter((item) => item !== title).join(",");
+        searchParams.set(name, newParams);
       }
-      dispatch(deleteFilter({ value: title, name }));
-    } else {
-      const minPrice = searchParams.get("minPrice");
-      const maxPrice = searchParams.get("maxPrice");
-      if (minPrice && maxPrice) {
-        searchParams.delete("minPrice");
-        searchParams.delete("maxPrice");
-        navigate(`?${searchParams.toString()}`);
-      }
-      dispatch(deleteFilter({ value: title, name: "currentPrice" }));
+      dispatch(deleteFilter({ name, value: [title] }));
+      navigate(`?${searchParams.toString()}`);
     }
   };
 
   return (
     <Box className={s.wrapper}>
-      <Typography variant="h6" component="span" fontSize={13} fontWeight={600}>
-        {title}
+      <Typography variant="h6" component="span" fontSize={12} fontWeight={600}>
+        {formatString(name)}: {title}
       </Typography>
       <Button
         variant="contained"

@@ -1,4 +1,4 @@
-import { Grid, Pagination, Stack } from "@mui/material";
+import { Grid, Pagination, Stack, Typography } from "@mui/material";
 import { useDispatch, useSelector } from "react-redux";
 import { useLocation, useNavigate } from "react-router-dom";
 import { useEffect, useState } from "react";
@@ -11,7 +11,7 @@ import ProductCard from "../../ProductCard/ProductCard";
 import ProductCardFull from "../../ProductCard/ProductCardFull/ProductCardFull";
 
 const ProductsListView = () => {
-  const products = useSelector(selectProducts);
+  const { products, productsQuantity, isLoading } = useSelector(selectProducts);
   const iconView = useSelector(selectProductsView);
   const dispatch = useDispatch();
   const location = useLocation();
@@ -31,21 +31,28 @@ const ProductsListView = () => {
     const params = new URLSearchParams(location.search);
     const page = params.get("startPage");
     setPage(Number(page));
+    let categories = params.get("categories");
+    categories = categories.replace(/-/g, " ");
+    const encodedCategories = encodeURIComponent(categories);
+    params.set("categories", encodedCategories);
     dispatch(fetchProducts(`?${params.toString()}`));
   }, [location.search, dispatch]);
 
   useEffect(() => {
-    if (Object.keys(products).length > 0) {
-      const allPages = Math.ceil(products.productsQuantity / perPage);
+    if (productsQuantity) {
+      const allPages = Math.ceil(productsQuantity / perPage);
       setCountPages(allPages);
     }
-  }, [dispatch, location.search, perPage, products]);
+  }, [dispatch, location.search, perPage, productsQuantity]);
 
   return (
     <>
       <Grid container spacing={2} justifyContent="center" mb={2} mt={2}>
-        {Object.keys(products).length > 0 &&
-          products.products.map((product) => {
+        {products?.length === 0 && (
+          <Typography variant="h6">No products found</Typography>
+        )}
+        {!isLoading &&
+          products?.map((product) => {
             const {
               itemNo,
               imageUrls,
@@ -91,18 +98,17 @@ const ProductsListView = () => {
             );
           })}
       </Grid>
-      {Object.keys(products).length > 0 &&
-        products.productsQuantity > perPage && (
-          <Stack spacing={2} m="30px 0" alignItems="center">
-            <Pagination
-              count={countPages}
-              variant="outlined"
-              color="primary"
-              page={page}
-              onChange={handleChange}
-            />
-          </Stack>
-        )}
+      {!isLoading && productsQuantity > perPage && (
+        <Stack spacing={2} m="30px 0" alignItems="center">
+          <Pagination
+            count={countPages}
+            variant="outlined"
+            color="primary"
+            page={page}
+            onChange={handleChange}
+          />
+        </Stack>
+      )}
     </>
   );
 };
