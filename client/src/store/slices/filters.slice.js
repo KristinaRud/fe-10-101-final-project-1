@@ -1,14 +1,10 @@
 import { createSlice } from "@reduxjs/toolkit";
 import { urlParser } from "../../utils/queryParams/urlParser";
-import {
-  fetchFiltersData,
-  fetchProductsByCategory,
-} from "../actionCreator/filters.actionCreator";
+import { fetchFiltersData } from "../actionCreator/filters.actionCreator";
 
 const searchParams = new URLSearchParams(window.location.search);
 const initialState = {
   filters: urlParser() || [],
-  productsOfCategory: {},
   category: searchParams.get("categories"),
   filtersData: [],
 };
@@ -19,8 +15,20 @@ const filtersSlice = createSlice({
   reducers: {
     setFilters: (state, action) => {
       let isFilterUpdated = false;
-      if (state.filters.length === 0) {
-        state.filters.push(action.payload);
+      if (action.payload.name === "minPrice") {
+        state.filters.forEach((obj) => {
+          if (obj.name === action.payload.name) {
+            obj.value = action.payload.value;
+            isFilterUpdated = true;
+          }
+        });
+      } else if (action.payload.name === "maxPrice") {
+        state.filters.forEach((obj) => {
+          if (obj.name === action.payload.name) {
+            obj.value = action.payload.value;
+            isFilterUpdated = true;
+          }
+        });
       } else {
         state.filters.forEach((filter) => {
           if (action.payload.name === filter.name) {
@@ -31,23 +39,23 @@ const filtersSlice = createSlice({
             }
           }
         });
-        if (!isFilterUpdated) {
-          state.filters.push(action.payload);
-        }
+      }
+      if (!isFilterUpdated) {
+        state.filters.push(action.payload);
       }
     },
     deleteFilter: (state, action) => {
-      state.filters = state.filters.filter((filter) => {
-        if (filter.name === action.payload.name) {
-          filter.value = filter.value.filter(
-            (value) => value !== action.payload.value,
-          );
-
-          return filter.value.length > 0;
+      state.filters = state.filters.filter((obj) => {
+        if (obj.name === action.payload.name) {
+          obj.value = obj.value.filter((value) => {
+            return value.toString() !== action.payload.value[0].toString();
+          });
+          return obj.value.length > 0;
         }
         return true;
       });
     },
+
     deleteAllFilters: (state) => {
       state.filters = [];
       return state;
@@ -57,9 +65,6 @@ const filtersSlice = createSlice({
     },
   },
   extraReducers: (builder) => {
-    builder.addCase(fetchProductsByCategory.fulfilled, (state, action) => {
-      state.productsOfCategory = action.payload;
-    });
     builder.addCase(fetchFiltersData.fulfilled, (state, action) => {
       const objByType = {};
       action.payload.forEach((obj) => {

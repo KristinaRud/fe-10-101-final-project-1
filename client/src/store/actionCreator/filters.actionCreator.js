@@ -1,24 +1,11 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
 import request from "../../utils/api/request";
 
-const fetchProductsByCategory = createAsyncThunk(
-  "filters/fetchProductsByCategory",
-  async (categories) => {
-    const { res, err } = await request({
-      url: `/products/filter?categories=${categories}`,
-    });
-    if (res) {
-      return res;
-    }
-    throw new Error(`Couldn't get products: ${err.data}`);
-  },
-);
-
 const fetchFiltersData = createAsyncThunk(
   "filters/fetchFiltersData",
-  async () => {
+  async (query = "") => {
     const { res, err } = await request({
-      url: `/filters`,
+      url: `/filters${query}`,
     });
     if (res) {
       return res;
@@ -27,4 +14,4 @@ const fetchFiltersData = createAsyncThunk(
   },
 );
 
-export { fetchProductsByCategory, fetchFiltersData };
+export { fetchFiltersData };
