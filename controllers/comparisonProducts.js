@@ -4,11 +4,11 @@ const queryCreator = require('../commonHelpers/queryCreator');
 const _ = require('lodash');
 
 exports.createComparisonProducts = (req, res, next) => {
-    ComparisonProducts.findOne({ customerId: req.user.id }).then((comparisonProducts) => {
+    ComparisonProducts.findOne({customerId: req.user.id}).then((comparisonProducts) => {
         if (comparisonProducts) {
             return res
                 .status(400)
-                .json({ message: `Comparison products for this customer is already exists` });
+                .json({message: `Comparison products for this customer is already exists`});
         } else {
             const comparisonProductsData = _.cloneDeep(req.body);
             comparisonProductsData.customerId = req.user.id;
@@ -30,7 +30,7 @@ exports.createComparisonProducts = (req, res, next) => {
 };
 
 exports.updateComparisonProducts = (req, res, next) => {
-    ComparisonProducts.findOne({ customerId: req.user.id })
+    ComparisonProducts.findOne({customerId: req.user.id})
         .then((comparisonProducts) => {
             if (!comparisonProducts) {
                 const comparisonProductsData = _.cloneDeep(req.body);
@@ -53,9 +53,9 @@ exports.updateComparisonProducts = (req, res, next) => {
                 const updatedComparisonProducts = queryCreator(comparisonProductsData);
 
                 ComparisonProducts.findOneAndUpdate(
-                    { customerId: req.user.id },
-                    { $set: updatedComparisonProducts },
-                    { new: true }
+                    {customerId: req.user.id},
+                    {$set: updatedComparisonProducts},
+                    {new: true}
                 )
                     .populate('products')
                     .populate('customerId')
@@ -78,7 +78,7 @@ exports.addProductToComparisonProducts = async (req, res, next) => {
     let productToAdd;
 
     try {
-        productToAdd = await Product.findOne({ _id: req.params.productId });
+        productToAdd = await Product.findOne({_id: req.params.productId});
     } catch (err) {
         res.status(400).json({
             message: `Error happened on server: "${err}" `,
@@ -90,7 +90,7 @@ exports.addProductToComparisonProducts = async (req, res, next) => {
             message: `Product with _id (ObjectId) "${req.params.productId}" does not exist`,
         });
     } else {
-        ComparisonProducts.findOne({ customerId: req.user.id })
+        ComparisonProducts.findOne({customerId: req.user.id})
             .then((comparisonProducts) => {
                 if (!comparisonProducts) {
                     const comparisonProductsData = {};
@@ -116,12 +116,12 @@ exports.addProductToComparisonProducts = async (req, res, next) => {
                     comparisonProductsData.products = comparisonProducts.products.concat(
                         req.params.productId
                     );
-                    const updatedComparisonProducts= queryCreator(comparisonProductsData);
+                    const updatedComparisonProducts = queryCreator(comparisonProductsData);
 
                     ComparisonProducts.findOneAndUpdate(
-                        { customerId: req.user.id },
-                        { $set: updatedComparisonProducts },
-                        { new: true }
+                        {customerId: req.user.id},
+                        {$set: updatedComparisonProducts},
+                        {new: true}
                     )
                         .populate('products')
                         .populate('customerId')
@@ -141,11 +141,11 @@ exports.addProductToComparisonProducts = async (req, res, next) => {
     }
 };
 
-exports.deleteProductFromComparisonProducts= async (req, res, next) => {
-    ComparisonProducts.findOne({ customerId: req.user.id })
+exports.deleteProductFromComparisonProducts = async (req, res, next) => {
+    ComparisonProducts.findOne({customerId: req.user.id})
         .then((comparisonProducts) => {
             if (!comparisonProducts) {
-                res.status(400).json({ message: `comparison products does not exist` });
+                res.status(400).json({message: `comparison products does not exist`});
             } else {
                 if (!comparisonProducts.products.includes(req.params.productId)) {
                     res.status(400).json({
@@ -163,7 +163,7 @@ exports.deleteProductFromComparisonProducts= async (req, res, next) => {
                 const updatedComparisonProducts = queryCreator(comparisonProductsData);
 
                 if (comparisonProductsData.products.length === 0) {
-                    return ComparisonProducts.deleteOne({ customerId: req.user.id })
+                    return ComparisonProducts.deleteOne({customerId: req.user.id})
                         .then((deletedCount) =>
                             res.status(200).json({
                                 products: [],
@@ -177,9 +177,9 @@ exports.deleteProductFromComparisonProducts= async (req, res, next) => {
                 }
 
                 ComparisonProducts.findOneAndUpdate(
-                    { customerId: req.user.id },
-                    { $set: updatedComparisonProducts },
-                    { new: true }
+                    {customerId: req.user.id},
+                    {$set: updatedComparisonProducts},
+                    {new: true}
                 )
                     .populate('products')
                     .populate('customerId')
@@ -199,17 +199,17 @@ exports.deleteProductFromComparisonProducts= async (req, res, next) => {
 };
 
 exports.deleteComparisonProducts = (req, res, next) => {
-    ComparisonProducts.findOne({ customerId: req.user.id }).then(async (comparisonProducts) => {
+    ComparisonProducts.findOne({customerId: req.user.id}).then(async (comparisonProducts) => {
         if (!comparisonProducts) {
             return res
                 .status(400)
-                .json({ message: `Comparison products for this customer is not found.` });
+                .json({message: `Comparison products for this customer is not found.`});
         } else {
             const comparisonProductsToDelete = await ComparisonProducts.findOne({
                 customerId: req.user.id,
             });
 
-            ComparisonProducts.deleteOne({ customerId: req.user.id })
+            ComparisonProducts.deleteOne({customerId: req.user.id})
                 .then((deletedCount) =>
                     res.status(200).json({
                         message: `Comparison Products witn id "${comparisonProductsToDelete._id}" is successfully deletes from DB `,
@@ -225,10 +225,24 @@ exports.deleteComparisonProducts = (req, res, next) => {
 };
 
 exports.getComparisonProducts = (req, res, next) => {
-    ComparisonProducts.findOne({ customerId: req.user.id })
+    ComparisonProducts.findOne({customerId: req.user.id})
         .populate('products')
         .populate('customerId')
-        .then((comparisonProducts) => res.json(comparisonProducts))
+        .then((comparisonProducts) => {
+            const productsByCategory = {};
+            comparisonProducts.products.forEach((product) => {
+                const {categories} = product;
+                if (!productsByCategory[categories]) {
+                    productsByCategory[categories] = [];
+                }
+                productsByCategory[categories].push(product);
+            });
+            const comparisonProductsData = {
+                ...comparisonProducts._doc,
+                products: productsByCategory,
+            };
+            res.json(comparisonProductsData)
+        })
         .catch((err) =>
             res.status(400).json({
                 message: `Error happened on server: "${err}" `,
