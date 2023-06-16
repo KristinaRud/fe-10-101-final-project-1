@@ -26,8 +26,10 @@ const Header = () => {
   const [anchorElNav, setAnchorElNav] = useState(null);
   const { itemsCart } = useSelector(selectShoppingCart);
   const counterCart = itemsCart
-    ?.map(({ count }) => count)
-    .reduce((prev, curr) => prev + curr, 0);
+    ? itemsCart
+        .map(({ cartQuantity }) => cartQuantity)
+        .reduce((prev, curr) => prev + curr, 0)
+    : 0;
 
   const mediaDesktop = useMediaQuery("(min-width: 1200px)");
   const mediaTablet = useMediaQuery("(min-width: 768px)");

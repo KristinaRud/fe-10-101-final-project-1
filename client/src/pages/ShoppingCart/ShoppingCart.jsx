@@ -18,11 +18,20 @@ import {
   incrementCartItem,
   decrementCartItem,
   deleteCart,
+  setItems,
 } from "../../store/slices/shoppingCart.slice";
 import { selectShoppingCart } from "../../store/selectors/shoppingCart.selector";
 import { selectCustomers } from "../../store/selectors/customers.selector";
 import useStyles from "./useStyles";
-import GetDataCart from "../../utils/cart/getDataCart";
+import {
+  deleteProductFromCart,
+  deleteShoppingCart,
+  fetchShoppingCart,
+  editProductFromCart,
+  decreaseProductFromCart,
+  editShoppingCart,
+} from "../../store/actionCreator/shoppingCart.actionCreator";
+import { updateShoppingCart } from "../../utils/cart/updateCart";
 
 const ShoppingCart = () => {
   const dispatch = useDispatch();
@@ -33,52 +42,67 @@ const ShoppingCart = () => {
 
   const handleQuantityChange = async (data, newQuantity) => {
     const isIncrement =
-      newQuantity > cartItems.find((item) => item.id === data.id)?.count;
+      newQuantity >
+      cartItems?.find((item) => item.id === data.id)?.cartQuantity;
 
-    await dispatch(
-      isIncrement ? incrementCartItem(data) : decrementCartItem(data),
-    );
+    if (isLogin) {
+      if (isIncrement) {
+        await dispatch(editProductFromCart(data.id));
+      } else {
+        await dispatch(decreaseProductFromCart(data.id));
+      }
+    } else {
+      dispatch(isIncrement ? incrementCartItem(data) : decrementCartItem(data));
+    }
 
     setCartItems((prevItems) =>
       prevItems.map((item) =>
-        item.id === data.id ? { ...item, count: newQuantity } : item,
+        item.id === data.id ? { ...item, cartQuantity: newQuantity } : item,
       ),
     );
   };
 
-  const calculateSubtotal = () => {
-    return cartItems.reduce(
-      (total, item) => total + item.currentPrice * item.count,
-      0,
-    );
-  };
+  const subtotalAmount = cartItems
+    ?.map(({ currentPrice, cartQuantity }) => currentPrice * cartQuantity)
+    .reduce((prev, curr) => prev + curr, 0);
 
-  const calculateTax = () => {
-    return calculateSubtotal() * 0.1;
-  };
+  const tax = subtotalAmount * 0.08;
+  const shipping = 100;
+  const totalAmount = subtotalAmount + tax + shipping;
 
-  const calculateShipping = () => {
-    return 100;
-  };
-
-  const calculateTotal = () => {
-    return calculateSubtotal() + calculateTax() + calculateShipping();
-  };
   const handleDeleteItem = async (id) => {
-    dispatch(deleteCartItem({ id, isLogin }));
+    if (isLogin) {
+      await dispatch(deleteProductFromCart(id));
+    } else {
+      dispatch(deleteCartItem(id));
+    }
   };
 
-  const handleUpdateCart = async () => {};
+  const handleUpdateCart = async () => {
+    if (isLogin) {
+      await dispatch(updateShoppingCart(editShoppingCart));
+    } else {
+      localStorage.setItem("shoppingCart", JSON.stringify(itemsCart));
+    }
+  };
 
   const handleClearCart = async () => {
-    dispatch(deleteCart(isLogin));
+    if (isLogin) {
+      await dispatch(deleteShoppingCart());
+    } else {
+      dispatch(deleteCart());
+    }
   };
 
   const isMobile = useMediaQuery((theme) => theme.breakpoints.down("md"));
 
   useEffect(() => {
-    dispatch(GetDataCart(isLogin));
-  }, [isLogin]);
+    if (isLogin) {
+      dispatch(fetchShoppingCart());
+    } else {
+      setItems(JSON.parse(localStorage.getItem("shoppingCart")));
+    }
+  }, [isLogin, dispatch]);
 
   return (
     <Container maxWidth="lg" className={classes.root}>
@@ -118,7 +142,7 @@ const ShoppingCart = () => {
                 <Typography align="right">{item.currentPrice}.00 ₴</Typography>
                 <TextField
                   type="number"
-                  value={item.count}
+                  value={item.cartQuantity}
                   InputProps={{
                     inputProps: { min: 1 },
                     classes: { notchedOutline: classes.notchedOutline },
@@ -132,7 +156,7 @@ const ShoppingCart = () => {
                         alt: item.alt,
                         description: item.description,
                         currentPrice: item.currentPrice,
-                        count: item.count,
+                        cartQuantity: item.cartQuantity,
                       },
                       parseInt(e.target.value, 10),
                       e.target.value > item.count,
@@ -140,7 +164,7 @@ const ShoppingCart = () => {
                   }
                 />
                 <Typography align="right">
-                  {item.currentPrice * item.count}.00 ₴
+                  {item.currentPrice * item.cartQuantity}.00 ₴
                 </Typography>
                 <IconButton
                   aria-label="Delete"
@@ -197,23 +221,21 @@ const ShoppingCart = () => {
               Subtotal
             </Typography>
             <Typography className={classes.subtitle}>
-              {`${calculateSubtotal()}.00 ₴`}
+              {`${subtotalAmount}.00 ₴`}
             </Typography>
           </div>
           <div className={classes.summaryItem}>
             <Typography variant="subtitle1" className={classes.subtitle}>
               Tax
             </Typography>
-            <Typography className={classes.subtitle}>
-              {`${calculateTax()}.00 ₴`}
-            </Typography>
+            <Typography className={classes.subtitle}>{`${tax} ₴`}</Typography>
           </div>
           <div className={classes.summaryItem}>
             <Typography variant="subtitle1" className={classes.subtitle}>
               Shipping
             </Typography>
             <Typography className={classes.subtitle}>
-              {`${calculateShipping()}.00 ₴`}
+              {`${shipping}.00 ₴`}
             </Typography>
           </div>
           <Divider />
@@ -222,7 +244,7 @@ const ShoppingCart = () => {
               Order Total
             </Typography>
             <Typography variant="h6" className={classes.subtitle}>
-              {`${calculateTotal()}.00 ₴`}
+              {`${totalAmount} ₴`}
             </Typography>
           </div>
           <Button variant="contained" className={classes.checkoutButton}>

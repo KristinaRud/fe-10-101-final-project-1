@@ -5,13 +5,15 @@ import {
   editProductFromCart,
   fetchShoppingCart,
   deleteShoppingCart,
-  updateShoppingCart,
+  editShoppingCart,
+  decreaseProductFromCart,
 } from "../actionCreator/shoppingCart.actionCreator";
+import { structureDataToStore } from "../../utils/cart/structureData";
 
 const shoppingCartSlice = createSlice({
   name: "shoppingCart",
   initialState: {
-    itemsCart: [],
+    itemsCart: JSON.parse(localStorage.getItem("shoppingCart")) || [],
   },
   reducers: {
     setItems: (state, action) => {
@@ -23,20 +25,11 @@ const shoppingCartSlice = createSlice({
       );
 
       if (itemIndex === -1) {
-        state.itemsCart.push({ ...action.payload, count: 1 });
+        state.itemsCart.push({ ...action.payload, cartQuantity: 1 });
       } else {
-        state.itemsCart[itemIndex].count += 1;
+        state.itemsCart[itemIndex].cartQuantity += 1;
       }
-      if (action.payload.isLogin) {
-        if (localStorage.getItem("shoppingCart")) {
-          createShoppingCart(JSON.parse(localStorage.getItem("shoppingCart")));
-          localStorage.removeItem("shoppingCart");
-        }
-
-        editProductFromCart(state.itemsCart);
-      } else {
-        localStorage.setItem("shoppingCart", JSON.stringify(state.itemsCart));
-      }
+      localStorage.setItem("shoppingCart", JSON.stringify(state.itemsCart));
     },
 
     incrementCartItem: (state, action) => {
@@ -44,69 +37,58 @@ const shoppingCartSlice = createSlice({
         (el) => el.id === action.payload.id,
       );
       if (index !== -1) {
-        state.itemsCart[index].count += 1;
+        state.itemsCart[index].cartQuantity += 1;
       }
-
-      if (action.payload.isLogin) {
-        editProductFromCart(state.itemsCart);
-      } else {
-        localStorage.setItem("shoppingCart", JSON.stringify(state.itemsCart));
-      }
+      localStorage.setItem("shoppingCart", JSON.stringify(state.itemsCart));
     },
 
     decrementCartItem: (state, action) => {
       const index = state.itemsCart.findIndex(
         (el) => el.id === action.payload.id,
       );
-      if (index !== -1 && state.itemsCart[index].count > 1) {
-        state.itemsCart[index].count -= 1;
+      if (index !== -1 && state.itemsCart[index].cartQuantity > 1) {
+        state.itemsCart[index].cartQuantity -= 1;
       }
-      if (action.payload.isLogin) {
-        editProductFromCart(state.itemsCart);
-      } else {
-        localStorage.setItem("shoppingCart", JSON.stringify(state.itemsCart));
-      }
+      localStorage.setItem("shoppingCart", JSON.stringify(state.itemsCart));
     },
     deleteCartItem: (state, action) => {
-      const index = state.itemsCart.findIndex(
-        (el) => el.id === action.payload.id,
-      );
+      const index = state.itemsCart.findIndex((el) => el.id === action.payload);
       if (index !== -1) {
         state.itemsCart.splice(index, 1);
       }
-      if (action.payload.isLogin) {
-        deleteProductFromCart(state.itemsCart);
-      } else {
-        localStorage.setItem("shoppingCart", JSON.stringify(state.itemsCart));
-      }
-    },
-    deleteCart: (state, action) => {
-      state.itemsCart = [];
-      if (action.payload) {
-        deleteShoppingCart();
-      } else {
+      localStorage.setItem("shoppingCart", JSON.stringify(state.itemsCart));
+      if (JSON.parse(localStorage.getItem("shoppingCart")).length === 0) {
         localStorage.removeItem("shoppingCart");
       }
+    },
+    deleteCart: (state) => {
+      state.itemsCart = [];
+      localStorage.removeItem("shoppingCart");
     },
   },
   extraReducers: (builder) => {
     builder.addCase(fetchShoppingCart.fulfilled, (state, action) => {
-      state.itemsCart = action.payload.products;
+      state.itemsCart = structureDataToStore(action.payload.products);
     });
     builder.addCase(createShoppingCart.fulfilled, (state, action) => {
-      state.itemsCart = action.payload.products;
+      state.itemsCart = structureDataToStore(action.payload.products);
+      localStorage.removeItem("shoppingCart");
     });
     builder.addCase(editProductFromCart.fulfilled, (state, action) => {
-      state.itemsCart = action.payload.products;
+      state.itemsCart = structureDataToStore(action.payload.products);
     });
     builder.addCase(deleteProductFromCart.fulfilled, (state, action) => {
-      state.itemsCart = action.payload.products;
+      state.itemsCart = structureDataToStore(action.payload.products);
     });
     builder.addCase(deleteShoppingCart.fulfilled, (state, action) => {
       state.itemsCart = action.payload.products;
     });
-    builder.addCase(updateShoppingCart.fulfilled, (state, action) => {
-      state.itemsCart = action.payload.products;
+    builder.addCase(editShoppingCart.fulfilled, (state, action) => {
+      state.itemsCart = structureDataToStore(action.payload.products);
+      localStorage.removeItem("shoppingCart");
+    });
+    builder.addCase(decreaseProductFromCart.fulfilled, (state, action) => {
+      state.itemsCart = structureDataToStore(action.payload.products);
     });
   },
 });

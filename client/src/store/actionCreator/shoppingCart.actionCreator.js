@@ -20,9 +20,7 @@ const createShoppingCart = createAsyncThunk(
     const { res, err } = await request({
       url: `/cart`,
       method: "POST",
-      body: {
-        products: [data],
-      },
+      body: data,
     });
     if (res) {
       return res;
@@ -33,13 +31,10 @@ const createShoppingCart = createAsyncThunk(
 
 const editProductFromCart = createAsyncThunk(
   "shoppingCart/editProductFromCart",
-  async (data) => {
+  async (id) => {
     const { res, err } = await request({
-      url: `/cart/${data.id}`,
+      url: `/cart/${id}`,
       method: "PUT",
-      body: {
-        products: [data],
-      },
     });
     if (res) {
       return res;
@@ -47,15 +42,26 @@ const editProductFromCart = createAsyncThunk(
     throw new Error(`Couldn't edit shopping cart: ${err.data}`);
   },
 );
-const updateShoppingCart = createAsyncThunk(
-  "shoppingCart/updateShoppingCart",
+const decreaseProductFromCart = createAsyncThunk(
+  "shoppingCart/decreaseProductFromCart",
+  async (id) => {
+    const { res, err } = await request({
+      url: `/cart/product/${id}`,
+      method: "DELETE",
+    });
+    if (res) {
+      return res;
+    }
+    throw new Error(`Couldn't edit shopping cart: ${err.data}`);
+  },
+);
+const editShoppingCart = createAsyncThunk(
+  "shoppingCart/editShoppingCart",
   async (data) => {
     const { res, err } = await request({
       url: `/cart`,
       method: "PUT",
-      body: {
-        products: [data],
-      },
+      body: data,
     });
     if (res) {
       return res;
@@ -98,5 +104,6 @@ export {
   editProductFromCart,
   deleteProductFromCart,
   deleteShoppingCart,
-  updateShoppingCart,
+  editShoppingCart,
+  decreaseProductFromCart,
 };
