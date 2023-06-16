@@ -41,41 +41,39 @@ const ProductCard = ({
   };
 
   return (
-    <Link to={`/${categories.toLowerCase()}/${id}`}>
-      <Card
-        className={styles.card}
-        sx={{ width: 235, height: 346, position: "relative" }}
-        onMouseEnter={handleMouseEnter}
-        onMouseLeave={handleMouseLeave}
-      >
-        {isHovered && (
-          <Box className={styles.menu}>
-            <Box className={styles.menu_top}>
-              <Button
-                sx={{
-                  "&:hover": { backgroundColor: "rgba(255, 255, 255, 0.2)" },
-                }}
-              >
-                <IconWishList />
-              </Button>
-              <Button
-                sx={{
-                  "&:hover": { backgroundColor: "rgba(255, 255, 255, 0.2)" },
-                }}
-              >
-                <IconCompare />
-              </Button>
-            </Box>
-            <Button
-              sx={{
-                "&:hover": { backgroundColor: "rgba(255, 255, 255, 0.2)" },
-                marginBottom: 2,
-              }}
-            >
-              <IconCart />
-            </Button>
-          </Box>
-        )}
+    <Card
+      className={styles.card}
+      sx={{ width: 235, height: 346, position: "relative" }}
+      onMouseEnter={handleMouseEnter}
+      onMouseLeave={handleMouseLeave}
+    >
+      <Box className={styles.menu} style={{ right: isHovered ? "0" : "-40%" }}>
+        <Box className={styles.menu_top}>
+          <Button
+            sx={{
+              "&:hover": { backgroundColor: "rgba(255, 255, 255, 0.2)" },
+            }}
+          >
+            <IconWishList />
+          </Button>
+          <Button
+            sx={{
+              "&:hover": { backgroundColor: "rgba(255, 255, 255, 0.2)" },
+            }}
+          >
+            <IconCompare />
+          </Button>
+        </Box>
+        <Button
+          sx={{
+            "&:hover": { backgroundColor: "rgba(255, 255, 255, 0.2)" },
+            marginBottom: 2,
+          }}
+        >
+          <IconCart />
+        </Button>
+      </Box>
+      <Link to={`/${categories.toLowerCase()}/${id}`}>
         <CardContent sx={{ paddingTop: 1 }}>
           <Typography variant="caption" color={available ? "green" : "error"}>
             {available ? (
@@ -162,8 +160,8 @@ const ProductCard = ({
             </Typography>
           </Box>
         </CardContent>
-      </Card>
-    </Link>
+      </Link>
+    </Card>
   );
 };
 

@@ -24,6 +24,7 @@ export const CommentsConfig = {
   arrows: false,
   infinite: true,
   speed: 500,
+  autoplaySpeed: 5000,
   slidesToShow: 1,
   slidesToScroll: 1,
   autoplay: true,
@@ -119,6 +120,30 @@ export const CategoriesProducts = {
       settings: {
         slidesToShow: 2,
         slidesToScroll: 1,
+      },
+    },
+  ],
+};
+
+export const FollowUsConfig = {
+  dots: true,
+  arrows: false,
+  infinite: true,
+  autoplay: true,
+  speed: 500,
+  slidesToShow: 6,
+  slidesToScroll: 1,
+  responsive: [
+    {
+      breakpoint: 1175,
+      settings: {
+        slidesToShow: 5,
+      },
+    },
+    {
+      breakpoint: 940,
+      settings: {
+        slidesToShow: 4,
       },
     },
   ],
