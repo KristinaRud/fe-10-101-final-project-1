@@ -35,10 +35,10 @@ const ProductsList = ({ category }) => {
               image={item.imageUrls[0]}
               title=" "
               description={item.name}
-              oldPrice={item.previousPrice.toString()}
-              currentPrice={item.currentPrice.toString()}
+              oldPrice={item.previousPrice}
+              currentPrice={item.currentPrice}
               available={item.quantity > 5}
-              rating={item.rating.toString()}
+              rating={item.rating}
               alt={item.name}
               id={item._id}
               categories={item.categories}
