@@ -34,7 +34,7 @@ module.exports = {
     "no-shadow": 0,
     "react/react-in-jsx-scope": 0,
     "react/jsx-no-useless-fragment": 0,
-    "no-underscore-dangle": "off",
+    "no-underscore-dangle": 0,
     "react/jsx-filename-extension": [
       1,
       {
@@ -55,7 +55,6 @@ module.exports = {
     "jsx-a11y/click-events-have-key-events": 0,
     "jsx-a11y/no-static-element-interactions": 0,
     "react/require-default-props": 0,
-    "no-underscore-dangle": 0,
     "react/jsx-curly-brace-presence": 0,
   },
 };
