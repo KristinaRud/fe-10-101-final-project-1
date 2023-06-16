@@ -9,7 +9,6 @@ import Typography from "@mui/material/Typography";
 import Menu from "@mui/material/Menu";
 import MenuIcon from "@mui/icons-material/Menu";
 import ShoppingCartOutlinedIcon from "@mui/icons-material/ShoppingCartOutlined";
-import SearchOutlinedIcon from "@mui/icons-material/SearchOutlined";
 import CloseRoundedIcon from "@mui/icons-material/CloseRounded";
 import ArrowForwardIosIcon from "@mui/icons-material/ArrowForwardIos";
 import { ReactComponent as VecIcon } from "../../pages/AboutUs/icons/vec.svg";
@@ -18,9 +17,9 @@ import Button from "../Button/Button";
 import ShopInfoDropDown from "../ShopInfoDropDown/ShopInfoDropDown";
 import AccBurgerMenu from "../AccBurgerMenu/AccBurgerMenu";
 import styles from "./Header.module.scss";
+import Search from "./Search/Search";
 
 const Header = () => {
-  const [isOpenListItem, setIsOpenListItem] = useState(false);
   const [anchorElNav, setAnchorElNav] = useState(null);
 
   const mediaDesktop = useMediaQuery("(min-width: 1200px)");
@@ -31,17 +30,8 @@ const Header = () => {
     "Desktop PCs",
     "Networking Devices",
     "Printers & Scanners",
-    "PC Parts",
-    "All Other Products",
-    "Repairs",
   ];
 
-  const openSearchInput = () => {
-    setIsOpenListItem(true);
-  };
-  const closeSearchInput = () => {
-    setIsOpenListItem(false);
-  };
   const handleOpenNavMenu = (event) => {
     setAnchorElNav(event.currentTarget);
   };
@@ -54,7 +44,7 @@ const Header = () => {
       <header className={styles.header}>
         <Box sx={{ margin: "0 auto", maxWidth: "1400px" }}>
           <ul className={styles.menu}>
-            {!mediaDesktop && !isOpenListItem && (
+            {!mediaDesktop && (
               <li className={styles.item__logo}>
                 <Button to="/" className={styles["btn-logo"]}>
                   <VecIcon className={styles.logo} />
@@ -65,14 +55,14 @@ const Header = () => {
               <li
                 className={cx(
                   styles.menu__item,
-                  isOpenListItem && !mediaTablet ? styles.border : null,
+                  !mediaTablet ? styles.border : null,
                 )}
               >
                 <span className={styles.gray}>Mon-Thu:</span> 9:00 AM - 5:30 PM{" "}
                 <ShopInfoDropDown />
               </li>
             </Box>
-            {(!isOpenListItem && mediaDesktop) || mediaDesktop ? (
+            {mediaDesktop ? (
               <li className={cx(styles.menu__item, styles.end)}>
                 <span className={styles.gray}>
                   Visit our showroom in 1234 Street Adress City Address, 1234
@@ -82,15 +72,13 @@ const Header = () => {
                 </Button>
               </li>
             ) : (
-              !isOpenListItem && (
-                <li className={cx(styles.menu__item, styles.end)}>
-                  <Button to="/contact" className={styles.underline}>
-                    Contact Us
-                  </Button>
-                </li>
-              )
+              <li className={cx(styles.menu__item, styles.end)}>
+                <Button to="/contact" className={styles.underline}>
+                  Contact Us
+                </Button>
+              </li>
             )}
-            {(!isOpenListItem && mediaDesktop) || mediaDesktop ? (
+            {mediaDesktop ? (
               <li className={cx(styles.menu__item)}>
                 <a href="tel:+(00) 1234 5678"> Call Us: (00) 1234 5678</a>
                 <Button href="https://uk-ua.facebook.com/">
@@ -107,18 +95,19 @@ const Header = () => {
                 </Button>
               </li>
             ) : (
-              isOpenListItem && (
-                <li className={cx(styles.menu__item)}>
-                  <a href="tel:+(00) 1234 5678"> Call Us: (00) 1234 5678</a>
-                </li>
-              )
+              <li className={cx(styles.menu__item)}>
+                <a href="tel:+(00) 1234 5678"> Call Us: (00) 1234 5678</a>
+              </li>
             )}
           </ul>
         </Box>
       </header>
 
       <div className={styles.navbar}>
-        <Box sx={{ margin: "0 auto", maxWidth: "1400px" }}>
+        <Box
+          sx={{ margin: "0 auto", maxWidth: "1400px" }}
+          className={styles.headerWrapper}
+        >
           <div className={styles["navbar-list"]}>
             <Box sx={{ display: { xs: "flex", lg: "none" } }}>
               <IconButton
@@ -182,7 +171,7 @@ const Header = () => {
               </Menu>
             </Box>
 
-            {((isOpenListItem && !mediaTablet) || mediaDesktop) && (
+            {(!mediaTablet || mediaDesktop) && (
               <Button to="/" className={styles["icon-logo"]}>
                 {mediaDesktop ? (
                   <LogoBlue />
@@ -192,36 +181,7 @@ const Header = () => {
               </Button>
             )}
 
-            {((!isOpenListItem && !mediaDesktop) ||
-              (isOpenListItem && mediaDesktop)) && (
-              <div className={styles["wrapper-input"]}>
-                <input
-                  placeholder={
-                    mediaDesktop
-                      ? " Search entiere store here..."
-                      : " Search here"
-                  }
-                  name="search"
-                  className={
-                    mediaDesktop
-                      ? cx(styles["input-search__desktop"])
-                      : cx(styles["input-search"])
-                  }
-                  onFocus={() => {
-                    if (!mediaTablet) {
-                      openSearchInput();
-                    }
-                  }}
-                />
-                {mediaDesktop && (
-                  <Button className={styles["btn-search__input"]}>
-                    <SearchOutlinedIcon />
-                  </Button>
-                )}
-              </div>
-            )}
-
-            {mediaDesktop && !isOpenListItem && (
+            {mediaDesktop && (
               <ul className={styles["navbar-menu"]}>
                 {navbarItems.map((item) => (
                   <li key={item} onClick={handleCloseNavMenu}>
@@ -230,32 +190,8 @@ const Header = () => {
                 ))}
               </ul>
             )}
-            {((mediaDesktop && !isOpenListItem) ||
-              (!mediaTablet && isOpenListItem)) && (
-              <Button className={styles["btn-deals"]}>Our deals</Button>
-            )}
-            {!isOpenListItem && (
-              <Button
-                className={styles["btn-search"]}
-                onClick={openSearchInput}
-              >
-                <SearchOutlinedIcon
-                  sx={{
-                    display: { xs: "none", lg: "flex" },
-                    mr: 1,
-                  }}
-                />
-              </Button>
-            )}
-            {isOpenListItem && mediaDesktop && (
-              <Button
-                className={styles["btn-close"]}
-                onClick={closeSearchInput}
-              >
-                <CloseRoundedIcon sx={{ fill: "#0156FF" }} />
-              </Button>
-            )}
 
+            <Search />
             <Button className={styles["wrapper-shop"]}>
               <ShoppingCartOutlinedIcon
                 sx={{
@@ -271,13 +207,6 @@ const Header = () => {
               <AccBurgerMenu />
             </Box>
           </div>
-          {isOpenListItem && !mediaTablet && (
-            <input
-              placeholder=" Search for goods"
-              name="search"
-              className={styles["input-search"]}
-            />
-          )}
         </Box>
       </div>
     </>

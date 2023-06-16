@@ -16,4 +16,19 @@ const fetchProducts = createAsyncThunk(
   },
 );
 
-export { fetchProducts };
+const fetchProductsForSearch = createAsyncThunk(
+  "products/fetchProductsForSearch",
+  async (data) => {
+    const { res, err } = await request({
+      url: "/products/search",
+      method: "POST",
+      body: { query: data },
+    });
+    if (res) {
+      return res;
+    }
+    throw new Error(`Couldn't get products: ${err.data}`);
+  },
+);
+
+export { fetchProducts, fetchProductsForSearch };
