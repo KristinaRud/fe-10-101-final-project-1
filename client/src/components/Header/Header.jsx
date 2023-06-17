@@ -200,7 +200,7 @@ const Header = () => {
             )}
 
             <Search />
-            <Button className={styles["wrapper-shop"]}>
+            <Button className={styles["wrapper-shop"]} to={"/shopping-cart"}>
               <ShoppingCartOutlinedIcon
                 sx={{
                   color: { xs: "#FFFFFF", md: "#FFFFFF", lg: "#000000" },

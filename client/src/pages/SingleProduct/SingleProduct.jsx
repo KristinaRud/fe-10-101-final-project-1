@@ -15,6 +15,7 @@ import AboutProductSlider from "../../components/Sliders/AboutProductSlider/Abou
 import Support from "../../components/Support/Support";
 import Features from "../../components/Features/Features";
 
+
 const SingleProduct = () => {
   const { id } = useParams();
   const dispatch = useDispatch();
@@ -41,14 +42,14 @@ const SingleProduct = () => {
   }, [id, products]);
 
   if (!currentProduct) return "Loading...";
-  const { name, categories, currentPrice, description, itemNo, image, alt } =
+  const { name, categories, currentPrice, description, itemNo, alt } =
     currentProduct;
 
   const breadcrumbsCustomData = [
     { label: "Home", url: "/" },
     {
       label: categories,
-      url: `/${categories}?categories=${categories}&perPage=8&startPage=1&sort=-rating`,
+      url: `/${categories}?categories=${categories}`,
     },
     { label: name },
   ];
@@ -104,10 +105,11 @@ const SingleProduct = () => {
                     handleAddToCart(
                       {
                         id,
-                        image,
+                        image: description[0].image,
                         alt,
-                        description,
+                        description: name,
                         currentPrice,
+                        itemNo,
                       },
                       isLogin,
                     ),

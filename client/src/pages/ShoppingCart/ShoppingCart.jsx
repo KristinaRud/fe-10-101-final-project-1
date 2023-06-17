@@ -75,7 +75,7 @@ const ShoppingCart = () => {
     setIsUpdate(true);
   };
 
-  const subtotalAmount = cartItems
+  const subtotalAmount = itemsCart
     ?.map(({ currentPrice, cartQuantity }) => currentPrice * cartQuantity)
     .reduce((prev, curr) => prev + curr, 0);
 
@@ -195,8 +195,9 @@ const ShoppingCart = () => {
                 <IconButton
                   aria-label="Delete"
                   className={classes.deleteButton}
+                  onClick={() => handleDeleteItem(item.id)}
                 >
-                  <HighlightOffIcon onClick={() => handleDeleteItem(item.id)} />
+                  <HighlightOffIcon />
                 </IconButton>
               </Box>
               <Divider />
