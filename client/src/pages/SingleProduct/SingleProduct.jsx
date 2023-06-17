@@ -12,6 +12,8 @@ import BreadcrumbsApp from "../../components/BreadcrumbsApp/BreadcrumbsApp";
 import handleAddToCart from "../../utils/cart/handleAddToCart";
 import { selectCustomers } from "../../store/selectors/customers.selector";
 import AboutProductSlider from "../../components/Sliders/AboutProductSlider/AboutProductSlider";
+import Support from "../../components/Support/Support";
+import Features from "../../components/Features/Features";
 
 const SingleProduct = () => {
   const { id } = useParams();
@@ -170,7 +172,9 @@ const SingleProduct = () => {
           </div>
         </div>
       </div>
-      <AboutProductSlider data={description} />;
+      <AboutProductSlider data={description} />
+      <Support />
+      <Features />
     </div>
   );
 };

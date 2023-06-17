@@ -1,6 +1,6 @@
 import { Formik, Form, Field } from "formik";
 import { Button } from "@mui/material";
-import { Link, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { TextField } from "formik-mui";
 import { useDispatch, useSelector } from "react-redux";
 import { useEffect, useState } from "react";
@@ -89,9 +89,6 @@ const LoginForm = () => {
             >
               Log In
             </Button>
-            <Link to="/" className={styles.form__link}>
-              Forgot Your Password?
-            </Link>
           </div>
         </Form>
       </Formik>

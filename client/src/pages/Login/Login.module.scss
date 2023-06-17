@@ -7,6 +7,8 @@
 
 .login {
     padding: 20px 0;
+    margin-left: 15px;
+    margin-bottom: 20px;
 
     @media screen and (width <= 768px) {
         padding: 20px 0 30px;
@@ -37,9 +39,8 @@
 .row {
     width: 100%;
     max-width: 1160px;
-    margin: 0 auto;
     display: flex;
-    justify-content: space-between;
+    justify-content: flex-start;
     gap: 35px;
 
     @media screen and (width <= 768px) {

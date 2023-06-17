@@ -220,7 +220,7 @@
     border-color: #0156ff !important;
   }
 
-  @media (max-width: 1200px) {
+  @media (width <= 1200px) {
     background-color: #fff;
   }
 }
@@ -239,6 +239,7 @@
   from {
     transform: rotate(0deg);
   }
+
   to {
     transform: rotate(360deg);
   }
@@ -274,7 +275,7 @@
   position: absolute;
   width: 100%;
   z-index: 1;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.16);
+  box-shadow: 0 2px 8px rgb(0 0 0 / 16%);
   margin-top: 5px;
   border-radius: 5px;
   background: #fff;
@@ -283,7 +284,7 @@
 }
 
 .searchWrapper {
-  @media (max-width: 470px) {
+  @media (width <= 470px) {
     position: absolute;
     top: 62px;
     width: 90%;
@@ -293,7 +294,7 @@
 }
 
 .headerWrapper {
-  @media (max-width: 470px) {
+  @media (width <= 470px) {
     height: 126px;
     position: relative;
   }

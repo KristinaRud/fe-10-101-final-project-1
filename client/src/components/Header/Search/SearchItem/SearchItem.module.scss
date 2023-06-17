@@ -10,7 +10,7 @@
     text-decoration: underline;
   }
 
-  @media (max-width: 570px) {
+  @media (width <= 570px) {
     flex-direction: column;
     text-align: center;
   }
