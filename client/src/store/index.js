@@ -9,6 +9,7 @@ import catalogReducer from "./slices/catalog.slice";
 import cityReducer from "./slices/city.slice";
 import postOfficeReducer from "./slices/postOffice.slice";
 import customersReducer from "./slices/customers.slice";
+import shoppingCartReducer from "./slices/shoppingCart.slice";
 import commentsReducer from "./slices/comments.slice";
 import newsReducer from "./slices/news.slice";
 
@@ -24,6 +25,7 @@ const store = configureStore({
     postOffice: postOfficeReducer,
     customers: customersReducer,
     orders: ordersReducer,
+    shoppingCart: shoppingCartReducer,
     comments: commentsReducer,
     news: newsReducer,
   },

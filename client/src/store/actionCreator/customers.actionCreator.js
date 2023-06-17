@@ -39,8 +39,8 @@ const editCustomer = createAsyncThunk(
   "customers/editCustomer",
   async (values) => {
     const { res, err } = await request({
-      url: "/customers/customer",
-      method: "PATCH",
+      url: "/customers",
+      method: "PUT",
       body: values,
     });
 

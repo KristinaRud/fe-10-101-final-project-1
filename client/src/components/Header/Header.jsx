@@ -3,6 +3,7 @@ import FacebookIcon from "@mui/icons-material/Facebook";
 import InstagramIcon from "@mui/icons-material/Instagram";
 import useMediaQuery from "@mui/material/useMediaQuery";
 import cx from "classnames";
+import { useSelector } from "react-redux";
 import { Box, MenuItem } from "@mui/material";
 import IconButton from "@mui/material/IconButton";
 import Typography from "@mui/material/Typography";
@@ -17,10 +18,17 @@ import Button from "../Button/Button";
 import ShopInfoDropDown from "../ShopInfoDropDown/ShopInfoDropDown";
 import AccBurgerMenu from "../AccBurgerMenu/AccBurgerMenu";
 import styles from "./Header.module.scss";
+import { selectShoppingCart } from "../../store/selectors/shoppingCart.selector";
 import Search from "./Search/Search";
 
 const Header = () => {
   const [anchorElNav, setAnchorElNav] = useState(null);
+  const { itemsCart } = useSelector(selectShoppingCart);
+  const counterCart = itemsCart
+    ? itemsCart
+        .map(({ cartQuantity }) => cartQuantity)
+        .reduce((prev, curr) => prev + curr, 0)
+    : 0;
 
   const mediaDesktop = useMediaQuery("(min-width: 1200px)");
   const mediaTablet = useMediaQuery("(min-width: 768px)");
@@ -199,9 +207,11 @@ const Header = () => {
                   transform: "rotateY(180deg)",
                 }}
               />
-              <div className={styles["wrapper-counter"]}>
-                <p>10</p>
-              </div>
+              {counterCart !== 0 && (
+                <div className={styles["wrapper-counter"]}>
+                  <p>{counterCart}</p>
+                </div>
+              )}
             </Button>
             <Box>
               <AccBurgerMenu />
