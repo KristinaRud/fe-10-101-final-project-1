@@ -32,6 +32,7 @@ const ProductsList = ({ category }) => {
         productsCategory.map((item) => (
           <div key={item._id}>
             <ProductCard
+              id={item._id}
               image={item.imageUrls[0]}
               title=" "
               description={item.name}
@@ -40,9 +41,9 @@ const ProductsList = ({ category }) => {
               available={item.quantity > 5}
               rating={item.rating}
               alt={item.name}
-              id={item._id}
               categories={item.categories}
               name={item.name}
+              itemNo={item.itemNo}
             />
           </div>
         ))}
