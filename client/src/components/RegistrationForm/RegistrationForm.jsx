@@ -9,18 +9,14 @@ import {
 } from "@mui/material";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { useDispatch } from "react-redux";
 import styles from "./RegistrationForm.module.scss";
 import { validationSchema } from "./utils";
 import BirthdateField from "./BirthdateField/BirthdateField";
 import TelephoneField from "./TelephoneField/TelephoneField";
 import request from "../../utils/api/request";
 import LoginSnackbar from "../LoginForm/LoginSnackbar";
-import { updateShoppingCart } from "../../utils/cart/updateCart";
-import { createShoppingCart } from "../../store/actionCreator/shoppingCart.actionCreator";
 
 const RegistrationForm = () => {
-  const dispatch = useDispatch();
   const [openSnackbar, setOpenSnackbar] = useState(false);
   const [status, setStatus] = useState("");
   const [textError, setTextError] = useState("Sign in failed!");
@@ -51,9 +47,6 @@ const RegistrationForm = () => {
       setTextError(err.request.responseText);
       setStatus("error");
       setOpenSnackbar(true);
-    }
-    if (localStorage.getItem("shoppingCart")) {
-      await dispatch(updateShoppingCart(createShoppingCart));
     }
   };
   return (

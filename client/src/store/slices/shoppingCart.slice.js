@@ -13,7 +13,7 @@ import { structureDataToStore } from "../../utils/cart/structureData";
 const shoppingCartSlice = createSlice({
   name: "shoppingCart",
   initialState: {
-    itemsCart: JSON.parse(localStorage.getItem("shoppingCart")) || [],
+    itemsCart: [],
   },
   reducers: {
     setItems: (state, action) => {
@@ -100,6 +100,7 @@ export const {
   decrementCartItem,
   deleteCartItem,
   deleteCart,
+  setIsAdded,
 } = shoppingCartSlice.actions;
 
 export default shoppingCartSlice.reducer;

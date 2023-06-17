@@ -1,7 +1,5 @@
-import { structureDataFromLS } from "./structureData";
-
-const updateShoppingCart = (action) => async (dispatch) => {
-  await dispatch(action(structureDataFromLS()));
+const updateShoppingCart = (action, structureData) => async (dispatch) => {
+  await dispatch(action(structureData()));
 };
 
 export { updateShoppingCart };

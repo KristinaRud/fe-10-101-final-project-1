@@ -7,6 +7,7 @@ const structureDataToStore = (action) => {
       description: item.product.name,
       currentPrice: item.product.currentPrice,
       cartQuantity: item.cartQuantity,
+      itemNo: item.itemNo,
     };
   });
   return [...itemsCart];
@@ -25,4 +26,18 @@ const structureDataFromLS = () => {
   };
 };
 
-export { structureDataToStore, structureDataFromLS };
+const concatDataCarts = (dataDB, dataLS) => {
+  const dataAllItems = [...dataDB, ...dataLS];
+
+  const products = dataAllItems.map((item) => {
+    return {
+      product: item.id,
+      cartQuantity: item.cartQuantity,
+    };
+  });
+  return {
+    products: [...products],
+  };
+};
+
+export { structureDataToStore, structureDataFromLS, concatDataCarts };

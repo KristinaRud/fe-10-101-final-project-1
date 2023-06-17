@@ -93,6 +93,7 @@ const ProductsListView = () => {
                   id={product._id}
                   categories={product.categories}
                   name={product.name}
+                  itemNo={product.itemNo}
                 />
               </Grid>
             );

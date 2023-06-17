@@ -9,8 +9,8 @@ import { validationSchema } from "./utils";
 import { login } from "../../store/actionCreator/customers.actionCreator";
 import LoginSnackbar from "./LoginSnackbar";
 import { selectCustomers } from "../../store/selectors/customers.selector";
-import { updateShoppingCart } from "../../utils/cart/updateCart";
 import { editShoppingCart } from "../../store/actionCreator/shoppingCart.actionCreator";
+import { structureDataFromLS } from "../../utils/cart/structureData";
 
 const LoginForm = () => {
   const dispatch = useDispatch();
@@ -24,7 +24,8 @@ const LoginForm = () => {
     await dispatch(login(values));
     await setSubmit(true);
     if (localStorage.getItem("shoppingCart")) {
-      await dispatch(updateShoppingCart(editShoppingCart));
+      await dispatch(editShoppingCart(structureDataFromLS()));
+      localStorage.removeItem("shoppingCart");
     }
   };
 

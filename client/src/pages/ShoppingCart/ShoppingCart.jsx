@@ -32,6 +32,7 @@ import {
   editShoppingCart,
 } from "../../store/actionCreator/shoppingCart.actionCreator";
 import { updateShoppingCart } from "../../utils/cart/updateCart";
+import LoginSnackbar from "../../components/LoginForm/LoginSnackbar";
 
 const ShoppingCart = () => {
   const dispatch = useDispatch();
@@ -39,6 +40,17 @@ const ShoppingCart = () => {
   const classes = useStyles();
   const [cartItems, setCartItems] = useState(itemsCart);
   const { isLogin } = useSelector(selectCustomers);
+  const [status, setStatus] = useState("");
+  const [isUpdate, setIsUpdate] = useState(false);
+  const [openSnackbar, setOpenSnackbar] = useState(false);
+
+  const handleClose = (event, reason) => {
+    if (reason === "clickaway") {
+      return;
+    }
+    setOpenSnackbar(false);
+    setIsUpdate(false);
+  };
 
   const handleQuantityChange = async (data, newQuantity) => {
     const isIncrement =
@@ -60,6 +72,7 @@ const ShoppingCart = () => {
         item.id === data.id ? { ...item, cartQuantity: newQuantity } : item,
       ),
     );
+    setIsUpdate(true);
   };
 
   const subtotalAmount = cartItems
@@ -76,6 +89,7 @@ const ShoppingCart = () => {
     } else {
       dispatch(deleteCartItem(id));
     }
+    setIsUpdate(true);
   };
 
   const handleUpdateCart = async () => {
@@ -84,6 +98,7 @@ const ShoppingCart = () => {
     } else {
       localStorage.setItem("shoppingCart", JSON.stringify(itemsCart));
     }
+    setIsUpdate(true);
   };
 
   const handleClearCart = async () => {
@@ -92,6 +107,7 @@ const ShoppingCart = () => {
     } else {
       dispatch(deleteCart());
     }
+    setIsUpdate(true);
   };
 
   const isMobile = useMediaQuery((theme) => theme.breakpoints.down("md"));
@@ -100,9 +116,18 @@ const ShoppingCart = () => {
     if (isLogin) {
       dispatch(fetchShoppingCart());
     } else {
-      setItems(JSON.parse(localStorage.getItem("shoppingCart")));
+      dispatch(setItems(JSON.parse(localStorage.getItem("shoppingCart"))));
     }
   }, [isLogin, dispatch]);
+
+  useEffect(() => {
+    if (isUpdate) {
+      setStatus("success");
+      setOpenSnackbar(true);
+    } else {
+      setStatus("error");
+    }
+  }, [isUpdate]);
 
   return (
     <Container maxWidth="lg" className={classes.root}>
@@ -157,6 +182,7 @@ const ShoppingCart = () => {
                         description: item.description,
                         currentPrice: item.currentPrice,
                         cartQuantity: item.cartQuantity,
+                        itemNo: item.itemNo,
                       },
                       parseInt(e.target.value, 10),
                       e.target.value > item.count,
@@ -251,6 +277,13 @@ const ShoppingCart = () => {
             Proceed to Checkout
           </Button>
         </Box>
+        <LoginSnackbar
+          open={openSnackbar}
+          status={status}
+          handleClose={handleClose}
+          textSuccess="Update successes!"
+          textError={"Your cart is not change"}
+        />
       </Box>
     </Container>
   );

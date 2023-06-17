@@ -43,6 +43,7 @@ const ProductsList = ({ category }) => {
               alt={item.name}
               categories={item.categories}
               name={item.name}
+              itemNo={item.itemNo}
             />
           </div>
         ))}
