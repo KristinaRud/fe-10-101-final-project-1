@@ -24,6 +24,7 @@ const FilterTagList = () => {
         <FilterTagItem key={value} title={value} name={filter.name} />
       ));
     }
+    return null;
   };
 
   const renderPrice = () => {
@@ -32,6 +33,7 @@ const FilterTagList = () => {
     if (maxPrice && minPrice) {
       return <FilterTagItem title={`${minPrice} - ${maxPrice}`} name="price" />;
     }
+    return null;
   };
   return (
     <div>

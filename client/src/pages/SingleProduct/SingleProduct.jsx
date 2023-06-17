@@ -11,6 +11,7 @@ import { selectProducts } from "../../store/selectors/products.selector";
 import BreadcrumbsApp from "../../components/BreadcrumbsApp/BreadcrumbsApp";
 import handleAddToCart from "../../utils/cart/handleAddToCart";
 import { selectCustomers } from "../../store/selectors/customers.selector";
+import AboutProductSlider from "../../components/Sliders/AboutProductSlider/AboutProductSlider";
 
 const SingleProduct = () => {
   const { id } = useParams();
@@ -45,7 +46,7 @@ const SingleProduct = () => {
     { label: "Home", url: "/" },
     {
       label: categories,
-      url: `/${categories}?categories=${categories}`,
+      url: `/${categories}?categories=${categories}&perPage=8&startPage=1&sort=-rating`,
     },
     { label: name },
   ];
@@ -169,6 +170,7 @@ const SingleProduct = () => {
           </div>
         </div>
       </div>
+      <AboutProductSlider data={description} />;
     </div>
   );
 };

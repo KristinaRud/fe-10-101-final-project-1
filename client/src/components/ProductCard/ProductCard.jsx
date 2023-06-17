@@ -125,6 +125,7 @@ const ProductCard = ({
             </Button>
           </Box>
         )}
+
         <CardContent sx={{ paddingTop: 1 }}>
           <Typography variant="caption" color={available ? "green" : "error"}>
             {available ? (
@@ -237,7 +238,7 @@ ProductCard.propTypes = {
   currentPrice: PropTypes.number.isRequired,
   available: PropTypes.bool.isRequired,
   rating: PropTypes.number,
-  id: PropTypes.number.isRequired,
+  id: PropTypes.string.isRequired,
   categories: PropTypes.string.isRequired,
   itemNo: PropTypes.number,
 };
