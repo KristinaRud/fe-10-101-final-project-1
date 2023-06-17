@@ -21,9 +21,9 @@ import {
 } from "../../assets/images/products";
 import styles from "./ProductCard.module.scss";
 import { selectCustomers } from "../../store/selectors/customers.selector";
-import handleAddToCart from "../../utils/cart/handleAddToCart";
 import { selectShoppingCart } from "../../store/selectors/shoppingCart.selector";
 import LoginSnackbar from "../LoginForm/LoginSnackbar";
+import handleAddToCart from "../../utils/cart/handleAddToCart";
 
 const ProductCard = ({
   image,
