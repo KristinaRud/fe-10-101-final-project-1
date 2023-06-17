@@ -50,7 +50,7 @@ const RegistrationForm = () => {
     }
   };
   return (
-    <>
+    <div className={styles.form__wrapper}>
       <Typography component="h2" className={styles.title}>
         Sign In
       </Typography>
@@ -142,7 +142,7 @@ const RegistrationForm = () => {
         textSuccess="Sign in successes!"
         textError={textError}
       />
-    </>
+    </div>
   );
 };
 

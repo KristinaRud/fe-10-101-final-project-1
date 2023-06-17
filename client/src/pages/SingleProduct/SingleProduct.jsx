@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { TextField } from "@mui/material";
-import { useParams } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import FavoriteBorderIcon from "@mui/icons-material/FavoriteBorder";
 import Button from "@mui/material/Button";
 import cn from "classnames";
@@ -11,6 +11,8 @@ import { fetchProducts } from "../../store/actionCreator/products.actionCreator"
 import { selectProducts } from "../../store/selectors/products.selector";
 import BreadcrumbsApp from "../../components/BreadcrumbsApp/BreadcrumbsApp";
 import AboutProductSlider from "../../components/Sliders/AboutProductSlider/AboutProductSlider";
+import Support from "../../components/Support/Support";
+import Features from "../../components/Features/Features";
 
 const SingleProduct = () => {
   const { id } = useParams();
@@ -133,12 +135,12 @@ const SingleProduct = () => {
               <div className={styles["product-info__footer"]}>
                 <p className={styles["product-info__support"]}>
                   Have a Question?{" "}
-                  <a
-                    href="mailto:"
+                  <Link
+                    to="/contact"
                     className={styles["product-info__support-link"]}
                   >
                     Contact Us
-                  </a>
+                  </Link>
                 </p>
                 <p className={styles["product-info__code"]}>{itemNo}</p>
               </div>
@@ -162,7 +164,9 @@ const SingleProduct = () => {
           </div>
         </div>
       </div>
-      <AboutProductSlider data={description} />;
+      <AboutProductSlider data={description} />
+      <Support />
+      <Features />
     </div>
   );
 };
