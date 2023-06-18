@@ -1,10 +1,14 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { fetchOrders } from "../actionCreator/orders.actionCreator";
+import {
+  fetchOrders,
+  getProductsFromCart,
+} from "../actionCreator/orders.actionCreator";
 
 const ordersSlice = createSlice({
   name: "orders",
   initialState: {
     orders: {},
+    products: {},
     isLoading: false,
     error: null,
   },
@@ -21,6 +25,9 @@ const ordersSlice = createSlice({
     builder.addCase(fetchOrders.rejected, (state, action) => {
       state.isLoading = false;
       state.error = action.payload;
+    });
+    builder.addCase(getProductsFromCart.fulfilled, (state, action) => {
+      state.products = action.payload;
     });
   },
 });

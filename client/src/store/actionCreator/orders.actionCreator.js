@@ -23,4 +23,35 @@ const createOrder = createAsyncThunk("order/createOrder", async (data) => {
   throw new Error(`Couldn't create wishList: ${err.data}`);
 });
 
-export { fetchOrders, createOrder };
+const getProductsFromCart = createAsyncThunk(
+  "order/getProductsFromCart",
+  async () => {
+    const products = JSON.parse(localStorage.getItem("cart"));
+    const data = [];
+
+    const fetchProductPromises = products.map(async (product) => {
+      try {
+        const { res } = await request({
+          url: `/products/${product.itemNo}`,
+        });
+
+        if (res) {
+          const productWithQuantity = {
+            product: res,
+            quantity: product.quantity,
+          };
+          return productWithQuantity;
+        }
+      } catch (error) {
+        throw new Error(`Couldn't get products: ${error}`);
+      }
+    });
+
+    const fetchedProducts = await Promise.all(fetchProductPromises);
+    data.push(...fetchedProducts);
+
+    return data;
+  },
+);
+
+export { fetchOrders, createOrder, getProductsFromCart };

@@ -10,6 +10,7 @@ export const validationSchema = Yup.object().shape({
       "Invalid phone number",
     )
     .required("Enter a phone number"),
+  paymentMethod: Yup.string().required("Select a payment method"),
   state: Yup.string().nullable().required("Select a state"),
   district: Yup.string().nullable().required("Select a district"),
   city: Yup.string().nullable().required("Select a city"),

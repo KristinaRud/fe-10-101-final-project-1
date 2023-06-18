@@ -8,6 +8,8 @@ import {
   Button,
 } from "@mui/material";
 import cn from "classnames";
+import { useDispatch, useSelector } from "react-redux";
+import { useEffect } from "react";
 import { validationSchema } from "./utils";
 import StatesInput from "./StatesInput/StatesInput";
 import DistrictsInput from "./DistrictsInput/DistrictsInput";
@@ -16,10 +18,22 @@ import s from "./CheckoutForm.module.scss";
 import PostOfficeRadio from "../PostOfficeRadio/PostOfficeRadio";
 import PostOfficeBranchInput from "./PostOfficeBranchInput/PostOfficeBranchInput";
 import PostOfficeDetails from "./PostOfficeDetails/PostOfficeDetails";
+import { selectCustomers } from "../../../store/selectors/customers.selector";
+import { getProductsFromCart } from "../../../store/actionCreator/orders.actionCreator";
+import { selectOrdersProducts } from "../../../store/selectors/orders.selector";
 
 const CheckoutForm = () => {
-  const handleSubmit = async () => {};
+  const { isLogin } = useSelector(selectCustomers);
+  const products = useSelector(selectOrdersProducts);
+  const dispatch = useDispatch();
 
+  const handleSubmit = async () => {};
+  console.log(products);
+  useEffect(() => {
+    if (!isLogin) {
+      dispatch(getProductsFromCart());
+    }
+  }, [isLogin, dispatch]);
   return (
     <Formik
       initialValues={{
@@ -27,6 +41,7 @@ const CheckoutForm = () => {
         firstName: "",
         lastName: "",
         phoneNumber: "",
+        paymentMethod: "",
         state: null,
         district: null,
         city: null,
@@ -71,6 +86,25 @@ const CheckoutForm = () => {
               label="Phone Number *"
               className={s.input}
             />
+            <Field
+              component={RadioGroup}
+              name="paymentMethod"
+              className={s.input}
+            >
+              <FormLabel component="legend">Payment Method *</FormLabel>
+              <FormControlLabel
+                value="non-cash"
+                control={<Radio disabled={isSubmitting} />}
+                label="Non-cash payment"
+                disabled={isSubmitting}
+              />
+              <FormControlLabel
+                value="imposed payment"
+                control={<Radio disabled={isSubmitting} />}
+                label="Imposed payment"
+                disabled={isSubmitting}
+              />
+            </Field>
             <StatesInput setFieldValue={setFieldValue} />
             <DistrictsInput setFieldValue={setFieldValue} />
             <CityInput setFieldValue={setFieldValue} />
@@ -86,20 +120,20 @@ const CheckoutForm = () => {
             name="deliveryDetails"
             className={cn(s["delivery-details"], s.input)}
           >
-            <FormLabel component="legend">Standard Rate</FormLabel>
+            <FormLabel component="legend">Standard Delivery</FormLabel>
             <FormControlLabel
-              value="standard"
+              value="Standard Delivery"
               control={<Radio disabled={isSubmitting} />}
-              label="Price may vary depending on the item/destination. Shop Staff will contact you. $21.00"
+              label="Delivery - 5-7 business days"
               disabled={isSubmitting}
             />
             <FormLabel component="legend" className={s.input}>
-              Pickup from store
+              Urgent Delivery
             </FormLabel>
             <FormControlLabel
-              value="pickup"
+              value="Urgent Delivery"
               control={<Radio disabled={isSubmitting} />}
-              label="1234 Street Adress City Address, 1234"
+              label="Delivery - 2-3 business days"
               disabled={isSubmitting}
             />
           </Field>
