@@ -156,33 +156,6 @@
   }
 }
 
-.wrapper-counter {
-  width: 17px;
-  height: 17px;
-  background: #fff;
-  border-radius: 50px;
-  position: absolute;
-  top: -8px;
-  right: -6px;
-
-  & p {
-    text-align: center;
-    font-weight: 700;
-    font-size: 10px;
-    line-height: 15px;
-    color: #0156ff;
-  }
-
-  @media (width >= 1200px) {
-    gap: 0;
-    background: #0156ff;
-
-    & p {
-      color: #fff;
-    }
-  }
-}
-
 .btn-deals {
   background: none;
   font-size: 14px;
@@ -298,4 +271,47 @@
     height: 126px;
     position: relative;
   }
+}
+
+.navbar__link-mobile {
+  height: 40px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding-left: 20px;
+  &:hover {
+    background-color: #d1e1ff;
+  }
+}
+
+.navbar__link-desktop {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 40px;
+  padding: 0 5px;
+  border-radius: 5px;
+  transition: .3s;
+  &:hover, &.active {
+    color: #0156FF;
+  }
+}
+
+.active {
+  color: #0156FF;
+}
+
+svg {
+  transition: .3s;
+  &:hover {
+    filter: invert(70%) sepia(42%) saturate(3205%) hue-rotate(219deg) brightness(100%) contrast(113%);
+  }
+}
+
+a:hover {
+  color: #0156FF;
+}
+
+a {
+  transition: .3s;
 }

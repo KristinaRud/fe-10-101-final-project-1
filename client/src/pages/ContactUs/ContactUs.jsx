@@ -1,14 +1,30 @@
 import Typography from "@mui/material/Typography";
-import { Form, Formik } from "formik";
-import { Button, TextField } from "@mui/material";
-import BreadcrumbsApp from "../../components/BreadcrumbsApp/BreadcrumbsApp";
-import { initialValues, validationSchema } from "./ContactUs.helpers-config";
-import styles from "./ContactUs.module.scss";
+import { Field, Form, Formik } from "formik";
+import { Button } from "@mui/material";
+import { TextField } from "formik-mui";
+import { useState } from "react";
+import Modal from "@mui/material/Modal";
+import Backdrop from "@mui/material/Backdrop";
+import Fade from "@mui/material/Fade";
+import Box from "@mui/material/Box";
 import ShopInfoStatic from "../../components/ShopInfoStatic/ShopInfoStatic";
-import TelephoneField from "../../components/RegistrationForm/TelephoneField/TelephoneField";
+import styles from "./ContactUs.module.scss";
+import { initialValues, validationSchema } from "./ContactUs.helpers-config";
+import BreadcrumbsApp from "../../components/BreadcrumbsApp/BreadcrumbsApp";
+// import TelephoneField from "../../components/RegistrationForm/TelephoneField/TelephoneField";
 
 const ContactUs = () => {
-  const handleSubmit = () => {};
+  const [open, setOpen] = useState(false);
+  const [username, setUsername] = useState("");
+  const [activeSubmit, setActiveSubmit] = useState(true);
+  const handleClose = () => {
+    setOpen(false);
+    setActiveSubmit(false);
+  };
+  const handleSubmit = (values) => {
+    setOpen(true);
+    setUsername(values.name);
+  };
   return (
     <div className={styles.container}>
       <BreadcrumbsApp />
@@ -38,35 +54,32 @@ const ContactUs = () => {
             validationSchema={validationSchema}
             onSubmit={(values) => handleSubmit(values)}
           >
-            <Form className={(styles.form, styles["form-wrapper"])}>
-              <TextField
-                required
-                id="standard-basic"
-                label="Your Name"
-                variant="standard"
-                type="text"
+            <Form className={(styles.form, styles["form-wrapper"])} noValidate>
+              <Field
+                component={TextField}
                 name="name"
-                className={(styles.form__row, styles.form__field)}
-              />
-              <TextField
-                required
-                id="standard-basic"
-                label="Your Email"
-                variant="standard"
-                type="email"
-                name="email"
-                className={(styles.form__row, styles.form__field)}
-              />
-              <TelephoneField
-                className={(styles.form__row, styles.form__field)}
-              />
-              <TextField
-                required
-                id="standard-basic"
-                label="What’s on your mind?"
-                variant="standard"
                 type="text"
+                label="Your Name *"
+                variant="standard"
+                className={(styles.form__row, styles.form__field)}
+              />
+              <Field
+                component={TextField}
+                name="email"
+                type="email"
+                label="Your Email *"
+                variant="standard"
+                className={(styles.form__row, styles.form__field)}
+              />
+              {/* <TelephoneField */}
+              {/*  className={(styles.form__row, styles.form__field)} */}
+              {/* /> */}
+              <Field
+                component={TextField}
                 name="additional"
+                type="text"
+                label="What’s on your mind? *"
+                variant="standard"
                 className={(styles.form__row, styles.form__field)}
               />
               <Button
@@ -74,6 +87,7 @@ const ContactUs = () => {
                 variant="contained"
                 size="large"
                 className={(styles.form__btn, styles["form__submit-btn"])}
+                disabled={!activeSubmit}
               >
                 Submit
               </Button>
@@ -82,6 +96,37 @@ const ContactUs = () => {
         </div>
         <ShopInfoStatic className={styles.details} />
       </div>
+      <Modal
+        aria-labelledby="transition-modal-title"
+        aria-describedby="transition-modal-description"
+        open={open}
+        onClose={handleClose}
+        closeAfterTransition
+        slots={{ backdrop: Backdrop }}
+        slotProps={{
+          backdrop: {
+            timeout: 500,
+          },
+        }}
+      >
+        <Fade in={open}>
+          <Box className={styles.modal}>
+            <Typography id="transition-modal-title" variant="h6" component="p">
+              Thank you, {username}!
+            </Typography>
+            <Typography
+              id="transition-modal-description"
+              styles={{ marginTop: 2 }}
+            >
+              Your request was accepted.
+              <br />
+              Our agent will call you during 1 hour.
+              <br />
+              Please, be patient.
+            </Typography>
+          </Box>
+        </Fade>
+      </Modal>
     </div>
   );
 };

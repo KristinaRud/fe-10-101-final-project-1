@@ -5,7 +5,7 @@
   }
 }
 
-.menu {
+.menu, .menu-active {
   position: absolute;
   top: 0;
   bottom: 0;
@@ -13,15 +13,21 @@
   flex-direction: column;
   justify-content: space-between;
   align-items: flex-end;
-  background: rgb(255 255 255 / 95%);
+  background: rgba(255, 255, 255, 0.95);
   z-index: 1;
   color: #fff;
   width: 30%;
-  transition: right 0.3s ease-in-out;
+  transition: 0.3s ease-in-out;
+  left: -80px;
+
 
   @media (width <= 600px) {
     width: 40%;
   }
+}
+
+.menu-active {
+  left: 0;
 }
 
 .menu_top {
@@ -96,4 +102,8 @@
 
 .green {
   fill: green;
+}
+
+button:hover {
+  background-color: #0156FF;
 }
