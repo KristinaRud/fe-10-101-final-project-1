@@ -1,13 +1,15 @@
 .modal__btn {
   transition: .4s;
+
   &:nth-child(1) {
     &:hover {
-      background-color: rgba(1, 86, 255, 0.49);
+      background-color: rgb(1 86 255 / 49%);
     }
   }
+
   &:nth-child(2) {
     &:hover {
-      background-color: rgba(138, 138, 138, 0.82);
+      background-color: rgb(138 138 138 / 82%);
     }
   }
 }
