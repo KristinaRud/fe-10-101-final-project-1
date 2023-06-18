@@ -13,20 +13,20 @@ const fetchOrders = createAsyncThunk("orders/fetchOrders", async () => {
 
 const createOrder = createAsyncThunk("order/createOrder", async (data) => {
   const { res, err } = await request({
-    url: `/orders/order`,
+    url: `/orders`,
     method: "POST",
     body: data,
   });
   if (res) {
     return res;
   }
-  throw new Error(`Couldn't create wishList: ${err.data}`);
+  throw new Error(`Couldn't create order: ${JSON.stringify(err.data)}`);
 });
 
 const getProductsFromCart = createAsyncThunk(
   "order/getProductsFromCart",
   async () => {
-    const products = JSON.parse(localStorage.getItem("cart"));
+    const products = JSON.parse(localStorage.getItem("shoppingCart"));
     const data = [];
 
     const fetchProductPromises = products.map(async (product) => {
@@ -38,7 +38,7 @@ const getProductsFromCart = createAsyncThunk(
         if (res) {
           const productWithQuantity = {
             product: res,
-            quantity: product.quantity,
+            cartQuantity: product.cartQuantity,
           };
           return productWithQuantity;
         }

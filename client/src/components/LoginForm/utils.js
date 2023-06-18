@@ -1,9 +1,7 @@
 import * as Yup from "yup";
 
 export const validationSchema = Yup.object({
-  loginOrEmail: Yup.string()
-    .email("Invalid email address")
-    .required("Required"),
+  loginOrEmail: Yup.string().required("Required"),
   password: Yup.string()
     .min(8, "Password must be at least 8 characters")
     .max(20, "Password must not exceed 20 characters")

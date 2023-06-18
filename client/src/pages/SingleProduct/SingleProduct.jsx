@@ -15,7 +15,6 @@ import AboutProductSlider from "../../components/Sliders/AboutProductSlider/Abou
 import Support from "../../components/Support/Support";
 import Features from "../../components/Features/Features";
 
-
 const SingleProduct = () => {
   const { id } = useParams();
   const dispatch = useDispatch();

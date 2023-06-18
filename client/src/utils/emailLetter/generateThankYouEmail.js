@@ -1,10 +1,11 @@
 export const generateThankYouEmail = (products) => {
   const tableRows = products
     .map(
-      (product) => `
+      (item) => `
     <tr>
-      <td>${product.name}</td>
-      <td>${product.currentPrice}</td>
+      <td>${item?.product?.name || item?.description}</td>
+      <td>${item?.product?.currentPrice || item?.currentPrice}</td>
+      <td>${item.cartQuantity}</td>
     </tr>
   `,
     )
