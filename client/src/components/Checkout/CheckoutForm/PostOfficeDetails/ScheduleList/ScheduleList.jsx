@@ -13,21 +13,18 @@ const ScheduleList = () => {
   const [schedule, setSchedule] = useState(scheduleData);
 
   useEffect(() => {
-    if (Object.keys(branch) > 0) {
-      if (postOffice === "novaPoshta") {
-        setSchedule([
-          { day: "Monday", workHours: branch.Schedule.Monday },
-          { day: "Tuesday", workHours: branch.Schedule.Tuesday },
-          { day: "Wednesday", workHours: branch.Schedule.Wednesday },
-          { day: "Thursday", workHours: branch.Schedule.Thursday },
-          { day: "Friday", workHours: branch.Schedule.Friday },
-          { day: "Saturday", workHours: branch.Schedule.Saturday },
-          { day: "Sunday", workHours: branch.Schedule.Sunday },
-        ]);
-      }
-      if (postOffice === "meestExpress") {
-        setSchedule(scheduleData);
-      }
+    if (postOffice === "novaPoshta") {
+      setSchedule([
+        { day: "Monday", workHours: branch.Schedule.Monday },
+        { day: "Tuesday", workHours: branch.Schedule.Tuesday },
+        { day: "Wednesday", workHours: branch.Schedule.Wednesday },
+        { day: "Thursday", workHours: branch.Schedule.Thursday },
+        { day: "Friday", workHours: branch.Schedule.Friday },
+        { day: "Saturday", workHours: branch.Schedule.Saturday },
+        { day: "Sunday", workHours: branch.Schedule.Sunday },
+      ]);
+    } else {
+      setSchedule(scheduleData);
     }
   }, [branch, postOffice]);
   return (

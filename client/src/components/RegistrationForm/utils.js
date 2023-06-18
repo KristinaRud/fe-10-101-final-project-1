@@ -38,7 +38,7 @@ export const validationSchema = Yup.object().shape({
     )
     .oneOf([Yup.ref("password"), null], "Passwords must match")
     .required("Confirm Password is required"),
-  telephone: Yup.string()
+  mobile: Yup.string()
     .matches(
       /^(\+38)?\s?\(?\d{3}\)?\s?\d{3}(-|\s)?\d{2}(-|\s)?\d{2}$/,
       "Invalid telephone number",

@@ -19,6 +19,11 @@ import {
 } from "../../store/actionCreator/customers.actionCreator";
 import AlertDialog from "../Header/AlertDialog/AlertDialog";
 import { stringAvatar } from "../../utils/avatar/stringAvatar";
+import { deleteCart } from "../../store/slices/shoppingCart.slice";
+import {
+  fetchShoppingCart,
+  putProductsToCartLogin,
+} from "../../store/actionCreator/shoppingCart.actionCreator";
 
 const AccBurgerMenu = () => {
   const [anchorAccBurgMenu, setAnchorAccBurgMenu] = useState(null);
@@ -40,7 +45,10 @@ const AccBurgerMenu = () => {
     dispatch(logout());
     setOpenDialog(false);
     setAnchorAccBurgMenu(null);
+    dispatch(deleteCart());
+    navigate("/");
   };
+
   const handleOpenAccMenu = (event) => {
     setAnchorAccBurgMenu(event.currentTarget);
   };
@@ -50,8 +58,12 @@ const AccBurgerMenu = () => {
   };
 
   useEffect(() => {
-    dispatch(getCustomer());
-  }, [dispatch]);
+    if (isLogin) {
+      dispatch(getCustomer());
+      dispatch(fetchShoppingCart());
+      dispatch(putProductsToCartLogin());
+    }
+  }, [dispatch, isLogin]);
 
   return (
     <>

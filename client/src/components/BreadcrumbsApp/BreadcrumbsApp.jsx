@@ -5,6 +5,7 @@ import PropTypes from "prop-types";
 import { parseBreadcrumbUrl } from "../../utils/queryParams/parseBreadcrumbUrl";
 import s from "./BreadcrumbsApp.module.scss";
 import { formatString } from "../../utils/string/formatString";
+import { replaceDashWithSpace } from "../../utils/string/replaceDashWithSpace";
 
 const BreadcrumbsApp = ({ breadcrumbsCustomData }) => {
   const location = useLocation();
@@ -20,7 +21,7 @@ const BreadcrumbsApp = ({ breadcrumbsCustomData }) => {
       >
         {breadcrumbsData.map(({ url, label }) => (
           <Link to={url} key={label} className={s.link}>
-            {formatString(label)}
+            {replaceDashWithSpace(formatString(label))}
           </Link>
         ))}
       </Breadcrumbs>

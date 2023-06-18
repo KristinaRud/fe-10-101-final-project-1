@@ -98,6 +98,31 @@ const deleteShoppingCart = createAsyncThunk(
   },
 );
 
+const putProductsToCartLogin = createAsyncThunk(
+  "shoppingCart/putProductsToCartLogin",
+  async () => {
+    const products = JSON.parse(window.localStorage.getItem("shoppingCart"));
+    if (products.length > 0) {
+      const fetchProductPromises = products.map(async (product) => {
+        try {
+          const { res } = await request({
+            url: `/cart/${product.id}`,
+            method: "PUT",
+          });
+          if (res) {
+            return res;
+          }
+        } catch (error) {
+          throw new Error(`Couldn't get products: ${error}`);
+        }
+      });
+      const fetchedProducts = await Promise.all(fetchProductPromises);
+      await window.localStorage.removeItem("shoppingCart");
+      return fetchedProducts;
+    }
+  },
+);
+
 export {
   fetchShoppingCart,
   createShoppingCart,
@@ -106,4 +131,5 @@ export {
   deleteShoppingCart,
   editShoppingCart,
   decreaseProductFromCart,
+  putProductsToCartLogin,
 };

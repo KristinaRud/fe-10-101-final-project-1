@@ -27,12 +27,8 @@ const Header = () => {
   const dispatch = useDispatch();
   const [anchorElNav, setAnchorElNav] = useState(null);
   const { itemsCart } = useSelector(selectShoppingCart);
+  const [counterCart, setCounterCart] = useState(0);
   const catalog = useSelector(allCategoriesSelector);
-  const counterCart = itemsCart
-    ? itemsCart
-        .map(({ cartQuantity }) => cartQuantity)
-        .reduce((prev, curr) => prev + curr, 0)
-    : 0;
 
   const mediaDesktop = useMediaQuery("(min-width: 1200px)");
   const mediaTablet = useMediaQuery("(min-width: 768px)");
@@ -54,6 +50,15 @@ const Header = () => {
   const handleCloseNavMenu = () => {
     setAnchorElNav(null);
   };
+
+  useEffect(() => {
+    const counter = itemsCart
+      ? itemsCart
+          .map(({ cartQuantity }) => cartQuantity)
+          .reduce((prev, curr) => prev + curr, 0)
+      : 0;
+    setCounterCart(counter);
+  }, [itemsCart]);
 
   return (
     <>
