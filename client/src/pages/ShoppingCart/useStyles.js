@@ -125,6 +125,7 @@ const useStyles = makeStyles((theme) => ({
     display: "flex",
     alignItems: "center",
     color: "#000000",
+    padding: "20px 0",
   },
   tabletTitle: {
     fontStyle: "normal",
@@ -135,6 +136,7 @@ const useStyles = makeStyles((theme) => ({
     alignItems: "center",
     textAlign: "center",
     color: "#000000",
+    padding: "20px 0",
   },
   desktopSummaryTitle: {
     fontStyle: "normal",
