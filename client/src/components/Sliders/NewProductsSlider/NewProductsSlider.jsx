@@ -28,6 +28,7 @@ const NewProductSlider = () => {
         {newProducts.map((item) => (
           <div key={item.itemNo} className={styles.card}>
             <ProductCard
+              id={item._id}
               image={item.imageUrls[0]}
               title=""
               description={item.name}
@@ -36,9 +37,9 @@ const NewProductSlider = () => {
               available={item.quantity > 5}
               rating={item.rating}
               alt={item.name}
-              id={item._id}
               categories={item.categories}
               name={item.name}
+              itemNo={item.itemNo}
             />
           </div>
         ))}

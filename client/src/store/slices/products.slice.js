@@ -1,11 +1,16 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { fetchProducts } from "../actionCreator/products.actionCreator";
+import {
+  fetchProductsForSearch,
+  fetchProducts,
+} from "../actionCreator/products.actionCreator";
 
 const productsSlice = createSlice({
   name: "products",
   initialState: {
     products: {},
+    productsForSearch: [],
     productsView: window.localStorage.getItem("productsView") || "grid",
+    isSearchLoading: false,
     isLoading: false,
     error: null,
   },
@@ -25,6 +30,13 @@ const productsSlice = createSlice({
     builder.addCase(fetchProducts.rejected, (state, action) => {
       state.isLoading = false;
       state.error = action.payload;
+    });
+    builder.addCase(fetchProductsForSearch.fulfilled, (state, action) => {
+      state.isSearchLoading = false;
+      state.productsForSearch = action.payload;
+    });
+    builder.addCase(fetchProductsForSearch.pending, (state) => {
+      state.isSearchLoading = true;
     });
   },
 });

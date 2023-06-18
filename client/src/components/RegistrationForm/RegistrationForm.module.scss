@@ -8,6 +8,10 @@
   flex-direction: column;
   gap: 15px;
 
+  &__wrapper {
+    margin-left: 20px;
+  }
+
   &__btn {
     background: #0156FF;
     border-radius: 50px;

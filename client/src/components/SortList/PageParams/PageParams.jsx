@@ -42,13 +42,13 @@ const PageParams = () => {
           onChange={handleChange}
         >
           <MenuItem value={condition(productsView)} className={s.item}>
-            {condition(productsView)} pear page
+            {condition(productsView)} per page
           </MenuItem>
           <MenuItem value={condition(productsView, 2)} className={s.item}>
-            {condition(productsView, 2)} pear page
+            {condition(productsView, 2)} per page
           </MenuItem>
           <MenuItem value={condition(productsView, 3)} className={s.item}>
-            {condition(productsView, 3)} pear page
+            {condition(productsView, 3)} per page
           </MenuItem>
         </Select>
       </FormControl>

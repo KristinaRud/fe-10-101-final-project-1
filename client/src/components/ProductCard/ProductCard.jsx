@@ -7,17 +7,23 @@ import {
   Button,
   Rating,
 } from "@mui/material";
+import { useSelector, useDispatch } from "react-redux";
 import CheckCircleIcon from "@mui/icons-material/CheckCircle";
 import PhoneIcon from "@mui/icons-material/Phone";
 import PropTypes from "prop-types";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
+import cx from "classnames";
 import {
   IconCompare,
   IconWishList,
   IconCart,
 } from "../../assets/images/products";
 import styles from "./ProductCard.module.scss";
+import { selectCustomers } from "../../store/selectors/customers.selector";
+import { selectShoppingCart } from "../../store/selectors/shoppingCart.selector";
+import LoginSnackbar from "../LoginForm/LoginSnackbar";
+import handleAddToCart from "../../utils/cart/handleAddToCart";
 
 const ProductCard = ({
   image,
@@ -27,10 +33,27 @@ const ProductCard = ({
   currentPrice,
   available,
   rating,
-  categories,
   id,
+  categories,
+  itemNo,
 }) => {
   const [isHovered, setIsHovered] = useState(false);
+  const dispatch = useDispatch();
+  const { isLogin } = useSelector(selectCustomers);
+  const { itemsCart } = useSelector(selectShoppingCart);
+  const isAdded = itemsCart?.some((el) => el.id === id);
+
+  const [status, setStatus] = useState("");
+  const [text, setText] = useState("");
+  const [error, setError] = useState("");
+  const [openSnackbar, setOpenSnackbar] = useState(false);
+
+  const handleClose = (event, reason) => {
+    if (reason === "clickaway") {
+      return;
+    }
+    setOpenSnackbar(false);
+  };
 
   const handleMouseEnter = () => {
     setIsHovered(true);
@@ -40,40 +63,69 @@ const ProductCard = ({
     setIsHovered(false);
   };
 
+  useEffect(() => {
+    if (isAdded) {
+      setStatus("success");
+      setText("Product added successfully!");
+    } else {
+      setStatus("error");
+      setError("Product not added");
+    }
+  }, [isAdded]);
+
   return (
-    <Card
-      className={styles.card}
-      sx={{ width: 235, height: 346, position: "relative" }}
-      onMouseEnter={handleMouseEnter}
-      onMouseLeave={handleMouseLeave}
-    >
-      <Box className={styles.menu} style={{ right: isHovered ? "0" : "-40%" }}>
-        <Box className={styles.menu_top}>
-          <Button
-            sx={{
-              "&:hover": { backgroundColor: "rgba(255, 255, 255, 0.2)" },
-            }}
-          >
-            <IconWishList />
-          </Button>
-          <Button
-            sx={{
-              "&:hover": { backgroundColor: "rgba(255, 255, 255, 0.2)" },
-            }}
-          >
-            <IconCompare />
-          </Button>
-        </Box>
-        <Button
-          sx={{
-            "&:hover": { backgroundColor: "rgba(255, 255, 255, 0.2)" },
-            marginBottom: 2,
-          }}
-        >
-          <IconCart />
-        </Button>
-      </Box>
-      <Link to={`/${categories.toLowerCase()}/${id}`}>
+    <>
+      <Card
+        className={styles.card}
+        sx={{ width: 235, height: 346, position: "relative" }}
+        onMouseEnter={handleMouseEnter}
+        onMouseLeave={handleMouseLeave}
+      >
+        {isHovered && (
+          <Box className={styles.menu}>
+            <Box className={styles.menu_top}>
+              <Button
+                sx={{
+                  "&:hover": { backgroundColor: "rgba(255, 255, 255, 0.2)" },
+                }}
+              >
+                <IconWishList />
+              </Button>
+              <Button
+                sx={{
+                  "&:hover": { backgroundColor: "rgba(255, 255, 255, 0.2)" },
+                }}
+              >
+                <IconCompare />
+              </Button>
+            </Box>
+            <Button
+              sx={{
+                "&:hover": { backgroundColor: "rgba(255, 255, 255, 0.2)" },
+                marginBottom: 2,
+              }}
+              onClick={() => {
+                dispatch(
+                  handleAddToCart(
+                    {
+                      id,
+                      image,
+                      alt,
+                      description,
+                      currentPrice,
+                      itemNo,
+                    },
+                    isLogin,
+                  ),
+                );
+                setOpenSnackbar(true);
+              }}
+            >
+              <IconCart className={isAdded && cx(styles.green)} />
+            </Button>
+          </Box>
+        )}
+
         <CardContent sx={{ paddingTop: 1 }}>
           <Typography variant="caption" color={available ? "green" : "error"}>
             {available ? (
@@ -105,15 +157,17 @@ const ProductCard = ({
               </Box>
             )}
           </Typography>
-          <CardMedia
-            className={styles.picture}
-            component="img"
-            height="150"
-            width="150"
-            image={image}
-            alt={alt}
-            mt={1}
-          />
+          <Link to={`/${categories.toLowerCase()}/${id}`}>
+            <CardMedia
+              className={styles.picture}
+              component="img"
+              height="150"
+              width="150"
+              image={image}
+              alt={alt}
+              mt={1}
+            />
+          </Link>
           <Box display="flex" alignItems="center" mt={1}>
             <Rating
               className={styles.rating}
@@ -126,14 +180,16 @@ const ProductCard = ({
               Reviews (4)
             </Typography>
           </Box>
-          <Typography
-            variant="body2"
-            color="text.secondary"
-            height="60px"
-            className={styles.description}
-          >
-            {description}
-          </Typography>
+          <Link to={`/${categories.toLowerCase()}/${id}`}>
+            <Typography
+              variant="body2"
+              color="text.secondary"
+              height="60px"
+              className={styles.description}
+            >
+              {description}
+            </Typography>
+          </Link>
           <Box
             className={styles.price}
             display="flex"
@@ -160,8 +216,15 @@ const ProductCard = ({
             </Typography>
           </Box>
         </CardContent>
-      </Link>
-    </Card>
+      </Card>
+      <LoginSnackbar
+        open={openSnackbar}
+        status={status}
+        handleClose={handleClose}
+        textSuccess={text}
+        textError={error}
+      />
+    </>
   );
 };
 
@@ -175,6 +238,7 @@ ProductCard.propTypes = {
   currentPrice: PropTypes.number.isRequired,
   available: PropTypes.bool.isRequired,
   rating: PropTypes.number,
-  id: PropTypes.number.isRequired,
+  id: PropTypes.string.isRequired,
   categories: PropTypes.string.isRequired,
+  itemNo: PropTypes.number,
 };

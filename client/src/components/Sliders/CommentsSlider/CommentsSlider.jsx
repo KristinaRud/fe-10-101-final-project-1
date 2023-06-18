@@ -3,7 +3,6 @@ import { useDispatch, useSelector } from "react-redux";
 import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
-import { Button } from "@mui/material";
 import { fetchComments } from "../../../store/actionCreator/comments.actionCreator";
 import { selectComments } from "../../../store/selectors/comments.selector";
 import "./CommentsSlider.scss";
@@ -32,7 +31,6 @@ const CommentsSlider = () => {
               </div>
             ))}
           </Slider>
-          <Button variant="outlined">Leave us a review</Button>
         </div>
       </div>
     </div>

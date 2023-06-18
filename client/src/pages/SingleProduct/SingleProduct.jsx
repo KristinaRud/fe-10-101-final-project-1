@@ -1,6 +1,5 @@
 import { useEffect, useState } from "react";
-import { TextField } from "@mui/material";
-import { useParams } from "react-router-dom";
+import { useParams, Link } from "react-router-dom";
 import FavoriteBorderIcon from "@mui/icons-material/FavoriteBorder";
 import Button from "@mui/material/Button";
 import cn from "classnames";
@@ -10,12 +9,18 @@ import styles from "./SingleProduct.module.scss";
 import { fetchProducts } from "../../store/actionCreator/products.actionCreator";
 import { selectProducts } from "../../store/selectors/products.selector";
 import BreadcrumbsApp from "../../components/BreadcrumbsApp/BreadcrumbsApp";
+import handleAddToCart from "../../utils/cart/handleAddToCart";
+import { selectCustomers } from "../../store/selectors/customers.selector";
 import AboutProductSlider from "../../components/Sliders/AboutProductSlider/AboutProductSlider";
+import Support from "../../components/Support/Support";
+import Features from "../../components/Features/Features";
+
 
 const SingleProduct = () => {
   const { id } = useParams();
   const dispatch = useDispatch();
   const { products } = useSelector(selectProducts);
+  const { isLogin } = useSelector(selectCustomers);
   const [currentProduct, setCurrentProduct] = useState(null);
   const [detailsList, setDetailsList] = useState(null);
   const [isActiveTab, setIsActiveTab] = useState({
@@ -37,7 +42,7 @@ const SingleProduct = () => {
   }, [id, products]);
 
   if (!currentProduct) return "Loading...";
-  const { name, categories, currentPrice, description, itemNo } =
+  const { name, categories, currentPrice, description, itemNo, alt } =
     currentProduct;
 
   const breadcrumbsCustomData = [
@@ -48,8 +53,6 @@ const SingleProduct = () => {
     },
     { label: name },
   ];
-
-  const productCounterHandler = () => {};
 
   const tabToggle = (event) => {
     const title = event.target.innerText;
@@ -88,25 +91,34 @@ const SingleProduct = () => {
               <p className={styles.count__text}>
                 On Sale from{" "}
                 <span className={styles["count__text--bold"]}>
-                  ${currentPrice}
+                  {`${currentPrice}.00 ₴`}
                 </span>
               </p>
-              <TextField
-                type="number"
-                defaultValue={1}
-                className={styles.count__field}
-                InputProps={{
-                  inputProps: {
-                    max: 20,
-                    min: 1,
-                  },
-                }}
-                onChange={productCounterHandler}
-              />
             </div>
-            <Button variant="contained" size="large" className={styles.button}>
-              Add to Cart
-            </Button>
+            <Link to={"/shopping-cart"}>
+              <Button
+                variant="contained"
+                size="large"
+                className={styles.button}
+                onClick={() => {
+                  dispatch(
+                    handleAddToCart(
+                      {
+                        id,
+                        image: description[0].image,
+                        alt,
+                        description: name,
+                        currentPrice,
+                        itemNo,
+                      },
+                      isLogin,
+                    ),
+                  );
+                }}
+              >
+                Add to Cart
+              </Button>
+            </Link>
           </div>
         </div>
       </div>
@@ -162,7 +174,9 @@ const SingleProduct = () => {
           </div>
         </div>
       </div>
-      <AboutProductSlider data={description} />;
+      <AboutProductSlider data={description} />
+      <Support />
+      <Features />
     </div>
   );
 };

@@ -1,0 +1,23 @@
+.card {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  gap: 5px;
+
+  &:hover .name {
+    color: #0156ff;
+    text-decoration: underline;
+  }
+
+  @media (width <= 570px) {
+    flex-direction: column;
+    text-align: center;
+  }
+}
+
+.img {
+  width: 45px;
+  height: 45px;
+  object-fit: contain;
+}

@@ -50,7 +50,7 @@ const RegistrationForm = () => {
     }
   };
   return (
-    <>
+    <div className={styles.form__wrapper}>
       <Typography component="h2" className={styles.title}>
         Sign In
       </Typography>
@@ -64,7 +64,7 @@ const RegistrationForm = () => {
           confirmPassword: "",
           telephone: "",
           birthdate: "",
-          gander: "",
+          gender: "",
         }}
         validationSchema={validationSchema}
         onSubmit={(values) => handleSubmit(values)}
@@ -115,8 +115,8 @@ const RegistrationForm = () => {
             />
             <TelephoneField />
             <BirthdateField />
-            <Field component={RadioGroup} name="gander">
-              <FormLabel component="legend">Gander: </FormLabel>
+            <Field component={RadioGroup} name="gender">
+              <FormLabel component="legend">Gender: </FormLabel>
               <FormControlLabel value="male" control={<Radio />} label="Male" />
               <FormControlLabel
                 value="female"
@@ -142,7 +142,7 @@ const RegistrationForm = () => {
         textSuccess="Sign in successes!"
         textError={textError}
       />
-    </>
+    </div>
   );
 };
 

@@ -172,9 +172,25 @@ exports.searchProducts = async (req, res, next) => {
   // Creating the array of key-words from taken string
   let queryArr = query.split(" ");
 
+  // Creating an array to store the regex patterns for each keyword
+  let regexPatterns = new RegExp(query, "i");
+
+  // Creating an array to store the $regex conditions for each field
+  let regexConditions = [
+    { name: { $regex: regexPatterns } },
+    { categories: { $regex: regexPatterns } },
+    { color: { $regex: regexPatterns } },
+    { brand: { $regex: regexPatterns } },
+    { manufacturer: { $regex: regexPatterns } },
+    { manufacturerCountry: { $regex: regexPatterns } },
+    { shortDescription: { $elemMatch: { $regex: regexPatterns } } },
+    { "description.title": { $regex: regexPatterns } },
+    { completeSet: { $elemMatch: { $regex: regexPatterns } } },
+  ];
+
   // Finding ALL products, that have at least one match
   let matchedProducts = await Product.find({
-    $text: { $search: query }
+    $or: regexConditions
   });
 
   res.send(matchedProducts);

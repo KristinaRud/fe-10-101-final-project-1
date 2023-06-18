@@ -29,7 +29,7 @@ const customersSlice = createSlice({
       state.data = action.payload;
     });
     builder.addCase(editCustomer.fulfilled, (state, action) => {
-      state.data = [...state.data, action.payload];
+      state.data = action.payload;
     });
   },
 });

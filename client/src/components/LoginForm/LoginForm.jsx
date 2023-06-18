@@ -1,6 +1,6 @@
 import { Formik, Form, Field } from "formik";
 import { Button } from "@mui/material";
-import { Link, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { TextField } from "formik-mui";
 import { useDispatch, useSelector } from "react-redux";
 import { useEffect, useState } from "react";
@@ -9,6 +9,8 @@ import { validationSchema } from "./utils";
 import { login } from "../../store/actionCreator/customers.actionCreator";
 import LoginSnackbar from "./LoginSnackbar";
 import { selectCustomers } from "../../store/selectors/customers.selector";
+import { editShoppingCart } from "../../store/actionCreator/shoppingCart.actionCreator";
+import { structureDataFromLS } from "../../utils/cart/structureData";
 
 const LoginForm = () => {
   const dispatch = useDispatch();
@@ -21,6 +23,10 @@ const LoginForm = () => {
   const handleSubmit = async (values) => {
     await dispatch(login(values));
     await setSubmit(true);
+    if (localStorage.getItem("shoppingCart")) {
+      await dispatch(editShoppingCart(structureDataFromLS()));
+      localStorage.removeItem("shoppingCart");
+    }
   };
 
   const handleClose = (event, reason) => {
@@ -83,9 +89,6 @@ const LoginForm = () => {
             >
               Log In
             </Button>
-            <Link to="/" className={styles.form__link}>
-              Forgot Your Password?
-            </Link>
           </div>
         </Form>
       </Formik>
