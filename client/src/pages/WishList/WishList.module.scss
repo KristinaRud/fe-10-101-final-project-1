@@ -3,11 +3,13 @@
   font-size: 32px;
   line-height: 48px;
   padding-top: 20px;
+
   @media (width <= 868px) {
     font-size: 18px;
     line-height: 27px;
   }
 }
+
 .list-wishlist{
  display: flex;
   padding: 60px 0;

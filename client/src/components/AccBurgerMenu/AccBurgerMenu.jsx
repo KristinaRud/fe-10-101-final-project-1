@@ -66,7 +66,7 @@ const AccBurgerMenu = () => {
             {Object.keys(data).length !== 0 ? (
               <Avatar
                 {...stringAvatar(`${data.firstName} ${data.lastName}`)}
-                sx={{ width: 34, height: 34 }}
+                sx={{ width: 34, height: 34, fontSize: 16 }}
               />
             ) : (
               <PersonIcon

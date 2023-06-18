@@ -144,12 +144,12 @@ const SingleProduct = () => {
               <div className={styles["product-info__footer"]}>
                 <p className={styles["product-info__support"]}>
                   Have a Question?{" "}
-                  <a
-                    href="mailto:"
+                  <Link
+                    to="/contact"
                     className={styles["product-info__support-link"]}
                   >
                     Contact Us
-                  </a>
+                  </Link>
                 </p>
                 <p className={styles["product-info__code"]}>{itemNo}</p>
               </div>
