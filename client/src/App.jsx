@@ -10,6 +10,7 @@ import store from "./store";
 import Footer from "./components/Footer/Footer";
 import Header from "./components/Header/Header";
 import theme from "./theme/createTheme";
+import "./App.scss";
 
 const App = () => (
   <Provider store={store}>

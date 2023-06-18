@@ -1,5 +1,6 @@
 import { Button, Dialog, DialogActions, DialogTitle } from "@mui/material";
 import PropTypes from "prop-types";
+import styles from "./AlertDialog.module.scss";
 
 const AlertDialog = ({ open, handleClose, handleAction }) => {
   return (
@@ -14,10 +15,12 @@ const AlertDialog = ({ open, handleClose, handleAction }) => {
           Are you sure you want to log out?
         </DialogTitle>
         <DialogActions>
-          <Button onClick={handleClose} autoFocus>
-            Disagree
+          <Button className={styles.modal__btn} onClick={handleClose} autoFocus>
+            No
           </Button>
-          <Button onClick={handleAction}>Agree</Button>
+          <Button className={styles.modal__btn} onClick={handleAction}>
+            Yes
+          </Button>
         </DialogActions>
       </Dialog>
     </div>

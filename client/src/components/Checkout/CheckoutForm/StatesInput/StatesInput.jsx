@@ -8,9 +8,11 @@ import { setChosenState } from "../../../../store/slices/city.slice";
 import { fetchAllStates } from "../../../../store/actionCreator/city.actionCreator";
 import s from "../CheckoutForm.module.scss";
 import { selectStates } from "../../../../store/selectors/city.selector";
+import { selectCustomers } from "../../../../store/selectors/customers.selector";
 
 const StatesInput = ({ setFieldValue }) => {
   const dispatch = useDispatch();
+  const { data } = useSelector(selectCustomers);
   const states = useSelector(selectStates);
   const handleChange = (event) => {
     if (states.length > 0) {
@@ -29,6 +31,15 @@ const StatesInput = ({ setFieldValue }) => {
   useEffect(() => {
     dispatch(fetchAllStates());
   }, [dispatch]);
+
+  useEffect(() => {
+    if (Object.keys(data)) {
+      setFieldValue("firstName", data.firstName);
+      setFieldValue("lastName", data.lastName);
+      setFieldValue("email", data.email);
+      setFieldValue("mobile", data.mobile);
+    }
+  }, [data, setFieldValue]);
 
   return (
     <Field

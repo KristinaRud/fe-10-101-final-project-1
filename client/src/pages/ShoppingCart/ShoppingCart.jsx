@@ -304,13 +304,15 @@ const ShoppingCart = () => {
                 {`${totalAmount} ₴`}
               </Typography>
             </div>
-            <Button
-              variant="contained"
-              className={classes.checkoutButton}
-              disabled={subtotalAmount === 0}
-            >
-              Proceed to Checkout
-            </Button>
+            <Link to={"/checkout"}>
+              <Button
+                variant="contained"
+                className={classes.checkoutButton}
+                disabled={subtotalAmount === 0}
+              >
+                Proceed to Checkout
+              </Button>
+            </Link>
           </Box>
           <LoginSnackbar
             open={openSnackbar}

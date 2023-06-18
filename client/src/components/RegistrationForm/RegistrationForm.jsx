@@ -62,7 +62,7 @@ const RegistrationForm = () => {
           email: "",
           password: "",
           confirmPassword: "",
-          telephone: "",
+          mobile: "",
           birthdate: "",
           gender: "",
         }}

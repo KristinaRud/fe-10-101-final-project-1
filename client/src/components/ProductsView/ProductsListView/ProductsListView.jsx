@@ -62,8 +62,8 @@ const ProductsListView = () => {
               rating,
               shortDescription,
               currentPrice,
-              _id,
               categories,
+              _id,
             } = product;
             if (iconView === "list") {
               return (

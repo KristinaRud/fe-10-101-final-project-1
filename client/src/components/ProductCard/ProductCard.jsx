@@ -85,53 +85,15 @@ const ProductCard = ({
         onMouseEnter={handleMouseEnter}
         onMouseLeave={handleMouseLeave}
       >
-        {isHovered && (
-          <Box className={styles.menu}>
-            <Box className={styles.menu_top}>
-              <Button
-                sx={{
-                  "&:hover": { backgroundColor: "rgba(255, 255, 255, 0.2)" },
-                }}
-                onClick={() => {
-                  dispatch(
-                    handleAddToWishList(
-                      {
-                        id,
-                        image,
-                        alt,
-                        description,
-                        currentPrice,
-                        itemNo,
-                        categories,
-                        available,
-                        rating,
-                        oldPrice,
-                      },
-                      itemsWishList,
-                      isLogin,
-                    ),
-                  );
-                  setOpenSnackbar(true);
-                }}
-              >
-                <IconWishList className={isWishList && cx(styles.green)} />
-              </Button>
-              <Button
-                sx={{
-                  "&:hover": { backgroundColor: "rgba(255, 255, 255, 0.2)" },
-                }}
-              >
-                <IconCompare />
-              </Button>
-            </Box>
+        <Box className={isHovered ? styles["menu-active"] : styles.menu}>
+          <Box className={styles.menu_top}>
             <Button
               sx={{
-                "&:hover": { backgroundColor: "rgba(255, 255, 255, 0.2)" },
-                marginBottom: 2,
+                "&:hover": { backgroundColor: "rgba(255, 255, 255, 0.9)" },
               }}
               onClick={() => {
                 dispatch(
-                  handleAddToCart(
+                  handleAddToWishList(
                     {
                       id,
                       image,
@@ -140,6 +102,9 @@ const ProductCard = ({
                       currentPrice,
                       itemNo,
                       categories,
+                      available,
+                      rating,
+                      oldPrice,
                     },
                     isLogin,
                   ),
@@ -147,11 +112,42 @@ const ProductCard = ({
                 setOpenSnackbar(true);
               }}
             >
-              <IconCart className={isAdded && cx(styles.green)} />
+              <IconWishList className={isWishList && cx(styles.green)} />
+            </Button>
+            <Button
+              sx={{
+                "&:hover": { backgroundColor: "rgba(255, 255, 255, 0.2)" },
+              }}
+            >
+              <IconCompare />
             </Button>
           </Box>
-        )}
-
+          <Button
+            sx={{
+              "&:hover": { backgroundColor: "rgba(255, 255, 255, 0.2)" },
+              marginBottom: 2,
+            }}
+            onClick={() => {
+              dispatch(
+                handleAddToCart(
+                  {
+                    id,
+                    image,
+                    alt,
+                    description,
+                    currentPrice,
+                    itemNo,
+                    categories,
+                  },
+                  isLogin,
+                ),
+              );
+              setOpenSnackbar(true);
+            }}
+          >
+            <IconCart className={isAdded && cx(styles.green)} />
+          </Button>
+        </Box>
         <CardContent sx={{ paddingTop: 1 }}>
           <Typography variant="caption" color={available ? "green" : "error"}>
             {available ? (

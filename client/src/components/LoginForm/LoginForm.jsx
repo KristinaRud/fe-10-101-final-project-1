@@ -9,12 +9,6 @@ import { validationSchema } from "./utils";
 import { login } from "../../store/actionCreator/customers.actionCreator";
 import LoginSnackbar from "./LoginSnackbar";
 import { selectCustomers } from "../../store/selectors/customers.selector";
-import {
-  structureDataFromLS,
-  structureWishListLS,
-} from "../../utils/cart/structureData";
-import { editShoppingCart } from "../../store/actionCreator/shoppingCart.actionCreator";
-import { updateWishList } from "../../store/actionCreator/wishList.actionCreator";
 
 const LoginForm = () => {
   const dispatch = useDispatch();
@@ -27,14 +21,6 @@ const LoginForm = () => {
   const handleSubmit = async (values) => {
     await dispatch(login(values));
     await setSubmit(true);
-    if (localStorage.getItem("shoppingCart")) {
-      await dispatch(editShoppingCart(structureDataFromLS()));
-      localStorage.removeItem("shoppingCart");
-    }
-    if (localStorage.getItem("wishList")) {
-      await dispatch(updateWishList(structureWishListLS()));
-      localStorage.removeItem("shoppingCart");
-    }
   };
 
   const handleClose = (event, reason) => {
@@ -73,8 +59,8 @@ const LoginForm = () => {
             <Field
               component={TextField}
               name="loginOrEmail"
-              type="email"
-              label="Email Address *"
+              type="text"
+              label="Login or Email Address *"
               variant="standard"
             />
           </div>
