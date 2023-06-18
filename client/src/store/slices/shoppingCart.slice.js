@@ -100,7 +100,6 @@ export const {
   decrementCartItem,
   deleteCartItem,
   deleteCart,
-  setIsAdded,
 } = shoppingCartSlice.actions;
 
 export default shoppingCartSlice.reducer;

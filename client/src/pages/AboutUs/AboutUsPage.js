@@ -11,11 +11,13 @@ import QualityImg from "../../assets/images/aboutUs/quality.png";
 import DeliveryImg from "../../assets/images/aboutUs/delivery.png";
 import { ReactComponent as DropIcon } from "./icons/drop.svg";
 import { ReactComponent as VecIcon } from "./icons/vec.svg";
+import BreadcrumbsApp from "../../components/BreadcrumbsApp/BreadcrumbsApp";
 
 const AboutUsPage = () => {
   return (
     <>
       <Box sx={{ margin: "0 auto", maxWidth: "1400px" }}>
+        <BreadcrumbsApp />
         <h1 className={styles.title}>About Us</h1>
       </Box>
       <section className={styles.black}>

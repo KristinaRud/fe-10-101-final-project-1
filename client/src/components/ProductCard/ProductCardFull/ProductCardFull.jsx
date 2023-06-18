@@ -6,16 +6,25 @@ import {
   Rating,
   Typography,
 } from "@mui/material";
+import { useDispatch, useSelector } from "react-redux";
 import CheckCircleIcon from "@mui/icons-material/CheckCircle";
 import PhoneIcon from "@mui/icons-material/Phone";
 import PropTypes from "prop-types";
 import ShoppingCartOutlinedIcon from "@mui/icons-material/ShoppingCartOutlined";
+import cx from "classnames";
 import s from "./ProductCardFull.module.scss";
 import {
   IconCompare,
   IconEmail,
   IconWishList,
 } from "../../../assets/images/products";
+import handleAddToCart, {
+  handleAddToWishList,
+} from "../../../utils/cart/handleAddToCart";
+import { selectWishList } from "../../../store/selectors/wishList.selector";
+import { selectCustomers } from "../../../store/selectors/customers.selector";
+import styles from "../ProductCard.module.scss";
+import { selectShoppingCart } from "../../../store/selectors/shoppingCart.selector";
 
 const ProductCardFull = ({
   available,
@@ -26,7 +35,17 @@ const ProductCardFull = ({
   oldPrice,
   currentPrice,
   description,
+  id,
+  itemNo,
+  categories,
 }) => {
+  const dispatch = useDispatch();
+  const { itemsWishList } = useSelector(selectWishList);
+  const { isLogin } = useSelector(selectCustomers);
+  const { itemsCart } = useSelector(selectShoppingCart);
+  const isAdded = itemsCart?.some((el) => el.id === id);
+  const isWishList = itemsWishList?.some((item) => item.id === id);
+
   return (
     <Card
       sx={{
@@ -107,9 +126,27 @@ const ProductCardFull = ({
               {currentPrice}.00 ₴
             </Typography>
           </Box>
-          <Button className={s.btn}>
-            <ShoppingCartOutlinedIcon />
-            Add to cart
+          <Button
+            className={cx(s.btn, isAdded && s.green)}
+            onClick={() => {
+              dispatch(
+                handleAddToCart(
+                  {
+                    id,
+                    image,
+                    alt,
+                    description,
+                    currentPrice,
+                    itemNo,
+                    categories,
+                  },
+                  isLogin,
+                ),
+              );
+            }}
+          >
+            <ShoppingCartOutlinedIcon className={isAdded && cx(styles.green)} />
+            {isAdded ? "In cart" : "Add to cart"}
           </Button>
         </Box>
         <Typography
@@ -126,8 +163,29 @@ const ProductCardFull = ({
           <Button>
             <IconCompare />
           </Button>
-          <Button>
-            <IconWishList />
+          <Button
+            onClick={() => {
+              dispatch(
+                handleAddToWishList(
+                  {
+                    id,
+                    image,
+                    alt,
+                    description,
+                    currentPrice,
+                    itemNo,
+                    categories,
+                    available,
+                    rating,
+                    oldPrice,
+                  },
+                  itemsWishList,
+                  isLogin,
+                ),
+              );
+            }}
+          >
+            <IconWishList className={isWishList && cx(styles.green)} />
           </Button>
         </Box>
       </Box>
@@ -144,5 +202,8 @@ ProductCardFull.propTypes = {
   oldPrice: PropTypes.number.isRequired,
   currentPrice: PropTypes.number.isRequired,
   description: PropTypes.string.isRequired,
+  itemNo: PropTypes.number.isRequired,
+  id: PropTypes.string.isRequired,
+  categories: PropTypes.string.isRequired,
 };
 export default ProductCardFull;

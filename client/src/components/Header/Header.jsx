@@ -1,6 +1,7 @@
 import { useState } from "react";
 import FacebookIcon from "@mui/icons-material/Facebook";
 import InstagramIcon from "@mui/icons-material/Instagram";
+import FavoriteBorderIcon from "@mui/icons-material/FavoriteBorder";
 import useMediaQuery from "@mui/material/useMediaQuery";
 import cx from "classnames";
 import { useSelector } from "react-redux";
@@ -20,15 +21,18 @@ import AccBurgerMenu from "../AccBurgerMenu/AccBurgerMenu";
 import styles from "./Header.module.scss";
 import { selectShoppingCart } from "../../store/selectors/shoppingCart.selector";
 import Search from "./Search/Search";
+import { selectWishList } from "../../store/selectors/wishList.selector";
 
 const Header = () => {
   const [anchorElNav, setAnchorElNav] = useState(null);
   const { itemsCart } = useSelector(selectShoppingCart);
-  const counterCart = itemsCart
-    ? itemsCart
-        .map(({ cartQuantity }) => cartQuantity)
-        .reduce((prev, curr) => prev + curr, 0)
-    : 0;
+  const { itemsWishList } = useSelector(selectWishList);
+  const counterCart =
+    itemsCart
+      ?.map(({ cartQuantity }) => cartQuantity)
+      ?.reduce((prev, curr) => prev + curr, 0) || 0;
+
+  const counterWishList = itemsWishList.length;
 
   const mediaDesktop = useMediaQuery("(min-width: 1200px)");
   const mediaTablet = useMediaQuery("(min-width: 768px)");
@@ -166,7 +170,9 @@ const Header = () => {
                       justifyContent: "space-between",
                     }}
                   >
-                    <Typography textAlign="center">{item}</Typography>
+                    <Typography textAlign="center">
+                      {item.toString()}
+                    </Typography>
                     <ArrowForwardIosIcon
                       sx={{ marginLeft: "30px", height: "8px" }}
                     />
@@ -210,6 +216,18 @@ const Header = () => {
               {counterCart !== 0 && (
                 <div className={styles["wrapper-counter"]}>
                   <p>{counterCart}</p>
+                </div>
+              )}
+            </Button>
+            <Button className={styles["wrapper-shop"]} to={"/wishlist"}>
+              <FavoriteBorderIcon
+                sx={{
+                  color: { xs: "#FFFFFF", md: "#FFFFFF", lg: "#000000" },
+                }}
+              />
+              {counterWishList !== 0 && (
+                <div className={styles["wrapper-counter"]}>
+                  <p>{counterWishList}</p>
                 </div>
               )}
             </Button>

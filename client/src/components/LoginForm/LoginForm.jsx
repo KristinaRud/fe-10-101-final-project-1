@@ -9,8 +9,12 @@ import { validationSchema } from "./utils";
 import { login } from "../../store/actionCreator/customers.actionCreator";
 import LoginSnackbar from "./LoginSnackbar";
 import { selectCustomers } from "../../store/selectors/customers.selector";
+import {
+  structureDataFromLS,
+  structureWishListLS,
+} from "../../utils/cart/structureData";
 import { editShoppingCart } from "../../store/actionCreator/shoppingCart.actionCreator";
-import { structureDataFromLS } from "../../utils/cart/structureData";
+import { updateWishList } from "../../store/actionCreator/wishList.actionCreator";
 
 const LoginForm = () => {
   const dispatch = useDispatch();
@@ -25,6 +29,10 @@ const LoginForm = () => {
     await setSubmit(true);
     if (localStorage.getItem("shoppingCart")) {
       await dispatch(editShoppingCart(structureDataFromLS()));
+      localStorage.removeItem("shoppingCart");
+    }
+    if (localStorage.getItem("wishList")) {
+      await dispatch(updateWishList(structureWishListLS()));
       localStorage.removeItem("shoppingCart");
     }
   };
