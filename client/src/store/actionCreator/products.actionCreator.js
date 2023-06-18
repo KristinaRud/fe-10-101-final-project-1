@@ -9,11 +9,17 @@ const fetchProducts = createAsyncThunk(
     const { res, err } = await request({
       url: `/products/filter${parsedParams}`,
     });
-    if (res) {
-      return res;
-    }
+    if (res) return res;
     throw new Error(`Couldn't get products: ${err.data}`);
   },
 );
 
-export { fetchProducts };
+const fetchProduct = createAsyncThunk("products/fetchProduct", async (id) => {
+  const { res, err } = await request({
+    url: `/products/${id}`,
+  });
+  if (res) return res;
+  throw new Error(`Couldn't get product: ${err.data}`);
+});
+
+export { fetchProducts, fetchProduct };

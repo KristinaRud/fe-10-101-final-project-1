@@ -1,10 +1,14 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { fetchProducts } from "../actionCreator/products.actionCreator";
+import {
+  fetchProduct,
+  fetchProducts,
+} from "../actionCreator/products.actionCreator";
 
 const productsSlice = createSlice({
   name: "products",
   initialState: {
     products: {},
+    currentProduct: {},
     productsView: window.localStorage.getItem("productsView") || "grid",
     isLoading: false,
     error: null,
@@ -23,6 +27,17 @@ const productsSlice = createSlice({
       state.products = action.payload;
     });
     builder.addCase(fetchProducts.rejected, (state, action) => {
+      state.isLoading = false;
+      state.error = action.payload;
+    });
+    builder.addCase(fetchProduct.pending, (state) => {
+      state.isLoading = true;
+    });
+    builder.addCase(fetchProduct.fulfilled, (state, action) => {
+      state.isLoading = false;
+      state.currentProduct = action.payload;
+    });
+    builder.addCase(fetchProduct.rejected, (state, action) => {
       state.isLoading = false;
       state.error = action.payload;
     });

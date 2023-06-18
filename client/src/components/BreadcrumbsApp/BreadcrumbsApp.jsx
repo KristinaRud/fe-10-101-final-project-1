@@ -33,7 +33,7 @@ export default BreadcrumbsApp;
 BreadcrumbsApp.propTypes = {
   breadcrumbsCustomData: PropTypes.arrayOf(
     PropTypes.shape({
-      label: PropTypes.string.isRequired,
+      label: PropTypes.string,
       url: PropTypes.string,
     }),
   ),

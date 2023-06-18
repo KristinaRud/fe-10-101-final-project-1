@@ -9,6 +9,7 @@ import {
 import CheckCircleIcon from "@mui/icons-material/CheckCircle";
 import PhoneIcon from "@mui/icons-material/Phone";
 import PropTypes from "prop-types";
+import { Link } from "react-router-dom";
 import ShoppingCartOutlinedIcon from "@mui/icons-material/ShoppingCartOutlined";
 import s from "./ProductCardFull.module.scss";
 import {
@@ -26,6 +27,8 @@ const ProductCardFull = ({
   oldPrice,
   currentPrice,
   description,
+  categories,
+  id,
 }) => {
   return (
     <Card
@@ -60,12 +63,14 @@ const ProductCardFull = ({
       </Typography>
       <Box display="flex" gap="50px">
         <Box display="flex" flexDirection="column">
-          <CardMedia
-            component="img"
-            className={s.img}
-            image={image}
-            alt={alt}
-          />
+          <Link to={`/${categories.toLowerCase()}/${id}`}>
+            <CardMedia
+              component="img"
+              className={s.img}
+              image={image}
+              alt={alt}
+            />
+          </Link>
           <Box display="flex" alignItems="center" mt={2}>
             <Rating
               name="products-small"
@@ -83,9 +88,11 @@ const ProductCardFull = ({
           flexDirection="column"
           className={s["content-wrapper"]}
         >
-          <Typography variant="h6" mb={2} fontSize="13px">
-            {name}
-          </Typography>
+          <Link to={`/${categories.toLowerCase()}/${id}`}>
+            <Typography variant="h6" mb={2} fontSize="13px">
+              {name}
+            </Typography>
+          </Link>
           <Box display="flex" className={s["price-wrapper"]}>
             {oldPrice && (
               <Typography
@@ -144,5 +151,7 @@ ProductCardFull.propTypes = {
   oldPrice: PropTypes.number.isRequired,
   currentPrice: PropTypes.number.isRequired,
   description: PropTypes.string.isRequired,
+  categories: PropTypes.string.isRequired,
+  id: PropTypes.string.isRequired,
 };
 export default ProductCardFull;

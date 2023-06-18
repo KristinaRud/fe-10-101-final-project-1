@@ -40,7 +40,7 @@ const ProductsList = ({ category }) => {
               available={item.quantity > 5}
               rating={item.rating}
               alt={item.name}
-              id={item._id}
+              id={item.itemNo}
               categories={item.categories}
               name={item.name}
             />
