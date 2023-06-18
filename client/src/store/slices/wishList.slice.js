@@ -6,6 +6,7 @@ import {
   updateWishList,
   updateProductToWishList,
   deleteProductFromWishList,
+  updateListProductFromWishList,
 } from "../actionCreator/wishList.actionCreator";
 import { structureDataWishList } from "../../utils/cart/structureData";
 
@@ -49,6 +50,12 @@ const wishListSlice = createSlice({
     builder.addCase(updateProductToWishList.fulfilled, (state, action) => {
       state.itemsWishList = structureDataWishList(action.payload.products);
     });
+    builder.addCase(
+      updateListProductFromWishList.fulfilled,
+      (state, action) => {
+        state.itemsWishList = structureDataWishList(action.payload[0].products);
+      },
+    );
   },
 });
 export const { addToWishList } = wishListSlice.actions;

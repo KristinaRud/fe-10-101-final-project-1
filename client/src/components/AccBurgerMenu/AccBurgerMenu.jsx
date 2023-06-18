@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
+import PropTypes from "prop-types";
 import Menu from "@mui/material/Menu";
 import PersonIcon from "@mui/icons-material/Person";
 import MenuItem from "@mui/material/MenuItem";
@@ -24,8 +25,12 @@ import {
   fetchShoppingCart,
   putProductsToCartLogin,
 } from "../../store/actionCreator/shoppingCart.actionCreator";
+import {
+  fetchWishList,
+  updateListProductFromWishList,
+} from "../../store/actionCreator/wishList.actionCreator";
 
-const AccBurgerMenu = () => {
+const AccBurgerMenu = ({ counterWishList }) => {
   const [anchorAccBurgMenu, setAnchorAccBurgMenu] = useState(null);
   const { isLogin, data } = useSelector(selectCustomers);
   const [openDialog, setOpenDialog] = useState(false);
@@ -61,7 +66,9 @@ const AccBurgerMenu = () => {
     if (isLogin) {
       dispatch(getCustomer());
       dispatch(fetchShoppingCart());
+      dispatch(fetchWishList());
       dispatch(putProductsToCartLogin());
+      dispatch(updateListProductFromWishList());
     }
   }, [dispatch, isLogin]);
 
@@ -131,9 +138,14 @@ const AccBurgerMenu = () => {
               <SettingsSuggestIcon sx={{ marginRight: "5px" }} />
               My Settings
             </MenuItem>
-            <MenuItem onClick={handleCloseAccMenu}>
+            <MenuItem
+              onClick={() => {
+                handleCloseAccMenu();
+                navigate("/wishlist");
+              }}
+            >
               <FavoriteBorderIcon sx={{ marginRight: "5px" }} />
-              My Wish List (0)
+              My Wish List {`(${counterWishList})`}
             </MenuItem>
             <MenuItem onClick={handleCloseAccMenu}>
               <BarChartIcon sx={{ marginRight: "5px" }} />
@@ -158,4 +170,11 @@ const AccBurgerMenu = () => {
   );
 };
 
+AccBurgerMenu.propTypes = {
+  counterWishList: PropTypes.number,
+};
+
+AccBurgerMenu.defaultProps = {
+  counterWishList: 0,
+};
 export default AccBurgerMenu;

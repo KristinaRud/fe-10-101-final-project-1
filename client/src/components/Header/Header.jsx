@@ -31,11 +31,12 @@ const Header = () => {
   const { itemsCart } = useSelector(selectShoppingCart);
   const { itemsWishList } = useSelector(selectWishList);
   const [counterCart, setCounterCart] = useState(0);
+  const [counterWishList, setCounterWishList] = useState(0);
   const catalog = useSelector(allCategoriesSelector);
 
   const mediaDesktop = useMediaQuery("(min-width: 1200px)");
   const mediaTablet = useMediaQuery("(min-width: 768px)");
-  const counterWishlist = itemsWishList.length;
+
   const navbarItems = catalog.map(({ name, id }) => {
     return {
       name,
@@ -55,13 +56,15 @@ const Header = () => {
   };
 
   useEffect(() => {
+    const counterWL = itemsWishList.length;
     const counter = itemsCart
       ? itemsCart
           .map(({ cartQuantity }) => cartQuantity)
           .reduce((prev, curr) => prev + curr, 0)
       : 0;
     setCounterCart(counter);
-  }, [itemsCart]);
+    setCounterWishList(counterWL);
+  }, [itemsCart, itemsWishList]);
   return (
     <>
       <header className={styles.header}>
@@ -215,35 +218,21 @@ const Header = () => {
 
             <Search />
             <DropdownCart cartCounter={counterCart} />
-            {/* <<<<<<< HEAD */}
-            {/*             <Button className={styles["wrapper-shop"]} to={"/shopping-cart"}> */}
-            {/*               <ShoppingCartOutlinedIcon */}
-            {/*                 sx={{ */}
-            {/*                   color: { xs: "#FFFFFF", md: "#FFFFFF", lg: "#000000" }, */}
-            {/*                   transform: "rotateY(180deg)", */}
-            {/*                 }} */}
-            {/*               /> */}
-            {/*               {counterCart !== 0 && ( */}
-            {/*                 <div className={styles["wrapper-counter"]}> */}
-            {/*                   <p>{counterCart}</p> */}
-            {/*                 </div> */}
-            {/*               )} */}
-            {/*             </Button> */}
             <Button className={styles["wrapper-shop"]} to={"/wishlist"}>
               <FavoriteBorderIcon
                 sx={{
                   color: { xs: "#FFFFFF", md: "#FFFFFF", lg: "#000000" },
                 }}
               />
-              {counterWishlist !== 0 && (
+              {counterWishList !== 0 && (
                 <div className={styles["wrapper-counter"]}>
-                  <p>{counterWishlist}</p>
+                  <p>{counterWishList}</p>
                 </div>
               )}
             </Button>
 
             <Box>
-              <AccBurgerMenu />
+              <AccBurgerMenu counterWishList={counterWishList} />
             </Box>
           </div>
         </Box>
