@@ -3,15 +3,14 @@ import FacebookIcon from "@mui/icons-material/Facebook";
 import InstagramIcon from "@mui/icons-material/Instagram";
 import useMediaQuery from "@mui/material/useMediaQuery";
 import cx from "classnames";
-import { useSelector } from "react-redux";
-import { Box, MenuItem } from "@mui/material";
+import { useDispatch, useSelector } from "react-redux";
+import { Box } from "@mui/material";
 import IconButton from "@mui/material/IconButton";
-import Typography from "@mui/material/Typography";
 import Menu from "@mui/material/Menu";
 import MenuIcon from "@mui/icons-material/Menu";
-import ShoppingCartOutlinedIcon from "@mui/icons-material/ShoppingCartOutlined";
 import CloseRoundedIcon from "@mui/icons-material/CloseRounded";
 import ArrowForwardIosIcon from "@mui/icons-material/ArrowForwardIos";
+import { Link, NavLink } from "react-router-dom";
 import { ReactComponent as VecIcon } from "../../pages/AboutUs/icons/vec.svg";
 import { ReactComponent as LogoBlue } from "./icons/logo-blue.svg";
 import Button from "../Button/Button";
@@ -20,21 +19,30 @@ import AccBurgerMenu from "../AccBurgerMenu/AccBurgerMenu";
 import styles from "./Header.module.scss";
 import { selectShoppingCart } from "../../store/selectors/shoppingCart.selector";
 import Search from "./Search/Search";
+import DropdownCart from "../DropdownCart/DropdownCart";
+import { allCategoriesSelector } from "../../store/selectors/catalog.selector";
+import { fetchCategories } from "../../store/actionCreator/catalog.actionCreator";
 
 const Header = () => {
+  const dispatch = useDispatch();
   const [anchorElNav, setAnchorElNav] = useState(null);
   const { itemsCart } = useSelector(selectShoppingCart);
   const [counterCart, setCounterCart] = useState(0);
+  const catalog = useSelector(allCategoriesSelector);
 
   const mediaDesktop = useMediaQuery("(min-width: 1200px)");
   const mediaTablet = useMediaQuery("(min-width: 768px)");
 
-  const navbarItems = [
-    "Laptops",
-    "Desktop PCs",
-    "Networking Devices",
-    "Printers & Scanners",
-  ];
+  const navbarItems = catalog.map(({ name, id }) => {
+    return {
+      name,
+      url: `${id}?categories=${id}&perPage=8&startPage=1&sort=-rating`,
+    };
+  });
+
+  useEffect(() => {
+    dispatch(fetchCategories());
+  }, [dispatch]);
 
   const handleOpenNavMenu = (event) => {
     setAnchorElNav(event.currentTarget);
@@ -162,25 +170,18 @@ const Header = () => {
                 </div>
 
                 {navbarItems.map((item) => (
-                  <MenuItem
-                    key={item}
+                  <Link
+                    to={item.url}
+                    key={item.name}
                     onClick={handleCloseNavMenu}
-                    sx={{
-                      margin: "8px auto",
-                      display: "flex",
-                      justifyContent: "space-between",
-                    }}
+                    className={styles["navbar__link-mobile"]}
                   >
-                    <Typography textAlign="center">{item}</Typography>
+                    {item.name}
                     <ArrowForwardIosIcon
                       sx={{ marginLeft: "30px", height: "8px" }}
                     />
-                  </MenuItem>
+                  </Link>
                 ))}
-
-                <Button className={cx(styles["btn-deals"], styles.blue)}>
-                  Our deals
-                </Button>
               </Menu>
             </Box>
 
@@ -197,27 +198,21 @@ const Header = () => {
             {mediaDesktop && (
               <ul className={styles["navbar-menu"]}>
                 {navbarItems.map((item) => (
-                  <li key={item} onClick={handleCloseNavMenu}>
-                    {item}
-                  </li>
+                  <NavLink
+                    to={item.url}
+                    key={item.name}
+                    onClick={handleCloseNavMenu}
+                    className={styles["navbar__link-desktop"]}
+                    activeClassName={"active"}
+                  >
+                    {item.name}
+                  </NavLink>
                 ))}
               </ul>
             )}
 
             <Search />
-            <Button className={styles["wrapper-shop"]} to={"/shopping-cart"}>
-              <ShoppingCartOutlinedIcon
-                sx={{
-                  color: { xs: "#FFFFFF", md: "#FFFFFF", lg: "#000000" },
-                  transform: "rotateY(180deg)",
-                }}
-              />
-              {counterCart !== 0 && (
-                <div className={styles["wrapper-counter"]}>
-                  <p>{counterCart}</p>
-                </div>
-              )}
-            </Button>
+            <DropdownCart cartCounter={counterCart} />
             <Box>
               <AccBurgerMenu />
             </Box>

@@ -33,6 +33,7 @@ import {
 } from "../../store/actionCreator/shoppingCart.actionCreator";
 import { updateShoppingCart } from "../../utils/cart/updateCart";
 import LoginSnackbar from "../../components/LoginForm/LoginSnackbar";
+import BreadcrumbsApp from "../../components/BreadcrumbsApp/BreadcrumbsApp";
 
 const ShoppingCart = () => {
   const dispatch = useDispatch();
@@ -130,165 +131,179 @@ const ShoppingCart = () => {
   }, [isUpdate]);
 
   return (
-    <Container maxWidth="lg" className={classes.root}>
-      <Typography
-        variant="h5"
-        component="div"
-        gutterBottom
-        className={isMobile ? classes.tabletTitle : classes.desktopTitle}
-      >
-        Shopping Cart
-      </Typography>
-      <Box className={classes.box} flexDirection={isMobile ? "column" : "row"}>
-        <Grid container>
-          {itemsCart?.map((item) => (
-            <Grid item key={item.id} xs={12} sm={12} md={12}>
-              <Box display="flex" alignItems="center" mb={2}>
-                <img
-                  src={item.image}
-                  alt={item.alt}
-                  className={classes.image}
-                />
-                <div>
-                  <Typography variant="subtitle1">
-                    {item.description}
-                  </Typography>
-                  <Typography variant="body2" color="textSecondary">
-                    {item.description}
-                  </Typography>
-                </div>
-              </Box>
-              <Box
-                display="flex"
-                justifyContent="space-between"
-                alignItems="center"
-                className={classes.boxContainer}
-              >
-                <Typography align="right">{item.currentPrice}.00 ₴</Typography>
-                <TextField
-                  type="number"
-                  value={item.cartQuantity}
-                  InputProps={{
-                    inputProps: { min: 1 },
-                    classes: { notchedOutline: classes.notchedOutline },
-                  }}
-                  className={classes.quantityInput}
-                  onChange={(e) =>
-                    handleQuantityChange(
-                      {
-                        id: item.id,
-                        image: item.image,
-                        alt: item.alt,
-                        description: item.description,
-                        currentPrice: item.currentPrice,
-                        cartQuantity: item.cartQuantity,
-                        itemNo: item.itemNo,
-                      },
-                      parseInt(e.target.value, 10),
-                      e.target.value > item.count,
-                    )
-                  }
-                />
-                <Typography align="right">
-                  {item.currentPrice * item.cartQuantity}.00 ₴
-                </Typography>
-                <IconButton
-                  aria-label="Delete"
-                  className={classes.deleteButton}
-                  onClick={() => handleDeleteItem(item.id)}
+    <Box
+      sx={{
+        margin: "10px auto",
+        maxWidth: "1400px",
+        padding: { xs: "0 15px", sm: "0 15px", xlg: "0" },
+      }}
+    >
+      <BreadcrumbsApp />
+      <Container maxWidth="lg" className={classes.root}>
+        <Typography
+          variant="h5"
+          component="div"
+          gutterBottom
+          className={isMobile ? classes.tabletTitle : classes.desktopTitle}
+        >
+          Shopping Cart
+        </Typography>
+        <Box
+          className={classes.box}
+          flexDirection={isMobile ? "column" : "row"}
+        >
+          <Grid container>
+            {itemsCart?.map((item) => (
+              <Grid item key={item.id} xs={12} sm={12} md={12}>
+                <Box display="flex" alignItems="center" mb={2}>
+                  <img
+                    src={item.image}
+                    alt={item.alt}
+                    className={classes.image}
+                  />
+                  <div>
+                    <Typography variant="subtitle1">
+                      {item.description}
+                    </Typography>
+                    <Typography variant="body2" color="textSecondary">
+                      {item.description}
+                    </Typography>
+                  </div>
+                </Box>
+                <Box
+                  display="flex"
+                  justifyContent="space-between"
+                  alignItems="center"
+                  className={classes.boxContainer}
                 >
-                  <HighlightOffIcon />
-                </IconButton>
-              </Box>
-              <Divider />
-            </Grid>
-          ))}
-          <Grid className={classes.btnContainer}>
-            <Box className={classes.clearContBtnBox}>
-              <Link to={"/"}>
+                  <Typography align="right">
+                    {item.currentPrice}.00 ₴
+                  </Typography>
+                  <TextField
+                    type="number"
+                    value={item.cartQuantity}
+                    InputProps={{
+                      inputProps: { min: 1 },
+                      classes: { notchedOutline: classes.notchedOutline },
+                    }}
+                    className={classes.quantityInput}
+                    onChange={(e) =>
+                      handleQuantityChange(
+                        {
+                          id: item.id,
+                          image: item.image,
+                          alt: item.alt,
+                          description: item.description,
+                          currentPrice: item.currentPrice,
+                          cartQuantity: item.cartQuantity,
+                          itemNo: item.itemNo,
+                        },
+                        parseInt(e.target.value, 10),
+                        e.target.value > item.count,
+                      )
+                    }
+                  />
+                  <Typography align="right">
+                    {item.currentPrice * item.cartQuantity}.00 ₴
+                  </Typography>
+                  <IconButton
+                    aria-label="Delete"
+                    className={classes.deleteButton}
+                    onClick={() => handleDeleteItem(item.id)}
+                  >
+                    <HighlightOffIcon />
+                  </IconButton>
+                </Box>
+                <Divider />
+              </Grid>
+            ))}
+            <Grid className={classes.btnContainer}>
+              <Box className={classes.clearContBtnBox}>
+                <Link to={"/"}>
+                  <Button
+                    variant="contained"
+                    className={`${classes.btnButton} ${classes.continueButton}`}
+                  >
+                    Continue Shopping
+                  </Button>
+                </Link>
                 <Button
                   variant="contained"
-                  className={`${classes.btnButton} ${classes.continueButton}`}
+                  className={classes.btnButton}
+                  onClick={handleClearCart}
                 >
-                  Continue Shopping
+                  Clear Shopping Cart
                 </Button>
-              </Link>
+              </Box>
               <Button
                 variant="contained"
                 className={classes.btnButton}
-                onClick={handleClearCart}
+                onClick={handleUpdateCart}
               >
-                Clear Shopping Cart
+                Update Shopping Cart
               </Button>
-            </Box>
-            <Button
-              variant="contained"
-              className={classes.btnButton}
-              onClick={handleUpdateCart}
-            >
-              Update Shopping Cart
-            </Button>
+            </Grid>
           </Grid>
-        </Grid>
-        <Box className={classes.summary}>
-          <Typography
-            variant="h5"
-            gutterBottom
-            className={
-              isMobile
-                ? classes.tabletSummaryTitle
-                : classes.desktopSummaryTitle
-            }
-          >
-            Summary
-          </Typography>
-          <Divider />
-          <div className={classes.summaryItem}>
-            <Typography variant="subtitle1" className={classes.subtitle}>
-              Subtotal
+          <Box className={classes.summary}>
+            <Typography
+              variant="h5"
+              gutterBottom
+              className={
+                isMobile
+                  ? classes.tabletSummaryTitle
+                  : classes.desktopSummaryTitle
+              }
+            >
+              Summary
             </Typography>
-            <Typography className={classes.subtitle}>
-              {`${subtotalAmount}.00 ₴`}
-            </Typography>
-          </div>
-          <div className={classes.summaryItem}>
-            <Typography variant="subtitle1" className={classes.subtitle}>
-              Tax
-            </Typography>
-            <Typography className={classes.subtitle}>{`${tax} ₴`}</Typography>
-          </div>
-          <div className={classes.summaryItem}>
-            <Typography variant="subtitle1" className={classes.subtitle}>
-              Shipping
-            </Typography>
-            <Typography className={classes.subtitle}>
-              {`${shipping}.00 ₴`}
-            </Typography>
-          </div>
-          <Divider />
-          <div className={classes.summaryItem}>
-            <Typography variant="subtitle1" className={classes.subtitle}>
-              Order Total
-            </Typography>
-            <Typography variant="h6" className={classes.subtitle}>
-              {`${totalAmount} ₴`}
-            </Typography>
-          </div>
-          <Link to={"/checkout"}>
-            <Button variant="contained" className={classes.checkoutButton}>
-              Proceed to Checkout
-            </Button>
-          </Link>
+            <Divider />
+            <div className={classes.summaryItem}>
+              <Typography variant="subtitle1" className={classes.subtitle}>
+                Subtotal
+              </Typography>
+              <Typography className={classes.subtitle}>
+                {`${subtotalAmount}.00 ₴`}
+              </Typography>
+            </div>
+            <div className={classes.summaryItem}>
+              <Typography variant="subtitle1" className={classes.subtitle}>
+                Tax
+              </Typography>
+              <Typography className={classes.subtitle}>{`${tax} ₴`}</Typography>
+            </div>
+            <div className={classes.summaryItem}>
+              <Typography variant="subtitle1" className={classes.subtitle}>
+                Shipping
+              </Typography>
+              <Typography className={classes.subtitle}>
+                {`${shipping}.00 ₴`}
+              </Typography>
+            </div>
+            <Divider />
+            <div className={classes.summaryItem}>
+              <Typography variant="subtitle1" className={classes.subtitle}>
+                Order Total
+              </Typography>
+              <Typography variant="h6" className={classes.subtitle}>
+                {`${totalAmount} ₴`}
+              </Typography>
+            </div>
+            <Link to={"/checkout"}>
+              <Button variant="contained" className={classes.checkoutButton}>
+                Proceed to Checkout
+              </Button>
+            </Link>
+          </Box>
+          <LoginSnackbar
+            open={openSnackbar}
+            status={status}
+            handleClose={handleClose}
+            textSuccess="Update successes!"
+            textError={"Your cart is not change"}
+          />
         </Box>
-        <LoginSnackbar
-          open={openSnackbar}
-          status={status}
-          handleClose={handleClose}
-          textSuccess="Update successes!"
-          textError={"Your cart is not change"}
-        />
-      </Box>
-    </Container>
+      </Container>
+    </Box>
   );
 };
 

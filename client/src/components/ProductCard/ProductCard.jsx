@@ -21,9 +21,12 @@ import {
 } from "../../assets/images/products";
 import styles from "./ProductCard.module.scss";
 import { selectCustomers } from "../../store/selectors/customers.selector";
+import handleAddToCart, {
+  handleAddToWishList,
+} from "../../utils/cart/handleAddToCart";
 import { selectShoppingCart } from "../../store/selectors/shoppingCart.selector";
+import { selectWishList } from "../../store/selectors/wishList.selector";
 import LoginSnackbar from "../LoginForm/LoginSnackbar";
-import handleAddToCart from "../../utils/cart/handleAddToCart";
 
 const ProductCard = ({
   image,
@@ -41,8 +44,9 @@ const ProductCard = ({
   const dispatch = useDispatch();
   const { isLogin } = useSelector(selectCustomers);
   const { itemsCart } = useSelector(selectShoppingCart);
+  const { itemsWishList } = useSelector(selectWishList);
   const isAdded = itemsCart?.some((el) => el.id === id);
-
+  const isWishList = itemsWishList?.some((item) => item.id === id);
   const [status, setStatus] = useState("");
   const [text, setText] = useState("");
   const [error, setError] = useState("");
@@ -64,14 +68,14 @@ const ProductCard = ({
   };
 
   useEffect(() => {
-    if (isAdded) {
+    if (isAdded || isWishList) {
       setStatus("success");
       setText("Product added successfully!");
     } else {
       setStatus("error");
       setError("Product not added");
     }
-  }, [isAdded]);
+  }, [isAdded, isWishList]);
 
   return (
     <>
@@ -81,32 +85,15 @@ const ProductCard = ({
         onMouseEnter={handleMouseEnter}
         onMouseLeave={handleMouseLeave}
       >
-        {isHovered && (
-          <Box className={styles.menu}>
-            <Box className={styles.menu_top}>
-              <Button
-                sx={{
-                  "&:hover": { backgroundColor: "rgba(255, 255, 255, 0.2)" },
-                }}
-              >
-                <IconWishList />
-              </Button>
-              <Button
-                sx={{
-                  "&:hover": { backgroundColor: "rgba(255, 255, 255, 0.2)" },
-                }}
-              >
-                <IconCompare />
-              </Button>
-            </Box>
+        <Box className={isHovered ? styles["menu-active"] : styles.menu}>
+          <Box className={styles.menu_top}>
             <Button
               sx={{
-                "&:hover": { backgroundColor: "rgba(255, 255, 255, 0.2)" },
-                marginBottom: 2,
+                "&:hover": { backgroundColor: "rgba(255, 255, 255, 0.9)" },
               }}
               onClick={() => {
                 dispatch(
-                  handleAddToCart(
+                  handleAddToWishList(
                     {
                       id,
                       image,
@@ -114,6 +101,10 @@ const ProductCard = ({
                       description,
                       currentPrice,
                       itemNo,
+                      categories,
+                      available,
+                      rating,
+                      oldPrice,
                     },
                     isLogin,
                   ),
@@ -121,11 +112,41 @@ const ProductCard = ({
                 setOpenSnackbar(true);
               }}
             >
-              <IconCart className={isAdded && cx(styles.green)} />
+              <IconWishList className={isWishList && cx(styles.green)} />
+            </Button>
+            <Button
+              sx={{
+                "&:hover": { backgroundColor: "rgba(255, 255, 255, 0.2)" },
+              }}
+            >
+              <IconCompare />
             </Button>
           </Box>
-        )}
-
+          <Button
+            sx={{
+              "&:hover": { backgroundColor: "rgba(255, 255, 255, 0.2)" },
+              marginBottom: 2,
+            }}
+            onClick={() => {
+              dispatch(
+                handleAddToCart(
+                  {
+                    id,
+                    image,
+                    alt,
+                    description,
+                    currentPrice,
+                    itemNo,
+                  },
+                  isLogin,
+                ),
+              );
+              setOpenSnackbar(true);
+            }}
+          >
+            <IconCart className={isAdded && cx(styles.green)} />
+          </Button>
+        </Box>
         <CardContent sx={{ paddingTop: 1 }}>
           <Typography variant="caption" color={available ? "green" : "error"}>
             {available ? (
@@ -236,7 +257,7 @@ ProductCard.propTypes = {
   description: PropTypes.string.isRequired,
   oldPrice: PropTypes.number,
   currentPrice: PropTypes.number.isRequired,
-  available: PropTypes.bool.isRequired,
+  available: PropTypes.bool,
   rating: PropTypes.number,
   id: PropTypes.string.isRequired,
   categories: PropTypes.string.isRequired,
