@@ -11,6 +11,7 @@ import ShoppingCart from "../pages/ShoppingCart/ShoppingCart";
 import { selectCustomers } from "../store/selectors/customers.selector";
 import AccountPage from "../pages/Account/AccountPage";
 import Registration from "../pages/Registration/Registration";
+import WishList from "../pages/WishList/WishList";
 
 const AppRoute = () => {
   const { isLogin } = useSelector(selectCustomers);
@@ -35,6 +36,7 @@ const AppRoute = () => {
         path="/sign-in"
         element={isLogin ? <Navigate to="/" /> : <Registration />}
       />
+      <Route path="/wishlist" element={<WishList />} />
       <Route path="*" element={<NotPage />} />
     </Routes>
   );
