@@ -12,6 +12,8 @@ import { selectCustomers } from "../store/selectors/customers.selector";
 import AccountPage from "../pages/Account/AccountPage";
 import Registration from "../pages/Registration/Registration";
 import WishList from "../pages/WishList/WishList";
+import ContactUs from "../pages/ContactUs/ContactUs";
+import TermsAndConditions from "../components/TermsAndConditions/TermsAndConditions";
 
 const AppRoute = () => {
   const { isLogin } = useSelector(selectCustomers);
@@ -28,6 +30,8 @@ const AppRoute = () => {
       <Route path="/:category/:id" element={<SingleProduct />} />
       <Route path="/:category" element={<Category />} />
       <Route path="/checkout" element={<CheckoutPage />} />
+      <Route path="/contact" element={<ContactUs />} />
+      <Route path="/terms-of-use" element={<TermsAndConditions />} />
       <Route
         path="/account"
         element={isLogin ? <AccountPage /> : <LoginPage />}

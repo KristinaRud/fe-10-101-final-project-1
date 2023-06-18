@@ -7,7 +7,6 @@ import BreadcrumbsApp from "../../components/BreadcrumbsApp/BreadcrumbsApp";
 
 const WishList = () => {
   const { itemsWishList } = useSelector(selectWishList);
-  console.log(itemsWishList);
 
   return (
     <Box
