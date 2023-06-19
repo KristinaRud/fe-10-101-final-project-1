@@ -1,5 +1,5 @@
 import { Box } from "@mui/material";
-import { useDispatch } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 import { useEffect, useState } from "react";
 import useMediaQuery from "@mui/material/useMediaQuery";
 import styles from "./AccountPage.module.scss";
@@ -9,15 +9,24 @@ import UserInformation from "../../components/Dashboard/Description/UserInformat
 import AccountOrders from "../../components/Dashboard/Description/AccountOrders";
 import { getCustomer } from "../../store/actionCreator/customers.actionCreator";
 import CompareProducts from "../../components/LeftSidear/CompareProducts/CompareProducts";
+import { selectWishList } from "../../store/selectors/wishList.selector";
+import { selectCustomers } from "../../store/selectors/customers.selector";
+import { fetchWishList } from "../../store/actionCreator/wishList.actionCreator";
 
 const AccountPage = () => {
   const dispatch = useDispatch();
   const [activeComponent, setActiveComponent] = useState("Account Dashboard");
   const mediaMobile = useMediaQuery("(max-width: 480px)");
+  const { itemsWishList } = useSelector(selectWishList);
+  const { isLogin } = useSelector(selectCustomers);
+  console.log(itemsWishList);
 
   useEffect(() => {
-    dispatch(getCustomer());
-  }, [dispatch]);
+    if (isLogin) {
+      dispatch(getCustomer());
+      dispatch(fetchWishList());
+    }
+  }, [dispatch, isLogin]);
 
   const handleMenuItemClick = (menuItem) => {
     setActiveComponent(menuItem.item);
@@ -64,7 +73,11 @@ const AccountPage = () => {
           <CompareProducts classname={styles["wrapper-compare"]} />
         )}
         {mediaMobile && (
-          <CompareProducts isFavourite classname={styles["wrapper-compare"]} />
+          <CompareProducts
+            isFavourite
+            data={itemsWishList}
+            classname={styles["wrapper-compare"]}
+          />
         )}
       </Box>
     </Box>

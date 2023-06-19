@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import FacebookIcon from "@mui/icons-material/Facebook";
 import InstagramIcon from "@mui/icons-material/Instagram";
+import FavoriteBorderIcon from "@mui/icons-material/FavoriteBorder";
 import useMediaQuery from "@mui/material/useMediaQuery";
 import cx from "classnames";
 import { useDispatch, useSelector } from "react-redux";
@@ -22,12 +23,15 @@ import Search from "./Search/Search";
 import DropdownCart from "../DropdownCart/DropdownCart";
 import { allCategoriesSelector } from "../../store/selectors/catalog.selector";
 import { fetchCategories } from "../../store/actionCreator/catalog.actionCreator";
+import { selectWishList } from "../../store/selectors/wishList.selector";
 
 const Header = () => {
   const dispatch = useDispatch();
   const [anchorElNav, setAnchorElNav] = useState(null);
   const { itemsCart } = useSelector(selectShoppingCart);
+  const { itemsWishList } = useSelector(selectWishList);
   const [counterCart, setCounterCart] = useState(0);
+  const [counterWishList, setCounterWishList] = useState(0);
   const catalog = useSelector(allCategoriesSelector);
 
   const mediaDesktop = useMediaQuery("(min-width: 1200px)");
@@ -52,14 +56,15 @@ const Header = () => {
   };
 
   useEffect(() => {
+    const counterWL = itemsWishList.length;
     const counter = itemsCart
       ? itemsCart
           .map(({ cartQuantity }) => cartQuantity)
           .reduce((prev, curr) => prev + curr, 0)
       : 0;
     setCounterCart(counter);
-  }, [itemsCart]);
-
+    setCounterWishList(counterWL);
+  }, [itemsCart, itemsWishList]);
   return (
     <>
       <header className={styles.header}>
@@ -213,8 +218,21 @@ const Header = () => {
 
             <Search />
             <DropdownCart cartCounter={counterCart} />
+            <Button className={styles["wrapper-shop"]} to={"/wishlist"}>
+              <FavoriteBorderIcon
+                sx={{
+                  color: { xs: "#FFFFFF", md: "#FFFFFF", lg: "#000000" },
+                }}
+              />
+              {counterWishList !== 0 && (
+                <div className={styles["wrapper-counter"]}>
+                  <p>{counterWishList}</p>
+                </div>
+              )}
+            </Button>
+
             <Box>
-              <AccBurgerMenu />
+              <AccBurgerMenu counterWishList={counterWishList} />
             </Box>
           </div>
         </Box>

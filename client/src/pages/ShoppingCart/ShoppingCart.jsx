@@ -32,9 +32,7 @@ import {
   fetchShoppingCart,
   editProductFromCart,
   decreaseProductFromCart,
-  editShoppingCart,
 } from "../../store/actionCreator/shoppingCart.actionCreator";
-import { updateShoppingCart } from "../../utils/cart/updateCart";
 import LoginSnackbar from "../../components/LoginForm/LoginSnackbar";
 import BreadcrumbsApp from "../../components/BreadcrumbsApp/BreadcrumbsApp";
 import s from "../../components/Checkout/OrderSummary/OrderSummary.module.scss";
@@ -57,32 +55,44 @@ const ShoppingCart = () => {
     setIsUpdate(false);
   };
 
-  const handleQuantityChange = async (data, newQuantity) => {
-    const isIncrement =
-      newQuantity >
-      cartItems?.find((item) => item.id === data.id)?.cartQuantity;
+  const handleQuantityChange = (data, e) => {
+    const newQuantity = parseInt(e.target.value, 10);
+    const isIncrement = newQuantity > data.cartQuantity;
 
     if (isLogin) {
       if (isIncrement) {
-        await dispatch(editProductFromCart(data.id));
+        dispatch(editProductFromCart(data.id));
       } else {
-        await dispatch(decreaseProductFromCart(data.id));
+        dispatch(decreaseProductFromCart(data.id));
       }
     } else {
       dispatch(isIncrement ? incrementCartItem(data) : decrementCartItem(data));
     }
 
-    setCartItems((prevItems) =>
-      prevItems.map((item) =>
-        item.id === data.id ? { ...item, cartQuantity: newQuantity } : item,
-      ),
+    const updatedItems = cartItems.map((item) =>
+      item.id === data.id ? { ...item, cartQuantity: newQuantity } : item,
     );
+
+    setCartItems(updatedItems);
     setIsUpdate(true);
   };
 
-  const subtotalAmount = itemsCart
-    ?.map(({ currentPrice, cartQuantity }) => currentPrice * cartQuantity)
-    .reduce((prev, curr) => prev + curr, 0);
+  const handleQuantityKeyDown = (data, e) => {
+    if (e.key === "+") {
+      if (isLogin) {
+        dispatch(editProductFromCart(data.id));
+      } else {
+        dispatch(incrementCartItem(data));
+      }
+    }
+  };
+
+  const subtotalAmount =
+    itemsCart?.length > 0
+      ? itemsCart
+          .map(({ currentPrice, cartQuantity }) => currentPrice * cartQuantity)
+          .reduce((prev, curr) => prev + curr, 0)
+      : 0;
 
   const tax = subtotalAmount * 0.08;
   const shipping = 100;
@@ -93,15 +103,6 @@ const ShoppingCart = () => {
       await dispatch(deleteProductFromCart(id));
     } else {
       dispatch(deleteCartItem(id));
-    }
-    setIsUpdate(true);
-  };
-
-  const handleUpdateCart = async () => {
-    if (isLogin) {
-      await dispatch(updateShoppingCart(editShoppingCart));
-    } else {
-      localStorage.setItem("shoppingCart", JSON.stringify(itemsCart));
     }
     setIsUpdate(true);
   };
@@ -156,19 +157,28 @@ const ShoppingCart = () => {
           className={classes.box}
           flexDirection={isMobile ? "column" : "row"}
         >
-          <Grid container>
+          <Grid container className={classes.container}>
+            {subtotalAmount === 0 && (
+              <Typography variant="subtitle1" className={classes.title}>
+                Your shopping cart is empty.
+              </Typography>
+            )}
             {itemsCart?.map((item) => (
               <Grid item key={item.id} xs={12} sm={12} md={12}>
                 <Box display="flex" alignItems="center" mb={2}>
-                  <img
-                    src={item.image}
-                    alt={item.alt}
-                    className={classes.image}
-                  />
+                  <Link to={`/${item.categories}/${item.id}`}>
+                    <img
+                      src={item.image}
+                      alt={item.alt}
+                      className={classes.image}
+                    />
+                  </Link>
                   <div>
-                    <Typography variant="subtitle1">
-                      {item.description}
-                    </Typography>
+                    <Link to={`/${item.categories}/${item.id}`}>
+                      <Typography variant="subtitle1">
+                        {item.description}
+                      </Typography>
+                    </Link>
                     <Typography variant="body2" color="textSecondary">
                       {item.description}
                     </Typography>
@@ -191,6 +201,20 @@ const ShoppingCart = () => {
                       classes: { notchedOutline: classes.notchedOutline },
                     }}
                     className={classes.quantityInput}
+                    onKeyDown={(e) =>
+                      handleQuantityKeyDown(
+                        {
+                          id: item.id,
+                          image: item.image,
+                          alt: item.alt,
+                          description: item.description,
+                          currentPrice: item.currentPrice,
+                          cartQuantity: item.cartQuantity,
+                          itemNo: item.itemNo,
+                        },
+                        e,
+                      )
+                    }
                     onChange={(e) =>
                       handleQuantityChange(
                         {
@@ -202,8 +226,7 @@ const ShoppingCart = () => {
                           cartQuantity: item.cartQuantity,
                           itemNo: item.itemNo,
                         },
-                        parseInt(e.target.value, 10),
-                        e.target.value > item.count,
+                        e,
                       )
                     }
                   />
@@ -239,13 +262,6 @@ const ShoppingCart = () => {
                   Clear Shopping Cart
                 </Button>
               </Box>
-              <Button
-                variant="contained"
-                className={classes.btnButton}
-                onClick={handleUpdateCart}
-              >
-                Update Shopping Cart
-              </Button>
             </Grid>
           </Grid>
           <Box className={classes.summaryWrapper}>
@@ -304,13 +320,16 @@ const ShoppingCart = () => {
                 <Typography variant="h6" className={classes.subtitle}>
                   {`${totalAmount} ₴`}
                 </Typography>
-              </div>
-              <Link to={"/checkout"}>
-                <Button variant="contained" className={classes.checkoutButton}>
-                  Proceed to Checkout
-                </Button>
-              </Link>
-            </Box>
+            </div>
+            <Link to={"/checkout"}>
+              <Button
+                variant="contained"
+                className={classes.checkoutButton}
+                disabled={subtotalAmount === 0}
+              >
+                Proceed to Checkout
+              </Button>
+            </Link>
           </Box>
           <LoginSnackbar
             open={openSnackbar}

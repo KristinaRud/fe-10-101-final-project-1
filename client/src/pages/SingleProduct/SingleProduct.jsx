@@ -8,11 +8,14 @@ import styles from "./SingleProduct.module.scss";
 import { fetchProducts } from "../../store/actionCreator/products.actionCreator";
 import { selectProducts } from "../../store/selectors/products.selector";
 import BreadcrumbsApp from "../../components/BreadcrumbsApp/BreadcrumbsApp";
-import handleAddToCart from "../../utils/cart/handleAddToCart";
+import handleAddToCart, {
+  handleAddToWishList,
+} from "../../utils/cart/handleAddToCart";
 import { selectCustomers } from "../../store/selectors/customers.selector";
 import AboutProductSlider from "../../components/Sliders/AboutProductSlider/AboutProductSlider";
 import Support from "../../components/Support/Support";
 import Features from "../../components/Features/Features";
+import { selectWishList } from "../../store/selectors/wishList.selector";
 import {
   IconCompare,
   IconWishList,
@@ -24,6 +27,7 @@ const SingleProduct = () => {
   const dispatch = useDispatch();
   const { products } = useSelector(selectProducts);
   const { isLogin } = useSelector(selectCustomers);
+  const { itemsWishList } = useSelector(selectWishList);
   const [currentProduct, setCurrentProduct] = useState(null);
   const [detailsList, setDetailsList] = useState(null);
   const [isActiveTab, setIsActiveTab] = useState({
@@ -45,8 +49,17 @@ const SingleProduct = () => {
   }, [id, products]);
 
   if (!currentProduct) return "Loading...";
-  const { name, categories, currentPrice, description, itemNo, alt } =
-    currentProduct;
+  const {
+    name,
+    categories,
+    currentPrice,
+    description,
+    itemNo,
+    alt,
+    available,
+    rating,
+    oldPrice,
+  } = currentProduct;
 
   const breadcrumbsCustomData = [
     { label: "Home", url: "/" },
@@ -114,6 +127,7 @@ const SingleProduct = () => {
                           description: name,
                           currentPrice,
                           itemNo,
+                          categories,
                         },
                         isLogin,
                       ),
@@ -178,7 +192,28 @@ const SingleProduct = () => {
                     </Button>
                   </li>
                   <li className={styles["product-picture__control-item"]}>
-                    <Button>
+                    <Button
+                      onClick={() => {
+                        dispatch(
+                          handleAddToWishList(
+                            {
+                              id,
+                              image: description[0].image,
+                              alt,
+                              description: name,
+                              currentPrice,
+                              itemNo,
+                              categories,
+                              available,
+                              rating,
+                              oldPrice,
+                            },
+                            itemsWishList,
+                            isLogin,
+                          ),
+                        );
+                      }}
+                    >
                       <IconWishList />
                     </Button>
                   </li>

@@ -6,8 +6,9 @@ import {
   updateWishList,
   updateProductToWishList,
   deleteProductFromWishList,
+  updateListProductFromWishList,
 } from "../actionCreator/wishList.actionCreator";
-import { structureDataToStore } from "../../utils/cart/structureData";
+import { structureDataWishList } from "../../utils/cart/structureData";
 
 const wishListSlice = createSlice({
   name: "wishList",
@@ -30,25 +31,31 @@ const wishListSlice = createSlice({
   },
   extraReducers: (builder) => {
     builder.addCase(fetchWishList.fulfilled, (state, action) => {
-      state.itemsWishList = structureDataToStore(action.payload.products);
+      state.itemsWishList = structureDataWishList(action.payload.products);
     });
     builder.addCase(createWishList.fulfilled, (state, action) => {
-      state.itemsWishList = structureDataToStore(action.payload.products);
+      state.itemsWishList = structureDataWishList(action.payload.products);
       localStorage.removeItem("wishList");
     });
     builder.addCase(deleteWishList.fulfilled, (state, action) => {
-      state.itemsWishList = structureDataToStore(action.payload.products);
+      state.itemsWishList = structureDataWishList(action.payload.products);
     });
     builder.addCase(updateWishList.fulfilled, (state, action) => {
-      state.itemsWishList = structureDataToStore(action.payload.products);
+      state.itemsWishList = structureDataWishList(action.payload.products);
       localStorage.removeItem("wishList");
     });
     builder.addCase(deleteProductFromWishList.fulfilled, (state, action) => {
-      state.itemsWishList = structureDataToStore(action.payload.products);
+      state.itemsWishList = structureDataWishList(action.payload.products);
     });
     builder.addCase(updateProductToWishList.fulfilled, (state, action) => {
-      state.itemsWishList = structureDataToStore(action.payload.products);
+      state.itemsWishList = structureDataWishList(action.payload.products);
     });
+    builder.addCase(
+      updateListProductFromWishList.fulfilled,
+      (state, action) => {
+        state.itemsWishList = structureDataWishList(action.payload[0].products);
+      },
+    );
   },
 });
 export const { addToWishList } = wishListSlice.actions;

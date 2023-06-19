@@ -141,7 +141,7 @@ const ProductCard = ({
           <Box className={styles.menu_top}>
             <Button
               sx={{
-                "&:hover": { backgroundColor: "rgba(255, 255, 255, 0.9)" },
+                "&:hover": { backgroundColor: "rgb(1 86 255 / 20%)" },
               }}
               onClick={() => {
                 dispatch(
@@ -158,6 +158,7 @@ const ProductCard = ({
                       rating,
                       oldPrice,
                     },
+                    itemsWishList,
                     isLogin,
                   ),
                 );
@@ -168,7 +169,7 @@ const ProductCard = ({
             </Button>
             <Button
               sx={{
-                "&:hover": { backgroundColor: "rgba(255, 255, 255, 0.2)" },
+                "&:hover": { backgroundColor: "rgb(1 86 255 / 20%)" },
               }}
               onClick={handleClickCompare}
             >
@@ -177,7 +178,7 @@ const ProductCard = ({
           </Box>
           <Button
             sx={{
-              "&:hover": { backgroundColor: "rgba(255, 255, 255, 0.2)" },
+              "&:hover": { backgroundColor: "rgb(1 86 255 / 20%)" },
               marginBottom: 2,
             }}
             onClick={() => {
@@ -190,6 +191,7 @@ const ProductCard = ({
                     description,
                     currentPrice,
                     itemNo,
+                    categories,
                   },
                   isLogin,
                 ),

@@ -6,10 +6,12 @@ import {
   Rating,
   Typography,
 } from "@mui/material";
+import { useDispatch, useSelector } from "react-redux";
 import CheckCircleIcon from "@mui/icons-material/CheckCircle";
 import PhoneIcon from "@mui/icons-material/Phone";
 import PropTypes from "prop-types";
 import ShoppingCartOutlinedIcon from "@mui/icons-material/ShoppingCartOutlined";
+import cx from "classnames";
 import { Link } from "react-router-dom";
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
@@ -26,8 +28,13 @@ import {
 } from "../../../store/actionCreator/comparison.actionCreator";
 import { selectCustomers } from "../../../store/selectors/customers.selector";
 import { selectComparison } from "../../../store/selectors/comparison.selector";
-import styles from "../ProductCard.module.scss";
 import LoginSnackbar from "../../LoginForm/LoginSnackbar";
+import handleAddToCart, {
+  handleAddToWishList,
+} from "../../../utils/cart/handleAddToCart";
+import { selectWishList } from "../../../store/selectors/wishList.selector";
+import styles from "../ProductCard.module.scss";
+import { selectShoppingCart } from "../../../store/selectors/shoppingCart.selector";
 
 const ProductCardFull = ({
   available,
@@ -39,6 +46,7 @@ const ProductCardFull = ({
   currentPrice,
   description,
   id,
+  itemNo,
   categories,
 }) => {
   const dispatch = useDispatch();
@@ -50,7 +58,11 @@ const ProductCardFull = ({
   const [error, setError] = useState("");
   const [openSnackbar, setOpenSnackbar] = useState(false);
   const [isInComparison, setIsInComparison] = useState(false);
-
+  const { itemsWishList } = useSelector(selectWishList);
+  const { itemsCart } = useSelector(selectShoppingCart);
+  const isAdded = itemsCart?.some((el) => el.id === id);
+  const isWishList = itemsWishList?.some((item) => item.id === id);
+  
   const handleClose = (event, reason) => {
     if (reason === "clickaway") {
       return;
@@ -101,6 +113,7 @@ const ProductCardFull = ({
       });
     }
   }, [comparison, categories, id]);
+
   return (
     <Card
       sx={{
@@ -183,9 +196,27 @@ const ProductCardFull = ({
               {currentPrice}.00 ₴
             </Typography>
           </Box>
-          <Button className={s.btn}>
-            <ShoppingCartOutlinedIcon />
-            Add to cart
+          <Button
+            className={cx(s.btn, isAdded && s.green)}
+            onClick={() => {
+              dispatch(
+                handleAddToCart(
+                  {
+                    id,
+                    image,
+                    alt,
+                    description,
+                    currentPrice,
+                    itemNo,
+                    categories,
+                  },
+                  isLogin,
+                ),
+              );
+            }}
+          >
+            <ShoppingCartOutlinedIcon className={isAdded && cx(styles.green)} />
+            {isAdded ? "In cart" : "Add to cart"}
           </Button>
         </Box>
         <Typography
@@ -207,8 +238,29 @@ const ProductCardFull = ({
           >
             <IconCompare className={isInComparison && cx(styles.green)} />
           </Button>
-          <Button>
-            <IconWishList />
+          <Button
+            onClick={() => {
+              dispatch(
+                handleAddToWishList(
+                  {
+                    id,
+                    image,
+                    alt,
+                    description,
+                    currentPrice,
+                    itemNo,
+                    categories,
+                    available,
+                    rating,
+                    oldPrice,
+                  },
+                  itemsWishList,
+                  isLogin,
+                ),
+              );
+            }}
+          >
+            <IconWishList className={isWishList && cx(styles.green)} />
           </Button>
         </Box>
       </Box>
@@ -234,5 +286,6 @@ ProductCardFull.propTypes = {
   description: PropTypes.string.isRequired,
   categories: PropTypes.string.isRequired,
   id: PropTypes.string.isRequired,
+  itemNo: PropTypes.number,
 };
 export default ProductCardFull;

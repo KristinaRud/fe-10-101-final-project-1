@@ -77,8 +77,9 @@ const ProductsListView = () => {
                     description={shortDescription.join(" ")}
                     currentPrice={currentPrice}
                     name={name}
-                    categories={categories}
                     id={_id}
+                    itemNo={itemNo}
+                    categories={categories}
                   />
                 </Grid>
               );
@@ -94,10 +95,10 @@ const ProductsListView = () => {
                   currentPrice={currentPrice}
                   description={name}
                   title=""
-                  id={product._id}
-                  categories={product.categories}
-                  name={product.name}
-                  itemNo={product.itemNo}
+                  id={_id}
+                  categories={categories}
+                  name={name}
+                  itemNo={itemNo}
                 />
               </Grid>
             );

@@ -82,6 +82,31 @@ const deleteProductFromWishList = createAsyncThunk(
   },
 );
 
+const updateListProductFromWishList = createAsyncThunk(
+  "wishList/updateListProductFromWishList",
+  async () => {
+    const products = JSON.parse(window.localStorage.getItem("wishList"));
+    if (products.length > 0) {
+      const fetchWishListPromises = products.map(async (product) => {
+        try {
+          const { res } = await request({
+            url: `/wishList/${product.id}`,
+            method: "PUT",
+          });
+          if (res) {
+            return res;
+          }
+        } catch (error) {
+          throw new Error(`Couldn't get products: ${error}`);
+        }
+      });
+      const fetchedWishList = await Promise.all(fetchWishListPromises);
+      await window.localStorage.removeItem("wishList");
+      return fetchedWishList;
+    }
+  },
+);
+
 export {
   fetchWishList,
   createWishList,
@@ -89,4 +114,5 @@ export {
   deleteWishList,
   updateProductToWishList,
   deleteProductFromWishList,
+  updateListProductFromWishList,
 };
