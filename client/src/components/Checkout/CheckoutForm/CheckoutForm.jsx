@@ -26,7 +26,7 @@ import {
 } from "../../../store/actionCreator/orders.actionCreator";
 import { selectOrders } from "../../../store/selectors/orders.selector";
 import TelephoneField from "../../RegistrationForm/TelephoneField/TelephoneField";
-import { createOrderLetter } from "../../../utils/email/createOrderLetter";
+import { generateThankYouEmail } from "../../../utils/emailLetter/generateThankYouEmail";
 import LoginSnackbar from "../../LoginForm/LoginSnackbar";
 import { clearOrders } from "../../../store/slices/orders.slice";
 import {
@@ -34,7 +34,6 @@ import {
   fetchShoppingCart,
 } from "../../../store/actionCreator/shoppingCart.actionCreator";
 import { selectShoppingCart } from "../../../store/selectors/shoppingCart.selector";
-import { deleteCart } from "../../../store/slices/shoppingCart.slice";
 
 const CheckoutForm = () => {
   const { isLogin, data } = useSelector(selectCustomers);
@@ -86,7 +85,7 @@ const CheckoutForm = () => {
       setSubmit(false);
       dispatch(clearOrders());
       if (!isLogin) {
-        dispatch(deleteCart());
+        window.localStorage.removeItem("shoppingCart");
       } else {
         dispatch(deleteShoppingCart());
       }
@@ -113,10 +112,10 @@ const CheckoutForm = () => {
 
   useEffect(() => {
     if (products.length) {
-      setLetterHtml(createOrderLetter(products));
+      setLetterHtml(generateThankYouEmail(products));
     }
     if (itemsCart.length) {
-      setLetterHtml(createOrderLetter(itemsCart));
+      setLetterHtml(generateThankYouEmail(itemsCart));
     }
   }, [itemsCart, products]);
 
@@ -159,11 +158,9 @@ const CheckoutForm = () => {
                 label="Email Address *"
                 className={s.input}
               />
-              {!isLogin && (
-                <Typography component="span" className={s.hint}>
-                  You can create an account after checkout.
-                </Typography>
-              )}
+              <Typography component="span" className={s.hint}>
+                You can create an account after checkout.
+              </Typography>
               <Field
                 component={TextField}
                 name="firstName"

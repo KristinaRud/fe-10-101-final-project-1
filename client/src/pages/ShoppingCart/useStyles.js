@@ -22,13 +22,12 @@ const useStyles = makeStyles((theme) => ({
     marginRight: theme.spacing(1),
   },
   summary: {
-    background: "#F5F7FF",
-    padding: "18px 35px",
-  },
-  summaryWrapper: {
+    marginTop: theme.spacing(2),
     display: "flex",
     flexDirection: "column",
+    background: "#F5F7FF",
     width: "65.66%",
+    padding: "18px 35px",
     [theme.breakpoints.down("md")]: {
       width: "100%",
     },

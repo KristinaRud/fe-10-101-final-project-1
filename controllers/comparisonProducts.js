@@ -240,7 +240,6 @@ exports.getComparisonProducts = (req, res, next) => {
             const comparisonProductsData = {
                 ...comparisonProducts._doc,
                 products: productsByCategory,
-                count: comparisonProducts.products.length,
             };
             res.json(comparisonProductsData)
         })
