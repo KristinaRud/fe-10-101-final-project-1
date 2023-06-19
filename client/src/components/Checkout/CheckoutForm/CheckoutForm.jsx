@@ -26,7 +26,6 @@ import {
 } from "../../../store/actionCreator/orders.actionCreator";
 import { selectOrders } from "../../../store/selectors/orders.selector";
 import TelephoneField from "../../RegistrationForm/TelephoneField/TelephoneField";
-import { generateThankYouEmail } from "../../../utils/emailLetter/generateThankYouEmail";
 import LoginSnackbar from "../../LoginForm/LoginSnackbar";
 import { clearOrders } from "../../../store/slices/orders.slice";
 import {
@@ -34,6 +33,7 @@ import {
   fetchShoppingCart,
 } from "../../../store/actionCreator/shoppingCart.actionCreator";
 import { selectShoppingCart } from "../../../store/selectors/shoppingCart.selector";
+import { createOrderLetter } from "../../../utils/email/createOrderLetter";
 
 const CheckoutForm = () => {
   const { isLogin, data } = useSelector(selectCustomers);
@@ -112,10 +112,10 @@ const CheckoutForm = () => {
 
   useEffect(() => {
     if (products.length) {
-      setLetterHtml(generateThankYouEmail(products));
+      setLetterHtml(createOrderLetter(products));
     }
     if (itemsCart.length) {
-      setLetterHtml(generateThankYouEmail(itemsCart));
+      setLetterHtml(createOrderLetter(itemsCart));
     }
   }, [itemsCart, products]);
 
