@@ -1,6 +1,6 @@
 import { useDispatch, useSelector } from "react-redux";
 import { useState, useEffect } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import {
   Typography,
   Button,
@@ -46,6 +46,7 @@ const ShoppingCart = () => {
   const [status, setStatus] = useState("");
   const [isUpdate, setIsUpdate] = useState(false);
   const [openSnackbar, setOpenSnackbar] = useState(false);
+  const navigate = useNavigate();
 
   const handleClose = (event, reason) => {
     if (reason === "clickaway") {
@@ -321,11 +322,14 @@ const ShoppingCart = () => {
                   {`${totalAmount} ₴`}
                 </Typography>
               </div>
-              <Link to={"/checkout"}>
-                <Button variant="contained" className={classes.checkoutButton}>
-                  Proceed to Checkout
-                </Button>
-              </Link>
+              <Button
+                variant="contained"
+                className={classes.checkoutButton}
+                disabled={!itemsCart}
+                onClick={() => navigate("/checkout")}
+              >
+                Proceed to Checkout
+              </Button>
             </Box>
           </Box>
           <LoginSnackbar

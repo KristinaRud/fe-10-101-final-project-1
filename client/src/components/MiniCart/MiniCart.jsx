@@ -42,7 +42,7 @@ const MiniCart = ({ onClick }) => {
         </Link>
       </div>
       <div className={styles.cart__list}>
-        {itemsCart.map((item) => {
+        {itemsCart?.map((item) => {
           return (
             <MiniCartItem
               key={uid(item)}
