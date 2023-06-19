@@ -31,7 +31,7 @@ const DropdownCart = ({ cartCounter }) => {
             transform: "rotateY(180deg)",
           }}
         />
-        {cartCounter !== 0 && (
+        {cartCounter > 0 && (
           <div className={styles["wrapper-counter"]}>
             <p>{cartCounter}</p>
           </div>

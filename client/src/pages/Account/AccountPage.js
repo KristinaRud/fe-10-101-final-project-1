@@ -12,6 +12,7 @@ import CompareProducts from "../../components/LeftSidear/CompareProducts/Compare
 import { selectWishList } from "../../store/selectors/wishList.selector";
 import { selectCustomers } from "../../store/selectors/customers.selector";
 import { fetchWishList } from "../../store/actionCreator/wishList.actionCreator";
+import BreadcrumbsApp from "../../components/BreadcrumbsApp/BreadcrumbsApp";
 
 const AccountPage = () => {
   const dispatch = useDispatch();
@@ -19,7 +20,6 @@ const AccountPage = () => {
   const mediaMobile = useMediaQuery("(max-width: 480px)");
   const { itemsWishList } = useSelector(selectWishList);
   const { isLogin } = useSelector(selectCustomers);
-  console.log(itemsWishList);
 
   useEffect(() => {
     if (isLogin) {
@@ -58,6 +58,8 @@ const AccountPage = () => {
         padding: { xs: "0 15px", sm: "0 15px", xlg: "0" },
       }}
     >
+      {" "}
+      <BreadcrumbsApp />
       <h1 className={styles.title}>My Dashboard</h1>
       <Box
         sx={{
