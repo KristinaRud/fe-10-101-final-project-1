@@ -34,6 +34,7 @@ import {
 } from "../../../store/actionCreator/shoppingCart.actionCreator";
 import { selectShoppingCart } from "../../../store/selectors/shoppingCart.selector";
 import { createOrderLetter } from "../../../utils/email/createOrderLetter";
+import { deleteCart } from "../../../store/slices/shoppingCart.slice";
 
 const CheckoutForm = () => {
   const { isLogin, data } = useSelector(selectCustomers);
@@ -85,7 +86,7 @@ const CheckoutForm = () => {
       setSubmit(false);
       dispatch(clearOrders());
       if (!isLogin) {
-        window.localStorage.removeItem("shoppingCart");
+        dispatch(deleteCart());
       } else {
         dispatch(deleteShoppingCart());
       }
@@ -158,9 +159,11 @@ const CheckoutForm = () => {
                 label="Email Address *"
                 className={s.input}
               />
-              <Typography component="span" className={s.hint}>
-                You can create an account after checkout.
-              </Typography>
+              {!isLogin && (
+                <Typography component="span" className={s.hint}>
+                  You can create an account after checkout.
+                </Typography>
+              )}
               <Field
                 component={TextField}
                 name="firstName"

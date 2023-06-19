@@ -37,11 +37,9 @@
   @media (width <= 768px) {
     max-width: 320px;
   }
-
   & :global svg {
     color: #72747c !important;
   }
-
   & :global .MuiStepIcon-text {
     fill: #fff;
   }
