@@ -318,13 +318,14 @@ a:hover {
 a {
   transition: .3s;
 }
+
 .wrapper-counter {
   width: 17px;
   height: 17px;
   background: #fff;
   border-radius: 50px;
   position: absolute;
-  top: -8px;
+  top: -12px;
   right: -6px;
 
   & p {

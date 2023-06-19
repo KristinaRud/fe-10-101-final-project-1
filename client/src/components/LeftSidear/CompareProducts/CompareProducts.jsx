@@ -5,7 +5,6 @@ import ListWrapper from "../ListWrapper/ListWrapper";
 import CompareProductsItem from "./CompareProductsItem/CompareProductsItem";
 
 const CompareProducts = ({ isFavourite, data, classname }) => {
-  console.log(data);
   return (
     <Link to={isFavourite ? "/wishList" : "/compare"}>
       <ListWrapper

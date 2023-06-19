@@ -6,6 +6,9 @@
   border-bottom: 1px solid #cacdd8;
   margin-bottom: 17px;
   padding-bottom: 12px;
+  @media (max-width: 768px) {
+    text-align: center;
+  }
 }
 
 .wrapper-address {
@@ -31,5 +34,9 @@
   color: #0156FF;
   border-bottom: 1px solid #0156FF;
   padding: 0;
-
+  &:hover {
+    color:#666;
+    background: none;
+    border-bottom: none;
+  }
 }

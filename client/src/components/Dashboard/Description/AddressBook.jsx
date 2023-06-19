@@ -12,6 +12,7 @@ const AddressBook = ({ activeComponent }) => {
           display: "flex",
           gap: { sm: "40px", md: "40px", xl: "80px" },
           flexWrap: "wrap",
+          justifyContent: { sm: "center", md: "start" },
         }}
       >
         <div className={styles["wrapper-address"]}>

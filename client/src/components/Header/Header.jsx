@@ -61,7 +61,7 @@ const Header = () => {
       ? itemsCart
           .map(({ cartQuantity }) => cartQuantity)
           .reduce((prev, curr) => prev + curr, 0)
-      : 0;
+      : 0 || NaN;
     setCounterCart(counter);
     setCounterWishList(counterWL);
   }, [itemsCart, itemsWishList]);
@@ -70,7 +70,7 @@ const Header = () => {
       <header className={styles.header}>
         <Box sx={{ margin: "0 auto", maxWidth: "1400px" }}>
           <ul className={styles.menu}>
-            {!mediaDesktop && (
+            {mediaTablet && !mediaDesktop && (
               <li className={styles.item__logo}>
                 <Button to="/" className={styles["btn-logo"]}>
                   <VecIcon className={styles.logo} />
@@ -104,7 +104,7 @@ const Header = () => {
                 </Button>
               </li>
             )}
-            {mediaDesktop ? (
+            {mediaDesktop && (
               <li className={cx(styles.menu__item)}>
                 <a href="tel:+(00) 1234 5678"> Call Us: (00) 1234 5678</a>
                 <Button href="https://uk-ua.facebook.com/">
@@ -119,10 +119,6 @@ const Header = () => {
                     sx={{ display: { xs: "none", md: "flex" }, mr: 1 }}
                   />
                 </Button>
-              </li>
-            ) : (
-              <li className={cx(styles.menu__item)}>
-                <a href="tel:+(00) 1234 5678"> Call Us: (00) 1234 5678</a>
               </li>
             )}
           </ul>

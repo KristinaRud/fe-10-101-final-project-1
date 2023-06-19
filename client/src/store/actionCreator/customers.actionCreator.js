@@ -34,9 +34,8 @@ const getCustomer = createAsyncThunk("customers/getCustomer", async () => {
   }
   throw new Error(`Couldn't get customer: ${err.data}`);
 });
-
-const editCustomer = createAsyncThunk(
-  "customers/editCustomer",
+const updateCustomer = createAsyncThunk(
+  "customers/updateCustomer",
   async (values) => {
     const { res, err } = await request({
       url: "/customers",
@@ -47,8 +46,31 @@ const editCustomer = createAsyncThunk(
     if (res) {
       return res;
     }
-    throw new Error(`Couldn't edit customer: ${err.data}`);
+    throw new Error(`Couldn't get customer: ${err.data}`);
   },
 );
 
-export { login, logout, getCustomer, editCustomer };
+const editPasswordCustomer = createAsyncThunk(
+  "customers/editPasswordCustomer",
+  async (values) => {
+    const { res, err } = await request({
+      url: "/customers/password",
+      method: "PUT",
+      body: values,
+    });
+
+    // if (res.success) {
+    //   window.localStorage.removeItem("token");
+    //   setAuthToken(res.token);
+    //   window.localStorage.setItem("token", res.token);
+    //   return res;
+    // }
+    // setAuthToken(false);
+    if (res) {
+      return res;
+    }
+    throw new Error(`Couldn't change password: ${err.data}`);
+  },
+);
+
+export { login, logout, getCustomer, editPasswordCustomer, updateCustomer };

@@ -3,7 +3,8 @@ import {
   getCustomer,
   login,
   logout,
-  editCustomer,
+  editPasswordCustomer,
+  updateCustomer,
 } from "../actionCreator/customers.actionCreator";
 import { checkToken } from "../../utils/api/checkToken";
 
@@ -13,6 +14,7 @@ const customersSlice = createSlice({
     data: {},
     isLogin: checkToken(window.localStorage.getItem("token")),
     token: window.localStorage.getItem("token") || null,
+    error: null,
   },
   reducers: {},
   extraReducers: (builder) => {
@@ -28,8 +30,19 @@ const customersSlice = createSlice({
     builder.addCase(getCustomer.fulfilled, (state, action) => {
       state.data = action.payload;
     });
-    builder.addCase(editCustomer.fulfilled, (state, action) => {
+    builder.addCase(editPasswordCustomer.fulfilled, (state, action) => {
       state.data = action.payload;
+      state.error = null;
+    });
+    builder.addCase(updateCustomer.fulfilled, (state, action) => {
+      state.data = action.payload;
+      state.error = null;
+    });
+    builder.addCase(editPasswordCustomer.rejected, (state, action) => {
+      state.error = action.error.message;
+    });
+    builder.addCase(updateCustomer.rejected, (state, action) => {
+      state.error = action.error.message;
     });
   },
 });
