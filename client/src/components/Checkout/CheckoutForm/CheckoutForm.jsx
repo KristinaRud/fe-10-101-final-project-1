@@ -26,7 +26,7 @@ import {
 } from "../../../store/actionCreator/orders.actionCreator";
 import { selectOrders } from "../../../store/selectors/orders.selector";
 import TelephoneField from "../../RegistrationForm/TelephoneField/TelephoneField";
-import { generateThankYouEmail } from "../../../utils/emailLetter/generateThankYouEmail";
+import { createOrderLetter } from "../../../utils/email/createOrderLetter";
 import LoginSnackbar from "../../LoginForm/LoginSnackbar";
 import { clearOrders } from "../../../store/slices/orders.slice";
 import {
@@ -34,6 +34,7 @@ import {
   fetchShoppingCart,
 } from "../../../store/actionCreator/shoppingCart.actionCreator";
 import { selectShoppingCart } from "../../../store/selectors/shoppingCart.selector";
+import { deleteCart } from "../../../store/slices/shoppingCart.slice";
 
 const CheckoutForm = () => {
   const { isLogin, data } = useSelector(selectCustomers);
@@ -85,7 +86,7 @@ const CheckoutForm = () => {
       setSubmit(false);
       dispatch(clearOrders());
       if (!isLogin) {
-        window.localStorage.removeItem("shoppingCart");
+        dispatch(deleteCart());
       } else {
         dispatch(deleteShoppingCart());
       }
@@ -112,10 +113,10 @@ const CheckoutForm = () => {
 
   useEffect(() => {
     if (products.length) {
-      setLetterHtml(generateThankYouEmail(products));
+      setLetterHtml(createOrderLetter(products));
     }
     if (itemsCart.length) {
-      setLetterHtml(generateThankYouEmail(itemsCart));
+      setLetterHtml(createOrderLetter(itemsCart));
     }
   }, [itemsCart, products]);
 
@@ -158,9 +159,11 @@ const CheckoutForm = () => {
                 label="Email Address *"
                 className={s.input}
               />
-              <Typography component="span" className={s.hint}>
-                You can create an account after checkout.
-              </Typography>
+              {!isLogin && (
+                <Typography component="span" className={s.hint}>
+                  You can create an account after checkout.
+                </Typography>
+              )}
               <Field
                 component={TextField}
                 name="firstName"

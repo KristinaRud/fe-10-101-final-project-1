@@ -11,12 +11,23 @@ import PhoneIcon from "@mui/icons-material/Phone";
 import PropTypes from "prop-types";
 import ShoppingCartOutlinedIcon from "@mui/icons-material/ShoppingCartOutlined";
 import { Link } from "react-router-dom";
+import { useEffect, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import cx from "classnames";
 import s from "./ProductCardFull.module.scss";
 import {
   IconCompare,
   IconEmail,
   IconWishList,
 } from "../../../assets/images/products";
+import {
+  addComparisonProduct,
+  removeComparisonProduct,
+} from "../../../store/actionCreator/comparison.actionCreator";
+import { selectCustomers } from "../../../store/selectors/customers.selector";
+import { selectComparison } from "../../../store/selectors/comparison.selector";
+import styles from "../ProductCard.module.scss";
+import LoginSnackbar from "../../LoginForm/LoginSnackbar";
 
 const ProductCardFull = ({
   available,
@@ -30,6 +41,66 @@ const ProductCardFull = ({
   id,
   categories,
 }) => {
+  const dispatch = useDispatch();
+  const { isLogin } = useSelector(selectCustomers);
+  const { comparison, operationSuccess, errorComparison } =
+    useSelector(selectComparison);
+  const [status, setStatus] = useState("");
+  const [text, setText] = useState("");
+  const [error, setError] = useState("");
+  const [openSnackbar, setOpenSnackbar] = useState(false);
+  const [isInComparison, setIsInComparison] = useState(false);
+
+  const handleClose = (event, reason) => {
+    if (reason === "clickaway") {
+      return;
+    }
+    setOpenSnackbar(false);
+  };
+
+  const handleClickCompare = () => {
+    if (isLogin) {
+      setIsInComparison(!isInComparison);
+      if (isInComparison) {
+        dispatch(removeComparisonProduct(id));
+      } else {
+        dispatch(addComparisonProduct(id));
+      }
+      if (operationSuccess) {
+        setOpenSnackbar(true);
+        setStatus("success");
+        setText("Operation success!");
+      } else {
+        setOpenSnackbar(true);
+        setStatus("error");
+        setError(errorComparison);
+      }
+    } else {
+      setOpenSnackbar(true);
+      setStatus("error");
+      setError("Please, log in to add product to comparison");
+    }
+  };
+
+  useEffect(() => {
+    const allProductsComparison = comparison?.products;
+    const categoriesComparison = Object.keys(allProductsComparison);
+    if (categoriesComparison.length > 0) {
+      categoriesComparison.forEach((category) => {
+        if (category.toLowerCase() === categories.toLowerCase()) {
+          const productsComparison = allProductsComparison[category];
+          const isAddedComparison = productsComparison.some(
+            (el) => el._id === id,
+          );
+          if (isAddedComparison) {
+            setIsInComparison(true);
+          } else {
+            setIsInComparison(false);
+          }
+        }
+      });
+    }
+  }, [comparison, categories, id]);
   return (
     <Card
       sx={{
@@ -128,14 +199,26 @@ const ProductCardFull = ({
           <Button>
             <IconEmail />
           </Button>
-          <Button>
-            <IconCompare />
+          <Button
+            sx={{
+              "&:hover": { backgroundColor: "rgba(255, 255, 255, 0.2)" },
+            }}
+            onClick={handleClickCompare}
+          >
+            <IconCompare className={isInComparison && cx(styles.green)} />
           </Button>
           <Button>
             <IconWishList />
           </Button>
         </Box>
       </Box>
+      <LoginSnackbar
+        open={openSnackbar}
+        status={status}
+        handleClose={handleClose}
+        textSuccess={text}
+        textError={error}
+      />
     </Card>
   );
 };

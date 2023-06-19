@@ -11,6 +11,9 @@ import {
   TextField,
   useMediaQuery,
   Grid,
+  Step,
+  StepLabel,
+  Stepper,
 } from "@mui/material";
 import HighlightOffIcon from "@mui/icons-material/HighlightOff";
 import {
@@ -34,6 +37,7 @@ import {
 import { updateShoppingCart } from "../../utils/cart/updateCart";
 import LoginSnackbar from "../../components/LoginForm/LoginSnackbar";
 import BreadcrumbsApp from "../../components/BreadcrumbsApp/BreadcrumbsApp";
+import s from "../../components/Checkout/OrderSummary/OrderSummary.module.scss";
 
 const ShoppingCart = () => {
   const dispatch = useDispatch();
@@ -244,55 +248,69 @@ const ShoppingCart = () => {
               </Button>
             </Grid>
           </Grid>
-          <Box className={classes.summary}>
-            <Typography
-              variant="h5"
-              gutterBottom
-              className={
-                isMobile
-                  ? classes.tabletSummaryTitle
-                  : classes.desktopSummaryTitle
-              }
-            >
-              Summary
-            </Typography>
-            <Divider />
-            <div className={classes.summaryItem}>
-              <Typography variant="subtitle1" className={classes.subtitle}>
-                Subtotal
+          <Box className={classes.summaryWrapper}>
+            <Stepper alternativeLabel className={s.stepper}>
+              <Step>
+                <StepLabel className={s.stepLast} sx={{ cursor: "pointer" }}>
+                  Shipping
+                </StepLabel>
+              </Step>
+              <Step>
+                <StepLabel className={s.stepLast}>Review & Payments</StepLabel>
+              </Step>
+            </Stepper>
+            <Box className={classes.summary}>
+              <Typography
+                variant="h5"
+                gutterBottom
+                className={
+                  isMobile
+                    ? classes.tabletSummaryTitle
+                    : classes.desktopSummaryTitle
+                }
+              >
+                Summary
               </Typography>
-              <Typography className={classes.subtitle}>
-                {`${subtotalAmount}.00 ₴`}
-              </Typography>
-            </div>
-            <div className={classes.summaryItem}>
-              <Typography variant="subtitle1" className={classes.subtitle}>
-                Tax
-              </Typography>
-              <Typography className={classes.subtitle}>{`${tax} ₴`}</Typography>
-            </div>
-            <div className={classes.summaryItem}>
-              <Typography variant="subtitle1" className={classes.subtitle}>
-                Shipping
-              </Typography>
-              <Typography className={classes.subtitle}>
-                {`${shipping}.00 ₴`}
-              </Typography>
-            </div>
-            <Divider />
-            <div className={classes.summaryItem}>
-              <Typography variant="subtitle1" className={classes.subtitle}>
-                Order Total
-              </Typography>
-              <Typography variant="h6" className={classes.subtitle}>
-                {`${totalAmount} ₴`}
-              </Typography>
-            </div>
-            <Link to={"/checkout"}>
-              <Button variant="contained" className={classes.checkoutButton}>
-                Proceed to Checkout
-              </Button>
-            </Link>
+              <Divider />
+              <div className={classes.summaryItem}>
+                <Typography variant="subtitle1" className={classes.subtitle}>
+                  Subtotal
+                </Typography>
+                <Typography className={classes.subtitle}>
+                  {`${subtotalAmount}.00 ₴`}
+                </Typography>
+              </div>
+              <div className={classes.summaryItem}>
+                <Typography variant="subtitle1" className={classes.subtitle}>
+                  Tax
+                </Typography>
+                <Typography
+                  className={classes.subtitle}
+                >{`${tax} ₴`}</Typography>
+              </div>
+              <div className={classes.summaryItem}>
+                <Typography variant="subtitle1" className={classes.subtitle}>
+                  Shipping
+                </Typography>
+                <Typography className={classes.subtitle}>
+                  {`${shipping}.00 ₴`}
+                </Typography>
+              </div>
+              <Divider />
+              <div className={classes.summaryItem}>
+                <Typography variant="subtitle1" className={classes.subtitle}>
+                  Order Total
+                </Typography>
+                <Typography variant="h6" className={classes.subtitle}>
+                  {`${totalAmount} ₴`}
+                </Typography>
+              </div>
+              <Link to={"/checkout"}>
+                <Button variant="contained" className={classes.checkoutButton}>
+                  Proceed to Checkout
+                </Button>
+              </Link>
+            </Box>
           </Box>
           <LoginSnackbar
             open={openSnackbar}

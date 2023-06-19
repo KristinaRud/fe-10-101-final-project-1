@@ -12,6 +12,7 @@ import customersReducer from "./slices/customers.slice";
 import shoppingCartReducer from "./slices/shoppingCart.slice";
 import commentsReducer from "./slices/comments.slice";
 import newsReducer from "./slices/news.slice";
+import comparisonReducer from "./slices/comparison.slice";
 
 const store = configureStore({
   reducer: {
@@ -28,6 +29,7 @@ const store = configureStore({
     shoppingCart: shoppingCartReducer,
     comments: commentsReducer,
     news: newsReducer,
+    comparison: comparisonReducer,
   },
 });
 

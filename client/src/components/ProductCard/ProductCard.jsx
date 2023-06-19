@@ -27,6 +27,11 @@ import handleAddToCart, {
 import { selectShoppingCart } from "../../store/selectors/shoppingCart.selector";
 import { selectWishList } from "../../store/selectors/wishList.selector";
 import LoginSnackbar from "../LoginForm/LoginSnackbar";
+import { selectComparison } from "../../store/selectors/comparison.selector";
+import {
+  addComparisonProduct,
+  removeComparisonProduct,
+} from "../../store/actionCreator/comparison.actionCreator";
 
 const ProductCard = ({
   image,
@@ -45,12 +50,15 @@ const ProductCard = ({
   const { isLogin } = useSelector(selectCustomers);
   const { itemsCart } = useSelector(selectShoppingCart);
   const { itemsWishList } = useSelector(selectWishList);
+  const { comparison, operationSuccess, errorComparison } =
+    useSelector(selectComparison);
   const isAdded = itemsCart?.some((el) => el.id === id);
   const isWishList = itemsWishList?.some((item) => item.id === id);
   const [status, setStatus] = useState("");
   const [text, setText] = useState("");
   const [error, setError] = useState("");
   const [openSnackbar, setOpenSnackbar] = useState(false);
+  const [isInComparison, setIsInComparison] = useState(false);
 
   const handleClose = (event, reason) => {
     if (reason === "clickaway") {
@@ -67,6 +75,30 @@ const ProductCard = ({
     setIsHovered(false);
   };
 
+  const handleClickCompare = () => {
+    if (isLogin) {
+      setIsInComparison(!isInComparison);
+      if (isInComparison) {
+        dispatch(removeComparisonProduct(id));
+      } else {
+        dispatch(addComparisonProduct(id));
+      }
+      if (operationSuccess) {
+        setOpenSnackbar(true);
+        setStatus("success");
+        setText("Operation success!");
+      } else {
+        setOpenSnackbar(true);
+        setStatus("error");
+        setError(errorComparison);
+      }
+    } else {
+      setOpenSnackbar(true);
+      setStatus("error");
+      setError("Please, log in to add product to comparison");
+    }
+  };
+
   useEffect(() => {
     if (isAdded || isWishList) {
       setStatus("success");
@@ -76,6 +108,26 @@ const ProductCard = ({
       setError("Product not added");
     }
   }, [isAdded, isWishList]);
+
+  useEffect(() => {
+    const allProductsComparison = comparison?.products;
+    const categoriesComparison = Object.keys(allProductsComparison);
+    if (categoriesComparison.length > 0) {
+      categoriesComparison.forEach((category) => {
+        if (category.toLowerCase() === categories.toLowerCase()) {
+          const productsComparison = allProductsComparison[category];
+          const isAddedComparison = productsComparison.some(
+            (el) => el._id === id,
+          );
+          if (isAddedComparison) {
+            setIsInComparison(true);
+          } else {
+            setIsInComparison(false);
+          }
+        }
+      });
+    }
+  }, [comparison, categories, id]);
 
   return (
     <>
@@ -118,8 +170,9 @@ const ProductCard = ({
               sx={{
                 "&:hover": { backgroundColor: "rgba(255, 255, 255, 0.2)" },
               }}
+              onClick={handleClickCompare}
             >
-              <IconCompare />
+              <IconCompare className={isInComparison && cx(styles.green)} />
             </Button>
           </Box>
           <Button
