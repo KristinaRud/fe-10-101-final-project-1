@@ -23,7 +23,7 @@ const CommentsSlider = () => {
         <div className={styles.comments_inner}>
           <Slider {...CommentsConfig}>
             {comments.map((item) => (
-              <div key={item.id}>
+              <div key={item._id}>
                 <div className={styles.text_comment}>{item.content}</div>
                 <div className={styles.text_author}>
                   - {item.customer.firstName} {item.customer.lastName}

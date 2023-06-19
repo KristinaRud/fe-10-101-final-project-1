@@ -283,6 +283,6 @@ ProductCardFull.propTypes = {
   description: PropTypes.string.isRequired,
   categories: PropTypes.string.isRequired,
   id: PropTypes.string.isRequired,
-  itemNo: PropTypes.number,
+  itemNo: PropTypes.string,
 };
 export default ProductCardFull;
