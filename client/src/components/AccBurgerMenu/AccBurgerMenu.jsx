@@ -25,6 +25,8 @@ import {
   fetchShoppingCart,
   putProductsToCartLogin,
 } from "../../store/actionCreator/shoppingCart.actionCreator";
+import { fetchComparisonProducts } from "../../store/actionCreator/comparison.actionCreator";
+import { selectComparison } from "../../store/selectors/comparison.selector";
 import {
   fetchWishList,
   updateListProductFromWishList,
@@ -33,6 +35,7 @@ import {
 const AccBurgerMenu = ({ counterWishList }) => {
   const [anchorAccBurgMenu, setAnchorAccBurgMenu] = useState(null);
   const { isLogin, data } = useSelector(selectCustomers);
+  const { comparison } = useSelector(selectComparison);
   const [openDialog, setOpenDialog] = useState(false);
   const dispatch = useDispatch();
   const navigate = useNavigate();
@@ -62,12 +65,18 @@ const AccBurgerMenu = ({ counterWishList }) => {
     setAnchorAccBurgMenu(null);
   };
 
+  const handleClickCompare = () => {
+    setAnchorAccBurgMenu(null);
+    navigate("/compare-products");
+  };
+
   useEffect(() => {
     if (isLogin) {
       dispatch(getCustomer());
       dispatch(fetchShoppingCart());
       dispatch(fetchWishList());
       dispatch(putProductsToCartLogin());
+      dispatch(fetchComparisonProducts());
       dispatch(updateListProductFromWishList());
     }
   }, [dispatch, isLogin]);
@@ -147,9 +156,9 @@ const AccBurgerMenu = ({ counterWishList }) => {
               <FavoriteBorderIcon sx={{ marginRight: "5px" }} />
               My Wish List {`(${counterWishList})`}
             </MenuItem>
-            <MenuItem onClick={handleCloseAccMenu}>
+            <MenuItem onClick={handleClickCompare}>
               <BarChartIcon sx={{ marginRight: "5px" }} />
-              Compare (0)
+              Compare ({comparison.count})
             </MenuItem>
             <Divider />
             <MenuItem onClick={handleClickOpenDialog}>
