@@ -45,7 +45,7 @@ const WishList = () => {
               itemNo={el.itemNo}
               categories={el.categories}
               available={el.available}
-              rating={el.rating}
+              rating={Number(el.rating)}
               oldPrice={el.oldPrice}
             />
           </li>

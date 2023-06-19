@@ -30,6 +30,25 @@
   }
 }
 
+.stepLast{
+  width: 100%;
+  max-width: 388px;
+
+  @media (width <= 768px) {
+    max-width: 320px;
+  }
+  & :global svg {
+    color: #72747c !important;
+  }
+  & :global .MuiStepIcon-text {
+    fill: #fff;
+  }
+
+  @media (width <= 480px) {
+    display: none;
+  }
+}
+
 .step {
   font-weight: 400;
   font-size: 16px;

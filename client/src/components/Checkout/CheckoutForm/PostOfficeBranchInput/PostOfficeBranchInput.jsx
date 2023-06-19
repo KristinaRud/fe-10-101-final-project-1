@@ -27,7 +27,7 @@ const PostOfficeBranchInput = ({ setFieldValue }) => {
       postOffices.forEach((branch) => {
         if (postOffice === "novaPoshta") {
           if (
-            `${branch.CategoryOfWarehouse} No.${branch.Number}` ===
+            `${branch?.CategoryOfWarehouse} No.${branch?.Number}` ===
             event.target.textContent
           ) {
             dispatch(setChosenPostOffice(branch));
@@ -35,7 +35,7 @@ const PostOfficeBranchInput = ({ setFieldValue }) => {
           }
         } else if (postOffice === "meestExpress") {
           if (
-            `${branch.type_public.en} No.${branch.num_showcase}` ===
+            `${branch?.type_public?.en} No.${branch?.num_showcase}` ===
             event.target.textContent
           ) {
             dispatch(setChosenPostOffice(branch));
@@ -64,8 +64,8 @@ const PostOfficeBranchInput = ({ setFieldValue }) => {
       onChange={handleChange}
       getOptionLabel={(option) =>
         postOffice === "novaPoshta" && postOffices.length > 0
-          ? `${option.CategoryOfWarehouse} No.${option.Number}`
-          : `${option.type_public.en} No.${option.num_showcase}`
+          ? `${option?.CategoryOfWarehouse} No.${option?.Number}`
+          : `${option?.type_public?.en} No.${option?.num_showcase}`
       }
       renderInput={(params) => (
         <Text
