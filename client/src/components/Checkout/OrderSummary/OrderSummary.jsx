@@ -38,14 +38,12 @@ const OrderSummary = () => {
     <div className={s.wrapper}>
       <Stepper activeStep={1} alternativeLabel className={s.stepper}>
         <Step>
-          <Link to={"/shopping-cart"}>
-            <StepLabel className={s.step} sx={{ cursor: "pointer" }}>
-              Shipping
-            </StepLabel>
-          </Link>
+          <StepLabel className={s.step} sx={{ cursor: "pointer" }}>
+            <Link to={"/shopping-cart"}>Shipping </Link>
+          </StepLabel>
         </Step>
         <Step>
-          <StepLabel className={s.stepLast}>Review & Payments</StepLabel>
+          <StepLabel className={s.step}>Review & Payments</StepLabel>
         </Step>
       </Stepper>
       <div className={s["order-wrapper"]}>
