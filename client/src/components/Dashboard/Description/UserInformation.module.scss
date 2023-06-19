@@ -5,7 +5,8 @@
   border-bottom: 1px solid #cacdd8;
   margin-bottom: 17px;
   padding-bottom: 12px;
-  @media (max-width: 768px) {
+
+  @media (width <= 768px) {
     text-align: center;
   }
 }
@@ -34,6 +35,7 @@
   color: #0156ff;
   border-bottom: 1px solid #0156ff;
   padding: 0;
+
   &:hover {
    color:#666;
     background: none;
@@ -43,7 +45,8 @@
 
 .wrapper-add {
   margin-bottom: 50px;
-  @media (max-width: 768px) {
+
+  @media (width <= 768px) {
     text-align: center;
   }
 }
@@ -53,10 +56,12 @@
   align-items: center;
   flex-wrap: wrap;
   gap: 10px;
+
   & h6 {
     font-weight: 600;
   }
-  @media (max-width: 768px) {
+
+  @media (width <= 768px) {
     justify-content: center;
   }
 }

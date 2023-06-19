@@ -59,13 +59,6 @@ const editPasswordCustomer = createAsyncThunk(
       body: values,
     });
 
-    // if (res.success) {
-    //   window.localStorage.removeItem("token");
-    //   setAuthToken(res.token);
-    //   window.localStorage.setItem("token", res.token);
-    //   return res;
-    // }
-    // setAuthToken(false);
     if (res) {
       return res;
     }
