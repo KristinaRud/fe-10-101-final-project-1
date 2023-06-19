@@ -13,6 +13,7 @@ export const AboutProductConfig = {
       breakpoint: 860,
       settings: {
         dots: false,
+        arrows: true,
       },
     },
   ],
@@ -27,6 +28,7 @@ export const CommentsConfig = {
   autoplaySpeed: 5000,
   slidesToShow: 1,
   slidesToScroll: 1,
+  swipeToSlide: true,
   autoplay: true,
 };
 
@@ -37,6 +39,8 @@ export const NewProductsConfig = {
   slidesToScroll: 1,
   autoplay: true,
   speed: 500,
+  swipeToSlide: true,
+  lazyLoad: true,
   responsive: [
     {
       breakpoint: 1410,
@@ -83,6 +87,7 @@ export const NewsConfig = {
   slidesToShow: 1,
   slidesToScroll: 1,
   autoplay: true,
+  lazyLoad: true,
   speed: 500,
 };
 
@@ -93,6 +98,8 @@ export const CategoriesProducts = {
   slidesToScroll: 1,
   autoplay: false,
   speed: 500,
+  swipeToSlide: true,
+  lazyLoad: true,
   responsive: [
     {
       breakpoint: 1380,
@@ -133,11 +140,16 @@ export const FollowUsConfig = {
   speed: 500,
   slidesToShow: 6,
   slidesToScroll: 1,
+  swipeToSlide: true,
+  lazyLoad: true,
+  centerMode: true,
+  centerPadding: "15px",
   responsive: [
     {
       breakpoint: 1175,
       settings: {
         slidesToShow: 5,
+        centerPadding: "10px",
       },
     },
     {

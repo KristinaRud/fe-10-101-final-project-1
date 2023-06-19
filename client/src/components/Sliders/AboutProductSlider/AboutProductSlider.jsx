@@ -11,14 +11,14 @@ const AboutProductSlider = ({ data }) => {
         {data.map((item) => (
           <div key={item.index}>
             <div className={styles.about_container}>
+              <div className={styles.about_content}>
+                <div className={styles.about_text}>{item.title}</div>
+              </div>
               <img
                 className={styles.about_image}
                 src={item.image}
                 alt="product"
               />
-              <div className={styles.about_content}>
-                <div className={styles.about_text}>{item.title}</div>
-              </div>
             </div>
           </div>
         ))}
