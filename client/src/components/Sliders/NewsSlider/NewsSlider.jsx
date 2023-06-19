@@ -21,7 +21,7 @@ const NewsSlider = () => {
     <div className={styles.news_slider}>
       <Slider {...NewsConfig}>
         {news.map((item) => (
-          <div key={item.id}>
+          <div key={item._id}>
             <div>
               <img src={item.imageUrl} alt={item.customId} width="100%" />
             </div>

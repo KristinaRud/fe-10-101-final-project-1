@@ -73,7 +73,7 @@ const ProductsListView = () => {
                     oldPrice={previousPrice}
                     alt={name}
                     available={quantity > 5}
-                    rating={rating}
+                    rating={Number(rating)}
                     description={shortDescription.join(" ")}
                     currentPrice={currentPrice}
                     name={name}
@@ -91,7 +91,7 @@ const ProductsListView = () => {
                   oldPrice={previousPrice}
                   alt={name}
                   available={quantity > 5}
-                  rating={rating}
+                  rating={Number(rating)}
                   currentPrice={currentPrice}
                   description={name}
                   title=""

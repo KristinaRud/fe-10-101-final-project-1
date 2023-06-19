@@ -35,7 +35,7 @@ const NewProductSlider = () => {
               oldPrice={item.previousPrice}
               currentPrice={item.currentPrice}
               available={item.quantity > 5}
-              rating={item.rating}
+              rating={Number(item.rating)}
               alt={item.name}
               categories={item.categories}
               name={item.name}

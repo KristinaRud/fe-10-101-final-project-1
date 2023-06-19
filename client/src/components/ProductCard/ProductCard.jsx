@@ -316,5 +316,5 @@ ProductCard.propTypes = {
   rating: PropTypes.number,
   id: PropTypes.string.isRequired,
   categories: PropTypes.string.isRequired,
-  itemNo: PropTypes.number,
+  itemNo: PropTypes.string,
 };
