@@ -106,6 +106,7 @@ const ProductCard = ({
                       rating,
                       oldPrice,
                     },
+                    itemsWishList,
                     isLogin,
                   ),
                 );
@@ -137,6 +138,7 @@ const ProductCard = ({
                     description,
                     currentPrice,
                     itemNo,
+                    categories,
                   },
                   isLogin,
                 ),

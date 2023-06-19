@@ -2,8 +2,14 @@
   margin-bottom: 50px;
   min-width: 300px;
 
+
+  @media (width <= 768px) {
+    max-width: 300px;
+    margin: 0 auto;
+  }
+
   @media (width <= 480px) {
-   width: 100%;
+    width: 100%;
   }
 }
 
@@ -12,6 +18,12 @@
   padding: 20px 20px 20px 0;
   cursor: pointer;
   max-width: 326px;
+
+
+  @media (width <= 768px) {
+    max-width: 300px;
+    margin: 0 auto;
+  }
 
   @media (width <= 480px) {
     max-width: 100%;

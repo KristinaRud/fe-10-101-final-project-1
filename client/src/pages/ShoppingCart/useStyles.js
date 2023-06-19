@@ -107,6 +107,8 @@ const useStyles = makeStyles((theme) => ({
     display: "flex",
     gap: "7px",
     flexDirection: "row",
+    width: "100%",
+    justifyContent: "space-between",
     [theme.breakpoints.down("sm")]: {
       flexDirection: "column",
       gap: "0",
@@ -116,6 +118,13 @@ const useStyles = makeStyles((theme) => ({
     border: "2px solid #A2A6B0",
     background: "none",
     color: "#A2A6B0",
+  },
+  title: {
+    fontWeight: "600",
+    fontSize: "24px",
+    lineHeight: "24px",
+    color: "#A2A6B0",
+    margin: "0 auto",
   },
   desktopTitle: {
     fontStyle: "normal",
@@ -170,6 +179,9 @@ const useStyles = makeStyles((theme) => ({
     [theme.breakpoints.down("sm")]: {
       flexDirection: "column",
     },
+  },
+  container: {
+    alignItems: "flex-end",
   },
 }));
 
