@@ -93,22 +93,24 @@ const ProductCardFull = ({
   };
 
   useEffect(() => {
-    const allProductsComparison = comparison?.products;
-    const categoriesComparison = Object.keys(allProductsComparison);
-    if (categoriesComparison.length > 0) {
-      categoriesComparison.forEach((category) => {
-        if (category.toLowerCase() === categories.toLowerCase()) {
-          const productsComparison = allProductsComparison[category];
-          const isAddedComparison = productsComparison.some(
-            (el) => el._id === id,
-          );
-          if (isAddedComparison) {
-            setIsInComparison(true);
-          } else {
-            setIsInComparison(false);
+    if (Object.keys(comparison).length > 0) {
+      const allProductsComparison = comparison?.products;
+      const categoriesComparison = Object.keys(allProductsComparison);
+      if (categoriesComparison.length > 0) {
+        categoriesComparison.forEach((category) => {
+          if (category.toLowerCase() === categories.toLowerCase()) {
+            const productsComparison = allProductsComparison[category];
+            const isAddedComparison = productsComparison.some(
+              (el) => el._id === id,
+            );
+            if (isAddedComparison) {
+              setIsInComparison(true);
+            } else {
+              setIsInComparison(false);
+            }
           }
-        }
-      });
+        });
+      }
     }
   }, [comparison, categories, id]);
   return (

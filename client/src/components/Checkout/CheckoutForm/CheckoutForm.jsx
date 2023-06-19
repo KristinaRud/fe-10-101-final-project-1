@@ -112,10 +112,10 @@ const CheckoutForm = () => {
   }, [isLogin, dispatch]);
 
   useEffect(() => {
-    if (products.length) {
+    if (products?.length) {
       setLetterHtml(createOrderLetter(products));
     }
-    if (itemsCart.length) {
+    if (itemsCart?.length) {
       setLetterHtml(createOrderLetter(itemsCart));
     }
   }, [itemsCart, products]);
