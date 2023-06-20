@@ -24,11 +24,11 @@ const OrderSummary = () => {
   const [quantity, setQuantity] = useState(0);
 
   useEffect(() => {
-    if (products.length > 0) {
+    if (products?.length > 0) {
       const quantity = totalQuantity(products);
       setQuantity(quantity);
     }
-    if (itemsCart.length > 0) {
+    if (itemsCart?.length > 0) {
       const quantity = totalQuantity(itemsCart);
       setQuantity(quantity);
     }
