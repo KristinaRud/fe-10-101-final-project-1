@@ -216,7 +216,7 @@ const Header = () => {
                     key={item.name}
                     onClick={handleCloseNavMenu}
                     className={styles["navbar__link-desktop"]}
-                    activeClassName={"active"}
+                    activeclassname={"active"}
                   >
                     {item.name}
                   </NavLink>
