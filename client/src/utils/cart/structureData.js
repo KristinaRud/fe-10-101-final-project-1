@@ -32,19 +32,6 @@ const structureDataWishList = (action) => {
   return [...itemsWishList];
 };
 
-const structureDataFromLS = () => {
-  const cartLS = JSON.parse(localStorage.getItem("shoppingCart"));
-  const products = cartLS.map((item) => {
-    return {
-      product: item.id,
-      cartQuantity: item.cartQuantity,
-    };
-  });
-  return {
-    products: [...products],
-  };
-};
-
 const structureWishListLS = () => {
   const cartLS = JSON.parse(localStorage.getItem("wishList"));
   const product = [];
@@ -54,9 +41,4 @@ const structureWishListLS = () => {
   return { products: product };
 };
 
-export {
-  structureDataToStore,
-  structureDataFromLS,
-  structureDataWishList,
-  structureWishListLS,
-};
+export { structureDataToStore, structureDataWishList, structureWishListLS };
