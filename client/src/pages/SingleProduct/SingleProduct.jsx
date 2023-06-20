@@ -16,11 +16,9 @@ import AboutProductSlider from "../../components/Sliders/AboutProductSlider/Abou
 import Support from "../../components/Support/Support";
 import Features from "../../components/Features/Features";
 import { selectWishList } from "../../store/selectors/wishList.selector";
-import {
-  IconCompare,
-  IconWishList,
-  IconEmail,
-} from "../../assets/images/products";
+import { IconWishList, IconEmail } from "../../assets/images/products";
+import LoginSnackbar from "../../components/LoginForm/LoginSnackbar";
+import IconComparisonProduct from "../../components/IconComparisonProduct/IconComparisonProduct";
 
 const SingleProduct = () => {
   const { id } = useParams();
@@ -34,6 +32,17 @@ const SingleProduct = () => {
     status: true,
     title: "About Product",
   });
+  const [status, setStatus] = useState("");
+  const [text, setText] = useState("");
+  const [error, setError] = useState("");
+  const [openSnackbar, setOpenSnackbar] = useState(false);
+
+  const handleClose = (event, reason) => {
+    if (reason === "clickaway") {
+      return;
+    }
+    setOpenSnackbar(false);
+  };
 
   useEffect(() => {
     dispatch(fetchProducts(""));
@@ -187,9 +196,14 @@ const SingleProduct = () => {
                     </Button>
                   </li>
                   <li className={styles["product-picture__control-item"]}>
-                    <Button>
-                      <IconCompare />
-                    </Button>
+                    <IconComparisonProduct
+                      id={id}
+                      setStatus={setStatus}
+                      setError={setError}
+                      setText={setText}
+                      categories={categories}
+                      setOpenSnackbar={setOpenSnackbar}
+                    />
                   </li>
                   <li className={styles["product-picture__control-item"]}>
                     <Button
@@ -227,6 +241,13 @@ const SingleProduct = () => {
             </div>
           </div>
         </div>
+        <LoginSnackbar
+          open={openSnackbar}
+          status={status}
+          handleClose={handleClose}
+          textSuccess={text}
+          textError={error}
+        />
       </div>
       <AboutProductSlider data={description} />
       <Support />

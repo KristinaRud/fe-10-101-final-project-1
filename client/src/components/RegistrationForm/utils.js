@@ -16,14 +16,7 @@ export const validationSchema = Yup.object().shape({
       "Allowed characters for First Name is a-z, A-Z, а-я, А-Я.",
     ),
   login: Yup.string().min(3).max(10),
-  currentPassword: Yup.string()
-    .min(8, "Password must be at least 8 characters")
-    .max(20, "Password must not exceed 20 characters")
-    .matches(
-      /^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9]).{8,}$/,
-      "Password must contain at least one uppercase letter, one lowercase letter, and one digit",
-    )
-    .required("Current password is required"),
+  email: Yup.string().email("Invalid email").required("Email is required"),
   password: Yup.string()
     .min(8, "Password must be at least 8 characters")
     .max(20, "Password must not exceed 20 characters")

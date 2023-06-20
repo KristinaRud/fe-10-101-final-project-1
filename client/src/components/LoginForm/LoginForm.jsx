@@ -17,6 +17,7 @@ const LoginForm = () => {
   const [open, setOpen] = useState(false);
   const [status, setStatus] = useState("");
   const [submit, setSubmit] = useState(false);
+  const [textError, setTextError] = useState("Login failed!");
   const navigate = useNavigate();
 
   const handleSubmit = async (values) => {
@@ -43,11 +44,12 @@ const LoginForm = () => {
           navigate("/");
         }, 2000);
       } else {
+        setTextError(customer.error);
         setStatus("error");
         setSubmit(false);
       }
     }
-  }, [customer.isLogin, navigate, submit]);
+  }, [customer.isLogin, dispatch, navigate, submit]);
 
   return (
     <>
@@ -93,12 +95,10 @@ const LoginForm = () => {
         status={status}
         handleClose={handleClose}
         textSuccess="Login success!"
-        textError="Login failed!"
+        textError={textError}
       />
     </>
   );
 };
 
 export default LoginForm;
-
-// TODO: forgot password, set timeout for snackbar

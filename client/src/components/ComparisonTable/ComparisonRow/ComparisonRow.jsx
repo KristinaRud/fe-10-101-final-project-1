@@ -5,6 +5,7 @@ import { useSelector } from "react-redux";
 import theme from "../../../theme/createTheme";
 import { formatString } from "../../../utils/string/formatString";
 import { selectComparison } from "../../../store/selectors/comparison.selector";
+import { checkRow, checkRowDifference } from "./utils";
 
 const ComparisonRow = ({ title, data }) => {
   const [different, setDifferent] = useState(false);
@@ -12,16 +13,17 @@ const ComparisonRow = ({ title, data }) => {
 
   useEffect(() => {
     if (showDifference) {
-      const values = data.map((item) => item[title]);
-      const isDifferent = values.some((value) => {
-        return value !== values[0];
-      });
+      const values = data.map((item) => checkRow(item, title, data));
+      const isDifferent = checkRowDifference(values);
       setDifferent(isDifferent);
+    } else {
+      setDifferent(false);
     }
   }, [data, showDifference, title]);
+
   return (
     <>
-      {!different && (
+      {!different && !!data && (
         <>
           <TableRow hover sx={{ backgroundColor: theme.palette.action.hover }}>
             <TableCell align="center" colSpan={data.length}>
@@ -30,7 +32,7 @@ const ComparisonRow = ({ title, data }) => {
           </TableRow>
           <TableRow
             sx={{
-              boxShadow: "0px 2px 4px rgba(0, 0, 0, 1)",
+              boxShadow: "0px 2px 4px rgba(0, 0, 0, 0.5)",
               "&:hover": {
                 backgroundColor: "rgba(0, 0, 0, 0.02)",
               },
@@ -43,7 +45,7 @@ const ComparisonRow = ({ title, data }) => {
                 sx={{ border: "1px solid rgba(224, 224, 224, 1)" }}
               >
                 <Typography variant="body1">
-                  {item[title] ? item[title] : "---"}
+                  {checkRow(item, title, data)}
                 </Typography>
               </TableCell>
             ))}

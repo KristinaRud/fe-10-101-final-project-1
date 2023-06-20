@@ -125,7 +125,22 @@ exports.addProductToComparisonProducts = async (req, res, next) => {
                     )
                         .populate('products')
                         .populate('customerId')
-                        .then((comparisonProducts) => res.json(comparisonProducts))
+                        .then((comparisonProducts) => {
+                            const productsByCategory = {};
+                            comparisonProducts.products.forEach((product) => {
+                                const {categories} = product;
+                                if (!productsByCategory[categories]) {
+                                    productsByCategory[categories] = [];
+                                }
+                                productsByCategory[categories].push(product);
+                            });
+                            const comparisonProductsData = {
+                                ...comparisonProducts._doc,
+                                products: productsByCategory,
+                                count: comparisonProducts.products.length,
+                            };
+                            res.json(comparisonProductsData)
+                        })
                         .catch((err) =>
                             res.status(400).json({
                                 message: `Error happened on server: "${err}" `,
@@ -183,7 +198,22 @@ exports.deleteProductFromComparisonProducts = async (req, res, next) => {
                 )
                     .populate('products')
                     .populate('customerId')
-                    .then((comparisonProducts) => res.json(comparisonProducts))
+                    .then((comparisonProducts) => {
+                        const productsByCategory = {};
+                        comparisonProducts.products.forEach((product) => {
+                            const {categories} = product;
+                            if (!productsByCategory[categories]) {
+                                productsByCategory[categories] = [];
+                            }
+                            productsByCategory[categories].push(product);
+                        });
+                        const comparisonProductsData = {
+                            ...comparisonProducts._doc,
+                            products: productsByCategory,
+                            count: comparisonProducts.products.length,
+                        };
+                        res.json(comparisonProductsData)
+                    })
                     .catch((err) =>
                         res.status(400).json({
                             message: `Error happened on server: "${err}" `,

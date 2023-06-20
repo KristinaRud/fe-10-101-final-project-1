@@ -13,9 +13,9 @@ const LoginPage = () => {
         <div className={styles.row}>
           <div className={styles.col}>
             <div className={styles.col__inner}>
-              <h6 className={styles.col__title}>Registered Customers</h6>
               <p className={styles.col__subtitle}>
-                If you have an account, sign in with your email address.
+                If you have an account, sign in with your email address or
+                login.
               </p>
               <LoginForm />
             </div>
@@ -33,7 +33,7 @@ const LoginPage = () => {
                 </li>
                 <li className={styles.list__item}>Track orders and more</li>
               </ul>
-              <Link to="/sign-in">
+              <Link to="/sign-up">
                 <Button variant="contained" size="large" className={styles.btn}>
                   Create An Account
                 </Button>
