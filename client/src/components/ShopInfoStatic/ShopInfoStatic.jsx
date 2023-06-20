@@ -65,7 +65,7 @@ const ShopInfoStatic = () => {
               className={styles.staticInfo__email}
               href="mailto:shop@email.com"
             >
-              shop@email.com
+              onlinestoredanit@gmail.com
             </a>
           </span>
         </div>

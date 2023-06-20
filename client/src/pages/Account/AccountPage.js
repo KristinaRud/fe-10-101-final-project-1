@@ -1,4 +1,4 @@
-import { Box } from "@mui/material";
+import { Box, Typography } from "@mui/material";
 import { useSelector, useDispatch } from "react-redux";
 import { useEffect, useState } from "react";
 import useMediaQuery from "@mui/material/useMediaQuery";
@@ -62,7 +62,9 @@ const AccountPage = () => {
     >
       {" "}
       <BreadcrumbsApp />
-      <h1 className={styles.title}>My Dashboard</h1>
+      <Typography variant="h2" className={styles.title}>
+        My Dashboard
+      </Typography>
       <Box
         sx={{
           display: { md: "flex", xl: "flex" },

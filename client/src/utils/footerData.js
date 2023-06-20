@@ -235,7 +235,7 @@ const data = [
               },
             }}
           >
-            shop@email.com
+            onlinestoredanit@gmail.com
           </Link>
         </li>
       </>

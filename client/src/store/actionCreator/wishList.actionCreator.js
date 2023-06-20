@@ -1,5 +1,6 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
 import request from "../../utils/api/request";
+import { structureDataWishList } from "../../utils/cart/structureData";
 
 const fetchWishList = createAsyncThunk("wishList/fetchWishList", async () => {
   const { res, err } = await request({
@@ -28,10 +29,16 @@ const createWishList = createAsyncThunk(
 const updateWishList = createAsyncThunk(
   "wishList/updateWishList",
   async (data) => {
+    const itemsBD = await structureDataWishList(fetchWishList());
+    const uniqueObjects = itemsBD.filter(
+      (obj1) =>
+        !data.some((obj2) => JSON.stringify(obj1) === JSON.stringify(obj2)),
+    );
+
     const { res, err } = await request({
       url: `/wishList`,
       method: "PUT",
-      body: data,
+      body: uniqueObjects,
     });
     if (res) {
       return res;
@@ -40,20 +47,16 @@ const updateWishList = createAsyncThunk(
   },
 );
 
-const deleteWishList = createAsyncThunk(
-  "wishList/deleteWishList",
-  async (data) => {
-    const { res, err } = await request({
-      url: `/wishList`,
-      method: "DELETE",
-      body: data,
-    });
-    if (res) {
-      return res;
-    }
-    throw new Error(`Couldn't delete wishList: ${err.data}`);
-  },
-);
+const deleteWishList = createAsyncThunk("wishList/deleteWishList", async () => {
+  const { res, err } = await request({
+    url: `/wishList`,
+    method: "DELETE",
+  });
+  if (res) {
+    return res;
+  }
+  throw new Error(`Couldn't delete wishList: ${err.data}`);
+});
 
 const updateProductToWishList = createAsyncThunk(
   "wishList/updateProductToWishList",
@@ -82,31 +85,6 @@ const deleteProductFromWishList = createAsyncThunk(
   },
 );
 
-const updateListProductFromWishList = createAsyncThunk(
-  "wishList/updateListProductFromWishList",
-  async () => {
-    const products = JSON.parse(window.localStorage.getItem("wishList"));
-    if (products.length > 0) {
-      const fetchWishListPromises = products.map(async (product) => {
-        try {
-          const { res } = await request({
-            url: `/wishList/${product.id}`,
-            method: "PUT",
-          });
-          if (res) {
-            return res;
-          }
-        } catch (error) {
-          throw new Error(`Couldn't get products: ${error}`);
-        }
-      });
-      const fetchedWishList = await Promise.all(fetchWishListPromises);
-      await window.localStorage.removeItem("wishList");
-      return fetchedWishList;
-    }
-  },
-);
-
 export {
   fetchWishList,
   createWishList,
@@ -114,5 +92,4 @@ export {
   deleteWishList,
   updateProductToWishList,
   deleteProductFromWishList,
-  updateListProductFromWishList,
 };

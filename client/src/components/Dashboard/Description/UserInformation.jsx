@@ -93,18 +93,18 @@ const UserInformation = ({ activeComponent }) => {
       {!activeComponent && (
         <div className={styles["wrapper-add"]}>
           <h4 className={styles.contact}>Additional Information</h4>
-          <div className={styles["wrapper-text"]}>
-            <h6 className={styles.text}>Birth Date : </h6>
-            <p className={styles.text}>{data.birthdate.replace(/T.*/, "")}</p>
-          </div>
-          <div className={styles["wrapper-text"]}>
-            <h6 className={styles.text}>Gender : </h6>
-            <p className={styles.text}>{data.gender}</p>
-          </div>
-          <div className={styles["wrapper-text"]}>
-            <h6 className={styles.text}>Login : </h6>
-            <p className={styles.text}>{data.login}</p>
-          </div>
+          <p className={styles.text}>
+            <span>Birth Date: </span>
+            {data.birthdate.replace(/T.*/, "")}
+          </p>
+          <p className={styles.text}>
+            <span>Gender: </span>
+            {data.gender}
+          </p>
+          <p className={styles.text}>
+            <span>Login: </span>
+            {data.login}
+          </p>
         </div>
       )}
     </Box>

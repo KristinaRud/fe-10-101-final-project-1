@@ -24,6 +24,9 @@ import DropdownCart from "../DropdownCart/DropdownCart";
 import { allCategoriesSelector } from "../../store/selectors/catalog.selector";
 import { fetchCategories } from "../../store/actionCreator/catalog.actionCreator";
 import { selectWishList } from "../../store/selectors/wishList.selector";
+import { fetchWishList } from "../../store/actionCreator/wishList.actionCreator";
+import { setItems } from "../../store/slices/wishList.slice";
+import { selectCustomers } from "../../store/selectors/customers.selector";
 
 const Header = () => {
   const dispatch = useDispatch();
@@ -33,6 +36,7 @@ const Header = () => {
   const [counterCart, setCounterCart] = useState(0);
   const [counterWishList, setCounterWishList] = useState(0);
   const catalog = useSelector(allCategoriesSelector);
+  const { isLogin } = useSelector(selectCustomers);
 
   const mediaDesktop = useMediaQuery("(min-width: 1200px)");
   const mediaTablet = useMediaQuery("(min-width: 768px)");
@@ -56,12 +60,20 @@ const Header = () => {
   };
 
   useEffect(() => {
-    const counterWL = itemsWishList.length;
+    if (isLogin) {
+      dispatch(fetchWishList());
+    } else {
+      dispatch(setItems(JSON.parse(localStorage.getItem("wishList"))));
+    }
+  }, [isLogin, dispatch]);
+
+  useEffect(() => {
+    const counterWL = itemsWishList ? itemsWishList?.length : 0;
     const counter = itemsCart
       ? itemsCart
           .map(({ cartQuantity }) => cartQuantity)
           .reduce((prev, curr) => prev + curr, 0)
-      : 0 || NaN;
+      : 0;
     setCounterCart(counter);
     setCounterWishList(counterWL);
   }, [itemsCart, itemsWishList]);
@@ -204,7 +216,7 @@ const Header = () => {
                     key={item.name}
                     onClick={handleCloseNavMenu}
                     className={styles["navbar__link-desktop"]}
-                    activeClassName={"active"}
+                    activeclassname={"active"}
                   >
                     {item.name}
                   </NavLink>
@@ -220,7 +232,7 @@ const Header = () => {
                   color: { xs: "#FFFFFF", md: "#FFFFFF", lg: "#000000" },
                 }}
               />
-              {counterWishList !== 0 && (
+              {counterWishList > 0 && (
                 <div className={styles["wrapper-counter"]}>
                   <p>{counterWishList}</p>
                 </div>
