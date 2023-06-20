@@ -6,17 +6,17 @@ import CompareProductsItem from "./CompareProductsItem/CompareProductsItem";
 
 const CompareProducts = ({ isFavourite, data, classname }) => {
   return (
-    <Link to={isFavourite ? "/wishList" : "/compare"}>
+    <Link to={isFavourite ? "/wishList" : "/compare-products"}>
       <ListWrapper
         title={isFavourite ? "My Wish List" : "Compare Products"}
         className={classname}
       >
-        {data.length > 0 ? (
+        {data?.length > 0 ? (
           data.map((item) => (
             <CompareProductsItem
               key={item.itemNo}
-              name={item.description}
-              url={item.image}
+              name={isFavourite ? item.description : item.name}
+              url={isFavourite ? item.image : item.imageUrls[0]}
             />
           ))
         ) : (

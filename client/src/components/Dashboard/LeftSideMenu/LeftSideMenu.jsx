@@ -6,15 +6,25 @@ import MenuDashboard from "./MenuDashboard";
 import CompareProducts from "../../LeftSidear/CompareProducts/CompareProducts";
 import styles from "./LeftSideMenu.module.scss";
 import { selectWishList } from "../../../store/selectors/wishList.selector";
+import { selectComparison } from "../../../store/selectors/comparison.selector";
 
 const LeftSideMenu = ({ onItemClick }) => {
   const { itemsWishList } = useSelector(selectWishList);
+  const { comparison } = useSelector(selectComparison);
   const mediaMobile = useMediaQuery("(max-width: 480px)");
+
   return (
     <Box className={styles.container}>
       <MenuDashboard onItemClick={onItemClick} />
       {!mediaMobile && (
-        <CompareProducts classname={styles["wrapper-compare"]} />
+        <CompareProducts
+          classname={styles["wrapper-compare"]}
+          data={
+            Object.keys(comparison).length > 0
+              ? Object.values(comparison?.products).flat(1)
+              : []
+          }
+        />
       )}
       {!mediaMobile && (
         <CompareProducts

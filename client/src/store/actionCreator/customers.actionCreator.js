@@ -9,14 +9,14 @@ const login = createAsyncThunk("customers/login", async (data) => {
     body: data,
   });
 
-  if (res.success) {
+  if (res && res.success) {
     setAuthToken(res.token);
     window.localStorage.setItem("token", res.token);
     return res;
   }
   setAuthToken(false);
 
-  throw new Error(`Couldn't login: ${err.data}`);
+  throw new Error(`Couldn't login: ${JSON.stringify(err.data)}`);
 });
 
 const logout = createAsyncThunk("customers/logout", async () => {
@@ -66,4 +66,25 @@ const editPasswordCustomer = createAsyncThunk(
   },
 );
 
-export { login, logout, getCustomer, editPasswordCustomer, updateCustomer };
+const signUp = createAsyncThunk("customers/signUp", async (values) => {
+  const { res, err } = await request({
+    url: "/customers",
+    method: "POST",
+    body: values,
+  });
+
+  if (res) {
+    return res;
+  }
+
+  throw new Error(`Couldn't login: ${JSON.stringify(err.data)}`);
+});
+
+export {
+  login,
+  logout,
+  getCustomer,
+  editPasswordCustomer,
+  updateCustomer,
+  signUp,
+};
