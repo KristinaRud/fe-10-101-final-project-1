@@ -1,51 +1,33 @@
 import { Field, Form, Formik } from "formik";
+import { useDispatch } from "react-redux";
 import { TextField } from "formik-mui";
 import { Button } from "@mui/material";
-import { useSelector } from "react-redux";
-import * as Yup from "yup";
 import PropTypes from "prop-types";
+import { validationSchemaPassword } from "./utils";
 import styles from "../../RegistrationForm/RegistrationForm.module.scss";
-import { selectCustomers } from "../../../store/selectors/customers.selector";
+import { editPasswordCustomer } from "../../../store/actionCreator/customers.actionCreator";
 
-const EditPasswordForm = ({ handleSubmitForm }) => {
-  const { data } = useSelector(selectCustomers);
+const EditPasswordForm = ({ setSubmit }) => {
+  const dispatch = useDispatch();
 
-  const validationSchema = Yup.object().shape({
-    currentPassword: Yup.string()
-      .test(
-        "password-match",
-        "Passwords must match",
-        (value) => value === data.confirmPassword,
-      )
-      .required("Current Password is required"),
-    password: Yup.string()
-      .min(8, "Password must be at least 8 characters")
-      .max(20, "Password must not exceed 20 characters")
-      .matches(
-        /^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9]).{8,}$/,
-        "Password must contain at least one uppercase letter, one lowercase letter, and one digit",
-      )
-      .required("Password is required"),
-    confirmPassword: Yup.string()
-      .min(8, "Password must be at least 8 characters")
-      .max(20, "Password must not exceed 20 characters")
-      .matches(
-        /^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9]).{8,}$/,
-        "Password must contain at least one uppercase letter, one lowercase letter, and one digit",
-      )
-      .oneOf([Yup.ref("password"), null], "Passwords must match")
-      .required("Confirm Password is required"),
-  });
+  const handleSubmitForm = async (values) => {
+    const passwords = {
+      password: values.currentPassword,
+      newPassword: values.password,
+    };
+    await dispatch(editPasswordCustomer(passwords));
+    setSubmit(true);
+  };
 
   return (
     <>
       <Formik
         initialValues={{
+          currentPassword: "",
           password: "",
           confirmPassword: "",
-          currentPassword: "",
         }}
-        validationSchema={validationSchema}
+        validationSchema={validationSchemaPassword}
         onSubmit={({ password, confirmPassword }) =>
           handleSubmitForm({ password, confirmPassword })
         }
@@ -89,11 +71,11 @@ const EditPasswordForm = ({ handleSubmitForm }) => {
 };
 
 EditPasswordForm.propTypes = {
-  handleSubmitForm: PropTypes.func,
+  setSubmit: PropTypes.func,
 };
 
 EditPasswordForm.defaultProps = {
-  handleSubmitForm: () => {},
+  setSubmit: () => {},
 };
 
 export default EditPasswordForm;

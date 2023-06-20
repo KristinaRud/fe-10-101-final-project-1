@@ -58,5 +58,6 @@ module.exports = {
     "react/require-default-props": 0,
     "react/jsx-curly-brace-presence": 0,
     "no-plusplus": 0,
+    "no-return-await": 0,
   },
 };

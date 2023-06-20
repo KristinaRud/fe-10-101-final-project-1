@@ -1,5 +1,5 @@
 import { Box } from "@mui/material";
-import { useDispatch, useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 import { useEffect, useState } from "react";
 import useMediaQuery from "@mui/material/useMediaQuery";
 import styles from "./AccountPage.module.scss";
@@ -9,20 +9,26 @@ import UserInformation from "../../components/Dashboard/Description/UserInformat
 import AccountOrders from "../../components/Dashboard/Description/AccountOrders";
 import { getCustomer } from "../../store/actionCreator/customers.actionCreator";
 import { fetchOrders } from "../../store/actionCreator/orders.actionCreator";
-import { selectOrders } from "../../store/selectors/orders.selector";
 import CompareProducts from "../../components/LeftSidear/CompareProducts/CompareProducts";
+import { selectWishList } from "../../store/selectors/wishList.selector";
+import { selectCustomers } from "../../store/selectors/customers.selector";
+import { fetchWishList } from "../../store/actionCreator/wishList.actionCreator";
+import BreadcrumbsApp from "../../components/BreadcrumbsApp/BreadcrumbsApp";
 
 const AccountPage = () => {
   const dispatch = useDispatch();
   const [activeComponent, setActiveComponent] = useState("Account Dashboard");
   const mediaMobile = useMediaQuery("(max-width: 480px)");
-  // eslint-disable-next-line no-unused-vars
-  const { orders } = useSelector(selectOrders);
+  const { itemsWishList } = useSelector(selectWishList);
+  const { isLogin } = useSelector(selectCustomers);
 
   useEffect(() => {
-    dispatch(getCustomer());
-    dispatch(fetchOrders());
-  }, [dispatch]);
+    if (isLogin) {
+      dispatch(getCustomer());
+      dispatch(fetchWishList());
+      dispatch(fetchOrders());
+    }
+  }, [dispatch, isLogin]);
 
   const handleMenuItemClick = (menuItem) => {
     setActiveComponent(menuItem.item);
@@ -54,6 +60,8 @@ const AccountPage = () => {
         padding: { xs: "0 15px", sm: "0 15px", xlg: "0" },
       }}
     >
+      {" "}
+      <BreadcrumbsApp />
       <h1 className={styles.title}>My Dashboard</h1>
       <Box
         sx={{
@@ -69,7 +77,11 @@ const AccountPage = () => {
           <CompareProducts classname={styles["wrapper-compare"]} />
         )}
         {mediaMobile && (
-          <CompareProducts isFavourite classname={styles["wrapper-compare"]} />
+          <CompareProducts
+            isFavourite
+            data={itemsWishList}
+            classname={styles["wrapper-compare"]}
+          />
         )}
       </Box>
     </Box>

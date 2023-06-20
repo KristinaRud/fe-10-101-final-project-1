@@ -94,25 +94,24 @@ exports.placeOrder = async (req, res, next) => {
         newOrder.populate("customerId").execPopulate();
       }
 
-      newOrder
-        .save()
-        .then(async order => {
-          const mailResult = await sendMail(
-            subscriberMail,
-            letterSubject,
-            letterHtml,
-            res
-          );
+        newOrder
+          .save()
+          .then(async order => {
+            const mailResult = await sendMail(
+              subscriberMail,
+              letterSubject,
+              letterHtml,
+            );
 
-          for (item of order.products){
-            const id = item.product._id;
-            const product = await Product.findOne({ _id: id });
-            const productQuantity = product.quantity;
-            await Product.findOneAndUpdate({ _id: id }, { quantity: productQuantity - item.cartQuantity }, { new: true })
-          }
+            for (item of order.products){
+              const id = item.product._id;
+              const product = await Product.findOne({ _id: id });
+              const productQuantity = product.quantity;
+              await Product.findOneAndUpdate({ _id: id }, { quantity: productQuantity - item.cartQuantity }, { new: true })
+            }
 
-          res.json({ order, mailResult });
-        })
+            res.json({ order, mailResult });
+          })
         .catch(err =>
           res.status(400).json({
             message: `Error happened on server: "${err}" `

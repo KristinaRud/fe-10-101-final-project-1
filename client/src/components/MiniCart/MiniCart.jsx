@@ -1,11 +1,24 @@
-import PropTypes from "prop-types";
 import { uid } from "react-uid";
 import { Typography } from "@mui/material";
+import { useSelector } from "react-redux";
+import { Link } from "react-router-dom";
+import PropTypes from "prop-types";
 import MiniCartItem from "./components/MiniCart-item";
 import styles from "./MiniCart.module.scss";
-import paypal from "../../assets/images/miniCart/paypal-icon.svg";
+import { selectShoppingCart } from "../../store/selectors/shoppingCart.selector";
 
-const MiniCart = ({ products }) => {
+const MiniCart = ({ onClick }) => {
+  const { itemsCart } = useSelector(selectShoppingCart) ?? [];
+  const subtotalAmount = itemsCart
+    ?.map(({ currentPrice, cartQuantity }) => currentPrice * cartQuantity)
+    .reduce((prev, curr) => prev + curr, 0);
+  const itemsInCart = itemsCart
+    ?.map(({ cartQuantity }) => cartQuantity)
+    .reduce((prev, curr) => prev + curr, 0);
+  const tax = subtotalAmount * 0.08;
+  const shipping = 100;
+  const totalAmount = (subtotalAmount + tax + shipping).toFixed(2);
+
   return (
     <div className={styles.cart}>
       <div>
@@ -17,47 +30,61 @@ const MiniCart = ({ products }) => {
           component="p"
           fontSize={12}
         >
-          {products.length} item in cart
+          {itemsInCart}
+          {itemsInCart > 1 ? " items" : " item"} in cart
         </Typography>
-        {/* eslint-disable-next-line jsx-a11y/anchor-is-valid */}
-        <a className={styles.cart__link} href="#">
+        <Link
+          to={"/shopping-cart"}
+          className={styles.cart__link}
+          onClick={onClick}
+        >
           View or Edit Your Cart
-        </a>
+        </Link>
       </div>
-      {products.map((item) => {
-        return (
-          <MiniCartItem
-            key={uid(item)}
-            url="https://c.ua/image/cache/catalog/PosokhovRoman/sonyPS/microsoft-xbox-series-x-1tb-500x500.jpg"
-            title={item.title}
-            count={3}
-          />
-        );
-      })}
+      <div className={styles.cart__list}>
+        {itemsCart?.map((item) => {
+          return (
+            <MiniCartItem
+              key={uid(item)}
+              url={item.image}
+              title={item.alt}
+              count={item.cartQuantity}
+              id={item.id}
+            />
+          );
+        })}
+      </div>
       <div>
-        <p className={styles.cart__price}>
-          <Typography component="span" fontSize={14} color="#A2A6B0">
-            Subtotal:
+        {itemsInCart ? (
+          <>
+            <p className={styles.cart__price}>
+              <Typography component="span" fontSize={14} color="#A2A6B0">
+                Subtotal:
+              </Typography>
+              {" $"}
+              {totalAmount}
+            </p>
+            <Link to={"/"} className={styles.cart__link} onClick={onClick}>
+              Proceed to Checkout
+            </Link>
+          </>
+        ) : (
+          <Typography
+            component="p"
+            fontSize={14}
+            color="#A2A6B0"
+            marginTop={"5px"}
+          >
+            No items has been added
           </Typography>
-          {" $"}0
-        </p>
-        {/* eslint-disable-next-line jsx-a11y/anchor-is-valid */}
-        <a className={styles.cart__link} href="#">
-          Go to Checkout
-        </a>
-        {/* eslint-disable-next-line jsx-a11y/anchor-is-valid */}
-        <a className={styles.cart__link} href="#">
-          Check out with
-          <img src={paypal} alt="paypal logo" />
-        </a>
+        )}
       </div>
     </div>
   );
 };
 
 MiniCart.propTypes = {
-  // eslint-disable-next-line react/forbid-prop-types
-  products: PropTypes.array.isRequired,
+  onClick: PropTypes.func.isRequired,
 };
 
 export default MiniCart;

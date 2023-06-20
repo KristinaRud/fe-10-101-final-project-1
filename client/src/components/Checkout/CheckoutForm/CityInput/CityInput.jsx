@@ -11,6 +11,7 @@ import {
   selectCities,
 } from "../../../../store/selectors/city.selector";
 import { fetchAllCitiesInDistrict } from "../../../../store/actionCreator/city.actionCreator";
+import { replaceCyrillicWithLatin } from "../../../../utils/string/replaceCyrillicWithLatin";
 
 const CityInput = ({ setFieldValue }) => {
   const dispatch = useDispatch();
@@ -19,7 +20,10 @@ const CityInput = ({ setFieldValue }) => {
 
   const handleChange = (event) => {
     cities.forEach((city) => {
-      if (city.public_name.en === event.target.textContent) {
+      if (
+        replaceCyrillicWithLatin(city.public_name.en) ===
+        event.target.textContent
+      ) {
         dispatch(setChosenCity(city));
         setFieldValue("city", city);
         setFieldValue("postOfficeBranch", null);
@@ -36,9 +40,12 @@ const CityInput = ({ setFieldValue }) => {
       component={Autocomplete}
       options={cities}
       onChange={handleChange}
-      getOptionLabel={(option) => option.public_name.en}
+      getOptionLabel={(option) =>
+        replaceCyrillicWithLatin(option.public_name.en)
+      }
       isOptionEqualToValue={(option, value) =>
-        option.public_name.en === value?.public_name.en
+        replaceCyrillicWithLatin(option.public_name.en) ===
+        replaceCyrillicWithLatin(value.public_name.en)
       }
       renderInput={(params) => (
         <Text
@@ -49,6 +56,11 @@ const CityInput = ({ setFieldValue }) => {
             autoComplete: "new-password",
           }}
         />
+      )}
+      renderOption={(props, option) => (
+        <li {...props} key={option.uuid}>
+          {replaceCyrillicWithLatin(option.public_name.en)}
+        </li>
       )}
     />
   );

@@ -1,9 +1,9 @@
 .btn {
   width: 160px;
   height: 37px;
-  border: 2px solid #0156FF;
+  border: 2px solid #0156ff;
   border-radius: 50px;
-  color: #0156FF;
+  color: #0156ff;
   font-weight: 600;
   font-size: 14px;
   line-height: 21px;
@@ -12,6 +12,10 @@
     width: 129px;
     height: 33px;
   }
+}
+
+.green {
+  color: green;
 }
 
 .img {
@@ -48,7 +52,7 @@
   }
 }
 
-.price-wrapper{
+.price-wrapper {
   margin-bottom: 20px;
 
   @media (width <= 768px) {

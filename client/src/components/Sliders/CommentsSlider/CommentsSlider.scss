@@ -26,20 +26,3 @@
     font-size: 9px;
   }
 }
-
-.MuiButton-outlined {
-  border: 2px solid #0156FF;
-  border-radius: 50px;
-  color: #0156FF;
-  font-weight: 600;
-  font-size: 14px;
-  line-height: 21px;
-  text-transform: capitalize;
-  padding: 8px 26px;
-
-  &:hover{
-    background: #0156FF;
-    color:#FFF;
-    border: 2px solid #0156FF;
-  }
-}

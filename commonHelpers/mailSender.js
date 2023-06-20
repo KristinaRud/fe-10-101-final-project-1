@@ -2,7 +2,7 @@ const nodemailer = require("nodemailer");
 const keys = require("../config/keys");
 const getConfigs = require("../config/getConfigs");
 
-module.exports = async (subscriberMail, letterSubject, letterHtml, res) => {
+module.exports = async (subscriberMail, letterSubject, letterHtml) => {
   const configs = await getConfigs();
 
   //authorization for sending email

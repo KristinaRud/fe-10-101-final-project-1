@@ -22,12 +22,13 @@ const useStyles = makeStyles((theme) => ({
     marginRight: theme.spacing(1),
   },
   summary: {
-    marginTop: theme.spacing(2),
+    background: "#F5F7FF",
+    padding: "18px 35px",
+  },
+  summaryWrapper: {
     display: "flex",
     flexDirection: "column",
-    background: "#F5F7FF",
     width: "65.66%",
-    padding: "18px 35px",
     [theme.breakpoints.down("md")]: {
       width: "100%",
     },
@@ -107,6 +108,8 @@ const useStyles = makeStyles((theme) => ({
     display: "flex",
     gap: "7px",
     flexDirection: "row",
+    width: "100%",
+    justifyContent: "space-between",
     [theme.breakpoints.down("sm")]: {
       flexDirection: "column",
       gap: "0",
@@ -117,6 +120,13 @@ const useStyles = makeStyles((theme) => ({
     background: "none",
     color: "#A2A6B0",
   },
+  title: {
+    fontWeight: "600",
+    fontSize: "24px",
+    lineHeight: "24px",
+    color: "#A2A6B0",
+    margin: "0 auto",
+  },
   desktopTitle: {
     fontStyle: "normal",
     fontWeight: 600,
@@ -125,6 +135,7 @@ const useStyles = makeStyles((theme) => ({
     display: "flex",
     alignItems: "center",
     color: "#000000",
+    padding: "20px 0",
   },
   tabletTitle: {
     fontStyle: "normal",
@@ -135,6 +146,7 @@ const useStyles = makeStyles((theme) => ({
     alignItems: "center",
     textAlign: "center",
     color: "#000000",
+    padding: "20px 0",
   },
   desktopSummaryTitle: {
     fontStyle: "normal",
@@ -168,6 +180,9 @@ const useStyles = makeStyles((theme) => ({
     [theme.breakpoints.down("sm")]: {
       flexDirection: "column",
     },
+  },
+  container: {
+    alignItems: "flex-end",
   },
 }));
 

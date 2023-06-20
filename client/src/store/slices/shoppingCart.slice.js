@@ -7,13 +7,14 @@ import {
   deleteShoppingCart,
   editShoppingCart,
   decreaseProductFromCart,
+  putProductsToCartLogin,
 } from "../actionCreator/shoppingCart.actionCreator";
 import { structureDataToStore } from "../../utils/cart/structureData";
 
 const shoppingCartSlice = createSlice({
   name: "shoppingCart",
   initialState: {
-    itemsCart: [],
+    itemsCart: JSON.parse(window.localStorage.getItem("shoppingCart")) || [],
   },
   reducers: {
     setItems: (state, action) => {
@@ -80,8 +81,8 @@ const shoppingCartSlice = createSlice({
     builder.addCase(deleteProductFromCart.fulfilled, (state, action) => {
       state.itemsCart = structureDataToStore(action.payload.products);
     });
-    builder.addCase(deleteShoppingCart.fulfilled, (state, action) => {
-      state.itemsCart = action.payload.products;
+    builder.addCase(deleteShoppingCart.fulfilled, (state) => {
+      state.itemsCart = [];
     });
     builder.addCase(editShoppingCart.fulfilled, (state, action) => {
       state.itemsCart = structureDataToStore(action.payload.products);
@@ -89,6 +90,9 @@ const shoppingCartSlice = createSlice({
     });
     builder.addCase(decreaseProductFromCart.fulfilled, (state, action) => {
       state.itemsCart = structureDataToStore(action.payload.products);
+    });
+    builder.addCase(putProductsToCartLogin.fulfilled, (state, action) => {
+      state.itemsCart = structureDataToStore(action.payload[0].products);
     });
   },
 });
@@ -100,7 +104,6 @@ export const {
   decrementCartItem,
   deleteCartItem,
   deleteCart,
-  setIsAdded,
 } = shoppingCartSlice.actions;
 
 export default shoppingCartSlice.reducer;

@@ -19,7 +19,7 @@ const FollowUsItem = ({ img, text, date }) => {
             variant="body1"
             component="div"
             fontSize="12px"
-            textAlight="center"
+            textAlign="center"
             className={s.text}
           >
             {text}
@@ -28,7 +28,7 @@ const FollowUsItem = ({ img, text, date }) => {
             variant="body2"
             color="text.secondary"
             fontSize="10px"
-            textAlight="center"
+            textAlign="center"
           >
             {date}
           </Typography>

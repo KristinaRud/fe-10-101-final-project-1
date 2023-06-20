@@ -1,5 +1,6 @@
 import { Field, Form, Formik } from "formik";
 import { TextField } from "formik-mui";
+import { useDispatch } from "react-redux";
 import {
   Button,
   RadioGroup,
@@ -12,23 +13,38 @@ import styles from "../../RegistrationForm/RegistrationForm.module.scss";
 import { validationSchema } from "./utils";
 import BirthdateField from "../../RegistrationForm/BirthdateField/BirthdateField";
 import TelephoneField from "../../RegistrationForm/TelephoneField/TelephoneField";
+import { updateCustomer } from "../../../store/actionCreator/customers.actionCreator";
 
-const EditUserForm = ({ handleSubmitForm }) => {
+const EditUserForm = ({ setSubmit }) => {
+  const dispatch = useDispatch();
+
+  const handleSubmitForm = async (values) => {
+    const valuesNonEmpty = Object.entries(values).reduce(
+      (object, [key, value]) => {
+        if (value) {
+          object[key] = value;
+        }
+        return object;
+      },
+      {},
+    );
+    await dispatch(updateCustomer(valuesNonEmpty));
+    setSubmit(true);
+  };
+
   return (
     <>
       <Formik
         initialValues={{
           firstName: "",
           lastName: "",
-          email: "",
-          telephone: "",
+          login: "",
+          mobile: "",
           birthdate: "",
-          gander: "",
+          gender: "",
         }}
         validationSchema={validationSchema}
         onSubmit={(values) => handleSubmitForm(values)}
-        validateOnChange={false}
-        validateOnBlur={false}
       >
         {() => (
           <Form className={styles.form}>
@@ -48,14 +64,14 @@ const EditUserForm = ({ handleSubmitForm }) => {
             />
             <Field
               component={TextField}
-              name="email"
-              type="email"
-              label="Email *"
+              name="login"
+              type="text"
+              label="Login *"
               variant="standard"
             />
             <TelephoneField />
             <BirthdateField />
-            <Field component={RadioGroup} name="gander">
+            <Field component={RadioGroup} name="gender">
               <FormLabel component="legend">Gender: </FormLabel>
               <FormControlLabel value="male" control={<Radio />} label="Male" />
               <FormControlLabel
@@ -80,11 +96,9 @@ const EditUserForm = ({ handleSubmitForm }) => {
 };
 
 EditUserForm.propTypes = {
-  handleSubmitForm: PropTypes.func,
+  setSubmit: PropTypes.func,
 };
 
-EditUserForm.defaultProps = {
-  handleSubmitForm: () => {},
-};
+EditUserForm.defaultProps = { setSubmit: () => {} };
 
 export default EditUserForm;

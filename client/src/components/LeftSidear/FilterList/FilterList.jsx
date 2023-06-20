@@ -17,6 +17,7 @@ import {
   setCategory,
 } from "../../../store/slices/filters.slice";
 import FilterByPrice from "./FilterItem/FilterByPrice";
+import { deleteAllQueryParams } from "../../../utils/queryParams/deleteAllQueryParams";
 
 const FilterList = ({ className, closeModal }) => {
   const dispatch = useDispatch();
@@ -47,6 +48,7 @@ const FilterList = ({ className, closeModal }) => {
   const handleSendFilter = () => {
     closeModal();
     searchParams.set("startPage", "1");
+    deleteAllQueryParams(searchParams, navigate);
     setFilterQueryParams(filters, searchParams, navigate);
   };
 
@@ -66,12 +68,7 @@ const FilterList = ({ className, closeModal }) => {
       <FilterButton onClick={handleClearFilter}>Clear Filters</FilterButton>
       {filtersData.length > 0 && filtersData.map((arr) => renderFilters(arr))}
       <FilterByColor />
-      <Button
-        variant="contained"
-        className={s.btn}
-        onClick={handleSendFilter}
-        disabled={filters.length === 0}
-      >
+      <Button variant="contained" className={s.btn} onClick={handleSendFilter}>
         Apply Filters {filters.length > 0 && `(${filters.length})`}
       </Button>
     </ListWrapper>

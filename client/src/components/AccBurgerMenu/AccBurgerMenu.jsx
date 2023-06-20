@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
+import PropTypes from "prop-types";
 import Menu from "@mui/material/Menu";
 import PersonIcon from "@mui/icons-material/Person";
 import MenuItem from "@mui/material/MenuItem";
@@ -19,10 +20,22 @@ import {
 } from "../../store/actionCreator/customers.actionCreator";
 import AlertDialog from "../Header/AlertDialog/AlertDialog";
 import { stringAvatar } from "../../utils/avatar/stringAvatar";
+import { deleteCart } from "../../store/slices/shoppingCart.slice";
+import {
+  fetchShoppingCart,
+  putProductsToCartLogin,
+} from "../../store/actionCreator/shoppingCart.actionCreator";
+import {
+  fetchWishList,
+  updateListProductFromWishList,
+} from "../../store/actionCreator/wishList.actionCreator";
+import { fetchComparisonProducts } from "../../store/actionCreator/comparison.actionCreator";
+import { selectComparison } from "../../store/selectors/comparison.selector";
 
-const AccBurgerMenu = () => {
+const AccBurgerMenu = ({ counterWishList }) => {
   const [anchorAccBurgMenu, setAnchorAccBurgMenu] = useState(null);
   const { isLogin, data } = useSelector(selectCustomers);
+  const { comparison } = useSelector(selectComparison);
   const [openDialog, setOpenDialog] = useState(false);
   const dispatch = useDispatch();
   const navigate = useNavigate();
@@ -40,7 +53,10 @@ const AccBurgerMenu = () => {
     dispatch(logout());
     setOpenDialog(false);
     setAnchorAccBurgMenu(null);
+    dispatch(deleteCart());
+    navigate("/");
   };
+
   const handleOpenAccMenu = (event) => {
     setAnchorAccBurgMenu(event.currentTarget);
   };
@@ -49,9 +65,21 @@ const AccBurgerMenu = () => {
     setAnchorAccBurgMenu(null);
   };
 
+  const handleClickCompare = () => {
+    setAnchorAccBurgMenu(null);
+    navigate("/compare-products");
+  };
+
   useEffect(() => {
-    dispatch(getCustomer());
-  }, [dispatch]);
+    if (isLogin) {
+      dispatch(getCustomer());
+      dispatch(fetchShoppingCart());
+      dispatch(fetchWishList());
+      dispatch(putProductsToCartLogin());
+      dispatch(updateListProductFromWishList());
+      dispatch(fetchComparisonProducts());
+    }
+  }, [dispatch, isLogin]);
 
   return (
     <>
@@ -66,7 +94,7 @@ const AccBurgerMenu = () => {
             {Object.keys(data).length !== 0 ? (
               <Avatar
                 {...stringAvatar(`${data.firstName} ${data.lastName}`)}
-                sx={{ width: 34, height: 34 }}
+                sx={{ width: 34, height: 34, fontSize: 16 }}
               />
             ) : (
               <PersonIcon
@@ -119,13 +147,18 @@ const AccBurgerMenu = () => {
               <SettingsSuggestIcon sx={{ marginRight: "5px" }} />
               My Settings
             </MenuItem>
-            <MenuItem onClick={handleCloseAccMenu}>
+            <MenuItem
+              onClick={() => {
+                handleCloseAccMenu();
+                navigate("/wishlist");
+              }}
+            >
               <FavoriteBorderIcon sx={{ marginRight: "5px" }} />
-              My Wish List (0)
+              My Wish List {`(${counterWishList})`}
             </MenuItem>
-            <MenuItem onClick={handleCloseAccMenu}>
+            <MenuItem onClick={handleClickCompare}>
               <BarChartIcon sx={{ marginRight: "5px" }} />
-              Compare (0)
+              Compare ({comparison.count})
             </MenuItem>
             <Divider />
             <MenuItem onClick={handleClickOpenDialog}>
@@ -146,4 +179,11 @@ const AccBurgerMenu = () => {
   );
 };
 
+AccBurgerMenu.propTypes = {
+  counterWishList: PropTypes.number,
+};
+
+AccBurgerMenu.defaultProps = {
+  counterWishList: 0,
+};
 export default AccBurgerMenu;

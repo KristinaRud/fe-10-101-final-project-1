@@ -62,6 +62,8 @@ const ProductsListView = () => {
               rating,
               shortDescription,
               currentPrice,
+              categories,
+              _id,
             } = product;
             if (iconView === "list") {
               return (
@@ -71,10 +73,13 @@ const ProductsListView = () => {
                     oldPrice={previousPrice}
                     alt={name}
                     available={quantity > 5}
-                    rating={rating}
+                    rating={Number(rating)}
                     description={shortDescription.join(" ")}
                     currentPrice={currentPrice}
                     name={name}
+                    id={_id}
+                    itemNo={itemNo}
+                    categories={categories}
                   />
                 </Grid>
               );
@@ -86,14 +91,14 @@ const ProductsListView = () => {
                   oldPrice={previousPrice}
                   alt={name}
                   available={quantity > 5}
-                  rating={rating}
+                  rating={Number(rating)}
                   currentPrice={currentPrice}
                   description={name}
                   title=""
-                  id={product._id}
-                  categories={product.categories}
-                  name={product.name}
-                  itemNo={product.itemNo}
+                  id={_id}
+                  categories={categories}
+                  name={name}
+                  itemNo={itemNo}
                 />
               </Grid>
             );
