@@ -1,10 +1,10 @@
-
 .title {
   font-weight: 700;
   font-size: 18px;
   line-height: 148%;
   border-bottom: 1px solid #cacdd8;
   margin-bottom: 17px;
+  margin-top: 17px;
   padding-bottom: 12px;
 
   @media (width <= 768px) {
@@ -30,14 +30,14 @@
   color: #666;
 }
 
-.btn-account{
+.btn-account {
   margin: 34px 50px 44px 0;
-  color: #0156FF;
-  border-bottom: 1px solid #0156FF;
+  color: #0156ff;
+  border-bottom: 1px solid #0156ff;
   padding: 0;
 
   &:hover {
-    color:#666;
+    color: #666;
     background: none;
     border-bottom: none;
   }

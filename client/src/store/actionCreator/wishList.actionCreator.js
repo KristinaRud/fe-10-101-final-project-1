@@ -40,20 +40,16 @@ const updateWishList = createAsyncThunk(
   },
 );
 
-const deleteWishList = createAsyncThunk(
-  "wishList/deleteWishList",
-  async (data) => {
-    const { res, err } = await request({
-      url: `/wishList`,
-      method: "DELETE",
-      body: data,
-    });
-    if (res) {
-      return res;
-    }
-    throw new Error(`Couldn't delete wishList: ${err.data}`);
-  },
-);
+const deleteWishList = createAsyncThunk("wishList/deleteWishList", async () => {
+  const { res, err } = await request({
+    url: `/wishList`,
+    method: "DELETE",
+  });
+  if (res) {
+    return res;
+  }
+  throw new Error(`Couldn't delete wishList: ${err.data}`);
+});
 
 const updateProductToWishList = createAsyncThunk(
   "wishList/updateProductToWishList",

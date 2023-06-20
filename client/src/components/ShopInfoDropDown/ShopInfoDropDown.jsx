@@ -97,7 +97,7 @@ const ShopInfoDropDown = () => {
             </a>{" "}
             <br /> E-mail:{" "}
             <a href="mailto:shop@email.com" style={{ color: "#0156FF" }}>
-              shop@email.com
+              onlinestoredanit@gmail.com
             </a>
           </Typography>
         </div>

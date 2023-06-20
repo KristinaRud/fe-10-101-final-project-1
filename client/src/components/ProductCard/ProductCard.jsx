@@ -110,22 +110,24 @@ const ProductCard = ({
   }, [isAdded, isWishList]);
 
   useEffect(() => {
-    const allProductsComparison = comparison?.products;
-    const categoriesComparison = Object.keys(allProductsComparison);
-    if (categoriesComparison.length > 0) {
-      categoriesComparison.forEach((category) => {
-        if (category.toLowerCase() === categories.toLowerCase()) {
-          const productsComparison = allProductsComparison[category];
-          const isAddedComparison = productsComparison.some(
-            (el) => el._id === id,
-          );
-          if (isAddedComparison) {
-            setIsInComparison(true);
-          } else {
-            setIsInComparison(false);
+    if (Object.keys(comparison).length > 0) {
+      const allProductsComparison = comparison?.products;
+      const categoriesComparison = Object.keys(allProductsComparison);
+      if (categoriesComparison.length > 0) {
+        categoriesComparison.forEach((category) => {
+          if (category.toLowerCase() === categories.toLowerCase()) {
+            const productsComparison = allProductsComparison[category];
+            const isAddedComparison = productsComparison.some(
+              (el) => el._id === id,
+            );
+            if (isAddedComparison) {
+              setIsInComparison(true);
+            } else {
+              setIsInComparison(false);
+            }
           }
-        }
-      });
+        });
+      }
     }
   }, [comparison, categories, id]);
 
@@ -165,7 +167,7 @@ const ProductCard = ({
                 setOpenSnackbar(true);
               }}
             >
-              <IconWishList className={isWishList && cx(styles.green)} />
+              <IconWishList className={isWishList ? cx(styles.green) : ""} />
             </Button>
             <Button
               sx={{
@@ -199,7 +201,7 @@ const ProductCard = ({
               setOpenSnackbar(true);
             }}
           >
-            <IconCart className={isAdded && cx(styles.green)} />
+            <IconCart className={isAdded ? cx(styles.green) : ""} />
           </Button>
         </Box>
         <CardContent sx={{ paddingTop: 1 }}>

@@ -14,14 +14,20 @@ import { structureDataToStore } from "../../utils/cart/structureData";
 const shoppingCartSlice = createSlice({
   name: "shoppingCart",
   initialState: {
-    itemsCart: JSON.parse(window.localStorage.getItem("shoppingCart")) || [],
+    itemsCart: JSON.parse(localStorage.getItem("shoppingCart")) || [],
   },
   reducers: {
     setItems: (state, action) => {
+      if (action.payload === null) {
+        action.payload = [];
+      }
       state.itemsCart = action.payload;
     },
     addToCart: (state, action) => {
-      const itemIndex = state.itemsCart.findIndex(
+      if (state.itemsCart === null) {
+        state.itemsCart = [];
+      }
+      const itemIndex = state.itemsCart?.findIndex(
         (el) => el.id === action.payload.id,
       );
 

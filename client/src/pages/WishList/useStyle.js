@@ -1,6 +1,6 @@
 import { makeStyles } from "@mui/styles";
 
-const useStyle = makeStyles((theme) => ({
+const useStyles = makeStyles((theme) => ({
   root: {
     maxWidth: "1160px",
     margin: "0 auto",
@@ -11,15 +11,13 @@ const useStyle = makeStyles((theme) => ({
   box: {
     display: "flex",
     gap: "35px",
+    justifyContent: "space-between",
     [theme.breakpoints.down("md")]: {
       flexDirection: "column-reverse",
     },
   },
   boxContainer: {
     paddingBottom: "18px",
-  },
-  deleteButton: {
-    marginRight: theme.spacing(1),
   },
   summary: {
     background: "#F5F7FF",
@@ -28,7 +26,7 @@ const useStyle = makeStyles((theme) => ({
   summaryWrapper: {
     display: "flex",
     flexDirection: "column",
-    width: "65.66%",
+    width: "30.66%",
     [theme.breakpoints.down("md")]: {
       width: "100%",
     },
@@ -45,26 +43,10 @@ const useStyle = makeStyles((theme) => ({
     lineHeight: "210%",
     color: "#000000",
   },
-  image: {
-    width: "80px",
-    marginRight: theme.spacing(2),
-  },
-  quantityInput: {
-    width: "70px",
-    background: "#F5F7FF",
-    border: "none",
-    padding: 0,
-    borderRadius: "6px",
-    [theme.breakpoints.down("sm")]: {
-      width: "56px",
-      height: "42.4px",
-    },
-  },
-  notchedOutline: {
-    border: "none",
-  },
   checkoutButton: {
     marginTop: theme.spacing(2),
+    marginRight: "auto",
+    marginLeft: "auto",
     height: "50px",
     background: "#0156FF",
     borderRadius: "50px",
@@ -113,40 +95,13 @@ const useStyle = makeStyles((theme) => ({
     [theme.breakpoints.down("sm")]: {
       flexDirection: "column",
       gap: "0",
+      alignItems: "center",
     },
   },
   continueButton: {
     border: "2px solid #A2A6B0",
     background: "none",
     color: "#A2A6B0",
-  },
-  title: {
-    fontWeight: "600",
-    fontSize: "24px",
-    lineHeight: "24px",
-    color: "#A2A6B0",
-    margin: "0 auto",
-  },
-  desktopTitle: {
-    fontStyle: "normal",
-    fontWeight: 600,
-    fontSize: 32,
-    lineHeight: "1.37",
-    display: "flex",
-    alignItems: "center",
-    color: "#000000",
-    padding: "20px 0",
-  },
-  tabletTitle: {
-    fontStyle: "normal",
-    fontWeight: 600,
-    fontSize: "18px",
-    lineHeight: "1.5",
-    display: "flex",
-    alignItems: "center",
-    textAlign: "center",
-    color: "#000000",
-    padding: "20px 0",
   },
   desktopSummaryTitle: {
     fontStyle: "normal",
@@ -186,4 +141,4 @@ const useStyle = makeStyles((theme) => ({
   },
 }));
 
-export default useStyle;
+export default useStyles;
