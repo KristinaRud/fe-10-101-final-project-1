@@ -13,6 +13,7 @@ import Registration from "../pages/Registration/Registration";
 import WishList from "../pages/WishList/WishList";
 import ContactUs from "../pages/ContactUs/ContactUs";
 import TermsAndConditions from "../components/TermsAndConditions/TermsAndConditions";
+import ComparisonProducts from "../pages/ComparisonProducts/ComparisonProducts";
 import NotFoundPage from "../pages/NotFound/NotFound";
 
 const AppRoute = () => {
@@ -37,10 +38,14 @@ const AppRoute = () => {
         element={isLogin ? <AccountPage /> : <LoginPage />}
       />
       <Route
-        path="/sign-in"
+        path="/sign-up"
         element={isLogin ? <Navigate to="/" /> : <Registration />}
       />
       <Route path="/wishlist" element={<WishList />} />
+      <Route
+        path="/compare-products"
+        element={isLogin ? <ComparisonProducts /> : <Navigate to="/" />}
+      />
       <Route path="*" element={<NotFoundPage />} />
     </Routes>
   );

@@ -8,6 +8,7 @@ import AddressBook from "../../components/Dashboard/Description/AddressBook";
 import UserInformation from "../../components/Dashboard/Description/UserInformation";
 import AccountOrders from "../../components/Dashboard/Description/AccountOrders";
 import { getCustomer } from "../../store/actionCreator/customers.actionCreator";
+import { fetchOrders } from "../../store/actionCreator/orders.actionCreator";
 import CompareProducts from "../../components/LeftSidear/CompareProducts/CompareProducts";
 import { selectWishList } from "../../store/selectors/wishList.selector";
 import { selectCustomers } from "../../store/selectors/customers.selector";
@@ -25,6 +26,7 @@ const AccountPage = () => {
     if (isLogin) {
       dispatch(getCustomer());
       dispatch(fetchWishList());
+      dispatch(fetchOrders());
     }
   }, [dispatch, isLogin]);
 

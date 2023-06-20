@@ -95,7 +95,7 @@ const UserInformation = ({ activeComponent }) => {
           <h4 className={styles.contact}>Additional Information</h4>
           <p className={styles.text}>
             <span>Birth Date: </span>
-            {data.birthdate}
+            {data.birthdate.replace(/T.*/, "")}
           </p>
           <p className={styles.text}>
             <span>Gender: </span>

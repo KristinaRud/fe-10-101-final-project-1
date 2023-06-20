@@ -9,6 +9,7 @@ import { validationSchema } from "./utils";
 import { login } from "../../store/actionCreator/customers.actionCreator";
 import LoginSnackbar from "./LoginSnackbar";
 import { selectCustomers } from "../../store/selectors/customers.selector";
+import { deleteChosenPostOffice } from "../../store/slices/postOffice.slice";
 
 const LoginForm = () => {
   const dispatch = useDispatch();
@@ -16,6 +17,7 @@ const LoginForm = () => {
   const [open, setOpen] = useState(false);
   const [status, setStatus] = useState("");
   const [submit, setSubmit] = useState(false);
+  const [textError, setTextError] = useState("Login failed!");
   const navigate = useNavigate();
 
   const handleSubmit = async (values) => {
@@ -37,15 +39,17 @@ const LoginForm = () => {
       if (customer.isLogin) {
         setStatus("success");
         setSubmit(false);
+        dispatch(deleteChosenPostOffice());
         setTimeout(() => {
           navigate("/");
         }, 2000);
       } else {
+        setTextError(customer.error);
         setStatus("error");
         setSubmit(false);
       }
     }
-  }, [customer.isLogin, navigate, submit]);
+  }, [customer.isLogin, dispatch, navigate, submit]);
 
   return (
     <>
@@ -91,12 +95,10 @@ const LoginForm = () => {
         status={status}
         handleClose={handleClose}
         textSuccess="Login success!"
-        textError="Login failed!"
+        textError={textError}
       />
     </>
   );
 };
 
 export default LoginForm;
-
-// TODO: forgot password, set timeout for snackbar

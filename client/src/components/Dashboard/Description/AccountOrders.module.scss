@@ -33,6 +33,8 @@
   line-height: 20px;
   color: #666;
   margin-bottom: 15px;
+  justify-content: space-between;
+
 
   @media (width <= 768px) {
     justify-content: center;

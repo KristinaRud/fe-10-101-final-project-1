@@ -7,52 +7,60 @@ import {
   Radio,
   Typography,
 } from "@mui/material";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
 import styles from "./RegistrationForm.module.scss";
 import { validationSchema } from "./utils";
 import BirthdateField from "./BirthdateField/BirthdateField";
 import TelephoneField from "./TelephoneField/TelephoneField";
-import request from "../../utils/api/request";
 import LoginSnackbar from "../LoginForm/LoginSnackbar";
+import { signUp } from "../../store/actionCreator/customers.actionCreator";
+import { selectCustomers } from "../../store/selectors/customers.selector";
 
 const RegistrationForm = () => {
   const [openSnackbar, setOpenSnackbar] = useState(false);
   const [status, setStatus] = useState("");
-  const [textError, setTextError] = useState("Sign in failed!");
+  const [textError, setTextError] = useState("Sign up failed!");
+  const [submit, setSubmit] = useState(false);
+  const { successSignup, error } = useSelector(selectCustomers);
   const navigate = useNavigate();
+  const dispatch = useDispatch();
 
   const handleClose = (event, reason) => {
     if (reason === "clickaway") {
       return;
     }
-
     setOpenSnackbar(false);
   };
 
   const handleSubmit = async (values) => {
-    const { res, err } = await request({
-      url: "/customers",
-      method: "POST",
-      body: values,
-    });
-    if (res) {
-      setStatus("success");
-      setOpenSnackbar(true);
-      setTimeout(() => {
-        navigate("/login");
-      }, 2000);
-    }
-    if (err) {
-      setTextError(err.request.responseText);
-      setStatus("error");
-      setOpenSnackbar(true);
-    }
+    dispatch(signUp(values));
+    setSubmit(true);
   };
+
+  useEffect(() => {
+    if (submit) {
+      if (successSignup) {
+        setStatus("success");
+        setOpenSnackbar(true);
+        setSubmit(false);
+        setTimeout(() => {
+          navigate("/login");
+        }, 2000);
+      } else {
+        setTextError(error);
+        setSubmit(false);
+        setStatus("error");
+        setOpenSnackbar(true);
+      }
+    }
+  }, [submit, successSignup, error, navigate]);
+
   return (
     <div className={styles.form__wrapper}>
       <Typography component="h2" className={styles.title}>
-        Sign In
+        Sign Up
       </Typography>
       <Formik
         initialValues={{
@@ -130,7 +138,7 @@ const RegistrationForm = () => {
               size="large"
               type="submit"
             >
-              Sign In
+              Sign Up
             </Button>
           </Form>
         )}

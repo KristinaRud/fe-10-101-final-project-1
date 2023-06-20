@@ -9,11 +9,16 @@ const comparisonSlice = createSlice({
   name: "comparison",
   initialState: {
     comparison: {},
-    operationSuccess: false,
+    operationSuccess: true,
     loading: false,
     errorComparison: null,
+    showDifference: false,
   },
-  reducers: {},
+  reducers: {
+    setShowDifference: (state, action) => {
+      state.showDifference = action.payload;
+    },
+  },
   extraReducers: (builder) => {
     builder
       .addCase(fetchComparisonProducts.pending, (state) => {
@@ -29,7 +34,8 @@ const comparisonSlice = createSlice({
         state.loading = false;
         state.errorComparison = action.error.message;
       })
-      .addCase(addComparisonProduct.fulfilled, (state) => {
+      .addCase(addComparisonProduct.fulfilled, (state, action) => {
+        state.comparison = action.payload;
         state.operationSuccess = true;
         state.errorComparison = null;
       })
@@ -37,7 +43,8 @@ const comparisonSlice = createSlice({
         state.operationSuccess = false;
         state.errorComparison = action.error.message;
       })
-      .addCase(removeComparisonProduct.fulfilled, (state) => {
+      .addCase(removeComparisonProduct.fulfilled, (state, action) => {
+        state.comparison = action.payload;
         state.operationSuccess = true;
         state.errorComparison = null;
       })
@@ -49,3 +56,5 @@ const comparisonSlice = createSlice({
 });
 
 export default comparisonSlice.reducer;
+
+export const { setShowDifference } = comparisonSlice.actions;
