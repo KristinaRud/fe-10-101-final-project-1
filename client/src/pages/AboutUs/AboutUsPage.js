@@ -1,5 +1,5 @@
 import cx from "classnames";
-import { Container, Box } from "@mui/material";
+import { Container, Box, Typography } from "@mui/material";
 import StarIcon from "@mui/icons-material/Star";
 import LocalShippingIcon from "@mui/icons-material/LocalShipping";
 import FavoriteIcon from "@mui/icons-material/Favorite";
@@ -18,7 +18,9 @@ const AboutUsPage = () => {
     <>
       <Box sx={{ margin: "0 auto", maxWidth: "1400px" }}>
         <BreadcrumbsApp />
-        <h1 className={styles.title}>About Us</h1>
+        <Typography variant="h2" className={styles.title}>
+          About Us
+        </Typography>
       </Box>
       <section className={styles.black}>
         <Container sx={{ margin: "0 auto", maxWidth: "1400px" }}>

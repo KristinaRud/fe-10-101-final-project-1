@@ -167,7 +167,7 @@ const ProductCard = ({
                 setOpenSnackbar(true);
               }}
             >
-              <IconWishList className={isWishList && cx(styles.green)} />
+              <IconWishList className={isWishList ? cx(styles.green) : ""} />
             </Button>
             <Button
               sx={{
@@ -201,7 +201,7 @@ const ProductCard = ({
               setOpenSnackbar(true);
             }}
           >
-            <IconCart className={isAdded && cx(styles.green)} />
+            <IconCart className={isAdded ? cx(styles.green) : ""} />
           </Button>
         </Box>
         <CardContent sx={{ paddingTop: 1 }}>

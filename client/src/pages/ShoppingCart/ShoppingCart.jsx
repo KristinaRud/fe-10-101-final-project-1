@@ -46,7 +46,9 @@ const ShoppingCart = () => {
   const [status, setStatus] = useState("");
   const [isUpdate, setIsUpdate] = useState(false);
   const [openSnackbar, setOpenSnackbar] = useState(false);
+  const isMobile = useMediaQuery((theme) => theme.breakpoints.down("md"));
   const navigate = useNavigate();
+
 
   const handleClose = (event, reason) => {
     if (reason === "clickaway") {
@@ -116,8 +118,6 @@ const ShoppingCart = () => {
     }
     setIsUpdate(true);
   };
-
-  const isMobile = useMediaQuery((theme) => theme.breakpoints.down("md"));
 
   useEffect(() => {
     if (isLogin) {
@@ -294,23 +294,27 @@ const ShoppingCart = () => {
                   Subtotal
                 </Typography>
                 <Typography className={classes.subtitle}>
-                  {`${subtotalAmount}.00 ₴`}
+                  {`${subtotalAmount
+                    .toString()
+                    .replace(/\B(?=(\d{3})+(?!\d))/g, " ")}.00 ₴`}
                 </Typography>
               </div>
               <div className={classes.summaryItem}>
                 <Typography variant="subtitle1" className={classes.subtitle}>
                   Tax
                 </Typography>
-                <Typography
-                  className={classes.subtitle}
-                >{`${tax} ₴`}</Typography>
+                <Typography className={classes.subtitle}>{`${tax
+                  .toString()
+                  .replace(/\B(?=(\d{3})+(?!\d))/g, " ")} ₴`}</Typography>
               </div>
               <div className={classes.summaryItem}>
                 <Typography variant="subtitle1" className={classes.subtitle}>
                   Shipping
                 </Typography>
                 <Typography className={classes.subtitle}>
-                  {`${shipping}.00 ₴`}
+                  {`${shipping
+                    .toString()
+                    .replace(/\B(?=(\d{3})+(?!\d))/g, " ")}.00 ₴`}
                 </Typography>
               </div>
               <Divider />
@@ -319,7 +323,9 @@ const ShoppingCart = () => {
                   Order Total
                 </Typography>
                 <Typography variant="h6" className={classes.subtitle}>
-                  {`${totalAmount} ₴`}
+                  {`${totalAmount
+                    .toString()
+                    .replace(/\B(?=(\d{3})+(?!\d))/g, " ")} ₴`}
                 </Typography>
               </div>
               <Button

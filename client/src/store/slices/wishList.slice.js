@@ -16,7 +16,16 @@ const wishListSlice = createSlice({
     itemsWishList: JSON.parse(localStorage.getItem("wishList")) || [],
   },
   reducers: {
+    setItems: (state, action) => {
+      if (action.payload === null) {
+        action.payload = [];
+      }
+      state.itemsWishList = action.payload;
+    },
     addToWishList: (state, action) => {
+      if (state.itemsWishList === null) {
+        state.itemsWishList = [];
+      }
       const index = state.itemsWishList.findIndex(
         (el) => el.id === action.payload.id,
       );
@@ -28,6 +37,10 @@ const wishListSlice = createSlice({
       }
       localStorage.setItem(`wishList`, JSON.stringify(state.itemsWishList));
     },
+    deleteWish: (state) => {
+      state.itemsWishList = [];
+      localStorage.removeItem("wishList");
+    },
   },
   extraReducers: (builder) => {
     builder.addCase(fetchWishList.fulfilled, (state, action) => {
@@ -37,8 +50,8 @@ const wishListSlice = createSlice({
       state.itemsWishList = structureDataWishList(action.payload.products);
       localStorage.removeItem("wishList");
     });
-    builder.addCase(deleteWishList.fulfilled, (state, action) => {
-      state.itemsWishList = structureDataWishList(action.payload.products);
+    builder.addCase(deleteWishList.fulfilled, (state) => {
+      state.itemsWishList = [];
     });
     builder.addCase(updateWishList.fulfilled, (state, action) => {
       state.itemsWishList = structureDataWishList(action.payload.products);
@@ -58,5 +71,5 @@ const wishListSlice = createSlice({
     );
   },
 });
-export const { addToWishList } = wishListSlice.actions;
+export const { addToWishList, setItems, deleteWish } = wishListSlice.actions;
 export default wishListSlice.reducer;
