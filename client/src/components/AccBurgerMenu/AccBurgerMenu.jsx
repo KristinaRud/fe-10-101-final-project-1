@@ -27,7 +27,7 @@ import {
 } from "../../store/actionCreator/shoppingCart.actionCreator";
 import {
   fetchWishList,
-  updateWishList,
+  updateWishListLogin,
 } from "../../store/actionCreator/wishList.actionCreator";
 import { fetchComparisonProducts } from "../../store/actionCreator/comparison.actionCreator";
 import { selectComparison } from "../../store/selectors/comparison.selector";
@@ -76,7 +76,7 @@ const AccBurgerMenu = ({ counterWishList }) => {
       dispatch(fetchShoppingCart());
       dispatch(fetchWishList());
       dispatch(putProductsToCartLogin());
-      dispatch(updateWishList());
+      dispatch(updateWishListLogin());
       dispatch(fetchComparisonProducts());
     }
   }, [dispatch, isLogin]);

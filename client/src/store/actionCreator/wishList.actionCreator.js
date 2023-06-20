@@ -1,6 +1,5 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
 import request from "../../utils/api/request";
-import { structureDataWishList } from "../../utils/cart/structureData";
 
 const fetchWishList = createAsyncThunk("wishList/fetchWishList", async () => {
   const { res, err } = await request({
@@ -23,27 +22,6 @@ const createWishList = createAsyncThunk(
       return res;
     }
     throw new Error(`Couldn't create wishList: ${err.data}`);
-  },
-);
-
-const updateWishList = createAsyncThunk(
-  "wishList/updateWishList",
-  async (data) => {
-    const itemsBD = await structureDataWishList(fetchWishList());
-    const uniqueObjects = itemsBD.filter(
-      (obj1) =>
-        !data.some((obj2) => JSON.stringify(obj1) === JSON.stringify(obj2)),
-    );
-
-    const { res, err } = await request({
-      url: `/wishList`,
-      method: "PUT",
-      body: uniqueObjects,
-    });
-    if (res) {
-      return res;
-    }
-    throw new Error(`Couldn't update wishList: ${err.data}`);
   },
 );
 
@@ -85,11 +63,36 @@ const deleteProductFromWishList = createAsyncThunk(
   },
 );
 
+const updateWishListLogin = createAsyncThunk(
+  "wishList/updateWishListLogin",
+  async () => {
+    const items = JSON.parse(window.localStorage.getItem("wishList"));
+    if (items.length > 0) {
+      const fetchProductPromises = items.map(async (product) => {
+        try {
+          const { res } = await request({
+            url: `/wishList/${product.id}`,
+            method: "PUT",
+          });
+          if (res) {
+            return res;
+          }
+        } catch (error) {
+          throw new Error(`Couldn't get products: ${error}`);
+        }
+      });
+      const fetchedItems = await Promise.all(fetchProductPromises);
+      await window.localStorage.removeItem("wishList");
+      return fetchedItems;
+    }
+  },
+);
+
 export {
   fetchWishList,
   createWishList,
-  updateWishList,
   deleteWishList,
   updateProductToWishList,
   deleteProductFromWishList,
+  updateWishListLogin,
 };
