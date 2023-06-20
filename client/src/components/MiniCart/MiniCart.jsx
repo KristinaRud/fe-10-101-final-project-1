@@ -9,9 +9,12 @@ import { selectShoppingCart } from "../../store/selectors/shoppingCart.selector"
 
 const MiniCart = ({ onClick }) => {
   const { itemsCart } = useSelector(selectShoppingCart) ?? [];
-  const subtotalAmount = itemsCart
-    ?.map(({ currentPrice, cartQuantity }) => currentPrice * cartQuantity)
-    .reduce((prev, curr) => prev + curr, 0);
+  const subtotalAmount =
+    itemsCart?.length > 0
+      ? itemsCart
+          .map(({ currentPrice, cartQuantity }) => currentPrice * cartQuantity)
+          .reduce((prev, curr) => prev + curr, 0)
+      : 0;
   const itemsInCart = itemsCart
     ?.map(({ cartQuantity }) => cartQuantity)
     .reduce((prev, curr) => prev + curr, 0);

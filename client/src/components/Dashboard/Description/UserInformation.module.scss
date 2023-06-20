@@ -4,6 +4,7 @@
   line-height: 148%;
   border-bottom: 1px solid #cacdd8;
   margin-bottom: 17px;
+  margin-top: 17px;
   padding-bottom: 12px;
 
   @media (width <= 768px) {
@@ -28,6 +29,9 @@
   line-height: 20px;
   color: #666;
 
+  & span {
+    font-weight: 600;
+  }
 }
 
 .btn-account {
@@ -37,7 +41,7 @@
   padding: 0;
 
   &:hover {
-   color:#666;
+    color: #666;
     background: none;
     border-bottom: none;
   }
@@ -45,23 +49,9 @@
 
 .wrapper-add {
   margin-bottom: 50px;
+  max-width: 280px;
 
   @media (width <= 768px) {
-    text-align: center;
-  }
-}
-
-.wrapper-text {
-  display: flex;
-  align-items: center;
-  flex-wrap: wrap;
-  gap: 10px;
-
-  & h6 {
-    font-weight: 600;
-  }
-
-  @media (width <= 768px) {
-    justify-content: center;
+    margin: 0 auto;
   }
 }
