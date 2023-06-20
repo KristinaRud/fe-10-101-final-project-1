@@ -9,6 +9,7 @@ import { validationSchema } from "./utils";
 import { login } from "../../store/actionCreator/customers.actionCreator";
 import LoginSnackbar from "./LoginSnackbar";
 import { selectCustomers } from "../../store/selectors/customers.selector";
+import { deleteChosenPostOffice } from "../../store/slices/postOffice.slice";
 
 const LoginForm = () => {
   const dispatch = useDispatch();
@@ -37,6 +38,7 @@ const LoginForm = () => {
       if (customer.isLogin) {
         setStatus("success");
         setSubmit(false);
+        dispatch(deleteChosenPostOffice());
         setTimeout(() => {
           navigate("/");
         }, 2000);

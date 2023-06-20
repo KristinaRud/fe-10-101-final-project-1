@@ -14,6 +14,7 @@ import Registration from "../pages/Registration/Registration";
 import WishList from "../pages/WishList/WishList";
 import ContactUs from "../pages/ContactUs/ContactUs";
 import TermsAndConditions from "../components/TermsAndConditions/TermsAndConditions";
+import ComparisonTable from "../components/ComparisonTable/ComparisonTable";
 
 const AppRoute = () => {
   const { isLogin } = useSelector(selectCustomers);
@@ -42,6 +43,7 @@ const AppRoute = () => {
       />
       <Route path="/wishlist" element={<WishList />} />
       <Route path="*" element={<NotPage />} />
+      <Route path="/compare-products" element={<ComparisonTable />} />
     </Routes>
   );
 };

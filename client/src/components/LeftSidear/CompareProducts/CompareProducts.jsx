@@ -11,7 +11,7 @@ const CompareProducts = ({ isFavourite, data, classname }) => {
         title={isFavourite ? "My Wish List" : "Compare Products"}
         className={classname}
       >
-        {data.length > 0 ? (
+        {data?.length > 0 ? (
           data.map((item) => (
             <CompareProductsItem
               key={item.itemNo}

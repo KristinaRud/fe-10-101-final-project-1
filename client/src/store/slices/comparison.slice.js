@@ -12,6 +12,7 @@ const comparisonSlice = createSlice({
     operationSuccess: false,
     loading: false,
     errorComparison: null,
+    showDifference: false,
   },
   reducers: {},
   extraReducers: (builder) => {

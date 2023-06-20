@@ -1,3 +1,5 @@
 export const replaceDashWithSpace = (str) => {
-  return str.replace(/-/g, " ");
+  if (str) {
+    return str.replace(/-/g, " ");
+  }
 };
