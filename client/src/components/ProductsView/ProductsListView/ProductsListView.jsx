@@ -32,6 +32,7 @@ const ProductsListView = () => {
     const page = params.get("startPage");
     setPage(Number(page));
     let categories = params.get("categories");
+    if (!categories) return;
     categories = categories.replace(/-/g, " ");
     const encodedCategories = encodeURIComponent(categories);
     params.set("categories", encodedCategories);

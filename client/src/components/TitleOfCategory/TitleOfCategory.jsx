@@ -8,6 +8,8 @@ const TitleOfCategory = () => {
   const query = new URLSearchParams(location.search);
   const category = query.get("categories");
 
+  if (!category) return;
+
   return (
     <Typography variant="h4" className={s.title}>
       {replaceDashWithSpace(category)}

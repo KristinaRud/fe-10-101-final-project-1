@@ -49,7 +49,6 @@ const ShoppingCart = () => {
   const isMobile = useMediaQuery((theme) => theme.breakpoints.down("md"));
   const navigate = useNavigate();
 
-
   const handleClose = (event, reason) => {
     if (reason === "clickaway") {
       return;
