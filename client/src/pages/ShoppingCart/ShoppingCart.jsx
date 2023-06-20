@@ -302,9 +302,9 @@ const ShoppingCart = () => {
                 <Typography variant="subtitle1" className={classes.subtitle}>
                   Tax
                 </Typography>
-                <Typography className={classes.subtitle}>{`${tax
-                  .toString()
-                  .replace(/\B(?=(\d{3})+(?!\d))/g, " ")} ₴`}</Typography>
+                <Typography className={classes.subtitle}>{`${tax.toFixed(
+                  2,
+                )} ₴`}</Typography>
               </div>
               <div className={classes.summaryItem}>
                 <Typography variant="subtitle1" className={classes.subtitle}>
