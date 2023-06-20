@@ -2,6 +2,7 @@ import {
   Accordion,
   AccordionDetails,
   AccordionSummary,
+  Button,
   Step,
   StepLabel,
   Stepper,
@@ -10,7 +11,7 @@ import {
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 import { useSelector } from "react-redux";
 import { useEffect, useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import s from "./OrderSummary.module.scss";
 import { selectOrders } from "../../../store/selectors/orders.selector";
 import { selectShoppingCart } from "../../../store/selectors/shoppingCart.selector";
@@ -22,6 +23,7 @@ const OrderSummary = () => {
   const { itemsCart } = useSelector(selectShoppingCart);
   const { isLogin } = useSelector(selectCustomers);
   const [quantity, setQuantity] = useState(0);
+  const navigate = useNavigate();
 
   useEffect(() => {
     if (products?.length > 0) {
@@ -52,7 +54,7 @@ const OrderSummary = () => {
         <Typography variant="h6" className={s["order-title"]}>
           Order Summary
         </Typography>
-        <Accordion>
+        <Accordion defaultExpanded>
           <AccordionSummary
             expandIcon={<ExpandMoreIcon />}
             aria-controls="order-summary-content"
@@ -123,6 +125,14 @@ const OrderSummary = () => {
                 ))}
           </AccordionDetails>
         </Accordion>
+        <Button
+          variant="contained"
+          className={s.btn}
+          disabled={itemsCart.length === 0 && products.length === 0}
+          onClick={() => navigate("/shopping-cart")}
+        >
+          Edit Shopping Cart
+        </Button>
       </div>
     </div>
   );

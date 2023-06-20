@@ -18,6 +18,11 @@ const postOfficeSlice = createSlice({
     setChosenPostOffice(state, action) {
       state.chosenPostOfficeBranch = action.payload;
     },
+    deleteChosenPostOffice(state) {
+      state.chosenPostOfficeBranch = null;
+      state.postOffice = null;
+      state.postOffices = [];
+    },
   },
   extraReducers: (builder) => {
     builder.addCase(fetchPostOfficesNP.fulfilled, (state, action) => {
@@ -29,5 +34,6 @@ const postOfficeSlice = createSlice({
   },
 });
 
-export const { setPostOffice, setChosenPostOffice } = postOfficeSlice.actions;
+export const { setPostOffice, setChosenPostOffice, deleteChosenPostOffice } =
+  postOfficeSlice.actions;
 export default postOfficeSlice.reducer;
