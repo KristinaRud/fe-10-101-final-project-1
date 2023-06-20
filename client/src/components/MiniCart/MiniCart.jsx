@@ -67,7 +67,11 @@ const MiniCart = ({ onClick }) => {
               {" $"}
               {totalAmount}
             </p>
-            <Link to={"/"} className={styles.cart__link} onClick={onClick}>
+            <Link
+              to={"/checkout"}
+              className={styles.cart__link}
+              onClick={onClick}
+            >
               Proceed to Checkout
             </Link>
           </>

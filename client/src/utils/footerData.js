@@ -1,48 +1,19 @@
 import { Link } from "react-router-dom";
+import CatalogComponent from "../components/Footer/CatalogComponent/CatalogComponent";
 
 const data = [
   {
-    title: `Information`,
+    title: `About Us`,
     details: (
       <>
         <li>
-          <Link to="/" color="inherit">
-            About Us
+          <Link to="/terms-of-use" color="inherit">
+            Terms and Conditions
           </Link>
         </li>
         <li>
-          <Link to="/" color="inherit">
-            About Zip
-          </Link>
-        </li>
-        <li>
-          <Link to="/" color="inherit">
-            Privacy Policy
-          </Link>
-        </li>
-        <li>
-          <Link to="/" color="inherit">
-            Search
-          </Link>
-        </li>
-        <li>
-          <Link to="/" color="inherit">
-            Terms
-          </Link>
-        </li>
-        <li>
-          <Link to="/" color="inherit">
-            Orders and Returns
-          </Link>
-        </li>
-        <li>
-          <Link to="/" color="inherit">
+          <Link to="/contact" color="inherit">
             Contact Us
-          </Link>
-        </li>
-        <li>
-          <Link to="/" color="inherit">
-            Advanced Search
           </Link>
         </li>
         <li>
@@ -54,131 +25,48 @@ const data = [
     ),
   },
   {
-    title: `PC Parts`,
-    details: (
-      <>
-        <li>
-          <Link to="/" color="inherit">
-            CPUS
-          </Link>
-        </li>
-        <li>
-          <Link to="/" color="inherit">
-            Add On Cards
-          </Link>
-        </li>
-        <li>
-          <Link to="/" color="inherit">
-            Hard Drives (Internal)
-          </Link>
-        </li>
-        <li>
-          <Link to="/" color="inherit">
-            Graphic Cards
-          </Link>
-        </li>
-        <li>
-          <Link to="/" color="inherit">
-            Keyboards / Mice
-          </Link>
-        </li>
-        <li>
-          <Link to="/" color="inherit">
-            Cases / Power Supplies / Cooling
-          </Link>
-        </li>
-        <li>
-          <Link to="/" color="inherit">
-            RAM (Memory)
-          </Link>
-        </li>
-        <li>
-          <Link to="/" color="inherit">
-            Software
-          </Link>
-        </li>
-        <li>
-          <Link to="/" color="inherit">
-            Speakers / Headsets
-          </Link>
-        </li>
-        <li>
-          <Link to="/" color="inherit">
-            Motherboards
-          </Link>
-        </li>
-      </>
-    ),
+    title: `Catalog`,
+    details: <CatalogComponent />,
   },
   {
-    title: `Desktop PCs`,
+    title: `Our partners`,
     details: (
       <>
         <li>
-          <Link to="/" color="inherit">
-            Custom PCs
+          <Link
+            to="https://www.acer.com/us-en"
+            target={"_blank"}
+            color="inherit"
+          >
+            Acer
           </Link>
         </li>
         <li>
-          <Link to="/" color="inherit">
-            Servers
+          <Link to="https://www.mi.com/ua/" target={"_blank"} color="inherit">
+            Xiaomi
           </Link>
         </li>
         <li>
-          <Link to="/" color="inherit">
-            MSI All-In-One PCs
+          <Link to="https://www.apple.com/" target={"_blank"} color="inherit">
+            Apple
           </Link>
         </li>
         <li>
-          <Link to="/" color="inherit">
-            HP/Compaq PCs
+          <Link
+            to="https://www.asus.com/ua-ua/"
+            target={"_blank"}
+            color="inherit"
+          >
+            Asus
           </Link>
         </li>
         <li>
-          <Link to="/" color="inherit">
-            ASUS PCs
-          </Link>
-        </li>
-        <li>
-          <Link to="/" color="inherit">
-            Tecs PCs
-          </Link>
-        </li>
-      </>
-    ),
-  },
-  {
-    title: `Laptops`,
-    details: (
-      <>
-        <li>
-          <Link to="/" color="inherit">
-            Everyday Use Notebooks
-          </Link>
-        </li>
-        <li>
-          <Link to="/" color="inherit">
-            MSI Workstation Series
-          </Link>
-        </li>
-        <li>
-          <Link to="/" color="inherit">
-            MSI Prestige Series
-          </Link>
-        </li>
-        <li>
-          <Link to="/" color="inherit">
-            Tablets and Pads
-          </Link>
-        </li>
-        <li>
-          <Link to="/" color="inherit">
-            Netbooks
-          </Link>
-        </li>
-        <li>
-          <Link to="/" color="inherit">
-            Infinity Gaming Notebooks
+          <Link
+            to="https://www.lenovo.com/ua/uk/"
+            target={"_blank"}
+            color="inherit"
+          >
+            Lenovo
           </Link>
         </li>
       </>

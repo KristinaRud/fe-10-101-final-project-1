@@ -11,7 +11,7 @@ import ShopInfoStatic from "../../components/ShopInfoStatic/ShopInfoStatic";
 import styles from "./ContactUs.module.scss";
 import { initialValues, validationSchema } from "./ContactUs.helpers-config";
 import BreadcrumbsApp from "../../components/BreadcrumbsApp/BreadcrumbsApp";
-// import TelephoneField from "../../components/RegistrationForm/TelephoneField/TelephoneField";
+import TelephoneField from "./TelephoneField/TelephoneField";
 
 const ContactUs = () => {
   const [open, setOpen] = useState(false);
@@ -71,9 +71,10 @@ const ContactUs = () => {
                 variant="standard"
                 className={(styles.form__row, styles.form__field)}
               />
-              {/* <TelephoneField */}
-              {/*  className={(styles.form__row, styles.form__field)} */}
-              {/* /> */}
+              <TelephoneField
+                name="mobile"
+                className={(styles.form__row, styles.form__field)}
+              />
               <Field
                 component={TextField}
                 name="additional"
