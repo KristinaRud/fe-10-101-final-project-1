@@ -23,7 +23,6 @@ const useStyles = makeStyles((theme) => ({
   footer: {
     backgroundColor: "#020203",
     paddingTop: "47px",
-    position: "relative",
     [theme.breakpoints.down("md")]: {
       paddingTop: "35px",
     },

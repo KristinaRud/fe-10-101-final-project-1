@@ -17,9 +17,9 @@ const ShopInfoStatic = () => {
           <span className={styles.staticInfo__contactsWrapper}>
             <b className={styles.staticInfo__contactsTitle}>Address:</b>
             <br />
-            <h1 className={styles.staticInfo__adressText}>
+            <text className={styles.staticInfo__adressText}>
               1234 Street Adress City Address, 1234
-            </h1>
+            </text>
           </span>
         </div>
         <div className={styles.staticInfo__contactsContainer}>
