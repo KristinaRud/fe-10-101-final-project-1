@@ -6,6 +6,7 @@ import {
   Box,
   Button,
   Rating,
+  CircularProgress,
 } from "@mui/material";
 import { useSelector, useDispatch } from "react-redux";
 import CheckCircleIcon from "@mui/icons-material/CheckCircle";
@@ -23,6 +24,7 @@ import handleAddToCart, {
 import { selectShoppingCart } from "../../store/selectors/shoppingCart.selector";
 import { selectWishList } from "../../store/selectors/wishList.selector";
 import LoginSnackbar from "../LoginForm/LoginSnackbar";
+import { fetchComparisonProducts } from "../../store/actionCreator/comparison.actionCreator";
 import IconComparisonProduct from "../IconComparisonProduct/IconComparisonProduct";
 
 const ProductCard = ({
@@ -48,7 +50,10 @@ const ProductCard = ({
   const [text, setText] = useState("");
   const [error, setError] = useState("");
   const [openSnackbar, setOpenSnackbar] = useState(false);
-
+  const loading = useSelector((state) => state.comparison.loading);
+  useEffect(() => {
+    dispatch(fetchComparisonProducts());
+  }, [dispatch]);
   const handleClose = (event, reason) => {
     if (reason === "clickaway") {
       return;
@@ -73,7 +78,13 @@ const ProductCard = ({
       setError("Product not added");
     }
   }, [isAdded, isWishList]);
-
+  if (loading) {
+    return (
+      <Box sx={{ display: "flex" }}>
+        <CircularProgress />
+      </Box>
+    );
+  }
   return (
     <>
       <Card
@@ -82,15 +93,54 @@ const ProductCard = ({
         onMouseEnter={handleMouseEnter}
         onMouseLeave={handleMouseLeave}
       >
-        <Box className={isHovered ? styles["menu-active"] : styles.menu}>
-          <Box className={styles.menu_top}>
+        {loading && (
+          <Box className={isHovered ? styles["menu-active"] : styles.menu}>
+            <Box className={styles.menu_top}>
+              <Button
+                sx={{
+                  "&:hover": { backgroundColor: "rgb(1 86 255 / 20%)" },
+                }}
+                onClick={() => {
+                  dispatch(
+                    handleAddToWishList(
+                      {
+                        id,
+                        image,
+                        alt,
+                        description,
+                        currentPrice,
+                        itemNo,
+                        categories,
+                        available,
+                        rating,
+                        oldPrice,
+                      },
+                      itemsWishList,
+                      isLogin,
+                    ),
+                  );
+                  setOpenSnackbar(true);
+                }}
+              >
+                <IconWishList className={isWishList ? cx(styles.green) : ""} />
+              </Button>
+              <IconComparisonProduct
+                categories={categories}
+                id={id}
+                setOpenSnackbar={setOpenSnackbar}
+                setText={setText}
+                setError={setError}
+                setStatus={setStatus}
+              />
+            </Box>
             <Button
               sx={{
                 "&:hover": { backgroundColor: "rgb(1 86 255 / 20%)" },
+                marginBottom: 2,
               }}
               onClick={() => {
                 dispatch(
-                  handleAddToWishList(
+                  handleAddToCart(
                     {
                       id,
                       image,
@@ -99,54 +149,17 @@ const ProductCard = ({
                       currentPrice,
                       itemNo,
                       categories,
-                      available,
-                      rating,
-                      oldPrice,
                     },
-                    itemsWishList,
                     isLogin,
                   ),
                 );
                 setOpenSnackbar(true);
               }}
             >
-              <IconWishList className={isWishList ? cx(styles.green) : ""} />
+              <IconCart className={isAdded ? cx(styles.green) : ""} />
             </Button>
-            <IconComparisonProduct
-              categories={categories}
-              id={id}
-              setOpenSnackbar={setOpenSnackbar}
-              setText={setText}
-              setError={setError}
-              setStatus={setStatus}
-            />
           </Box>
-          <Button
-            sx={{
-              "&:hover": { backgroundColor: "rgb(1 86 255 / 20%)" },
-              marginBottom: 2,
-            }}
-            onClick={() => {
-              dispatch(
-                handleAddToCart(
-                  {
-                    id,
-                    image,
-                    alt,
-                    description,
-                    currentPrice,
-                    itemNo,
-                    categories,
-                  },
-                  isLogin,
-                ),
-              );
-              setOpenSnackbar(true);
-            }}
-          >
-            <IconCart className={isAdded ? cx(styles.green) : ""} />
-          </Button>
-        </Box>
+        )}
         <CardContent sx={{ paddingTop: 1 }}>
           <Typography variant="caption" color={available ? "green" : "error"}>
             {available ? (
