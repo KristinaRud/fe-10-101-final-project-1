@@ -10,7 +10,6 @@ import ListWrapper from "../ListWrapper/ListWrapper";
 import { selectFilters } from "../../../store/selectors/filters.selector";
 import { deleteAllQueryFilters } from "../../../utils/queryParams/deleteAllQueryFilters";
 import { setFilterQueryParams } from "../../../utils/queryParams/setFilterQueryParams";
-import { fetchFiltersData } from "../../../store/actionCreator/filters.actionCreator";
 import s from "./FilterList.module.scss";
 import {
   deleteAllFilters,
@@ -51,10 +50,6 @@ const FilterList = ({ className, closeModal }) => {
     deleteAllQueryParams(searchParams, navigate);
     setFilterQueryParams(filters, searchParams, navigate);
   };
-
-  useEffect(() => {
-    dispatch(fetchFiltersData(`?categories=${categories}`));
-  }, [categories, dispatch]);
 
   useEffect(() => {
     if (categories !== category) {

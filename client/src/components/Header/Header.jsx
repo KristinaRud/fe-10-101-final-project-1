@@ -87,7 +87,6 @@ const Header = () => {
                 <Button to="/" className={styles["btn-logo"]}>
                   <VecIcon className={styles.logo} />
                 </Button>
-                TechnoKit
               </li>
             )}
             <Box>

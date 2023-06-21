@@ -10,7 +10,7 @@ const fetchFiltersData = createAsyncThunk(
     if (res) {
       return res;
     }
-    throw new Error(`Couldn't get filters: ${err.data}`);
+    throw new Error(`Couldn't get filters: ${JSON.stringify(err.data)}`);
   },
 );
 
