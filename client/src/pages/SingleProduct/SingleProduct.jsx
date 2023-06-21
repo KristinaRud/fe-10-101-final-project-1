@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import { Box, CircularProgress } from "@mui/material";
 import { useParams, Link } from "react-router-dom";
 import Button from "@mui/material/Button";
 import cn from "classnames";
@@ -11,6 +12,7 @@ import BreadcrumbsApp from "../../components/BreadcrumbsApp/BreadcrumbsApp";
 import handleAddToCart, {
   handleAddToWishList,
 } from "../../utils/cart/handleAddToCart";
+import { fetchComparisonProducts } from "../../store/actionCreator/comparison.actionCreator";
 import { selectCustomers } from "../../store/selectors/customers.selector";
 import AboutProductSlider from "../../components/Sliders/AboutProductSlider/AboutProductSlider";
 import Support from "../../components/Support/Support";
@@ -24,6 +26,7 @@ const SingleProduct = () => {
   const { id } = useParams();
   const dispatch = useDispatch();
   const { products } = useSelector(selectProducts);
+  const loading = useSelector((state) => state.comparison.loading);
   const { isLogin } = useSelector(selectCustomers);
   const { itemsWishList } = useSelector(selectWishList);
   const [currentProduct, setCurrentProduct] = useState(null);
@@ -46,6 +49,9 @@ const SingleProduct = () => {
 
   useEffect(() => {
     dispatch(fetchProducts(""));
+  }, [dispatch]);
+  useEffect(() => {
+    dispatch(fetchComparisonProducts());
   }, [dispatch]);
 
   useEffect(() => {
@@ -186,60 +192,66 @@ const SingleProduct = () => {
               </div>
             </div>
           </div>
-          <div className={styles.col}>
-            <div className={styles["product-picture"]}>
-              <div className={styles["product-picture__inner"]}>
-                <ul className={styles["product-picture__control"]}>
-                  <li className={styles["product-picture__control-item"]}>
-                    <Button>
-                      <IconEmail />
-                    </Button>
-                  </li>
-                  <li className={styles["product-picture__control-item"]}>
-                    <IconComparisonProduct
-                      id={id}
-                      setStatus={setStatus}
-                      setError={setError}
-                      setText={setText}
-                      categories={categories}
-                      setOpenSnackbar={setOpenSnackbar}
-                    />
-                  </li>
-                  <li className={styles["product-picture__control-item"]}>
-                    <Button
-                      onClick={() => {
-                        dispatch(
-                          handleAddToWishList(
-                            {
-                              id,
-                              image: description[0].image,
-                              alt,
-                              description: name,
-                              currentPrice,
-                              itemNo,
-                              categories,
-                              available,
-                              rating,
-                              oldPrice,
-                            },
-                            itemsWishList,
-                            isLogin,
-                          ),
-                        );
-                      }}
-                    >
-                      <IconWishList />
-                    </Button>
-                  </li>
-                </ul>
-                <img
-                  src={description[0].image}
-                  alt={name}
-                  className={styles["product-picture__image"]}
-                />
+          {loading ? (
+            <Box sx={{ display: "flex" }}>
+              <CircularProgress />
+            </Box>
+          ) : (
+            <div className={styles.col}>
+              <div className={styles["product-picture"]}>
+                <div className={styles["product-picture__inner"]}>
+                  <ul className={styles["product-picture__control"]}>
+                    <li className={styles["product-picture__control-item"]}>
+                      <Button>
+                        <IconEmail />
+                      </Button>
+                    </li>
+                    <li className={styles["product-picture__control-item"]}>
+                      <IconComparisonProduct
+                        id={id}
+                        setStatus={setStatus}
+                        setError={setError}
+                        setText={setText}
+                        categories={categories}
+                        setOpenSnackbar={setOpenSnackbar}
+                      />
+                    </li>
+                    <li className={styles["product-picture__control-item"]}>
+                      <Button
+                        onClick={() => {
+                          dispatch(
+                            handleAddToWishList(
+                              {
+                                id,
+                                image: description[0].image,
+                                alt,
+                                description: name,
+                                currentPrice,
+                                itemNo,
+                                categories,
+                                available,
+                                rating,
+                                oldPrice,
+                              },
+                              itemsWishList,
+                              isLogin,
+                            ),
+                          );
+                        }}
+                      >
+                        <IconWishList />
+                      </Button>
+                    </li>
+                  </ul>
+                  <img
+                    src={description[0].image}
+                    alt={name}
+                    className={styles["product-picture__image"]}
+                  />
+                </div>
               </div>
             </div>
-          </div>
+          )}
         </div>
         <LoginSnackbar
           open={openSnackbar}
