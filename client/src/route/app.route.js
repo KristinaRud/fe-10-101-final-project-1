@@ -46,7 +46,7 @@ const AppRoute = () => {
         path="/compare-products"
         element={isLogin ? <ComparisonProducts /> : <Navigate to="/" />}
       />
-      <Route path="*" element={<NotFoundPage />} />
+      <Route path="/error" element={<NotFoundPage />} />
     </Routes>
   );
 };

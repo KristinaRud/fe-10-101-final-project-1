@@ -3,6 +3,7 @@ import { useParams, Link } from "react-router-dom";
 import Button from "@mui/material/Button";
 import cn from "classnames";
 import { useDispatch, useSelector } from "react-redux";
+import { Box, CircularProgress } from "@mui/material";
 import { getDetailsList } from "./utils";
 import styles from "./SingleProduct.module.scss";
 import { fetchProducts } from "../../store/actionCreator/products.actionCreator";
@@ -57,7 +58,14 @@ const SingleProduct = () => {
     }
   }, [id, products]);
 
-  if (!currentProduct) return "Loading...";
+  if (!currentProduct) {
+    return (
+      <Box sx={{ margin: "40px" }} display="flex" justifyContent="center">
+        <CircularProgress />
+      </Box>
+    );
+  }
+
   const {
     name,
     categories,

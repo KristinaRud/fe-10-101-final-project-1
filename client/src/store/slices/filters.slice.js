@@ -7,6 +7,8 @@ const initialState = {
   filters: urlParser() || [],
   category: searchParams.get("categories"),
   filtersData: [],
+  isLoading: false,
+  error: null,
 };
 
 const filtersSlice = createSlice({
@@ -63,6 +65,9 @@ const filtersSlice = createSlice({
     setCategory: (state, action) => {
       state.category = action.payload;
     },
+    deleteError: (state) => {
+      state.error = null;
+    },
   },
   extraReducers: (builder) => {
     builder.addCase(fetchFiltersData.fulfilled, (state, action) => {
@@ -76,10 +81,24 @@ const filtersSlice = createSlice({
         }
       });
       state.filtersData = Object.values(objByType);
+      state.isLoading = false;
+      state.error = null;
+    });
+    builder.addCase(fetchFiltersData.rejected, (state, action) => {
+      state.error = action.error.message;
+      state.isLoading = false;
+    });
+    builder.addCase(fetchFiltersData.pending, (state) => {
+      state.isLoading = true;
     });
   },
 });
 
-export const { setFilters, deleteFilter, deleteAllFilters, setCategory } =
-  filtersSlice.actions;
+export const {
+  setFilters,
+  deleteFilter,
+  deleteAllFilters,
+  setCategory,
+  deleteError,
+} = filtersSlice.actions;
 export default filtersSlice.reducer;

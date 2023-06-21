@@ -91,6 +91,9 @@ exports.getFilters = (req, res, next) => {
                     {$match: {categories: category}},
                 ])
                     .then(result => {
+                        if (result.length === 0) {
+                            throw new Error(`No products found in category: ${category}`);
+                        }
                         const modifiedFilters = filters.map(filter => {
                             const filterType = filter.type;
                             const filterName = filter.name;

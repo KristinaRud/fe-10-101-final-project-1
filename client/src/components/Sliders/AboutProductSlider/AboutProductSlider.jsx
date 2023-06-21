@@ -9,7 +9,7 @@ const AboutProductSlider = ({ data }) => {
     <div className={styles.about_slider}>
       <Slider {...AboutProductConfig}>
         {data.map((item) => (
-          <div key={item.index}>
+          <div key={item.title}>
             <div className={styles.about_container}>
               <div className={styles.about_content}>
                 <div className={styles.about_text}>{item.title}</div>
