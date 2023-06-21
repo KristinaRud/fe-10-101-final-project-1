@@ -157,3 +157,13 @@
         font-size: 12px;
     }
 }
+
+.utility-social-item {
+    a {
+        transition: 0s;
+    }
+
+    a:hover {
+        filter: invert(41%) sepia(93%) saturate(7494%) hue-rotate(219deg) brightness(101%) contrast(109%);
+    }
+}

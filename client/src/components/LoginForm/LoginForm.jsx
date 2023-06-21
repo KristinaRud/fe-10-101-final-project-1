@@ -49,7 +49,7 @@ const LoginForm = () => {
         setSubmit(false);
       }
     }
-  }, [customer.isLogin, dispatch, navigate, submit]);
+  }, [customer.isLogin, dispatch, navigate, submit, customer.error]);
 
   return (
     <>

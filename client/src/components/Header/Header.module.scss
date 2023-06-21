@@ -303,14 +303,6 @@
   color: #0156FF;
 }
 
-svg {
-  transition: .3s;
-
-  &:hover {
-    filter: invert(70%) sepia(42%) saturate(3205%) hue-rotate(219deg) brightness(100%) contrast(113%);
-  }
-}
-
 a:hover {
   color: #0156FF;
 }

@@ -7,6 +7,7 @@ import MobileFilterAndSort from "../../components/LeftSidear/MobileSidebar/Mobil
 import MobileCompareProducts from "../../components/LeftSidear/MobileSidebar/MobileCompareProducts";
 import BreadcrumbsApp from "../../components/BreadcrumbsApp/BreadcrumbsApp";
 import TitleOfCategory from "../../components/TitleOfCategory/TitleOfCategory";
+import FadeTextBlock from "../../components/FadeTextBlock/FadeTextBlock";
 
 const Category = () => {
   return (
@@ -20,6 +21,7 @@ const Category = () => {
           <SortList />
           <FilterTagList />
           <ProductsView />
+          <FadeTextBlock />
           <MobileCompareProducts />
         </Container>
       </Box>
