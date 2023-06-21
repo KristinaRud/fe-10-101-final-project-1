@@ -5,14 +5,13 @@ import {
   CardMedia,
   Rating,
   Typography,
-  CircularProgress,
 } from "@mui/material";
 import CheckCircleIcon from "@mui/icons-material/CheckCircle";
 import PhoneIcon from "@mui/icons-material/Phone";
 import PropTypes from "prop-types";
 import ShoppingCartOutlinedIcon from "@mui/icons-material/ShoppingCartOutlined";
 import { Link } from "react-router-dom";
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import cx from "classnames";
 import s from "./ProductCardFull.module.scss";
@@ -25,7 +24,6 @@ import handleAddToCart, {
 } from "../../../utils/cart/handleAddToCart";
 import { selectWishList } from "../../../store/selectors/wishList.selector";
 import { selectShoppingCart } from "../../../store/selectors/shoppingCart.selector";
-import { fetchComparisonProducts } from "../../../store/actionCreator/comparison.actionCreator";
 import IconComparisonProduct from "../../IconComparisonProduct/IconComparisonProduct";
 
 const ProductCardFull = ({
@@ -51,7 +49,6 @@ const ProductCardFull = ({
   const [text, setText] = useState("");
   const [error, setError] = useState("");
   const [openSnackbar, setOpenSnackbar] = useState(false);
-  const loading = useSelector((state) => state.comparison.loading);
 
   const handleClose = (event, reason) => {
     if (reason === "clickaway") {
@@ -59,9 +56,7 @@ const ProductCardFull = ({
     }
     setOpenSnackbar(false);
   };
-  useEffect(() => {
-    dispatch(fetchComparisonProducts());
-  }, [dispatch]);
+
   return (
     <Card
       sx={{
@@ -94,33 +89,27 @@ const ProductCardFull = ({
         )}
       </Typography>
       <Box display="flex" gap="50px">
-        {loading ? (
-          <Box sx={{ display: "flex" }}>
-            <CircularProgress />
+        <Box display="flex" flexDirection="column">
+          <Link to={`/${categories.toLowerCase()}/${id}`}>
+            <CardMedia
+              component="img"
+              className={s.img}
+              image={image}
+              alt={alt}
+            />
+          </Link>
+          <Box display="flex" alignItems="center" mt={2}>
+            <Rating
+              name="products-small"
+              value={rating}
+              readOnly
+              size="small"
+            />
+            <Typography variant="body2" ml={1}>
+              Reviews (4)
+            </Typography>
           </Box>
-        ) : (
-          <Box display="flex" flexDirection="column">
-            <Link to={`/${categories.toLowerCase()}/${id}`}>
-              <CardMedia
-                component="img"
-                className={s.img}
-                image={image}
-                alt={alt}
-              />
-            </Link>
-            <Box display="flex" alignItems="center" mt={2}>
-              <Rating
-                name="products-small"
-                value={rating}
-                readOnly
-                size="small"
-              />
-              <Typography variant="body2" ml={1}>
-                Reviews (4)
-              </Typography>
-            </Box>
-          </Box>
-        )}
+        </Box>
         <Box
           display="flex"
           flexDirection="column"

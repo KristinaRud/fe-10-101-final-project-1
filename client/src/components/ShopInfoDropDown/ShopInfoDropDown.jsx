@@ -64,35 +64,15 @@ const ShopInfoDropDown = () => {
             <Typography className={styles.info__scheduledTitle} component="p">
               We are open:
             </Typography>
-            <Typography
-              component="span"
-              className={styles.info__scheduledWrapper}
-            >
-              <h1 className={styles.info__scheduledText}>Mon-Thu: </h1>
-              <strong className={styles.info__scheduledTime}>
-                9:00 AM - 5:30 PM
-              </strong>
-            </Typography>
-            <Typography
-              component="span"
-              className={styles.info__scheduledWrapper}
-            >
-              <h1 className={styles.info__scheduledText}>Fr: </h1>
-              <strong className={styles.info__scheduledTime}>
-                {" "}
-                {""}
-                9:00 AM - 6:00 PM
-              </strong>
-            </Typography>
-            <Typography
-              component="span"
-              className={styles.info__scheduledWrapper}
-            >
-              <h1 className={styles.info__scheduledText}>Sat: </h1>{" "}
-              <strong className={styles.info__scheduledTime}>
-                {" "}
-                11:00 AM - 5:00 PM
-              </strong>
+            <Typography component="span">
+              <text className={styles.info__scheduledText}>Mon-Thu: </text>
+              <b className={styles.info__scheduledTime}>9:00 AM - 5:30 PM</b>
+              <br />
+              <text className={styles.info__scheduledText}>Fr: </text>
+              <b className={styles.info__scheduledTime}> 9:00 AM - 6:00 PM</b>
+              <br />
+              <text className={styles.info__scheduledText}>Sat: </text>{" "}
+              <b className={styles.info__scheduledTime}> 11:00 AM - 5:00 PM</b>
             </Typography>
           </div>
         </div>
