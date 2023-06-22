@@ -140,7 +140,7 @@ const ProductCardFull = ({
             </Typography>
           </Box>
           <Button
-            className={cx(s.btn, isAdded && s.green)}
+            className={cx(s.btn, isAdded ? s.green : "")}
             onClick={() => {
               dispatch(
                 handleAddToCart(
@@ -158,7 +158,7 @@ const ProductCardFull = ({
               );
             }}
           >
-            <ShoppingCartOutlinedIcon className={isAdded && cx(styles.green)} />
+            <ShoppingCartOutlinedIcon className={isAdded ? styles.green : ""} />
             {isAdded ? "In cart" : "Add to cart"}
           </Button>
         </Box>
@@ -203,7 +203,7 @@ const ProductCardFull = ({
               );
             }}
           >
-            <IconWishList className={isWishList && cx(styles.green)} />
+            <IconWishList className={isWishList ? styles.green : ""} />
           </Button>
         </Box>
       </Box>
