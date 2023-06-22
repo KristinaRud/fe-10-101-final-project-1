@@ -1,10 +1,39 @@
+import { useEffect, useRef, useState } from "react";
 import { uid } from "react-uid";
 import styles from "./Features.module.scss";
 import { featuresConfig } from "./FeaturesConfig";
 
 const Features = () => {
-  const featuresList = featuresConfig.map((feature) => (
-    <div className={styles.list__item} key={uid(feature)}>
+  const [animate, setAnimate] = useState(false);
+  const listRef = useRef(null);
+
+  useEffect(() => {
+    const handleScroll = () => {
+      const listElement = listRef.current;
+      if (listElement) {
+        const rect = listElement.getBoundingClientRect();
+        const windowHeight =
+          window.innerHeight || document.documentElement.clientHeight;
+        if (rect.bottom <= windowHeight && !animate) {
+          setAnimate(true);
+        }
+      }
+    };
+
+    window.addEventListener("scroll", handleScroll);
+    return () => {
+      window.removeEventListener("scroll", handleScroll);
+    };
+  }, [animate]);
+
+  const featuresList = featuresConfig.map((feature, index) => (
+    <div
+      className={`${styles.list__item} ${
+        animate && styles["list__item--animate"]
+      }`}
+      key={uid(feature)}
+      style={{ transitionDelay: `${0.2 * index}s` }}
+    >
       <div className={styles["list__item-heading"]}>
         <img
           src={feature.image}
@@ -27,7 +56,9 @@ const Features = () => {
             synchronization.
           </p>
         </div>
-        <div className={styles.list}>{featuresList}</div>
+        <div className={styles.list} ref={listRef}>
+          {featuresList}
+        </div>
       </div>
     </div>
   );

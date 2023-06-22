@@ -5,7 +5,7 @@ import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import { fetchComments } from "../../../store/actionCreator/comments.actionCreator";
 import { selectComments } from "../../../store/selectors/comments.selector";
-import "./CommentsSlider.scss";
+import "../slidersCustomize.scss";
 import { CommentsConfig } from "../slidersConfig";
 import styles from "./CommentsSlider.module.scss";
 
