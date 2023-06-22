@@ -6,6 +6,18 @@
   row-gap: 10px;
   align-items: center;
   margin-top: 30px;
+  opacity: 0;
+  transform: translateY(20px);
+  transition: opacity 0.4s ease, transform 0.4s ease;
+
+  &--animate {
+    opacity: 1;
+    transform: translateY(0);
+  }
+  &--hidden {
+    opacity: 0;
+    transform: translateY(20px);
+  }
 
   @media (width <= 768px) {
     margin-top: 15px;
@@ -15,6 +27,19 @@
 .brand {
   width: 202px;
   height: 150px;
+  opacity: 0;
+  transform: translateY(20px);
+  transition: opacity 0.4s ease, transform 0.4s ease;
+
+  &--animate {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  &--hidden {
+    opacity: 0;
+    transform: translateY(20px);
+  }
 
   @media (width <= 480px) {
     width: 173px;

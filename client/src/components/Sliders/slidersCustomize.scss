@@ -1,4 +1,10 @@
 /* Custom Dots */
+.slick-dots.slick-left {
+  text-align: start;
+  bottom: 40px;
+  left: 10%;
+}
+
 .slick-dots.slick-right {
   text-align: end;
   bottom: -30px;
