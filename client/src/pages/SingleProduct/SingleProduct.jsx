@@ -27,6 +27,7 @@ const SingleProduct = () => {
   const { products } = useSelector(selectProducts);
   const { isLogin } = useSelector(selectCustomers);
   const { itemsWishList } = useSelector(selectWishList);
+  const isWishList = itemsWishList?.some((item) => item.id === id);
   const [currentProduct, setCurrentProduct] = useState(null);
   const [detailsList, setDetailsList] = useState(null);
   const [isActiveTab, setIsActiveTab] = useState({
@@ -236,7 +237,9 @@ const SingleProduct = () => {
                         );
                       }}
                     >
-                      <IconWishList />
+                      <IconWishList
+                        className={isWishList ? cn(styles.green) : ""}
+                      />
                     </Button>
                   </li>
                 </ul>
