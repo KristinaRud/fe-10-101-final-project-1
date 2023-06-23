@@ -1,17 +1,19 @@
 const structureDataToStore = (action) => {
-  const itemsCart = action.map((item) => {
-    return {
-      id: item.product._id,
-      image: item.product.imageUrls[0],
-      alt: item.product.name,
-      description: item.product.name,
-      currentPrice: item.product.currentPrice,
-      cartQuantity: item.cartQuantity,
-      itemNo: item.itemNo,
-      categories: item.categories,
-    };
-  });
-  return [...itemsCart];
+  if (action) {
+    const itemsCart = action.map((item) => {
+      return {
+        id: item.product._id,
+        image: item.product.imageUrls[0],
+        alt: item.product.name,
+        description: item.product.name,
+        currentPrice: item.product.currentPrice,
+        cartQuantity: item.cartQuantity,
+        itemNo: item.product.itemNo,
+        categories: item.product.categories,
+      };
+    });
+    return [...itemsCart];
+  }
 };
 
 const structureDataWishList = (action) => {

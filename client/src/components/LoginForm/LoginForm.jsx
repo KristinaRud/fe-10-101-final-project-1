@@ -1,5 +1,5 @@
 import { Formik, Form, Field } from "formik";
-import { Button } from "@mui/material";
+import { Button, Divider, Typography } from "@mui/material";
 import { useNavigate } from "react-router-dom";
 import { TextField } from "formik-mui";
 import { useDispatch, useSelector } from "react-redux";
@@ -10,6 +10,7 @@ import { login } from "../../store/actionCreator/customers.actionCreator";
 import LoginSnackbar from "./LoginSnackbar";
 import { selectCustomers } from "../../store/selectors/customers.selector";
 import { deleteChosenPostOffice } from "../../store/slices/postOffice.slice";
+import GoogleBtn from "./GoogleBtn/GoogleBtn";
 
 const LoginForm = () => {
   const dispatch = useDispatch();
@@ -90,6 +91,14 @@ const LoginForm = () => {
           </div>
         </Form>
       </Formik>
+      <Divider sx={{ margin: "10px 0" }}>or</Divider>
+      <Typography variant="body1">Login with Google</Typography>
+      <GoogleBtn
+        setOpen={setOpen}
+        setStatus={setStatus}
+        setTextError={setTextError}
+      />
+
       <LoginSnackbar
         open={open}
         status={status}

@@ -12,7 +12,7 @@ import MEicon from "../../assets/images/MElogo.png";
 
 const Map = ({ center, markers, logo }) => {
   const { isLoaded } = useLoadScript({
-    googleMapsApiKey: "AIzaSyDYNUjT2q2oMllTCjy7YVNQ_UvBYiQHmps",
+    googleMapsApiKey: process.env.REACT_APP_GOOGLE_MAPS_API_KEY,
   });
   const [isOpen, setIsOpen] = useState(false);
   const [infoWindowData, setInfoWindowData] = useState();

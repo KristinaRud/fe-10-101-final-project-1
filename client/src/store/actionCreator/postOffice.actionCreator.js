@@ -10,7 +10,7 @@ export const fetchPostOfficesNP = createAsyncThunk(
           "Content-Type": "application/json",
         },
         body: JSON.stringify({
-          apiKey: "11db3360a446054261266a07fe716f33",
+          apiKey: process.env.REACT_APP_NOVA_POSHTA_API_KEY,
           modelName: "Address",
           calledMethod: "getWarehouses",
           methodProperties: {

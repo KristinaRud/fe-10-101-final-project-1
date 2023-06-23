@@ -3,9 +3,9 @@ const jwt = require("jsonwebtoken");
 const _ = require("lodash");
 const keys = require("../config/keys");
 const getConfigs = require("../config/getConfigs");
-const passport = require("passport");
 const uniqueRandom = require("unique-random");
 const rand = uniqueRandom(10000000, 99999999);
+const verifyGoogleToken = require("../commonHelpers/verifyGoogleToken");
 
 // Load Customer model
 const Customer = require("../models/Customer");
@@ -83,6 +83,50 @@ exports.createCustomer = (req, res, next) => {
             })
         );
 };
+
+exports.loginGoogleCustomer = async (req, res, next) => {
+    const {token} = req.body;
+
+    try {
+        const user = await verifyGoogleToken(token);
+
+        if (!user) {
+            return res.status(401).json({error: "Invalid token"});
+        }
+
+        const email = user.emailAddresses[0].value;
+        let customer = await Customer.findOne({email})
+
+        if (!customer) {
+            customer = new Customer({
+                firstName: user.names[0].givenName,
+                lastName: user.names[0].familyName,
+                email,
+                login: email,
+                customerNo: rand(),
+            });
+            await customer.save();
+        }
+
+        const payload = {
+            id: customer._id,
+            firstName: customer.firstName,
+            lastName: customer.lastName,
+            isAdmin: customer.isAdmin,
+        };
+
+        jwt.sign(payload, keys.secretOrKey, {expiresIn: 36000}, (err, token) => {
+            res.json({
+                success: true,
+                token: "Bearer " + token
+            });
+        });
+    } catch (error) {
+        res.status(400).json({
+            message: `Error happened on server: "${error}" `
+        });
+    }
+}
 
 // Controller for customer login
 exports.loginCustomer = async (req, res, next) => {

@@ -1,4 +1,5 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
+import { debounce } from "lodash";
 import { updatedQueryString } from "../../utils/queryParams/updatedQueryString";
 import request from "../../utils/api/request";
 
@@ -31,4 +32,11 @@ const fetchProductsForSearch = createAsyncThunk(
   },
 );
 
-export { fetchProducts, fetchProductsForSearch };
+const debouncedFetchProductsForSearch = debounce((data, dispatch) => {
+  dispatch(fetchProductsForSearch(data));
+}, 800);
+
+const debouncedSearch = (arg) => (dispatch) =>
+  debouncedFetchProductsForSearch(arg, dispatch);
+
+export { fetchProducts, fetchProductsForSearch, debouncedSearch };

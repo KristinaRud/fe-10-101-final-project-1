@@ -103,22 +103,44 @@ const putProductsToCartLogin = createAsyncThunk(
   async () => {
     const products = JSON.parse(window.localStorage.getItem("shoppingCart"));
     if (products.length > 0) {
-      const fetchProductPromises = products.map(async (product) => {
-        try {
-          const { res } = await request({
-            url: `/cart/${product.id}`,
-            method: "PUT",
-          });
-          if (res) {
-            return res;
-          }
-        } catch (error) {
-          throw new Error(`Couldn't get products: ${error}`);
-        }
+      const updatedProducts = {
+        products: products.map((product) => ({
+          product: product.id,
+          cartQuantity: product.cartQuantity,
+        })),
+      };
+      const { res: response } = await request({
+        url: `/cart`,
       });
-      const fetchedProducts = await Promise.all(fetchProductPromises);
-      await window.localStorage.removeItem("shoppingCart");
-      return fetchedProducts;
+      if (response) {
+        const previousProducts = response.products.map((product) => ({
+          product: product.product._id,
+          cartQuantity: product.cartQuantity,
+        }));
+        updatedProducts.products = [
+          ...updatedProducts.products,
+          ...previousProducts,
+        ];
+        const { res, err } = await request({
+          url: `/cart`,
+          method: "PUT",
+          body: updatedProducts,
+        });
+        if (res) {
+          return res;
+        }
+        throw new Error(`Couldn't update shopping cart: ${err.data}`);
+      } else {
+        const { res, err } = await request({
+          url: `/cart`,
+          method: "POST",
+          body: updatedProducts,
+        });
+        if (res) {
+          return res;
+        }
+        throw new Error(`Couldn't create shopping cart: ${err.data}`);
+      }
     }
   },
 );
