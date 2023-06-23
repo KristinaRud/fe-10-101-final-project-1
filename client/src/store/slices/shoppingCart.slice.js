@@ -98,7 +98,7 @@ const shoppingCartSlice = createSlice({
       state.itemsCart = structureDataToStore(action.payload.products);
     });
     builder.addCase(putProductsToCartLogin.fulfilled, (state, action) => {
-      state.itemsCart = structureDataToStore(action.payload[0].products);
+      state.itemsCart = structureDataToStore(action.payload.products);
     });
   },
 });

@@ -7,7 +7,7 @@ const ComparisonHeader = ({ data }) => {
     <>
       <TableHead>
         <TableRow>
-          {data.map((column) => (
+          {data?.map((column) => (
             <ComparisonHeaderCell key={column._id} column={column} />
           ))}
         </TableRow>

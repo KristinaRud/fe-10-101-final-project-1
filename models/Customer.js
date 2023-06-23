@@ -27,11 +27,11 @@ const CustomerSchema = new Schema(
         },
         password: {
             type: String,
-            required: true
+            // required: true
         },
         confirmPassword: {
             type: String,
-            required: true
+            // required: true
         },
         telephone: {
             type: String

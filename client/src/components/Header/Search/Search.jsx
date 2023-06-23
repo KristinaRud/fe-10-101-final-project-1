@@ -11,7 +11,7 @@ import ClearIcon from "@mui/icons-material/Clear";
 import { useDispatch, useSelector } from "react-redux";
 import { useRef, useState } from "react";
 import styles from "../Header.module.scss";
-import { fetchProductsForSearch } from "../../../store/actionCreator/products.actionCreator";
+import { debouncedSearch } from "../../../store/actionCreator/products.actionCreator";
 import SearchItem from "./SearchItem/SearchItem";
 
 const Search = () => {
@@ -21,6 +21,7 @@ const Search = () => {
   const dispatch = useDispatch();
   const [menuOpen, setMenuOpen] = useState(false);
   const [listOpen, setListOpen] = useState(false);
+  const [firstSubmit, setFirstSubmit] = useState(false);
   const listRef = useRef(null);
 
   const formik = useFormik({
@@ -29,7 +30,10 @@ const Search = () => {
     },
     onSubmit: (values) => {
       if (values.searchQuery.length > 0) {
-        dispatch(fetchProductsForSearch(values.searchQuery));
+        dispatch(debouncedSearch(values.searchQuery));
+        setTimeout(() => {
+          setFirstSubmit(true);
+        }, 800);
       }
     },
   });
@@ -43,10 +47,12 @@ const Search = () => {
   };
 
   const handleClear = () => {
+    setFirstSubmit(false);
     formik.setFieldValue("searchQuery", "");
   };
 
   const handleBlur = (event) => {
+    setFirstSubmit(false);
     formik.setFieldValue("searchQuery", "");
     setMenuOpen(false);
     if (!listRef.current?.contains(event.relatedTarget)) {
@@ -86,10 +92,10 @@ const Search = () => {
         <div
           className={styles.searchSpinner}
           aria-hidden
-          hidden={!isSearchLoading}
+          hidden={!isSearchLoading || !listOpen}
         />
       </form>
-      {(menuOpen || listOpen) && (
+      {(menuOpen || listOpen) && firstSubmit && (
         <div ref={listRef}>
           <List className={styles.searchList}>
             {productsForSearch?.map((product) => (

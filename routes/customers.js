@@ -8,7 +8,8 @@ const {
   loginCustomer,
   getCustomer,
   editCustomerInfo,
-  updatePassword
+  updatePassword,
+  loginGoogleCustomer
 } = require("../controllers/customers");
 
 // @route   POST /customers
@@ -20,6 +21,8 @@ router.post("/", createCustomer);
 // @desc    Login Customer / Returning JWT Token
 // @access  Public
 router.post("/login", loginCustomer);
+
+router.post("/login-google", loginGoogleCustomer);
 
 // @route   GET /
 // @desc    Return current customer

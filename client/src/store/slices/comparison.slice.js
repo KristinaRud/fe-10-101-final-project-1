@@ -18,6 +18,9 @@ const comparisonSlice = createSlice({
     setShowDifference: (state, action) => {
       state.showDifference = action.payload;
     },
+    deleteComparison: (state) => {
+      state.comparison = {};
+    },
   },
   extraReducers: (builder) => {
     builder
@@ -57,4 +60,4 @@ const comparisonSlice = createSlice({
 
 export default comparisonSlice.reducer;
 
-export const { setShowDifference } = comparisonSlice.actions;
+export const { setShowDifference, deleteComparison } = comparisonSlice.actions;

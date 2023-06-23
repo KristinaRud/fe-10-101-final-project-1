@@ -66,7 +66,6 @@ const Header = () => {
       dispatch(setItems(JSON.parse(localStorage.getItem("wishList"))));
     }
   }, [isLogin, dispatch]);
-
   useEffect(() => {
     const counterWL = itemsWishList ? itemsWishList?.length : 0;
     const counter = itemsCart

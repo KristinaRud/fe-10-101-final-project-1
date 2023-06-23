@@ -5,6 +5,7 @@ import {
   StyledEngineProvider,
   ThemeProvider,
 } from "@mui/material";
+import { GoogleOAuthProvider } from "@react-oauth/google";
 import AppRoute from "./route/app.route";
 import store from "./store";
 import Footer from "./components/Footer/Footer";
@@ -14,16 +15,18 @@ import "./App.scss";
 
 const App = () => (
   <Provider store={store}>
-    <BrowserRouter>
-      <ThemeProvider theme={theme}>
-        <StyledEngineProvider injectFirst>
-          <CssBaseline />
-          <Header />
-          <AppRoute />
-          <Footer />
-        </StyledEngineProvider>
-      </ThemeProvider>
-    </BrowserRouter>
+    <GoogleOAuthProvider clientId={process.env.REACT_APP_GOOGLE_CLIENT_ID}>
+      <BrowserRouter>
+        <ThemeProvider theme={theme}>
+          <StyledEngineProvider injectFirst>
+            <CssBaseline />
+            <Header />
+            <AppRoute />
+            <Footer />
+          </StyledEngineProvider>
+        </ThemeProvider>
+      </BrowserRouter>
+    </GoogleOAuthProvider>
   </Provider>
 );
 

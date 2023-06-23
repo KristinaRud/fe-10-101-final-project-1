@@ -6,6 +6,7 @@ import {
   editPasswordCustomer,
   updateCustomer,
   signUp,
+  loginGoogle,
 } from "../actionCreator/customers.actionCreator";
 import { checkToken } from "../../utils/api/checkToken";
 
@@ -55,6 +56,10 @@ const customersSlice = createSlice({
     builder.addCase(signUp.rejected, (state, action) => {
       state.successSignup = false;
       state.error = action.error.message;
+    });
+    builder.addCase(loginGoogle.fulfilled, (state, action) => {
+      state.token = action.payload;
+      state.isLogin = true;
     });
   },
 });

@@ -19,6 +19,25 @@ const login = createAsyncThunk("customers/login", async (data) => {
   throw new Error(`Couldn't login: ${JSON.stringify(err.data)}`);
 });
 
+const loginGoogle = createAsyncThunk(
+  "customers/loginGoogle",
+  async (accessToken) => {
+    const { res, err } = await request({
+      url: "/customers/login-google",
+      method: "POST",
+      body: accessToken,
+    });
+    if (res && res.success) {
+      setAuthToken(res.token);
+      window.localStorage.setItem("token", res.token);
+      return res;
+    }
+    setAuthToken(false);
+
+    throw new Error(`Couldn't login: ${JSON.stringify(err.data)}`);
+  },
+);
+
 const logout = createAsyncThunk("customers/logout", async () => {
   setAuthToken(null);
   window.localStorage.removeItem("token");
@@ -87,4 +106,5 @@ export {
   editPasswordCustomer,
   updateCustomer,
   signUp,
+  loginGoogle,
 };

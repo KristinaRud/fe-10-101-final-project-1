@@ -31,6 +31,7 @@ import {
 } from "../../store/actionCreator/wishList.actionCreator";
 import { fetchComparisonProducts } from "../../store/actionCreator/comparison.actionCreator";
 import { selectComparison } from "../../store/selectors/comparison.selector";
+import { deleteComparison } from "../../store/slices/comparison.slice";
 
 const AccBurgerMenu = ({ counterWishList }) => {
   const [anchorAccBurgMenu, setAnchorAccBurgMenu] = useState(null);
@@ -39,7 +40,6 @@ const AccBurgerMenu = ({ counterWishList }) => {
   const [openDialog, setOpenDialog] = useState(false);
   const dispatch = useDispatch();
   const navigate = useNavigate();
-
   const handleClickOpenDialog = () => {
     setOpenDialog(true);
   };
@@ -51,6 +51,7 @@ const AccBurgerMenu = ({ counterWishList }) => {
 
   const handleActionDialog = () => {
     dispatch(logout());
+    dispatch(deleteComparison());
     setOpenDialog(false);
     setAnchorAccBurgMenu(null);
     dispatch(deleteCart());
@@ -75,9 +76,12 @@ const AccBurgerMenu = ({ counterWishList }) => {
       dispatch(getCustomer());
       dispatch(fetchShoppingCart());
       dispatch(fetchWishList());
-      dispatch(putProductsToCartLogin());
       dispatch(updateWishListLogin());
       dispatch(fetchComparisonProducts());
+
+      if (window.localStorage.getItem("shoppingCart")) {
+        dispatch(putProductsToCartLogin());
+      }
     }
   }, [dispatch, isLogin]);
 
