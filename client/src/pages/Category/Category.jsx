@@ -1,5 +1,5 @@
 import { Box, CircularProgress, Container } from "@mui/material";
-import { Navigate, useLocation } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import LeftSidebar from "../../components/LeftSidear/LeftSidebar";
@@ -21,10 +21,17 @@ const Category = () => {
   const categories = searchParams.get("categories");
   const dispatch = useDispatch();
   const { isLoading, error } = useSelector(selectFilters);
+  const navigate = useNavigate();
 
   useEffect(() => {
     dispatch(fetchFiltersData(`?categories=${categories}`));
   }, [categories, dispatch]);
+  useEffect(() => {
+    if (error) {
+      dispatch(deleteError());
+      navigate("/error");
+    }
+  }, [error, dispatch, navigate]);
 
   if (isLoading) {
     return (
@@ -34,16 +41,9 @@ const Category = () => {
     );
   }
 
-  const redirect = () => {
-    dispatch(deleteError());
-    return <Navigate to="/error" />;
-  };
-
   return (
     <Box sx={{ margin: "10px auto", maxWidth: "1400px" }}>
-      {error ? (
-        redirect()
-      ) : (
+      {categories && (
         <>
           <BreadcrumbsApp />
           <TitleOfCategory />

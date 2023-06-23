@@ -98,6 +98,7 @@ const shoppingCartSlice = createSlice({
       state.itemsCart = structureDataToStore(action.payload.products);
     });
     builder.addCase(putProductsToCartLogin.fulfilled, (state, action) => {
+      window.localStorage.removeItem("shoppingCart");
       state.itemsCart = structureDataToStore(action.payload.products);
     });
   },
