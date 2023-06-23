@@ -28,9 +28,7 @@ const EditPasswordForm = ({ setSubmit }) => {
           confirmPassword: "",
         }}
         validationSchema={validationSchemaPassword}
-        onSubmit={({ password, confirmPassword }) =>
-          handleSubmitForm({ password, confirmPassword })
-        }
+        onSubmit={(values) => handleSubmitForm(values)}
       >
         {() => (
           <Form className={styles.form}>

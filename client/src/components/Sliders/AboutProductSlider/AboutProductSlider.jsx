@@ -1,7 +1,7 @@
 import Slider from "react-slick";
 import PropTypes from "prop-types";
 import styles from "./AboutProductSlider.module.scss";
-import "./AboutProduct.scss";
+import "../slidersCustomize.scss";
 import { AboutProductConfig } from "../slidersConfig";
 
 const AboutProductSlider = ({ data }) => {

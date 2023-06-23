@@ -52,21 +52,21 @@ const EditUserForm = ({ setSubmit }) => {
               component={TextField}
               name="firstName"
               type="text"
-              label="First name *"
+              label="First name "
               variant="standard"
             />
             <Field
               component={TextField}
               name="lastName"
               type="text"
-              label="Last name *"
+              label="Last name "
               variant="standard"
             />
             <Field
               component={TextField}
               name="login"
               type="text"
-              label="Login *"
+              label="Login "
               variant="standard"
             />
             <TelephoneField />

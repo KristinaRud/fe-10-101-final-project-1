@@ -37,8 +37,12 @@ const customersSlice = createSlice({
       state.data = action.payload;
     });
     builder.addCase(editPasswordCustomer.fulfilled, (state, action) => {
-      state.data = action.payload;
-      state.error = null;
+      if (action.payload.password === "Password does not match") {
+        state.error = "Password does not match";
+      } else {
+        state.data = action.payload.customer;
+        state.error = null;
+      }
     });
     builder.addCase(updateCustomer.fulfilled, (state, action) => {
       state.data = action.payload;

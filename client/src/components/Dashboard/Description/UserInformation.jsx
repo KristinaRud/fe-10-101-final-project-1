@@ -11,6 +11,7 @@ import EditUserForm from "../EditAccountForms/EditUserForm";
 
 const UserInformation = ({ activeComponent }) => {
   const [submit, setSubmit] = useState(false);
+  const [submitPassword, setSubmitPassword] = useState(false);
   const { data, error } = useSelector(selectCustomers);
   const [openFormUser, setOpenFormUser] = useState(false);
   const [openFormPassword, setOpenFormPassword] = useState(false);
@@ -26,22 +27,25 @@ const UserInformation = ({ activeComponent }) => {
   };
 
   useEffect(() => {
-    if (Object.keys(data).length && submit) {
+    if (Object.keys(data).length > 0 && (submit || submitPassword)) {
       setStatus("success");
       setOpenSnackbar(true);
       setOpenFormUser(false);
       setOpenFormPassword(false);
       setSubmit(false);
+      setSubmitPassword(false);
     }
-    if (error && submit) {
+    if (error && (submit || submitPassword)) {
       setTextError(JSON.stringify(error));
       setOpenSnackbar(true);
       setStatus("error");
       setSubmit(false);
+    } else if (error && submit) {
       setOpenFormUser(true);
+    } else if (error && submitPassword) {
       setOpenFormPassword(true);
     }
-  }, [submit, error, data]);
+  }, [submit, error, data, submitPassword]);
 
   return (
     <Box>
@@ -79,7 +83,9 @@ const UserInformation = ({ activeComponent }) => {
           </div>
 
           {openFormUser && <EditUserForm setSubmit={setSubmit} />}
-          {openFormPassword && <EditPasswordForm setSubmit={setSubmit} />}
+          {openFormPassword && (
+            <EditPasswordForm setSubmit={setSubmitPassword} />
+          )}
         </div>
       </Box>
       <LoginSnackbar
@@ -95,7 +101,7 @@ const UserInformation = ({ activeComponent }) => {
           <h4 className={styles.contact}>Additional Information</h4>
           <p className={styles.text}>
             <span>Birth Date: </span>
-            {data.birthdate.replace(/T.*/, "")}
+            {data.birthdate}
           </p>
           <p className={styles.text}>
             <span>Gender: </span>

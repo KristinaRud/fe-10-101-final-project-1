@@ -24,6 +24,10 @@
     margin-right: 15px;
   }
 
+  &__scheduledWrapper {
+    display: block ruby;
+  }
+
   &__scheduledTitle {
     font-size: 12px;
     font-weight: 400;
@@ -41,6 +45,7 @@
     font-weight: 600;
     font-size: 13px;
     line-height: 14px;
+    margin-left: 5px;
   }
 
   &__location {
