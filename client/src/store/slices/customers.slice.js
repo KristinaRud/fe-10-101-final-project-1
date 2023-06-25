@@ -7,6 +7,7 @@ import {
   updateCustomer,
   signUp,
   loginGoogle,
+  forgotPassword,
 } from "../actionCreator/customers.actionCreator";
 import { checkToken } from "../../utils/api/checkToken";
 
@@ -17,6 +18,8 @@ const customersSlice = createSlice({
     isLogin: checkToken(window.localStorage.getItem("token")),
     token: window.localStorage.getItem("token") || null,
     error: null,
+    isLoading: true,
+    successSentForgotPassword: false,
     successSignup: true,
   },
   reducers: {},
@@ -64,6 +67,21 @@ const customersSlice = createSlice({
     builder.addCase(loginGoogle.fulfilled, (state, action) => {
       state.token = action.payload;
       state.isLogin = true;
+    });
+    builder.addCase(forgotPassword.fulfilled, (state) => {
+      state.successSentForgotPassword = true;
+      state.error = null;
+      state.isLoading = false;
+    });
+    builder.addCase(forgotPassword.rejected, (state, action) => {
+      state.successSentForgotPassword = false;
+      state.error = action.error.message;
+      state.isLoading = false;
+    });
+    builder.addCase(forgotPassword.pending, (state) => {
+      state.successSentForgotPassword = false;
+      state.error = null;
+      state.isLoading = true;
     });
   },
 });

@@ -9,7 +9,8 @@ const {
   getCustomer,
   editCustomerInfo,
   updatePassword,
-  loginGoogleCustomer
+  loginGoogleCustomer,
+  forgotPassword
 } = require("../controllers/customers");
 
 // @route   POST /customers
@@ -50,5 +51,8 @@ router.put(
   passport.authenticate("jwt", { session: false }),
   updatePassword
 );
+
+router.put("/forgot-password", forgotPassword);
+
 
 module.exports = router;
