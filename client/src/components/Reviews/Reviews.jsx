@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
 import PropTypes from "prop-types";
-import { Card, Typography } from "@mui/material";
+import { Box, Card, Typography } from "@mui/material";
 import { fetchCommentsByProduct } from "../../store/actionCreator/comments.actionCreator";
 import styles from "../../pages/SingleProduct/SingleProduct.module.scss";
 
@@ -18,7 +18,7 @@ const Reviews = ({ productId }) => {
   }, [dispatch, productId]);
 
   return (
-    <div>
+    <Box sx={{ maxHeight: "400px", overflow: "auto" }}>
       {comments.length > 0 ? (
         comments.map((comment) => (
           <Card key={comment._id} sx={{ mt: 1, mb: 1, p: 2 }}>
@@ -35,7 +35,7 @@ const Reviews = ({ productId }) => {
           Be the first to review this product
         </p>
       )}
-    </div>
+    </Box>
   );
 };
 

@@ -3,7 +3,17 @@ import { useParams, Link } from "react-router-dom";
 import Button from "@mui/material/Button";
 import cn from "classnames";
 import { useDispatch, useSelector } from "react-redux";
-import { Box, CircularProgress, Rating, Typography } from "@mui/material";
+import {
+  Box,
+  CircularProgress,
+  Dialog,
+  DialogActions,
+  DialogContent,
+  DialogTitle,
+  Rating,
+  TextField,
+  Typography,
+} from "@mui/material";
 import { getDetailsList } from "./utils";
 import styles from "./SingleProduct.module.scss";
 import { fetchProducts } from "../../store/actionCreator/products.actionCreator";
@@ -41,12 +51,30 @@ const SingleProduct = () => {
   const [error, setError] = useState("");
   const [openSnackbar, setOpenSnackbar] = useState(false);
   const [commentsCount, setCommentsCount] = useState(0);
+  const [openReviewDialog, setOpenReviewDialog] = useState(false);
+  const [reviewText, setReviewText] = useState("");
+  const [ratingValue, setRatingValue] = useState(0);
 
   const handleClose = (event, reason) => {
     if (reason === "clickaway") {
       return;
     }
     setOpenSnackbar(false);
+  };
+
+  const handleDialogOpen = () => {
+    setOpenReviewDialog(true);
+  };
+
+  const handleDialogClose = () => {
+    setOpenReviewDialog(false);
+  };
+
+  const handleReviewSubmit = () => {
+    // Тут треба буде додати логіку для відправки відгуку
+    setReviewText("");
+    setRatingValue(0);
+    setOpenReviewDialog(false);
   };
 
   useEffect(() => {
@@ -240,7 +268,7 @@ const SingleProduct = () => {
               <div className={styles["product-picture__inner"]}>
                 <ul className={styles["product-picture__control"]}>
                   <li className={styles["product-picture__control-item"]}>
-                    <Button>
+                    <Button onClick={handleDialogOpen}>
                       <IconEmail />
                     </Button>
                   </li>
@@ -303,6 +331,51 @@ const SingleProduct = () => {
       <AboutProductSlider data={description} />
       <Support />
       <Features />
+      <Dialog
+        open={openReviewDialog}
+        onClose={handleDialogClose}
+        sx={{
+          "& .MuiDialog-paper": {
+            width: "70%",
+          },
+        }}
+      >
+        <DialogTitle>Leave a Review</DialogTitle>
+        <DialogContent>
+          <Rating
+            name="product-rating"
+            value={ratingValue}
+            onChange={(event, newValue) => setRatingValue(newValue)}
+          />
+          <TextField
+            sx={{ width: "100%" }}
+            autoFocus
+            margin="dense"
+            label="Your Review (! WITHOUT LOGIC FOR NOW !)"
+            type="text"
+            multiline
+            rows={8}
+            value={reviewText}
+            onChange={(e) => setReviewText(e.target.value)}
+          />
+        </DialogContent>
+        <DialogActions>
+          <Button
+            onClick={handleDialogClose}
+            color="secondary"
+            variant="contained"
+          >
+            Cancel
+          </Button>
+          <Button
+            onClick={handleReviewSubmit}
+            color="secondary"
+            variant="contained"
+          >
+            Submit
+          </Button>
+        </DialogActions>
+      </Dialog>
     </>
   );
 };
