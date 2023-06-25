@@ -14,6 +14,7 @@ import WishList from "../pages/WishList/WishList";
 import ContactUs from "../pages/ContactUs/ContactUs";
 import TermsAndConditions from "../components/TermsAndConditions/TermsAndConditions";
 import ComparisonProducts from "../pages/ComparisonProducts/ComparisonProducts";
+import CheckoutConfirmPage from "../pages/CheckoutConfirm/CheckoutConfirmPage";
 import NotFoundPage from "../pages/NotFound/NotFound";
 
 const AppRoute = () => {
@@ -45,6 +46,10 @@ const AppRoute = () => {
       <Route
         path="/compare-products"
         element={isLogin ? <ComparisonProducts /> : <Navigate to="/" />}
+      />
+      <Route
+        path="/checkoutConfirmPage"
+        element={isLogin ? <CheckoutConfirmPage /> : <Navigate to="/" />}
       />
       <Route path="/error" element={<NotFoundPage />} />
     </Routes>

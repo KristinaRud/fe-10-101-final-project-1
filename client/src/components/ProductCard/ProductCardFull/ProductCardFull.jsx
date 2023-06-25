@@ -5,6 +5,7 @@ import {
   CardMedia,
   Rating,
   Typography,
+  Skeleton,
 } from "@mui/material";
 import CheckCircleIcon from "@mui/icons-material/CheckCircle";
 import PhoneIcon from "@mui/icons-material/Phone";
@@ -58,163 +59,177 @@ const ProductCardFull = ({
   };
 
   return (
-    <Card
-      sx={{
-        maxWidth: 1166,
-        display: "flex",
-        flexDirection: "column",
-        padding: "14px 25px",
-        position: "relative",
-      }}
-    >
-      <Typography
-        variant="caption"
-        color={available ? "green" : "error"}
-        alignSelf="end"
+    <>
+      <Card>
+        <Skeleton
+          variant="rectangular"
+          width={250}
+          height={250}
+          marginLeft={10}
+        />
+        <Skeleton variant="text" width={250} />
+      </Card>
+      <Card
+        sx={{
+          maxWidth: 1166,
+          display: "flex",
+          flexDirection: "column",
+          padding: "14px 25px",
+          position: "relative",
+          marginLeft: "25px",
+        }}
       >
-        {available ? (
-          <Box display="flex" alignItems="center">
-            <CheckCircleIcon color="green" />
-            <Typography variant="body2" color="green" ml={1}>
-              in stock
-            </Typography>
-          </Box>
-        ) : (
-          <Box display="flex" alignItems="center" mt={2}>
-            <PhoneIcon color="red" />
-            <Typography variant="body2" color="red" ml={1}>
-              check availablity
-            </Typography>
-          </Box>
-        )}
-      </Typography>
-      <Box display="flex" gap="50px">
-        <Box display="flex" flexDirection="column">
-          <Link to={`/${categories.toLowerCase()}/${id}`}>
-            <CardMedia
-              component="img"
-              className={s.img}
-              image={image}
-              alt={alt}
-            />
-          </Link>
-          <Box display="flex" alignItems="center" mt={2}>
-            <Rating
-              name="products-small"
-              value={rating}
-              readOnly
-              size="small"
-            />
-            <Typography variant="body2" ml={1}>
-              Reviews (4)
-            </Typography>
-          </Box>
-        </Box>
-        <Box
-          display="flex"
-          flexDirection="column"
-          className={s["content-wrapper"]}
-        >
-          <Typography variant="h6" mb={2} fontSize="13px">
-            {name}
-          </Typography>
-          <Box display="flex" className={s["price-wrapper"]}>
-            {oldPrice && (
-              <Typography
-                variant="body2"
-                color="text.secondary"
-                fontSize="13px"
-                sx={{ textDecoration: "line-through" }}
-                mr={2}
-              >
-                {oldPrice}.00 ₴
-              </Typography>
-            )}
-            <Typography
-              variant="h6"
-              component="div"
-              fontWeight={600}
-              fontSize="14px"
-            >
-              {currentPrice}.00 ₴
-            </Typography>
-          </Box>
-          <Button
-            className={cx(s.btn, isAdded && s.green)}
-            onClick={() => {
-              dispatch(
-                handleAddToCart(
-                  {
-                    id,
-                    image,
-                    alt,
-                    description,
-                    currentPrice,
-                    itemNo,
-                    categories,
-                  },
-                  isLogin,
-                ),
-              );
-            }}
-          >
-            <ShoppingCartOutlinedIcon className={isAdded && cx(styles.green)} />
-            {isAdded ? "In cart" : "Add to cart"}
-          </Button>
-        </Box>
         <Typography
-          variant="body2"
-          color="text.secondary"
-          className={s.description}
+          variant="caption"
+          color={available ? "green" : "error"}
+          alignSelf="end"
         >
-          {description}
+          {available ? (
+            <Box display="flex" alignItems="center">
+              <CheckCircleIcon color="green" />
+              <Typography variant="body2" color="green" ml={1}>
+                in stock
+              </Typography>
+            </Box>
+          ) : (
+            <Box display="flex" alignItems="center" mt={2}>
+              <PhoneIcon color="red" />
+              <Typography variant="body2" color="red" ml={1}>
+                check availablity
+              </Typography>
+            </Box>
+          )}
         </Typography>
-        <Box display="flex" className={s["btn-wrapper"]}>
-          <Button>
-            <IconEmail />
-          </Button>
-          <IconComparisonProduct
-            setError={setError}
-            id={id}
-            categories={categories}
-            setOpenSnackbar={setOpenSnackbar}
-            setStatus={setStatus}
-            setText={setText}
-          />
-          <Button
-            onClick={() => {
-              dispatch(
-                handleAddToWishList(
-                  {
-                    id,
-                    image,
-                    alt,
-                    description,
-                    currentPrice,
-                    itemNo,
-                    categories,
-                    available,
-                    rating,
-                    oldPrice,
-                  },
-                  itemsWishList,
-                  isLogin,
-                ),
-              );
-            }}
+        <Box display="flex" gap="50px">
+          <Box display="flex" flexDirection="column">
+            <Link to={`/${categories.toLowerCase()}/${id}`}>
+              <CardMedia
+                component="img"
+                className={s.img}
+                image={image}
+                alt={alt}
+              />
+            </Link>
+            <Box display="flex" alignItems="center" mt={2}>
+              <Rating
+                name="products-small"
+                value={rating}
+                readOnly
+                size="small"
+              />
+              <Typography variant="body2" ml={1}>
+                Reviews (4)
+              </Typography>
+            </Box>
+          </Box>
+          <Box
+            display="flex"
+            flexDirection="column"
+            className={s["content-wrapper"]}
           >
-            <IconWishList className={isWishList && cx(styles.green)} />
-          </Button>
+            <Typography variant="h6" mb={2} fontSize="13px">
+              {name}
+            </Typography>
+            <Box display="flex" className={s["price-wrapper"]}>
+              {oldPrice && (
+                <Typography
+                  variant="body2"
+                  color="text.secondary"
+                  fontSize="13px"
+                  sx={{ textDecoration: "line-through" }}
+                  mr={2}
+                >
+                  {oldPrice}.00 ₴
+                </Typography>
+              )}
+              <Typography
+                variant="h6"
+                component="div"
+                fontWeight={600}
+                fontSize="14px"
+              >
+                {currentPrice}.00 ₴
+              </Typography>
+            </Box>
+            <Button
+              className={cx(s.btn, isAdded && s.green)}
+              onClick={() => {
+                dispatch(
+                  handleAddToCart(
+                    {
+                      id,
+                      image,
+                      alt,
+                      description,
+                      currentPrice,
+                      itemNo,
+                      categories,
+                    },
+                    isLogin,
+                  ),
+                );
+              }}
+            >
+              <ShoppingCartOutlinedIcon
+                className={isAdded && cx(styles.green)}
+              />
+              {isAdded ? "In cart" : "Add to cart"}
+            </Button>
+          </Box>
+          <Typography
+            variant="body2"
+            color="text.secondary"
+            className={s.description}
+          >
+            {description}
+          </Typography>
+          <Box display="flex" className={s["btn-wrapper"]}>
+            <Button>
+              <IconEmail />
+            </Button>
+            <IconComparisonProduct
+              setError={setError}
+              id={id}
+              categories={categories}
+              setOpenSnackbar={setOpenSnackbar}
+              setStatus={setStatus}
+              setText={setText}
+            />
+            <Button
+              onClick={() => {
+                dispatch(
+                  handleAddToWishList(
+                    {
+                      id,
+                      image,
+                      alt,
+                      description,
+                      currentPrice,
+                      itemNo,
+                      categories,
+                      available,
+                      rating,
+                      oldPrice,
+                    },
+                    itemsWishList,
+                    isLogin,
+                  ),
+                );
+              }}
+            >
+              <IconWishList className={isWishList && cx(styles.green)} />
+            </Button>
+          </Box>
         </Box>
-      </Box>
-      <LoginSnackbar
-        open={openSnackbar}
-        status={status}
-        handleClose={handleClose}
-        textSuccess={text}
-        textError={error}
-      />
-    </Card>
+        <LoginSnackbar
+          open={openSnackbar}
+          status={status}
+          handleClose={handleClose}
+          textSuccess={text}
+          textError={error}
+        />
+      </Card>
+    </>
   );
 };
 

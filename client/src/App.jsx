@@ -11,6 +11,8 @@ import Footer from "./components/Footer/Footer";
 import Header from "./components/Header/Header";
 import theme from "./theme/createTheme";
 import "./App.scss";
+import BackToTopButton from "./components/BackToTopButton/BackToTopButton";
+import ScrollToTop from "./utils/scrollToTop/scrollToTopFunc";
 
 const App = () => (
   <Provider store={store}>
@@ -19,6 +21,8 @@ const App = () => (
         <StyledEngineProvider injectFirst>
           <CssBaseline />
           <Header />
+          <BackToTopButton />
+          <ScrollToTop />
           <AppRoute />
           <Footer />
         </StyledEngineProvider>
