@@ -3,7 +3,7 @@ import { useParams, Link } from "react-router-dom";
 import Button from "@mui/material/Button";
 import cn from "classnames";
 import { useDispatch, useSelector } from "react-redux";
-import { Box, CircularProgress } from "@mui/material";
+import { Box, CircularProgress, Rating, Typography } from "@mui/material";
 import { getDetailsList } from "./utils";
 import styles from "./SingleProduct.module.scss";
 import { fetchProducts } from "../../store/actionCreator/products.actionCreator";
@@ -17,9 +17,11 @@ import AboutProductSlider from "../../components/Sliders/AboutProductSlider/Abou
 import Support from "../../components/Support/Support";
 import Features from "../../components/Features/Features";
 import { selectWishList } from "../../store/selectors/wishList.selector";
+import { fetchCommentsByProduct } from "../../store/actionCreator/comments.actionCreator";
 import { IconWishList, IconEmail } from "../../assets/images/products";
 import LoginSnackbar from "../../components/LoginForm/LoginSnackbar";
 import IconComparisonProduct from "../../components/IconComparisonProduct/IconComparisonProduct";
+import Reviews from "../../components/Reviews/Reviews";
 
 const SingleProduct = () => {
   const { id } = useParams();
@@ -38,6 +40,7 @@ const SingleProduct = () => {
   const [text, setText] = useState("");
   const [error, setError] = useState("");
   const [openSnackbar, setOpenSnackbar] = useState(false);
+  const [commentsCount, setCommentsCount] = useState(0);
 
   const handleClose = (event, reason) => {
     if (reason === "clickaway") {
@@ -58,6 +61,14 @@ const SingleProduct = () => {
       setDetailsList(list);
     }
   }, [id, products]);
+
+  useEffect(() => {
+    dispatch(fetchCommentsByProduct(id))
+      .unwrap()
+      .then((comments) => {
+        setCommentsCount(parseInt(comments.length, 10));
+      });
+  });
 
   if (!currentProduct) {
     return (
@@ -96,6 +107,23 @@ const SingleProduct = () => {
     });
   };
 
+  const activeTabContent = (() => {
+    if (isActiveTab.title === "About Product") {
+      return (
+        <p className={styles["product-info__description"]}>
+          {description[0].title}
+        </p>
+      );
+    }
+    if (isActiveTab.title === "Details") {
+      return <ul className={styles["details-list"]}>{detailsList}</ul>;
+    }
+    if (isActiveTab.title === "Reviews") {
+      return <Reviews productId={id} />;
+    }
+    return null;
+  })();
+
   return (
     <>
       <div className={styles.product}>
@@ -119,6 +147,15 @@ const SingleProduct = () => {
                 onClick={(event) => tabToggle(event)}
               >
                 Details
+              </li>
+              <li
+                className={cn(styles.tabs__item, {
+                  [styles["tabs__item--active"]]:
+                    isActiveTab.status && isActiveTab.title === "Reviews",
+                })}
+                onClick={(event) => tabToggle(event)}
+              >
+                Reviews
               </li>
             </ul>
             <div className={styles.control}>
@@ -170,16 +207,19 @@ const SingleProduct = () => {
                 <h1 className={styles["product-info__title"]}>
                   {currentProduct.name}
                 </h1>
-                <p className={styles["product-info__subtitle"]}>
-                  Be the first to review this product
-                </p>
-                {isActiveTab.title === "About Product" ? (
-                  <p className={styles["product-info__description"]}>
-                    {description[0].title}
-                  </p>
-                ) : (
-                  <ul className={styles["details-list"]}>{detailsList}</ul>
-                )}
+                <Box display="flex" alignItems="center" mb={1}>
+                  <Rating
+                    className={styles.rating}
+                    name="products-small"
+                    value={parseFloat(rating)}
+                    readOnly
+                    size="small"
+                  />
+                  <Typography className={styles.reviews} variant="body2" ml={1}>
+                    Reviews ({commentsCount})
+                  </Typography>
+                </Box>
+                {activeTabContent}
                 <div className={styles["product-info__footer"]}>
                   <p className={styles["product-info__support"]}>
                     Have a Question?{" "}
