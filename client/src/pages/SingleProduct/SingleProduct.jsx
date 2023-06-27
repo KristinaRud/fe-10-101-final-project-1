@@ -39,6 +39,8 @@ const SingleProduct = () => {
   const [error, setError] = useState("");
   const [openSnackbar, setOpenSnackbar] = useState(false);
 
+  console.log(id);
+
   const handleClose = (event, reason) => {
     if (reason === "clickaway") {
       return;
@@ -53,9 +55,13 @@ const SingleProduct = () => {
   useEffect(() => {
     if (products) {
       const currentProduct = products.find((product) => product._id === id);
-      const list = getDetailsList(currentProduct.characteristics);
-      setCurrentProduct(currentProduct);
-      setDetailsList(list);
+      if (!currentProduct) {
+        window.location.href = "/error";
+      } else {
+        const list = getDetailsList(currentProduct.characteristics);
+        setCurrentProduct(currentProduct);
+        setDetailsList(list);
+      }
     }
   }, [id, products]);
 
