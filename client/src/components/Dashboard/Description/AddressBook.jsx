@@ -6,7 +6,7 @@ import Button from "../../Button/Button";
 import styles from "./AddressBook.module.scss";
 
 const AddressBook = ({ activeComponent }) => {
-  const { orders } = useSelector(selectOrders);
+  const { allOrders } = useSelector(selectOrders);
   return (
     <Box>
       <h3 className={styles.title}>Address Book</h3>
@@ -21,11 +21,12 @@ const AddressBook = ({ activeComponent }) => {
         <div className={styles["wrapper-address"]}>
           <h4 className={styles.address}>Default Billing Address</h4>
           <p className={styles.text}>
-            {orders && orders.length >= 0
+            {allOrders && allOrders.length > 0
               ? `${
-                  orders[orders.length - 1]?.postOfficeBranch.CityDescription
-                }, ${orders[orders.length - 1]?.postOffice}, ${
-                  orders[orders.length - 1]?.postOfficeBranch.Description
+                  allOrders[allOrders.length - 1].postOfficeBranch
+                    .CityDescription
+                }, ${allOrders[allOrders.length - 1]?.postOffice}, ${
+                  allOrders[allOrders.length - 1]?.postOfficeBranch.Description
                 }`
               : "You have not set a default billing address."}
           </p>

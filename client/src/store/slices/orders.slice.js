@@ -8,6 +8,7 @@ import {
 const ordersSlice = createSlice({
   name: "orders",
   initialState: {
+    allOrders: [],
     orders: {},
     products: [],
     isLoading: false,
@@ -16,6 +17,7 @@ const ordersSlice = createSlice({
   reducers: {
     clearOrders: (state) => {
       state.orders = {};
+      state.allOrders = [];
       state.products = [];
       state.isLoading = false;
       state.error = null;
@@ -31,11 +33,11 @@ const ordersSlice = createSlice({
     });
     builder.addCase(fetchOrders.fulfilled, (state, action) => {
       state.isLoading = false;
-      state.orders = action.payload;
+      state.allOrders = action.payload;
     });
     builder.addCase(fetchOrders.rejected, (state, action) => {
       state.isLoading = false;
-      state.error = action.payload;
+      state.allOrders = action.payload;
     });
     builder.addCase(getProductsFromCart.fulfilled, (state, action) => {
       state.products = action.payload;

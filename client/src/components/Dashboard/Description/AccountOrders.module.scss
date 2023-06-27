@@ -3,7 +3,6 @@
   font-weight: 700;
   font-size: 18px;
   line-height: 148%;
-  border-bottom: 1px solid #cacdd8;
   margin-bottom: 17px;
   padding-bottom: 12px;
 
@@ -11,17 +10,24 @@
     text-align: center;
   }
 }
+.link:hover{
+  text-decoration: underline !important;
+}
 
 .description {
+  color: #777F85;
   width: 120px;
-  font-weight: 500;
-  font-size: 16px;
+  font-size: 0.9rem;;
   line-height: 20px;
   margin: 15px 0;
 
   @media (width <= 768px) {
     justify-content: center;
   }
+}
+
+.noOrder{
+  color: #000;
 }
 
 .item {
@@ -33,7 +39,9 @@
   line-height: 20px;
   color: #666;
   margin-bottom: 15px;
+  margin-top: 15px;
   justify-content: space-between;
+  border-bottom: 1px solid #DFE0E0;
 
 
   @media (width <= 768px) {
