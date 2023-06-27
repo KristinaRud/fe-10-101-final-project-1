@@ -17,6 +17,11 @@ import ComparisonProducts from "../pages/ComparisonProducts/ComparisonProducts";
 import NotFoundPage from "../pages/NotFound/NotFound";
 import Layout from "../pages/Layout/Loyaut";
 import AdminPanel from "../pages/AdminPanel/AdminPanel";
+import AdminCategories from "../pages/AdminPanel/Categories/AdminCategories";
+import CollectionTable from "../components/Admin/Category/CollectionTable/CollectionTable";
+import AddNewForm from "../components/Admin/Category/AddNewForm/AddNewForm";
+import AdminProducts from "../pages/AdminPanel/Products/AdminProducts";
+import ProductsTable from "../components/Admin/Products/ProductsTable/ProductsTable";
 
 const AppRoute = () => {
   const { isLogin } = useSelector(selectCustomers);
@@ -51,7 +56,16 @@ const AppRoute = () => {
         />
         <Route path="/error" element={<NotFoundPage />} />
       </Route>
-      <Route path="/admin" element={<AdminPanel />} />
+      <Route path="/admin" element={<AdminPanel />}>
+        <Route path="categories" element={<AdminCategories />}>
+          <Route path="" element={<CollectionTable />} />
+          <Route path="new" element={<AddNewForm />} />
+          <Route path=":category" element={<AddNewForm />} />
+        </Route>
+        <Route path="products" element={<AdminProducts />}>
+          <Route path="" element={<ProductsTable />} />
+        </Route>
+      </Route>
     </Routes>
   );
 };

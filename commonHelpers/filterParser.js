@@ -20,8 +20,10 @@ module.exports = function filterParser(filtersQueryString) {
         };
       } else if (!excludedParams.includes(filterParam)) {
         mongooseQuery[filterParam] = decodeURI(filtersQueryString[filterParam]);
-      } else if (filtersQueryString.categories.includes("-")){
-          mongooseQuery[filterParam] = decodeURI(filtersQueryString[filterParam].replace(/-/g, ' '));
+      } else if (filtersQueryString.categories){
+          if(filtersQueryString.categories.includes("-")){
+              mongooseQuery[filterParam] = decodeURI(filtersQueryString[filterParam].replace(/-/g, ' '))
+          }
       }
 
       return mongooseQuery;

@@ -33,17 +33,43 @@ const DrawerApp = ({ open, handleDrawerToggle }) => {
           link=""
           icon={<DashboardIcon />}
         />
-        <SidebarListItem
-          title="Products"
-          open={open}
-          link="/products"
-          icon={<WebStoriesIcon />}
-        />
+        <Typography
+          variant="body2"
+          noWrap
+          component="div"
+          marginLeft={1}
+          marginTop={2}
+        >
+          Collections
+        </Typography>
+        <Divider />
         <SidebarListItem
           title="Categories"
           open={open}
           link="/categories"
           icon={<CategoryIcon />}
+        />
+        <SidebarListItem
+          title="Products"
+          open={open}
+          link="/products?perPage=10&startPage=1&sort=-itemNo"
+          icon={<WebStoriesIcon />}
+        />
+        <Typography
+          variant="body2"
+          noWrap
+          component="div"
+          marginLeft={1}
+          marginTop={2}
+        >
+          Orders & Reports
+        </Typography>
+        <Divider />
+        <SidebarListItem
+          title="Orders"
+          open={open}
+          link="/orders"
+          icon={<WebStoriesIcon />}
         />
       </List>
     </Drawer>
