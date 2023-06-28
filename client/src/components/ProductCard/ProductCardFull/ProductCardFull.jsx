@@ -26,6 +26,7 @@ import { selectWishList } from "../../../store/selectors/wishList.selector";
 import { selectShoppingCart } from "../../../store/selectors/shoppingCart.selector";
 import IconComparisonProduct from "../../IconComparisonProduct/IconComparisonProduct";
 import { fetchCommentsByProduct } from "../../../store/actionCreator/comments.actionCreator";
+import { calculateAverageRating } from "../../../utils/comments";
 
 const ProductCardFull = ({
   available,
@@ -50,7 +51,7 @@ const ProductCardFull = ({
   const [text, setText] = useState("");
   const [error, setError] = useState("");
   const [openSnackbar, setOpenSnackbar] = useState(false);
-  const [commentsCount, setCommentsCount] = useState(0);
+  const [comments, setComments] = useState([]);
 
   const handleClose = (event, reason) => {
     if (reason === "clickaway") {
@@ -63,9 +64,11 @@ const ProductCardFull = ({
     dispatch(fetchCommentsByProduct(id))
       .unwrap()
       .then((comments) => {
-        setCommentsCount(parseInt(comments.length, 10));
+        setComments(comments);
       });
-  });
+  }, [dispatch, id]);
+
+  const averageRating = calculateAverageRating(comments);
 
   return (
     <Card
@@ -111,12 +114,12 @@ const ProductCardFull = ({
           <Box display="flex" alignItems="center" mt={2}>
             <Rating
               name="products-small"
-              value={rating}
+              value={averageRating}
               readOnly
               size="small"
             />
             <Typography variant="body2" ml={1}>
-              Reviews ({commentsCount})
+              Reviews ({comments.length})
             </Typography>
           </Box>
         </Box>

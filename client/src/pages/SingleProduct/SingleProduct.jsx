@@ -27,11 +27,15 @@ import AboutProductSlider from "../../components/Sliders/AboutProductSlider/Abou
 import Support from "../../components/Support/Support";
 import Features from "../../components/Features/Features";
 import { selectWishList } from "../../store/selectors/wishList.selector";
-import { fetchCommentsByProduct } from "../../store/actionCreator/comments.actionCreator";
+import {
+  fetchCommentsByProduct,
+  createComments,
+} from "../../store/actionCreator/comments.actionCreator";
 import { IconWishList, IconEmail } from "../../assets/images/products";
 import LoginSnackbar from "../../components/LoginForm/LoginSnackbar";
 import IconComparisonProduct from "../../components/IconComparisonProduct/IconComparisonProduct";
 import Reviews from "../../components/Reviews/Reviews";
+import { calculateAverageRating } from "../../utils/comments";
 
 const SingleProduct = () => {
   const { id } = useParams();
@@ -50,10 +54,10 @@ const SingleProduct = () => {
   const [text, setText] = useState("");
   const [error, setError] = useState("");
   const [openSnackbar, setOpenSnackbar] = useState(false);
-  const [commentsCount, setCommentsCount] = useState(0);
   const [openReviewDialog, setOpenReviewDialog] = useState(false);
   const [reviewText, setReviewText] = useState("");
   const [ratingValue, setRatingValue] = useState(0);
+  const [comments, setComments] = useState([]);
 
   const handleClose = (event, reason) => {
     if (reason === "clickaway") {
@@ -71,7 +75,12 @@ const SingleProduct = () => {
   };
 
   const handleReviewSubmit = () => {
-    // Тут треба буде додати логіку для відправки відгуку
+    const data = {
+      product: id,
+      rating: ratingValue,
+      content: reviewText,
+    };
+    dispatch(createComments(data));
     setReviewText("");
     setRatingValue(0);
     setOpenReviewDialog(false);
@@ -94,9 +103,9 @@ const SingleProduct = () => {
     dispatch(fetchCommentsByProduct(id))
       .unwrap()
       .then((comments) => {
-        setCommentsCount(parseInt(comments.length, 10));
+        setComments(comments);
       });
-  });
+  }, [dispatch, id]);
 
   if (!currentProduct) {
     return (
@@ -134,6 +143,8 @@ const SingleProduct = () => {
       title,
     });
   };
+
+  const averageRating = calculateAverageRating(comments);
 
   const activeTabContent = (() => {
     if (isActiveTab.title === "About Product") {
@@ -239,12 +250,12 @@ const SingleProduct = () => {
                   <Rating
                     className={styles.rating}
                     name="products-small"
-                    value={parseFloat(rating)}
+                    value={averageRating}
                     readOnly
                     size="small"
                   />
                   <Typography className={styles.reviews} variant="body2" ml={1}>
-                    Reviews ({commentsCount})
+                    Reviews ({comments.length})
                   </Typography>
                 </Box>
                 {activeTabContent}
@@ -351,7 +362,7 @@ const SingleProduct = () => {
             sx={{ width: "100%" }}
             autoFocus
             margin="dense"
-            label="Your Review (! WITHOUT LOGIC FOR NOW !)"
+            label="Your Review"
             type="text"
             multiline
             rows={8}
@@ -362,7 +373,7 @@ const SingleProduct = () => {
         <DialogActions>
           <Button
             onClick={handleDialogClose}
-            color="secondary"
+            color="background"
             variant="contained"
           >
             Cancel

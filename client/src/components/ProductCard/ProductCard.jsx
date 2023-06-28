@@ -25,6 +25,7 @@ import { selectWishList } from "../../store/selectors/wishList.selector";
 import LoginSnackbar from "../LoginForm/LoginSnackbar";
 import IconComparisonProduct from "../IconComparisonProduct/IconComparisonProduct";
 import { fetchCommentsByProduct } from "../../store/actionCreator/comments.actionCreator";
+import { calculateAverageRating } from "../../utils/comments";
 
 const ProductCard = ({
   image,
@@ -49,7 +50,7 @@ const ProductCard = ({
   const [text, setText] = useState("");
   const [error, setError] = useState("");
   const [openSnackbar, setOpenSnackbar] = useState(false);
-  const [commentsCount, setCommentsCount] = useState(0);
+  const [comments, setComments] = useState([]);
 
   const handleClose = (event, reason) => {
     if (reason === "clickaway") {
@@ -80,9 +81,11 @@ const ProductCard = ({
     dispatch(fetchCommentsByProduct(id))
       .unwrap()
       .then((comments) => {
-        setCommentsCount(parseInt(comments.length, 10));
+        setComments(comments);
       });
-  });
+  }, [dispatch, id]);
+
+  const averageRating = calculateAverageRating(comments);
 
   return (
     <>
@@ -203,12 +206,12 @@ const ProductCard = ({
             <Rating
               className={styles.rating}
               name="products-small"
-              value={rating}
+              value={averageRating}
               readOnly
               size="small"
             />
             <Typography className={styles.reviews} variant="body2" ml={1}>
-              Reviews ({commentsCount})
+              Reviews ({comments.length})
             </Typography>
           </Box>
           <Link to={`/${categories.toLowerCase()}/${id}`}>

@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
 import PropTypes from "prop-types";
-import { Box, Card, Typography } from "@mui/material";
+import { Box, Card, Rating, Typography } from "@mui/material";
 import { fetchCommentsByProduct } from "../../store/actionCreator/comments.actionCreator";
 import styles from "../../pages/SingleProduct/SingleProduct.module.scss";
 
@@ -22,6 +22,12 @@ const Reviews = ({ productId }) => {
       {comments.length > 0 ? (
         comments.map((comment) => (
           <Card key={comment._id} sx={{ mt: 1, mb: 1, p: 2 }}>
+            <Rating
+              name="products-small"
+              value={comment.rating}
+              readOnly
+              size="small"
+            />
             <Typography sx={{ mb: 2, fontStyle: "italic" }}>
               {comment.content}
             </Typography>

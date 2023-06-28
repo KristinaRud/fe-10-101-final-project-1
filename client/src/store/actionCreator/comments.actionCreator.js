@@ -11,6 +11,21 @@ const fetchComments = createAsyncThunk("comments/fetchComments", async () => {
   throw new Error(`Couldn't get comments: ${err.data}`);
 });
 
+const createComments = createAsyncThunk(
+  "comments/createComments",
+  async (data) => {
+    const { res, err } = await request({
+      url: "/comments",
+      method: "POST",
+      body: data,
+    });
+    if (res) {
+      return res;
+    }
+    throw new Error(`Couldn't create Review: ${err.data}`);
+  },
+);
+
 const fetchCommentsByProduct = createAsyncThunk(
   "comments/fetchCommentsByProduct",
   async (productId) => {
@@ -24,4 +39,4 @@ const fetchCommentsByProduct = createAsyncThunk(
   },
 );
 
-export { fetchComments, fetchCommentsByProduct };
+export { fetchComments, createComments, fetchCommentsByProduct };
