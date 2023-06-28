@@ -11,11 +11,13 @@ import LoginSnackbar from "./LoginSnackbar";
 import { selectCustomers } from "../../store/selectors/customers.selector";
 import { deleteChosenPostOffice } from "../../store/slices/postOffice.slice";
 import GoogleBtn from "./GoogleBtn/GoogleBtn";
+import ForgotPasswordDialog from "./ForgotPasswordDialog/ForgotPasswordDialog";
 
 const LoginForm = () => {
   const dispatch = useDispatch();
   const customer = useSelector(selectCustomers);
   const [open, setOpen] = useState(false);
+  const [openDialog, setOpenDialog] = useState(false);
   const [status, setStatus] = useState("");
   const [submit, setSubmit] = useState(false);
   const [textError, setTextError] = useState("Login failed!");
@@ -88,6 +90,15 @@ const LoginForm = () => {
             >
               Log In
             </Button>
+            <Button
+              className={styles.form__link}
+              size="large"
+              variant="text"
+              type={"button"}
+              onClick={() => setOpenDialog(true)}
+            >
+              Forgot Password?
+            </Button>
           </div>
         </Form>
       </Formik>
@@ -98,7 +109,6 @@ const LoginForm = () => {
         setStatus={setStatus}
         setTextError={setTextError}
       />
-
       <LoginSnackbar
         open={open}
         status={status}
@@ -106,6 +116,7 @@ const LoginForm = () => {
         textSuccess="Login success!"
         textError={textError}
       />
+      <ForgotPasswordDialog open={openDialog} setOpen={setOpenDialog} />
     </>
   );
 };

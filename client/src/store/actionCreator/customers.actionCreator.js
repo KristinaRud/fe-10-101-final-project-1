@@ -99,6 +99,22 @@ const signUp = createAsyncThunk("customers/signUp", async (values) => {
   throw new Error(`Couldn't login: ${JSON.stringify(err.data)}`);
 });
 
+const forgotPassword = createAsyncThunk(
+  "customers/forgotPassword",
+  async (values) => {
+    const { res, err } = await request({
+      url: "/customers/forgot-password",
+      method: "PUT",
+      body: values,
+    });
+    if (res) {
+      return res;
+    }
+
+    throw new Error(`Couldn't sent password: ${JSON.stringify(err.data)}`);
+  },
+);
+
 export {
   login,
   logout,
@@ -107,4 +123,5 @@ export {
   updateCustomer,
   signUp,
   loginGoogle,
+  forgotPassword,
 };
