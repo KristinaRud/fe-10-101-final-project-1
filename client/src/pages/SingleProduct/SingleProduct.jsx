@@ -69,7 +69,13 @@ const SingleProduct = () => {
   };
 
   const handleDialogOpen = () => {
-    setOpenReviewDialog(true);
+    if (isLogin) {
+      setOpenReviewDialog(true);
+    } else {
+      setOpenSnackbar(true);
+      setStatus("error");
+      setError("Please, log in to add your review");
+    }
   };
 
   const handleDialogClose = () => {
