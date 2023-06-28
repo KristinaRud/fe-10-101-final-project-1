@@ -11,7 +11,7 @@ import PhoneIcon from "@mui/icons-material/Phone";
 import PropTypes from "prop-types";
 import ShoppingCartOutlinedIcon from "@mui/icons-material/ShoppingCartOutlined";
 import { Link } from "react-router-dom";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import cx from "classnames";
 import s from "./ProductCardFull.module.scss";
@@ -25,6 +25,8 @@ import handleAddToCart, {
 import { selectWishList } from "../../../store/selectors/wishList.selector";
 import { selectShoppingCart } from "../../../store/selectors/shoppingCart.selector";
 import IconComparisonProduct from "../../IconComparisonProduct/IconComparisonProduct";
+import { fetchCommentsByProduct } from "../../../store/actionCreator/comments.actionCreator";
+import { calculateAverageRating } from "../../../utils/comments";
 
 const ProductCardFull = ({
   available,
@@ -49,6 +51,7 @@ const ProductCardFull = ({
   const [text, setText] = useState("");
   const [error, setError] = useState("");
   const [openSnackbar, setOpenSnackbar] = useState(false);
+  const [comments, setComments] = useState([]);
 
   const handleClose = (event, reason) => {
     if (reason === "clickaway") {
@@ -56,6 +59,16 @@ const ProductCardFull = ({
     }
     setOpenSnackbar(false);
   };
+
+  useEffect(() => {
+    dispatch(fetchCommentsByProduct(id))
+      .unwrap()
+      .then((comments) => {
+        setComments(comments);
+      });
+  }, [dispatch, id]);
+
+  const averageRating = calculateAverageRating(comments);
 
   return (
     <Card
@@ -101,12 +114,12 @@ const ProductCardFull = ({
           <Box display="flex" alignItems="center" mt={2}>
             <Rating
               name="products-small"
-              value={rating}
+              value={averageRating}
               readOnly
               size="small"
             />
             <Typography variant="body2" ml={1}>
-              Reviews (4)
+              Reviews ({comments.length})
             </Typography>
           </Box>
         </Box>

@@ -454,3 +454,15 @@
         }
     }
 }
+
+.rating {
+    @media (width <= 600px) {
+        font-size: 10px;
+    }
+}
+
+.reviews {
+    @media (width <= 600px) {
+        font-size: 10px;
+    }
+}
