@@ -1,6 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
 import {
-  createWishList,
   fetchWishList,
   deleteWishList,
   updateProductToWishList,
@@ -45,10 +44,6 @@ const wishListSlice = createSlice({
     builder.addCase(fetchWishList.fulfilled, (state, action) => {
       state.itemsWishList = structureDataWishList(action.payload.products);
     });
-    builder.addCase(createWishList.fulfilled, (state, action) => {
-      state.itemsWishList = structureDataWishList(action.payload.products);
-      localStorage.removeItem("wishList");
-    });
     builder.addCase(deleteWishList.fulfilled, (state) => {
       state.itemsWishList = [];
     });
@@ -59,7 +54,8 @@ const wishListSlice = createSlice({
       state.itemsWishList = structureDataWishList(action.payload.products);
     });
     builder.addCase(updateWishListLogin.fulfilled, (state, action) => {
-      state.itemsWishList = structureDataWishList(action.payload[0].products);
+      state.itemsWishList = structureDataWishList(action.payload.products);
+      localStorage.removeItem("wishList");
     });
   },
 });
