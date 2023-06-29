@@ -49,6 +49,7 @@
     width: 200px;
         height: 150px;
         margin-top: 30px;
+
     @media (width <= 768px) {
             width: 150px;
             height: 110px;
@@ -64,6 +65,7 @@
     text-decoration: underline;
     cursor: pointer;
 }
+
 &__container {
     display: flex;
 }
