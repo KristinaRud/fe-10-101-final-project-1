@@ -261,7 +261,7 @@ const ProductCard = ({
                 sx={{ textDecoration: "line-through" }}
                 mr={2}
               >
-               {isLoading ? (
+                {isLoading ? (
                   <Skeleton sx={{ width: "100%" }} />
                 ) : (
                   <>{oldPrice.toLocaleString()}.00 ₴</>
@@ -275,7 +275,7 @@ const ProductCard = ({
               variant="h6"
               component="div"
             >
-            {isLoading ? (
+              {isLoading ? (
                 <Skeleton sx={{ width: "100%" }} />
               ) : (
                 <>{currentPrice.toLocaleString()}.00 ₴</>

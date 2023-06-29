@@ -164,7 +164,11 @@ const ProductCardFull = ({
                 sx={{ textDecoration: "line-through" }}
                 mr={2}
               >
-             {isLoading ? <Skeleton width={62} /> : <>{oldPrice.toLocaleString()}.00 ₴</>}
+                {isLoading ? (
+                  <Skeleton width={62} />
+                ) : (
+                  <>{oldPrice.toLocaleString()}.00 ₴</>
+                )}
               </Typography>
             ) : (
               <div />
@@ -175,7 +179,11 @@ const ProductCardFull = ({
               fontWeight={600}
               fontSize="14px"
             >
-           {isLoading ? <Skeleton width={66} /> : <>{currentPrice.toLocaleString()}.00 ₴</>}
+              {isLoading ? (
+                <Skeleton width={66} />
+              ) : (
+                <>{currentPrice.toLocaleString()}.00 ₴</>
+              )}
             </Typography>
           </Box>
           {isLoading ? (
