@@ -97,7 +97,7 @@ const ShoppingCart = () => {
       : 0;
 
   const tax = subtotalAmount * 0.08;
-  const shipping = 100;
+  const shipping = subtotalAmount > 0 ? 100 : 0;
   const totalAmount = subtotalAmount + tax + shipping;
 
   const handleDeleteItem = async (id) => {
@@ -330,7 +330,7 @@ const ShoppingCart = () => {
               <Button
                 variant="contained"
                 className={classes.checkoutButton}
-                disabled={!itemsCart}
+                disabled={subtotalAmount === 0}
                 onClick={() => navigate("/checkout")}
               >
                 Proceed to Checkout

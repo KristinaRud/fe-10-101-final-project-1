@@ -76,11 +76,17 @@ const AccBurgerMenu = ({ counterWishList }) => {
       dispatch(getCustomer());
       dispatch(fetchShoppingCart());
       dispatch(fetchWishList());
-      dispatch(updateWishListLogin());
       dispatch(fetchComparisonProducts());
 
+      if (window.localStorage.getItem("wishList")) {
+        dispatch(updateWishListLogin());
+      }
       if (window.localStorage.getItem("shoppingCart")) {
-        dispatch(putProductsToCartLogin());
+        dispatch(
+          putProductsToCartLogin(
+            JSON.parse(window.localStorage.getItem("shoppingCart")),
+          ),
+        );
       }
     }
   }, [dispatch, isLogin]);
