@@ -51,19 +51,35 @@ const AccountPage = () => {
         />
         <div className={styles.accinfo}>
           <UserInformation activeComponent={activeComponent} />
-          <AddressBook activeComponent={activeComponent} />
+          <AddressBook
+            activeComponent={activeComponent}
+            address={
+              allOrders.length > 0 || allOrders !== undefined
+                ? allOrders[allOrders.length - 1]
+                : "You have not set a default billing address."
+            }
+          />
         </div>
       </>
     );
   } else if (activeComponent === "Account Information") {
     componentToRender = <UserInformation />;
   } else if (activeComponent === "Address Book") {
-    componentToRender = <AddressBook />;
+    componentToRender = (
+      <AddressBook
+        activeComponent={activeComponent}
+        address={
+          allOrders.length > 0 || allOrders !== undefined
+            ? allOrders[allOrders.length - 1]
+            : "You have not set a default billing address."
+        }
+      />
+    );
   } else if (activeComponent === "My Orders") {
     componentToRender = (
       <Routes>
         <Route
-          path="/orders*"
+          path="/orders"
           element={
             <AccountOrders
               title="Order history"
