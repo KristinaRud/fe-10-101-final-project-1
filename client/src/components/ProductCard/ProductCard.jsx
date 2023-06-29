@@ -230,7 +230,7 @@ const ProductCard = ({
             flexDirection="column"
             mt={2}
           >
-            {oldPrice && (
+            {oldPrice && oldPrice !== 0 ? (
               <Typography
                 className={styles.price_old}
                 variant="body2"
@@ -238,15 +238,17 @@ const ProductCard = ({
                 sx={{ textDecoration: "line-through" }}
                 mr={2}
               >
-                {oldPrice}.00 ₴
+                {oldPrice.toLocaleString()}.00 ₴
               </Typography>
+            ) : (
+              <div style={{ width: "100%", height: "20px" }} />
             )}
             <Typography
               className={styles.price_new}
               variant="h6"
               component="div"
             >
-              {currentPrice}.00 ₴
+              {currentPrice.toLocaleString()}.00 ₴
             </Typography>
           </Box>
         </CardContent>
