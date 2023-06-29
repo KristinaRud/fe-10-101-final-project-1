@@ -15,10 +15,10 @@ const customersSlice = createSlice({
   name: "customers",
   initialState: {
     data: {},
+    isLoading: false,
     isLogin: checkToken(window.localStorage.getItem("token")),
     token: window.localStorage.getItem("token") || null,
     error: null,
-    isLoading: true,
     successSentForgotPassword: false,
     successSignup: true,
   },
@@ -36,7 +36,12 @@ const customersSlice = createSlice({
       state.isLogin = false;
       state.data = {};
     });
+    builder.addCase(getCustomer.pending, (state) => {
+      state.isLoading = true;
+      state.error = null;
+    });
     builder.addCase(getCustomer.fulfilled, (state, action) => {
+      state.isLoading = false;
       state.data = action.payload;
     });
     builder.addCase(editPasswordCustomer.fulfilled, (state, action) => {

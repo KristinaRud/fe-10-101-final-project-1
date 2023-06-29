@@ -2,6 +2,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { useEffect, useState } from "react";
 import PropTypes from "prop-types";
 import Slider from "react-slick";
+import { Box, CircularProgress } from "@mui/material";
 import { selectProducts } from "../../../../store/selectors/products.selector";
 import { fetchProducts } from "../../../../store/actionCreator/products.actionCreator";
 import ProductCard from "../../../ProductCard/ProductCard";
@@ -28,7 +29,7 @@ const ProductsList = ({ category }) => {
 
   return (
     <Slider className={s.slider} {...CategoriesProducts}>
-      {productsCategory.length > 0 &&
+      {productsCategory.length > 0 ? (
         productsCategory.map((item) => (
           <div key={item._id}>
             <ProductCard
@@ -46,7 +47,12 @@ const ProductsList = ({ category }) => {
               itemNo={item.itemNo}
             />
           </div>
-        ))}
+        ))
+      ) : (
+        <Box sx={{ margin: "40px" }} justifyContent="center">
+          <CircularProgress />
+        </Box>
+      )}
     </Slider>
   );
 };

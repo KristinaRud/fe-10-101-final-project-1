@@ -59,8 +59,6 @@ const SingleProduct = () => {
   const [ratingValue, setRatingValue] = useState(0);
   const [comments, setComments] = useState([]);
 
-  console.log(id);
-
   const handleClose = (event, reason) => {
     if (reason === "clickaway") {
       return;
