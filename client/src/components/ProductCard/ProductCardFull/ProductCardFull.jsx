@@ -131,8 +131,13 @@ const ProductCardFull = ({
           <Typography variant="h6" mb={2} fontSize="13px">
             {name}
           </Typography>
-          <Box display="flex" className={s["price-wrapper"]}>
-            {oldPrice && (
+          <Box
+            display="flex"
+            justifyContent="end"
+            alignItems="baseline"
+            className={s["price-wrapper"]}
+          >
+            {oldPrice && oldPrice !== 0 ? (
               <Typography
                 variant="body2"
                 color="text.secondary"
@@ -140,8 +145,10 @@ const ProductCardFull = ({
                 sx={{ textDecoration: "line-through" }}
                 mr={2}
               >
-                {oldPrice}.00 ₴
+                {oldPrice.toLocaleString()}.00 ₴
               </Typography>
+            ) : (
+              <div />
             )}
             <Typography
               variant="h6"
@@ -149,7 +156,7 @@ const ProductCardFull = ({
               fontWeight={600}
               fontSize="14px"
             >
-              {currentPrice}.00 ₴
+              {currentPrice.toLocaleString()}.00 ₴
             </Typography>
           </Box>
           <Button
