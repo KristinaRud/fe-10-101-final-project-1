@@ -91,7 +91,7 @@ const CheckoutForm = () => {
         dispatch(deleteShoppingCart());
       }
       setTimeout(() => {
-        navigate("/checkoutConfirmPage");
+        navigate("/checkout-confirm-page");
       }, 2000);
     }
     if (error && submit) {

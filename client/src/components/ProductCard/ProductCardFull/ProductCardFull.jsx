@@ -42,7 +42,7 @@ const ProductCardFull = ({
 }) => {
   const dispatch = useDispatch();
   const { itemsWishList } = useSelector(selectWishList);
-  const { isLogin } = useSelector(selectCustomers);
+  const { isLogin, isLoading } = useSelector(selectCustomers);
   const { itemsCart } = useSelector(selectShoppingCart);
   const isAdded = itemsCart?.some((el) => el.id === id);
   const isWishList = itemsWishList?.some((item) => item.id === id);
@@ -57,18 +57,8 @@ const ProductCardFull = ({
     }
     setOpenSnackbar(false);
   };
-
   return (
     <>
-      <Card>
-        <Skeleton
-          variant="rectangular"
-          width={250}
-          height={250}
-          marginLeft={10}
-        />
-        <Skeleton variant="text" width={250} />
-      </Card>
       <Card
         sx={{
           maxWidth: 1166,
@@ -86,16 +76,24 @@ const ProductCardFull = ({
         >
           {available ? (
             <Box display="flex" alignItems="center">
-              <CheckCircleIcon color="green" />
+              {isLoading ? (
+                <Skeleton variant="circular" width={24} height={24} />
+              ) : (
+                <CheckCircleIcon color="green" />
+              )}
               <Typography variant="body2" color="green" ml={1}>
-                in stock
+                {isLoading ? <Skeleton width={53} /> : "in stock"}
               </Typography>
             </Box>
           ) : (
             <Box display="flex" alignItems="center" mt={2}>
-              <PhoneIcon color="red" />
+              {isLoading ? (
+                <Skeleton variant="circular" width={24} height={24} />
+              ) : (
+                <PhoneIcon color="red" />
+              )}
               <Typography variant="body2" color="red" ml={1}>
-                check availablity
+                {isLoading ? <Skeleton width={80} /> : "check availablity"}
               </Typography>
             </Box>
           )}
@@ -103,23 +101,33 @@ const ProductCardFull = ({
         <Box display="flex" gap="50px">
           <Box display="flex" flexDirection="column">
             <Link to={`/${categories.toLowerCase()}/${id}`}>
-              <CardMedia
-                component="img"
-                className={s.img}
-                image={image}
-                alt={alt}
-              />
+              {isLoading ? (
+                <Skeleton variant="rectangular" width={250} height={250} />
+              ) : (
+                <CardMedia
+                  component="img"
+                  className={s.img}
+                  image={image}
+                  alt={alt}
+                />
+              )}
             </Link>
             <Box display="flex" alignItems="center" mt={2}>
-              <Rating
-                name="products-small"
-                value={rating}
-                readOnly
-                size="small"
-              />
-              <Typography variant="body2" ml={1}>
-                Reviews (4)
-              </Typography>
+              {isLoading ? (
+                <Skeleton sx={{ width: "100%" }} />
+              ) : (
+                <>
+                  <Rating
+                    name="products-small"
+                    value={rating}
+                    readOnly
+                    size="small"
+                  />
+                  <Typography variant="body2" ml={1}>
+                    Reviews (4)
+                  </Typography>
+                </>
+              )}
             </Box>
           </Box>
           <Box
@@ -128,7 +136,7 @@ const ProductCardFull = ({
             className={s["content-wrapper"]}
           >
             <Typography variant="h6" mb={2} fontSize="13px">
-              {name}
+              {isLoading ? <Skeleton width={150} /> : <>{name}</>}
             </Typography>
             <Box display="flex" className={s["price-wrapper"]}>
               {oldPrice && (
@@ -139,7 +147,7 @@ const ProductCardFull = ({
                   sx={{ textDecoration: "line-through" }}
                   mr={2}
                 >
-                  {oldPrice}.00 ₴
+                  {isLoading ? <Skeleton width={62} /> : <>{oldPrice}.00 ₴</>}
                 </Typography>
               )}
               <Typography
@@ -148,53 +156,70 @@ const ProductCardFull = ({
                 fontWeight={600}
                 fontSize="14px"
               >
-                {currentPrice}.00 ₴
+                {isLoading ? <Skeleton width={66} /> : <>{currentPrice}.00 ₴</>}
               </Typography>
             </Box>
-            <Button
-              className={cx(s.btn, isAdded && s.green)}
-              onClick={() => {
-                dispatch(
-                  handleAddToCart(
-                    {
-                      id,
-                      image,
-                      alt,
-                      description,
-                      currentPrice,
-                      itemNo,
-                      categories,
-                    },
-                    isLogin,
-                  ),
-                );
-              }}
-            >
-              <ShoppingCartOutlinedIcon
-                className={isAdded && cx(styles.green)}
-              />
-              {isAdded ? "In cart" : "Add to cart"}
-            </Button>
+            {isLoading ? (
+              <Skeleton variant="rectangular" width={160} height={37} />
+            ) : (
+              <Button
+                className={cx(s.btn, isAdded && styles.green)}
+                onClick={() => {
+                  dispatch(
+                    handleAddToCart(
+                      {
+                        id,
+                        image,
+                        alt,
+                        description,
+                        currentPrice,
+                        itemNo,
+                        categories,
+                      },
+                      isLogin,
+                    ),
+                  );
+                }}
+              >
+                <ShoppingCartOutlinedIcon className={cx(isAdded && s.green)} />
+                {isAdded ? "In cart" : "Add to cart"}
+              </Button>
+            )}
           </Box>
           <Typography
             variant="body2"
             color="text.secondary"
             className={s.description}
           >
-            {description}
+            {isLoading ? (
+              <>
+                <Skeleton width={400} />
+                <Skeleton width={400} />
+              </>
+            ) : (
+              <>{description}</>
+            )}
           </Typography>
           <Box display="flex" className={s["btn-wrapper"]}>
             <Button>
-              <IconEmail />
+              {isLoading ? (
+                <Skeleton variant="circular" width={30} height={30} />
+              ) : (
+                <IconEmail />
+              )}
             </Button>
-            <IconComparisonProduct
-              setError={setError}
-              id={id}
-              categories={categories}
-              setOpenSnackbar={setOpenSnackbar}
-              setStatus={setStatus}
-              setText={setText}
-            />
+            {isLoading ? (
+              <Skeleton variant="circular" width={30} height={30} />
+            ) : (
+              <IconComparisonProduct
+                setError={setError}
+                id={id}
+                categories={categories}
+                setOpenSnackbar={setOpenSnackbar}
+                setStatus={setStatus}
+                setText={setText}
+              />
+            )}
             <Button
               onClick={() => {
                 dispatch(
@@ -217,7 +242,11 @@ const ProductCardFull = ({
                 );
               }}
             >
-              <IconWishList className={isWishList && cx(styles.green)} />
+              {isLoading ? (
+                <Skeleton variant="circular" width={30} height={30} />
+              ) : (
+                <IconWishList className={cx(isWishList && s.green)} />
+              )}
             </Button>
           </Box>
         </Box>

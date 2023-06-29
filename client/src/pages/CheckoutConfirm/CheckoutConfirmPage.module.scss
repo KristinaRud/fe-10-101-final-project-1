@@ -14,7 +14,11 @@
     justify-items: center;
     align-items: center;
     text-align: center;
+    padding: 20px 0;
     margin: 40px;
+    background: #F5F7FF;
+    display: flex;
+    flex-direction: column;
 
     @media (width <= 768px) {
             margin: 20px;
@@ -42,19 +46,25 @@
 }
 
 &__img {
+    width: 200px;
+        height: 150px;
+        margin-top: 30px;
     @media (width <= 768px) {
-            width: 300px;
-            height: 240px;
+            width: 150px;
+            height: 110px;
         }
 
                 @media (width <= 375px) {
-                    width: 200px;
-                    height: 140px;
+                    width: 110px;
+                    height: 70px;
                 }
 }
 
 &__link {
     text-decoration: underline;
     cursor: pointer;
+}
+&__container {
+    display: flex;
 }
 }

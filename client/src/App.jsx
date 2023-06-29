@@ -13,22 +13,28 @@ import theme from "./theme/createTheme";
 import "./App.scss";
 import BackToTopButton from "./components/BackToTopButton/BackToTopButton";
 import ScrollToTop from "./utils/scrollToTop/scrollToTopFunc";
+import PageLoader from "./components/PageLoader/PageLoader";
 
-const App = () => (
-  <Provider store={store}>
-    <BrowserRouter>
-      <ThemeProvider theme={theme}>
-        <StyledEngineProvider injectFirst>
-          <CssBaseline />
-          <Header />
-          <BackToTopButton />
-          <ScrollToTop />
-          <AppRoute />
-          <Footer />
-        </StyledEngineProvider>
-      </ThemeProvider>
-    </BrowserRouter>
-  </Provider>
-);
+const App = () => {
+  return (
+    <>
+      <Provider store={store}>
+        <BrowserRouter>
+          <ThemeProvider theme={theme}>
+            <StyledEngineProvider injectFirst>
+              <CssBaseline />
+              <PageLoader />
+              <Header />
+              <BackToTopButton />
+              <ScrollToTop />
+              <AppRoute />
+              <Footer />
+            </StyledEngineProvider>
+          </ThemeProvider>
+        </BrowserRouter>
+      </Provider>
+    </>
+  );
+};
 
 export default App;

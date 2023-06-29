@@ -34,6 +34,7 @@ const getCustomer = createAsyncThunk("customers/getCustomer", async () => {
   }
   throw new Error(`Couldn't get customer: ${err.data}`);
 });
+
 const updateCustomer = createAsyncThunk(
   "customers/updateCustomer",
   async (values) => {

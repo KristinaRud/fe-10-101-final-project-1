@@ -1,4 +1,4 @@
-import { Box, CircularProgress, Container } from "@mui/material";
+import { Box, Container } from "@mui/material";
 import { Navigate, useLocation } from "react-router-dom";
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
@@ -20,19 +20,11 @@ const Category = () => {
   const searchParams = new URLSearchParams(location.search);
   const categories = searchParams.get("categories");
   const dispatch = useDispatch();
-  const { isLoading, error } = useSelector(selectFilters);
+  const { error } = useSelector(selectFilters);
 
   useEffect(() => {
     dispatch(fetchFiltersData(`?categories=${categories}`));
   }, [categories, dispatch]);
-
-  if (isLoading) {
-    return (
-      <Box sx={{ margin: "40px" }} display="flex" justifyContent="center">
-        <CircularProgress />
-      </Box>
-    );
-  }
 
   const redirect = () => {
     dispatch(deleteError());
