@@ -1,4 +1,4 @@
-export const createSubscribeLetter = () => {
+export const createUnSubscribeLetter = () => {
   return `
      <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
      <html xmlns="http://www.w3.org/1999/xhtml" xmlns:o="urn:schemas-microsoft-com:office:office" style="font-family:arial, 'helvetica neue', helvetica, sans-serif">
@@ -10,23 +10,7 @@ export const createSubscribeLetter = () => {
           <meta http-equiv="X-UA-Compatible" content="IE=edge">
           <meta content="telephone=no" name="format-detection">
           <title>Gadget order confirmed</title>
-          <!--[if (mso 16)]>
-          <style type="text/css">
-             a {text-decoration: none;}
-          </style>
-          <![endif]--><!--[if gte mso 9]>
-          <style>sup { font-size: 100% !important; }</style>
-          <![endif]--><!--[if gte mso 9]>
-          <xml>
-             <o:OfficeDocumentSettings>
-                <o:AllowPNG></o:AllowPNG>
-                <o:PixelsPerInch>96</o:PixelsPerInch>
-             </o:OfficeDocumentSettings>
-          </xml>
-          <![endif]--><!--[if !mso]>
-          <!-- -->
-          <link href="https://fonts.googleapis.com/css2?family=Sora&amp;display=swap" rel="stylesheet">
-          <!--<![endif]-->
+             <link href="https://fonts.googleapis.com/css2?family=Sora&amp;display=swap" rel="stylesheet">
           <style type="text/css">
              #outlook a {
              padding:0;
@@ -57,11 +41,6 @@ export const createSubscribeLetter = () => {
        </head>
        <body style="width:100%;font-family:arial, 'helvetica neue', helvetica, sans-serif;-webkit-text-size-adjust:100%;-ms-text-size-adjust:100%;padding:0;Margin:0">
           <div class="es-wrapper-color" style="background-color:#042326">
-             <!--[if gte mso 9]>
-             <v:background xmlns:v="urn:schemas-microsoft-com:vml" fill="t">
-                <v:fill type="tile" color="#042326"></v:fill>
-             </v:background>
-             <![endif]-->
              <table class="es-wrapper" width="100%" cellspacing="0" cellpadding="0" style="mso-table-lspace:0pt;mso-table-rspace:0pt;border-collapse:collapse;border-spacing:0px;padding:0;Margin:0;width:100%;height:100%;background-repeat:repeat;background-position:center top;background-color:#FFFFFF">
                 <tbody>
                    <tr>
@@ -113,12 +92,12 @@ export const createSubscribeLetter = () => {
                                                                 <tbody>
                                                                    <tr>
                                                                       <td align="center" class="es-m-txt-c" style="Margin:0;padding-bottom:20px;padding-left:20px;padding-right:20px;padding-top:35px">
-                                                                         <h2 style="Margin:0;line-height:34px;mso-line-height-rule:exactly;font-family:Sora, Arial, sans-serif;font-size:28px;font-style:normal;font-weight:bold;color:#E4E4E4">Welcome to the TechnoKit!</h2>
+                                                                         <h2 style="Margin:0;line-height:34px;mso-line-height-rule:exactly;font-family:Sora, Arial, sans-serif;font-size:28px;font-style:normal;font-weight:bold;color:#E4E4E4">You have Unsubscribed successfully</h2>
                                                                       </td>
                                                                    </tr>
                                                                    <tr>
                                                                       <td align="center" class="es-m-p20r es-m-p20l" style="Margin:0;padding-top:10px;padding-bottom:5px;padding-left:40px;padding-right:40px">
-                                                                         <p style="Margin:0;-webkit-text-size-adjust:none;-ms-text-size-adjust:none;mso-line-height-rule:exactly;font-family:Sora, Arial, sans-serif;line-height:21px;color:#E4E4E4;font-size:14px">You will receive updates , new collections, exclusive Capsule Collections and special promotions.</p>
+                                                                         <p style="Margin:0;-webkit-text-size-adjust:none;-ms-text-size-adjust:none;mso-line-height-rule:exactly;font-family:Sora, Arial, sans-serif;line-height:21px;color:#E4E4E4;font-size:14px">You have stopped receive updates , new collections, exclusive Capsule Collections and special promotions.</p>
                                                                       </td>
                                                                    </tr>
                                                                    <tr>
@@ -128,23 +107,10 @@ export const createSubscribeLetter = () => {
                                                                    </tr>
                                                                    <tr>
                                                                       <td align="center" style="Margin:0;padding-top:10px;padding-left:20px;padding-right:20px;padding-bottom:35px">
-                                                                         <!--[if mso]>
-                                                                         <a href="http://localhost:3001/login" target="_blank" hidden>
-                                                                            <v:roundrect xmlns:v="urn:schemas-microsoft-com:vml" xmlns:w="urn:schemas-microsoft-com:office:word" esdevVmlButton href="https://viewstripo.email" 
-                                                                               style="height:51px; v-text-anchor:middle; width:268px" arcsize="50%" stroke="f"  fillcolor="#d98b8b">
-                                                                               <w:anchorlock></w:anchorlock>
-                                                                               <center style='color:#042326; font-family:Sora, Arial, sans-serif; font-size:18px; font-weight:400; line-height:18px;  mso-text-raise:1px'>Log in</center>
-                                                                            </v:roundrect>
-                                                                         </a>
-                                                                         <![endif]--><!--[if !mso]><!-- --><span class="msohide es-button-border" style="border-style:solid;border-color:#2CB543;background:#D98B8B;border-width:0px;display:inline-block;border-radius:30px;width:auto;mso-border-alt:10px;mso-hide:all"><a href="http://localhost:3001/login" class="es-button" target="_blank" style="mso-style-priority:100 !important;text-decoration:none;-webkit-text-size-adjust:none;-ms-text-size-adjust:none;mso-line-height-rule:exactly;color:#042326;font-size:18px;display:inline-block;background:#D98B8B;border-radius:30px;font-family:Sora, Arial, sans-serif;font-weight:normal;font-style:normal;line-height:22px;width:auto;text-align:center;padding:15px 35px 15px 35px">Log in</a></span><!--<![endif]-->
+                                                                     <span class="msohide es-button-border" style="border-style:solid;border-color:#2CB543;background:#D98B8B;border-width:0px;display:inline-block;border-radius:30px;width:auto;mso-border-alt:10px;mso-hide:all"><a href="http://localhost:3001/login" class="es-button" target="_blank" style="mso-style-priority:100 !important;text-decoration:none;-webkit-text-size-adjust:none;-ms-text-size-adjust:none;mso-line-height-rule:exactly;color:#042326;font-size:18px;display:inline-block;background:#D98B8B;border-radius:30px;font-family:Sora, Arial, sans-serif;font-weight:normal;font-style:normal;line-height:22px;width:auto;text-align:center;padding:15px 35px 15px 35px">Log in</a></span><!--<![endif]-->
                                                                       </td>
-                                                                      
+                                                                 
                                                                    </tr>
-                                                                   <tr>
-                                                                   <td align="center" style="Margin:0;padding-top:5px;padding-left:10px;padding-right:10px;padding-bottom:25px">
-                                                                     <span class="msohide es-button-border" style="border-style:solid;border-color:#2CB543;background:#D98B8B;border-width:0px;display:inline-block;border-radius:30px;width:auto;mso-border-alt:10px;mso-hide:all"><a href="http://localhost:3000/unsubscribe" class="es-button" target="_blank" style="mso-style-priority:100 !important;text-decoration:none;-webkit-text-size-adjust:none;-ms-text-size-adjust:none;mso-line-height-rule:exactly;color:#042326;font-size:12px;display:inline-block;background:#D98B8B;border-radius:30px;font-family:Sora, Arial, sans-serif;font-weight:normal;font-style:normal;line-height:14px;width:auto;text-align:center;padding:5px 15px 5px 15px">Unsubscribe</a></span><!--<![endif]-->
-                                                                      </td>
-</tr>
                                                                 </tbody>
                                                              </table>
                                                           </td>

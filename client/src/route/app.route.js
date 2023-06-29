@@ -18,6 +18,7 @@ import CheckoutConfirmPage from "../pages/CheckoutConfirm/CheckoutConfirmPage";
 import NotFoundPage from "../pages/NotFound/NotFound";
 import Layout from "../pages/Layout/Loyaut";
 import AdminPanel from "../pages/AdminPanel/AdminPanel";
+import UnsubscribePage from "../pages/Unsubscribe/UnsubscribePage";
 
 const AppRoute = () => {
   const { isLogin } = useSelector(selectCustomers);
@@ -55,6 +56,7 @@ const AppRoute = () => {
           element={isLogin ? <CheckoutConfirmPage /> : <Navigate to="/" />}
         />
         <Route path="/error" element={<NotFoundPage />} />
+        <Route path="/unsubscribe" element={<UnsubscribePage />} />
       </Route>
       <Route path="/admin" element={<AdminPanel />} />
     </Routes>

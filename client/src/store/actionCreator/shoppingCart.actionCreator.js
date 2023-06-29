@@ -14,21 +14,6 @@ const fetchShoppingCart = createAsyncThunk(
   },
 );
 
-const createShoppingCart = createAsyncThunk(
-  "shoppingCart/createShoppingCart",
-  async (data) => {
-    const { res, err } = await request({
-      url: `/cart`,
-      method: "POST",
-      body: data,
-    });
-    if (res) {
-      return res;
-    }
-    throw new Error(`Couldn't create shopping cart: ${err.data}`);
-  },
-);
-
 const editProductFromCart = createAsyncThunk(
   "shoppingCart/editProductFromCart",
   async (id) => {
@@ -55,21 +40,6 @@ const decreaseProductFromCart = createAsyncThunk(
     throw new Error(`Couldn't edit shopping cart: ${err.data}`);
   },
 );
-const editShoppingCart = createAsyncThunk(
-  "shoppingCart/editShoppingCart",
-  async (data) => {
-    const { res, err } = await request({
-      url: `/cart`,
-      method: "PUT",
-      body: data,
-    });
-    if (res) {
-      return res;
-    }
-    throw new Error(`Couldn't update shopping cart: ${err.data}`);
-  },
-);
-
 const deleteProductFromCart = createAsyncThunk(
   "shoppingCart/deleteProductFromCart",
   async (id) => {
@@ -100,35 +70,47 @@ const deleteShoppingCart = createAsyncThunk(
 
 const putProductsToCartLogin = createAsyncThunk(
   "shoppingCart/putProductsToCartLogin",
-  async () => {
-    const products = JSON.parse(window.localStorage.getItem("shoppingCart"));
+  async (products) => {
     if (products.length > 0) {
       const updatedProducts = {
         products: products.map((product) => ({
           product: product.id,
-          cartQuantity: product.cartQuantity,
+          cartQuantity: product.cartQuantity || 1,
         })),
       };
+
       const { res: response } = await request({
         url: `/cart`,
       });
+
       if (response) {
-        const previousProducts = response.products.map((product) => ({
-          product: product.product._id,
-          cartQuantity: product.cartQuantity,
-        }));
-        updatedProducts.products = [
-          ...updatedProducts.products,
-          ...previousProducts,
-        ];
+        const updatedItems = updatedProducts.products.map(
+          (product) => product.product,
+        );
+
+        response.products.forEach((product) => {
+          const productIndex = updatedItems.indexOf(product.product._id);
+          if (productIndex !== -1) {
+            updatedProducts.products[productIndex].cartQuantity +=
+              product.cartQuantity;
+          } else {
+            updatedProducts.products.push({
+              product: product.product._id,
+              cartQuantity: product.cartQuantity || 1,
+            });
+          }
+        });
+
         const { res, err } = await request({
           url: `/cart`,
           method: "PUT",
           body: updatedProducts,
         });
+
         if (res) {
           return res;
         }
+
         throw new Error(`Couldn't update shopping cart: ${err.data}`);
       } else {
         const { res, err } = await request({
@@ -136,9 +118,11 @@ const putProductsToCartLogin = createAsyncThunk(
           method: "POST",
           body: updatedProducts,
         });
+
         if (res) {
           return res;
         }
+
         throw new Error(`Couldn't create shopping cart: ${err.data}`);
       }
     }
@@ -147,11 +131,9 @@ const putProductsToCartLogin = createAsyncThunk(
 
 export {
   fetchShoppingCart,
-  createShoppingCart,
   editProductFromCart,
   deleteProductFromCart,
   deleteShoppingCart,
-  editShoppingCart,
   decreaseProductFromCart,
   putProductsToCartLogin,
 };

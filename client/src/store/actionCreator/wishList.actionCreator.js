@@ -1,5 +1,6 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
 import request from "../../utils/api/request";
+import { structureWishListLS } from "../../utils/cart/structureData";
 
 const fetchWishList = createAsyncThunk("wishList/fetchWishList", async () => {
   const { res, err } = await request({
@@ -9,21 +10,6 @@ const fetchWishList = createAsyncThunk("wishList/fetchWishList", async () => {
   if (res) return res;
   throw new Error(`Couldn't get wishList: ${err.data}`);
 });
-
-const createWishList = createAsyncThunk(
-  "wishList/createWishList",
-  async (data) => {
-    const { res, err } = await request({
-      url: `/wishList`,
-      method: "POST",
-      body: data,
-    });
-    if (res) {
-      return res;
-    }
-    throw new Error(`Couldn't create wishList: ${err.data}`);
-  },
-);
 
 const deleteWishList = createAsyncThunk("wishList/deleteWishList", async () => {
   const { res, err } = await request({
@@ -66,31 +52,47 @@ const deleteProductFromWishList = createAsyncThunk(
 const updateWishListLogin = createAsyncThunk(
   "wishList/updateWishListLogin",
   async () => {
-    const items = JSON.parse(window.localStorage.getItem("wishList"));
-    if (items.length > 0) {
-      const fetchProductPromises = items.map(async (product) => {
-        try {
-          const { res } = await request({
-            url: `/wishList/${product.id}`,
-            method: "PUT",
-          });
-          if (res) {
-            return res;
-          }
-        } catch (error) {
-          throw new Error(`Couldn't get products: ${error}`);
+    const { res: response } = await request({
+      url: `/wishlist`,
+    });
+    if (response) {
+      const productsUpdates = [];
+      const wishListLS = JSON.parse(localStorage.getItem("wishList"));
+      wishListLS.forEach((item) => {
+        const itemIndex = response.products.findIndex(
+          (el) => el._id === item.id,
+        );
+        if (itemIndex === -1) {
+          productsUpdates.push(item.id);
         }
       });
-      const fetchedItems = await Promise.all(fetchProductPromises);
-      await window.localStorage.removeItem("wishList");
-      return fetchedItems;
+      response.products.forEach((el) => productsUpdates.push(el._id));
+
+      const { res, err } = await request({
+        url: `/wishlist`,
+        method: "PUT",
+        body: { products: productsUpdates },
+      });
+      if (res) {
+        return res;
+      }
+      throw new Error(`Couldn't update Wish List: ${err.data}`);
+    } else {
+      const { res, err } = await request({
+        url: `/wishlist`,
+        method: "POST",
+        body: structureWishListLS(),
+      });
+      if (res) {
+        return res;
+      }
+      throw new Error(`Couldn't create Wish List: ${err.data}`);
     }
   },
 );
 
 export {
   fetchWishList,
-  createWishList,
   deleteWishList,
   updateProductToWishList,
   deleteProductFromWishList,

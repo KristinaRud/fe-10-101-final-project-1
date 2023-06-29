@@ -31,7 +31,7 @@ import {
   fetchCommentsByProduct,
   createComments,
 } from "../../store/actionCreator/comments.actionCreator";
-import { IconWishList, IconEmail } from "../../assets/images/products";
+import { IconWishList, IconComment } from "../../assets/images/products";
 import LoginSnackbar from "../../components/LoginForm/LoginSnackbar";
 import IconComparisonProduct from "../../components/IconComparisonProduct/IconComparisonProduct";
 import Reviews from "../../components/Reviews/Reviews";
@@ -290,7 +290,7 @@ const SingleProduct = () => {
                 <ul className={styles["product-picture__control"]}>
                   <li className={styles["product-picture__control-item"]}>
                     <Button onClick={handleDialogOpen}>
-                      <IconEmail />
+                      <IconComment />
                     </Button>
                   </li>
                   <li className={styles["product-picture__control-item"]}>

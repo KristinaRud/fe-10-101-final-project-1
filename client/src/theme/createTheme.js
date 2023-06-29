@@ -58,6 +58,26 @@ const theme = createTheme(
           },
         },
       },
+      MuiCssBaseline: {
+        styleOverrides: `
+        html, body, div, span, a, ul, li, header, footer, 
+        h1, h2, h3, h4, h5, h6, p {
+          margin: 0;
+          padding: 0;
+          border: 0;
+          font-size: 100%;
+          vertical-align: baseline;
+        }
+        a, 
+        a:active {
+          text-decoration: none;
+          color: inherit;
+        }
+        ol, ul {
+         list-style: none;
+        }
+        `,
+      },
     },
   },
   enUS,

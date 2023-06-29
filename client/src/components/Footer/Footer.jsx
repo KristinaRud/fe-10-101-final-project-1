@@ -18,6 +18,7 @@ import Master from "../../assets/images/footer/payment/maestro.png";
 import Disc from "../../assets/images/footer/payment/discover.png";
 import AmEx from "../../assets/images/footer/payment/american-express.png";
 import data from "../../utils/footerData";
+import SubscriberForm from "./SubscriberForm/SubscriberForm";
 
 const useStyles = makeStyles((theme) => ({
   footer: {
@@ -26,6 +27,14 @@ const useStyles = makeStyles((theme) => ({
     position: "relative",
     [theme.breakpoints.down("md")]: {
       paddingTop: "35px",
+    },
+  },
+  wrapperSub: {
+    display: "flex",
+    justifyContent: "space-between",
+    flexWrap: "wrap",
+    [theme.breakpoints.down("md")]: {
+      justifyContent: "center",
     },
   },
   headerTitle: {
@@ -165,12 +174,15 @@ const Footer = () => {
 
   return (
     <footer className={classes.footer}>
-      <Container maxWidth="lg">
-        <div className={classes.headerTitle}>
-          <h3>Sign Up To Our Newsletter.</h3>
-          <p className={classes.paragraph}>
-            Be the first to hear about the latest offers.
-          </p>
+      <Container maxWidth="xlg">
+        <div className={classes.wrapperSub}>
+          <div className={classes.headerTitle}>
+            <h3>Sign Up To Our Newsletter.</h3>
+            <p className={classes.paragraph}>
+              Be the first to hear about the latest offers.
+            </p>
+          </div>
+          <SubscriberForm />
         </div>
         {renderFooterContent()}
         <div className={styles.utility}>
