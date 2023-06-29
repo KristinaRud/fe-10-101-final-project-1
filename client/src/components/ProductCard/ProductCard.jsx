@@ -6,6 +6,7 @@ import {
   Box,
   Button,
   Rating,
+  Skeleton,
 } from "@mui/material";
 import { useSelector, useDispatch } from "react-redux";
 import CheckCircleIcon from "@mui/icons-material/CheckCircle";
@@ -41,7 +42,7 @@ const ProductCard = ({
 }) => {
   const [isHovered, setIsHovered] = useState(false);
   const dispatch = useDispatch();
-  const { isLogin } = useSelector(selectCustomers);
+  const { isLogin, isLoading } = useSelector(selectCustomers);
   const { itemsCart } = useSelector(selectShoppingCart);
   const { itemsWishList } = useSelector(selectWishList);
   const isAdded = itemsCart?.some((el) => el.id === id);
@@ -164,55 +165,73 @@ const ProductCard = ({
           <Typography variant="caption" color={available ? "green" : "error"}>
             {available ? (
               <Box display="flex" alignItems="center">
-                <CheckCircleIcon
-                  className={styles.caption_icon}
-                  color="green"
-                />
+                {isLoading ? (
+                  <Skeleton variant="circular" width={24} height={24} />
+                ) : (
+                  <CheckCircleIcon
+                    className={styles.caption_icon}
+                    color="green"
+                  />
+                )}
                 <Typography
                   className={styles.caption_text}
                   variant="body2"
                   color="green"
                   ml={1}
                 >
-                  in stock
+                  {isLoading ? <Skeleton width={53} /> : "in stock"}
                 </Typography>
               </Box>
             ) : (
               <Box display="flex" alignItems="center">
-                <PhoneIcon className={styles.caption_icon} color="red" />
+                {isLoading ? (
+                  <Skeleton variant="circular" width={24} height={24} />
+                ) : (
+                  <PhoneIcon className={styles.caption_icon} color="red" />
+                )}
                 <Typography
                   className={styles.caption_text}
                   variant="body2"
                   color="red"
                   ml={1}
                 >
-                  check availability
+                  {isLoading ? <Skeleton width={80} /> : "check availablity"}
                 </Typography>
               </Box>
             )}
           </Typography>
           <Link to={`/${categories.toLowerCase()}/${id}`}>
-            <CardMedia
-              className={styles.picture}
-              component="img"
-              height="150"
-              width="150"
-              image={image}
-              alt={alt}
-              mt={1}
-            />
+            {isLoading ? (
+              <Skeleton variant="rectangular" width={203} height={150} />
+            ) : (
+              <CardMedia
+                className={styles.picture}
+                component="img"
+                height="150"
+                width="150"
+                image={image}
+                alt={alt}
+                mt={1}
+              />
+            )}
           </Link>
           <Box display="flex" alignItems="center" mt={1}>
-            <Rating
-              className={styles.rating}
-              name="products-small"
-              value={averageRating}
-              readOnly
-              size="small"
-            />
-            <Typography className={styles.reviews} variant="body2" ml={1}>
-              Reviews ({comments.length})
-            </Typography>
+            {isLoading ? (
+              <Skeleton sx={{ width: "100%" }} />
+            ) : (
+              <>
+                <Rating
+                  className={styles.rating}
+                  name="products-small"
+                  value={averageRating}
+                  readOnly
+                  size="small"
+                />
+                <Typography className={styles.reviews} variant="body2" ml={1}>
+                  Reviews ({comments.length})
+                </Typography>
+              </>
+            )}
           </Box>
           <Link to={`/${categories.toLowerCase()}/${id}`}>
             <Typography
@@ -221,7 +240,11 @@ const ProductCard = ({
               height="60px"
               className={styles.description}
             >
-              {description}
+              {isLoading ? (
+                <Skeleton sx={{ width: "100%" }} />
+              ) : (
+                <>{description}</>
+              )}
             </Typography>
           </Link>
           <Box
@@ -238,7 +261,11 @@ const ProductCard = ({
                 sx={{ textDecoration: "line-through" }}
                 mr={2}
               >
-                {oldPrice.toLocaleString()}.00 ₴
+               {isLoading ? (
+                  <Skeleton sx={{ width: "100%" }} />
+                ) : (
+                  <>{oldPrice.toLocaleString()}.00 ₴</>
+                )}
               </Typography>
             ) : (
               <div style={{ width: "100%", height: "20px" }} />
@@ -248,7 +275,11 @@ const ProductCard = ({
               variant="h6"
               component="div"
             >
-              {currentPrice.toLocaleString()}.00 ₴
+            {isLoading ? (
+                <Skeleton sx={{ width: "100%" }} />
+              ) : (
+                <>{currentPrice.toLocaleString()}.00 ₴</>
+              )}
             </Typography>
           </Box>
         </CardContent>

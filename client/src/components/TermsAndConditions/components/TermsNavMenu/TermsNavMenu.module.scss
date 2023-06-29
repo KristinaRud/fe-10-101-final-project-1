@@ -1,5 +1,4 @@
 .navMenu {
-  display: flex;
   min-width: 327px;
   justify-items: center;
   margin-left: 30px;
@@ -14,10 +13,11 @@
   }
 
   &__list {
-    position: fixed;
+    position: sticky;
     background-color: #f5f7ff;
     margin-top: 95px;
     padding: 25px;
+    top: 0;
   }
 
   &__link {

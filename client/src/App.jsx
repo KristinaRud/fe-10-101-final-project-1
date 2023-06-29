@@ -10,6 +10,9 @@ import AppRoute from "./route/app.route";
 import store from "./store";
 import theme from "./theme/createTheme";
 import "./App.scss";
+import BackToTopButton from "./components/BackToTopButton/BackToTopButton";
+import ScrollToTop from "./utils/scrollToTop/scrollToTopFunc";
+import PageLoader from "./components/PageLoader/PageLoader";
 
 const App = () => (
   <Provider store={store}>
@@ -18,6 +21,9 @@ const App = () => (
         <ThemeProvider theme={theme}>
           <StyledEngineProvider injectFirst>
             <CssBaseline />
+            <PageLoader />
+            <BackToTopButton />
+            <ScrollToTop />
             <AppRoute />
           </StyledEngineProvider>
         </ThemeProvider>
