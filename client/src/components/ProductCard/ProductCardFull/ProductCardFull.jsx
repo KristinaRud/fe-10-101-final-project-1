@@ -41,6 +41,7 @@ const ProductCardFull = ({
   id,
   itemNo,
   categories,
+  enabled,
 }) => {
   const dispatch = useDispatch();
   const { itemsWishList } = useSelector(selectWishList);
@@ -72,6 +73,8 @@ const ProductCardFull = ({
   const averageRating = calculateAverageRating(comments);
 
   return (
+  <>
+    {enabled ? (
     <Card
       sx={{
         maxWidth: 1166,
@@ -202,6 +205,7 @@ const ProductCardFull = ({
                       currentPrice,
                       itemNo,
                       categories,
+                      enabled,
                     },
                     isLogin,
                   ),
@@ -264,6 +268,7 @@ const ProductCardFull = ({
                     available,
                     rating,
                     oldPrice,
+                    enabled,
                   },
                   itemsWishList,
                   isLogin,
@@ -287,6 +292,8 @@ const ProductCardFull = ({
         textError={error}
       />
     </Card>
+    ) : null}
+    </>
   );
 };
 
@@ -302,5 +309,6 @@ ProductCardFull.propTypes = {
   categories: PropTypes.string.isRequired,
   id: PropTypes.string.isRequired,
   itemNo: PropTypes.string,
+  enabled: PropTypes.bool.isRequired,
 };
 export default ProductCardFull;

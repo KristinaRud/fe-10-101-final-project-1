@@ -39,6 +39,7 @@ const ProductCard = ({
   id,
   categories,
   itemNo,
+  enabled,
 }) => {
   const [isHovered, setIsHovered] = useState(false);
   const dispatch = useDispatch();
@@ -90,6 +91,7 @@ const ProductCard = ({
 
   return (
     <>
+      {enabled ? (
       <Card
         className={styles.card}
         sx={{ width: 235, height: 346, position: "relative" }}
@@ -116,6 +118,7 @@ const ProductCard = ({
                       available,
                       rating,
                       oldPrice,
+                      enabled,
                     },
                     itemsWishList,
                     isLogin,
@@ -151,6 +154,7 @@ const ProductCard = ({
                     currentPrice,
                     itemNo,
                     categories,
+                    enabled,
                   },
                   isLogin,
                 ),
@@ -284,6 +288,7 @@ const ProductCard = ({
           </Box>
         </CardContent>
       </Card>
+        ) : null}
       <LoginSnackbar
         open={openSnackbar}
         status={status}
@@ -308,4 +313,5 @@ ProductCard.propTypes = {
   id: PropTypes.string.isRequired,
   categories: PropTypes.string.isRequired,
   itemNo: PropTypes.string,
+  enabled: PropTypes.bool.isRequired,
 };

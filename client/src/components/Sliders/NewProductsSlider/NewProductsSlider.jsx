@@ -42,6 +42,7 @@ const NewProductSlider = () => {
                 categories={item.categories}
                 name={item.name}
                 itemNo={item.itemNo}
+                enabled={item.enabled}
               />
             ) : (
               <Box sx={{ margin: "40px" }} justifyContent="center">

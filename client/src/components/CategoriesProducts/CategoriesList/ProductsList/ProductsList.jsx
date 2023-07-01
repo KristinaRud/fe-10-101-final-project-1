@@ -45,6 +45,7 @@ const ProductsList = ({ category }) => {
               categories={item.categories}
               name={item.name}
               itemNo={item.itemNo}
+              enabled={item.enabled}
             />
           </div>
         ))
