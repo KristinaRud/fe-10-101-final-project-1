@@ -34,6 +34,7 @@ export const CommentsConfig = {
 
 export const NewProductsConfig = {
   dots: false,
+  variableWidth: true,
   infinite: true,
   slidesToShow: 6,
   slidesToScroll: 1,
@@ -83,6 +84,7 @@ export const NewProductsConfig = {
 
 export const NewsConfig = {
   dots: false,
+  variableWidth: true,
   infinite: true,
   slidesToShow: 1,
   slidesToScroll: 1,
@@ -93,6 +95,7 @@ export const NewsConfig = {
 
 export const CategoriesProducts = {
   dots: false,
+  variableWidth: true,
   infinite: true,
   slidesToShow: 5,
   slidesToScroll: 1,
