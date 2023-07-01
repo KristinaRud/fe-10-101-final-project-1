@@ -92,21 +92,60 @@ const ProductCard = ({
   return (
     <>
       {enabled ? (
-      <Card
-        className={styles.card}
-        sx={{ width: 235, height: 346, position: "relative" }}
-        onMouseEnter={handleMouseEnter}
-        onMouseLeave={handleMouseLeave}
-      >
-        <Box className={isHovered ? styles["menu-active"] : styles.menu}>
-          <Box className={styles.menu_top}>
+        <Card
+          className={styles.card}
+          sx={{ width: 235, height: 346, position: "relative" }}
+          onMouseEnter={handleMouseEnter}
+          onMouseLeave={handleMouseLeave}
+        >
+          <Box className={isHovered ? styles["menu-active"] : styles.menu}>
+            <Box className={styles.menu_top}>
+              <Button
+                sx={{
+                  "&:hover": { backgroundColor: "rgb(1 86 255 / 20%)" },
+                }}
+                onClick={() => {
+                  dispatch(
+                    handleAddToWishList(
+                      {
+                        id,
+                        image,
+                        alt,
+                        description,
+                        currentPrice,
+                        itemNo,
+                        categories,
+                        available,
+                        rating,
+                        oldPrice,
+                        enabled,
+                      },
+                      itemsWishList,
+                      isLogin,
+                    ),
+                  );
+                  setOpenSnackbar(true);
+                }}
+              >
+                <IconWishList className={isWishList ? cx(styles.green) : ""} />
+              </Button>
+              <IconComparisonProduct
+                categories={categories}
+                id={id}
+                setOpenSnackbar={setOpenSnackbar}
+                setText={setText}
+                setError={setError}
+                setStatus={setStatus}
+              />
+            </Box>
             <Button
               sx={{
                 "&:hover": { backgroundColor: "rgb(1 86 255 / 20%)" },
+                marginBottom: 2,
               }}
               onClick={() => {
                 dispatch(
-                  handleAddToWishList(
+                  handleAddToCart(
                     {
                       id,
                       image,
@@ -115,180 +154,141 @@ const ProductCard = ({
                       currentPrice,
                       itemNo,
                       categories,
-                      available,
-                      rating,
-                      oldPrice,
                       enabled,
                     },
-                    itemsWishList,
                     isLogin,
                   ),
                 );
                 setOpenSnackbar(true);
               }}
             >
-              <IconWishList className={isWishList ? cx(styles.green) : ""} />
+              <IconCart className={isAdded ? cx(styles.green) : ""} />
             </Button>
-            <IconComparisonProduct
-              categories={categories}
-              id={id}
-              setOpenSnackbar={setOpenSnackbar}
-              setText={setText}
-              setError={setError}
-              setStatus={setStatus}
-            />
           </Box>
-          <Button
-            sx={{
-              "&:hover": { backgroundColor: "rgb(1 86 255 / 20%)" },
-              marginBottom: 2,
-            }}
-            onClick={() => {
-              dispatch(
-                handleAddToCart(
-                  {
-                    id,
-                    image,
-                    alt,
-                    description,
-                    currentPrice,
-                    itemNo,
-                    categories,
-                    enabled,
-                  },
-                  isLogin,
-                ),
-              );
-              setOpenSnackbar(true);
-            }}
-          >
-            <IconCart className={isAdded ? cx(styles.green) : ""} />
-          </Button>
-        </Box>
-        <CardContent sx={{ paddingTop: 1 }}>
-          <Typography variant="caption" color={available ? "green" : "error"}>
-            {available ? (
-              <Box display="flex" alignItems="center">
-                {isLoading ? (
-                  <Skeleton variant="circular" width={24} height={24} />
-                ) : (
-                  <CheckCircleIcon
-                    className={styles.caption_icon}
+          <CardContent sx={{ paddingTop: 1 }}>
+            <Typography variant="caption" color={available ? "green" : "error"}>
+              {available ? (
+                <Box display="flex" alignItems="center">
+                  {isLoading ? (
+                    <Skeleton variant="circular" width={24} height={24} />
+                  ) : (
+                    <CheckCircleIcon
+                      className={styles.caption_icon}
+                      color="green"
+                    />
+                  )}
+                  <Typography
+                    className={styles.caption_text}
+                    variant="body2"
                     color="green"
-                  />
-                )}
-                <Typography
-                  className={styles.caption_text}
-                  variant="body2"
-                  color="green"
-                  ml={1}
-                >
-                  {isLoading ? <Skeleton width={53} /> : "in stock"}
-                </Typography>
-              </Box>
-            ) : (
-              <Box display="flex" alignItems="center">
-                {isLoading ? (
-                  <Skeleton variant="circular" width={24} height={24} />
-                ) : (
-                  <PhoneIcon className={styles.caption_icon} color="red" />
-                )}
-                <Typography
-                  className={styles.caption_text}
-                  variant="body2"
-                  color="red"
-                  ml={1}
-                >
-                  {isLoading ? <Skeleton width={80} /> : "check availablity"}
-                </Typography>
-              </Box>
-            )}
-          </Typography>
-          <Link to={`/${categories.toLowerCase()}/${id}`}>
-            {isLoading ? (
-              <Skeleton variant="rectangular" width={203} height={150} />
-            ) : (
-              <CardMedia
-                className={styles.picture}
-                component="img"
-                height="150"
-                width="150"
-                image={image}
-                alt={alt}
-                mt={1}
-              />
-            )}
-          </Link>
-          <Box display="flex" alignItems="center" mt={1}>
-            {isLoading ? (
-              <Skeleton sx={{ width: "100%" }} />
-            ) : (
-              <>
-                <Rating
-                  className={styles.rating}
-                  name="products-small"
-                  value={averageRating}
-                  readOnly
-                  size="small"
+                    ml={1}
+                  >
+                    {isLoading ? <Skeleton width={53} /> : "in stock"}
+                  </Typography>
+                </Box>
+              ) : (
+                <Box display="flex" alignItems="center">
+                  {isLoading ? (
+                    <Skeleton variant="circular" width={24} height={24} />
+                  ) : (
+                    <PhoneIcon className={styles.caption_icon} color="red" />
+                  )}
+                  <Typography
+                    className={styles.caption_text}
+                    variant="body2"
+                    color="red"
+                    ml={1}
+                  >
+                    {isLoading ? <Skeleton width={80} /> : "check availablity"}
+                  </Typography>
+                </Box>
+              )}
+            </Typography>
+            <Link to={`/${categories.toLowerCase()}/${id}`}>
+              {isLoading ? (
+                <Skeleton variant="rectangular" width={203} height={150} />
+              ) : (
+                <CardMedia
+                  className={styles.picture}
+                  component="img"
+                  height="150"
+                  width="150"
+                  image={image}
+                  alt={alt}
+                  mt={1}
                 />
-                <Typography className={styles.reviews} variant="body2" ml={1}>
-                  Reviews ({comments.length})
-                </Typography>
-              </>
-            )}
-          </Box>
-          <Link to={`/${categories.toLowerCase()}/${id}`}>
-            <Typography
-              variant="body2"
-              color="text.secondary"
-              height="60px"
-              className={styles.description}
-            >
+              )}
+            </Link>
+            <Box display="flex" alignItems="center" mt={1}>
               {isLoading ? (
                 <Skeleton sx={{ width: "100%" }} />
               ) : (
-                <>{description}</>
+                <>
+                  <Rating
+                    className={styles.rating}
+                    name="products-small"
+                    value={averageRating}
+                    readOnly
+                    size="small"
+                  />
+                  <Typography className={styles.reviews} variant="body2" ml={1}>
+                    Reviews ({comments.length})
+                  </Typography>
+                </>
               )}
-            </Typography>
-          </Link>
-          <Box
-            className={styles.price}
-            display="flex"
-            flexDirection="column"
-            mt={2}
-          >
-            {oldPrice && oldPrice !== 0 ? (
+            </Box>
+            <Link to={`/${categories.toLowerCase()}/${id}`}>
               <Typography
-                className={styles.price_old}
                 variant="body2"
                 color="text.secondary"
-                sx={{ textDecoration: "line-through" }}
-                mr={2}
+                height="60px"
+                className={styles.description}
               >
                 {isLoading ? (
                   <Skeleton sx={{ width: "100%" }} />
                 ) : (
-                  <>{oldPrice.toLocaleString()}.00 ₴</>
+                  <>{description}</>
                 )}
               </Typography>
-            ) : (
-              <div style={{ width: "100%", height: "20px" }} />
-            )}
-            <Typography
-              className={styles.price_new}
-              variant="h6"
-              component="div"
+            </Link>
+            <Box
+              className={styles.price}
+              display="flex"
+              flexDirection="column"
+              mt={2}
             >
-              {isLoading ? (
-                <Skeleton sx={{ width: "100%" }} />
+              {oldPrice && oldPrice !== 0 ? (
+                <Typography
+                  className={styles.price_old}
+                  variant="body2"
+                  color="text.secondary"
+                  sx={{ textDecoration: "line-through" }}
+                  mr={2}
+                >
+                  {isLoading ? (
+                    <Skeleton sx={{ width: "100%" }} />
+                  ) : (
+                    <>{oldPrice.toLocaleString()}.00 ₴</>
+                  )}
+                </Typography>
               ) : (
-                <>{currentPrice.toLocaleString()}.00 ₴</>
+                <div style={{ width: "100%", height: "20px" }} />
               )}
-            </Typography>
-          </Box>
-        </CardContent>
-      </Card>
-        ) : null}
+              <Typography
+                className={styles.price_new}
+                variant="h6"
+                component="div"
+              >
+                {isLoading ? (
+                  <Skeleton sx={{ width: "100%" }} />
+                ) : (
+                  <>{currentPrice.toLocaleString()}.00 ₴</>
+                )}
+              </Typography>
+            </Box>
+          </CardContent>
+        </Card>
+      ) : null}
       <LoginSnackbar
         open={openSnackbar}
         status={status}
