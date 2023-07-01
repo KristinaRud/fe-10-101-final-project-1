@@ -5,6 +5,7 @@ import ChevronRightIcon from "@mui/icons-material/ChevronRight";
 import WebStoriesIcon from "@mui/icons-material/WebStories";
 import DashboardIcon from "@mui/icons-material/Dashboard";
 import CategoryIcon from "@mui/icons-material/Category";
+import FilterAltIcon from "@mui/icons-material/FilterAlt";
 import { ReactComponent as Logo } from "../../../../components/Header/icons/logo-blue.svg";
 import { DrawerHeader, Drawer } from "./DrawerStyle";
 import SidebarListItem from "./SidebarListItem/SidebarListItem";
@@ -52,8 +53,14 @@ const DrawerApp = ({ open, handleDrawerToggle }) => {
         <SidebarListItem
           title="Products"
           open={open}
-          link="/products?perPage=10&startPage=1&sort=-itemNo"
+          link="/products?perPage=10&startPage=1&sort=-itemNo&enabled=true"
           icon={<WebStoriesIcon />}
+        />
+        <SidebarListItem
+          title="Filters"
+          open={open}
+          link="/filters"
+          icon={<FilterAltIcon />}
         />
         <Typography
           variant="body2"

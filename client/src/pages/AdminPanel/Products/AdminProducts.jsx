@@ -4,6 +4,7 @@ import { useDispatch } from "react-redux";
 import { useEffect } from "react";
 import TitleOfCollections from "../../../components/Admin/TitleOfCollections/TitleOfCollections";
 import { fetchProducts } from "../../../store/actionCreator/products.actionCreator";
+import { fetchCategories } from "../../../store/actionCreator/catalog.actionCreator";
 
 const AdminProducts = () => {
   const dispatch = useDispatch();
@@ -12,6 +13,10 @@ const AdminProducts = () => {
   useEffect(() => {
     dispatch(fetchProducts(`?${params.toString()}`));
   }, [dispatch, params]);
+
+  useEffect(() => {
+    dispatch(fetchCategories());
+  }, [dispatch]);
   return (
     <Container>
       <TitleOfCollections collection={"Products"} />

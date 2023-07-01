@@ -10,7 +10,7 @@ import { TextField } from "formik-mui";
 import * as Yup from "yup";
 import { useDispatch, useSelector } from "react-redux";
 import { useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import CategoryImage from "./CategoryImage/CategoryImage";
 import {
   addCategory,
@@ -43,6 +43,7 @@ const AddNewForm = () => {
   const params = useParams();
   const data = useSelector(allCategoriesSelector);
   const dispatch = useDispatch();
+  const navigate = useNavigate();
   const [submit, setSubmit] = useState(false);
   const [openBackdrop, setOpenBackdrop] = useState(false);
   const [openSnackbar, setOpenSnackbar] = useState(false);
@@ -83,6 +84,9 @@ const AddNewForm = () => {
         id: params.category,
       };
       dispatch(updateCategory(newCategory));
+      setTimeout(() => {
+        navigate("/admin/categories");
+      }, 1000);
     } else {
       newCategory = {
         ...values,

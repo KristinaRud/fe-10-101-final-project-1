@@ -22,6 +22,10 @@ import CollectionTable from "../components/Admin/Category/CollectionTable/Collec
 import AddNewForm from "../components/Admin/Category/AddNewForm/AddNewForm";
 import AdminProducts from "../pages/AdminPanel/Products/AdminProducts";
 import ProductsTable from "../components/Admin/Products/ProductsTable/ProductsTable";
+import AddNewProductForm from "../components/Admin/Products/AddNewProductForm/AddNewProductForm";
+import AdminFilters from "../pages/AdminPanel/Filters/AdminFilters";
+import FiltersTable from "../components/Admin/Filters/FiltersTable/FiltersTable";
+import AddNewFiltersForm from "../components/Admin/Filters/AddNewFiltersForm/AddNewFiltersForm";
 
 const AppRoute = () => {
   const { isLogin } = useSelector(selectCustomers);
@@ -64,6 +68,13 @@ const AppRoute = () => {
         </Route>
         <Route path="products" element={<AdminProducts />}>
           <Route path="" element={<ProductsTable />} />
+          <Route path="new" element={<AddNewProductForm />} />
+          <Route path=":product" element={<AddNewProductForm />} />
+        </Route>
+        <Route path={"filters"} element={<AdminFilters />}>
+          <Route path="" element={<FiltersTable />} />
+          <Route path="new" element={<AddNewFiltersForm />} />
+          <Route path=":filter" element={<AddNewFiltersForm />} />
         </Route>
       </Route>
     </Routes>

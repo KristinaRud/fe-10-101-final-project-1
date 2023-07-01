@@ -1,12 +1,10 @@
 import { Box, Button, Paper, Table, TableContainer } from "@mui/material";
 import { Link } from "react-router-dom";
-import { useSelector } from "react-redux";
+import { useState } from "react";
 import BreadcrumbsApp from "../../../BreadcrumbsApp/BreadcrumbsApp";
-import ProductsTableHeader from "./ProductsTableHeader/ProductsTableHeader";
 import s from "../../../ComparisonTable/ComparisonTable.module.scss";
-import ProductsTableBody from "./ProductsTableBody/ProductsTableBody";
-import ProductTableFooter from "./ProductTableFooter/ProductTableFooter";
-import ToggleBtn from "./ToggleBtn/ToggleBtn";
+import FiltersTableHeader from "./FiltersTableHeader/FiltersTableHeader";
+import FiltersTableBody from "./FiltersTableBody/FiltersTableBody";
 
 const breadcrumbs = [
   {
@@ -14,13 +12,19 @@ const breadcrumbs = [
     label: "Dashboard",
   },
   {
-    url: "/admin/products",
-    label: "Products",
+    url: "/admin/filters",
+    label: "Filters",
   },
 ];
 
-const ProductsTable = () => {
-  const { products } = useSelector((state) => state.products);
+const FiltersTable = () => {
+  const [order, setOrder] = useState("asc");
+  const [orderBy, setOrderBy] = useState("type");
+  const handleRequestSort = (event, property) => {
+    const isAsc = orderBy === property && order === "asc";
+    setOrder(isAsc ? "desc" : "asc");
+    setOrderBy(property);
+  };
 
   return (
     <>
@@ -35,7 +39,7 @@ const ProductsTable = () => {
           breadcrumbsCustomData={breadcrumbs}
           sx={{ padding: "0px 20px 0" }}
         />
-        <Link to={"/admin/products/new"}>
+        <Link to={"/admin/filters/new"}>
           <Button
             variant={"outlined"}
             sx={{
@@ -50,26 +54,22 @@ const ProductsTable = () => {
               },
             }}
           >
-            Add new product
+            Add new filter
           </Button>
         </Link>
       </Box>
-      <ToggleBtn />
       <TableContainer component={Paper} className={s.table}>
         <Table aria-label="collapsible table" size={"small"}>
-          <ProductsTableHeader />
-          {Object.keys(products).length > 0 && (
-            <>
-              <ProductsTableBody data={products.products} />
-              <ProductTableFooter
-                productsQuantity={products.productsQuantity}
-              />
-            </>
-          )}
+          <FiltersTableHeader
+            order={order}
+            orderBy={orderBy}
+            onRequestSort={handleRequestSort}
+          />
+          <FiltersTableBody orderBy={orderBy} order={order} />
         </Table>
       </TableContainer>
     </>
   );
 };
 
-export default ProductsTable;
+export default FiltersTable;

@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import {
   Box,
   Button,
@@ -12,16 +12,36 @@ import {
 import KeyboardArrowUpIcon from "@mui/icons-material/KeyboardArrowUp";
 import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
 import PropTypes from "prop-types";
+import { useDispatch } from "react-redux";
 import { headers } from "../../ProductsTableHeader/utils";
 import ProductsListCompleteSet from "../ProductsListCompleteSet/ProductsListCompleteSet";
 import ProductsListImage from "../ProductsListImage/ProductsListImage";
 import ProductsListCharacteristics from "../ProductsListCharacteristics/ProductsListCharacteristics";
 import ProductsListDescription from "../ProductsListDescription/ProductsListDescription";
+import { updateProduct } from "../../../../../../store/actionCreator/products.actionCreator";
 
 const ProductsTableRow = ({ row }) => {
   const [open, setOpen] = useState(false);
+  const location = useLocation();
+  const query = new URLSearchParams(location.search);
   const navigate = useNavigate();
-
+  const dispatch = useDispatch();
+  const handleMoveToArchive = () => {
+    if (row.enabled) {
+      dispatch(
+        updateProduct({
+          id: row._id,
+          data: { enabled: false, name: row.name },
+        }),
+      );
+      navigate(`?${query.toString()}`);
+    } else {
+      dispatch(
+        updateProduct({ id: row._id, data: { enabled: true, name: row.name } }),
+      );
+      navigate(`?${query.toString()}`);
+    }
+  };
   const renderRow = (cell) => {
     if (Array.isArray(cell)) {
       return (
@@ -92,8 +112,24 @@ const ProductsTableRow = ({ row }) => {
                 display={"flex"}
                 justifyContent={"flex-end"}
                 sx={{ width: "100%" }}
-                mt={1}
+                gap={2}
               >
+                <Button
+                  onClick={handleMoveToArchive}
+                  variant={"outlined"}
+                  sx={{
+                    border: "2px solid #0156FF",
+                    borderRadius: "50px",
+                    color: "#0156FF",
+                    "&:hover": {
+                      border: "2px solid #0156FF",
+                      backgroundColor: "#0156FF",
+                      color: "white",
+                    },
+                  }}
+                >
+                  {row.enabled ? "Move to archive" : "Move from archive"}
+                </Button>
                 <Button
                   onClick={() => navigate(`/admin/products/${row.itemNo}`)}
                   variant={"outlined"}

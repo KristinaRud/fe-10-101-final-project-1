@@ -1,14 +1,13 @@
 import PropTypes from "prop-types";
-import { Divider, List, ListItem, Typography } from "@mui/material";
+import { Box, Divider, List, ListItem, Typography } from "@mui/material";
 
 const ProductsListDescription = ({ arr }) => {
   const renderOptions = (obj, index) => {
     const { title, image } = obj;
     return (
-      <>
+      <Box key={image}>
         <ListItem
           sx={{ padding: "5px 0 0 16px", justifyContent: "space-between" }}
-          key={image}
         >
           <Typography variant={"body1"} mr={1}>
             Slide {index + 1}:
@@ -23,7 +22,7 @@ const ProductsListDescription = ({ arr }) => {
           />
         </ListItem>
         <Divider />
-      </>
+      </Box>
     );
   };
 
@@ -39,8 +38,8 @@ const ProductsListDescription = ({ arr }) => {
 ProductsListDescription.propTypes = {
   arr: PropTypes.arrayOf(
     PropTypes.shape({
-      title: PropTypes.string.isRequired,
-      image: PropTypes.string.isRequired,
+      title: PropTypes.string,
+      image: PropTypes.string,
     }),
   ),
 };
