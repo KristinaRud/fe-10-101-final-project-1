@@ -17,7 +17,6 @@ const OrderDetailsPage = () => {
   useEffect(() => {
     dispatch(getOrderByOrderNo(orderNo));
   }, [dispatch, orderNo]);
-  console.log(order);
   if (isLoading) {
     return (
       <Box sx={{ margin: "40px" }} display="flex" justifyContent="center">
