@@ -4,7 +4,7 @@ import { checkToken } from "./checkToken";
 const request = async ({ url, method = "GET", body, headers } = {}) => {
   const token = window.localStorage.getItem("token");
 
-  axios.defaults.baseURL = "http://localhost:4000/api";
+  axios.defaults.baseURL = `${window.location.href}api`;
   axios.defaults.headers.post["Content-Type"] = "application/json";
 
   if (token) {
