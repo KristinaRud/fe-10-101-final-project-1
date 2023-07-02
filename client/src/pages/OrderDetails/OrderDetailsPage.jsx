@@ -1,3 +1,4 @@
+/* eslint-disable jsx-a11y/anchor-is-valid */
 // eslint-disable-next-line no-unused-vars
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
@@ -16,7 +17,7 @@ const OrderDetailsPage = () => {
   useEffect(() => {
     dispatch(getOrderByOrderNo(orderNo));
   }, [dispatch, orderNo]);
-
+  console.log(order);
   if (isLoading) {
     return (
       <Box sx={{ margin: "40px" }} display="flex" justifyContent="center">
@@ -61,6 +62,40 @@ const OrderDetailsPage = () => {
             <span className="store-order-number">№ {orderNo}</span> -
             Відправлене
           </span>
+        </div>
+        <div className={styles.order}>
+          <div className={styles.orderList}>
+            <div>
+              <img
+                className={styles.images}
+                src={order?.products[0].product.imageUrls[0]}
+                alt="product"
+              />
+            </div>
+            <div className={styles.orderInfo}>
+              <h3 className={styles.orderTitle}>
+                {order?.products[0].product.brand}
+              </h3>
+              <a href="#" className={styles.graytxt}>
+                {order?.products[0].product.name}
+              </a>
+              <p>
+                Quantity:
+                <span className={styles.graytxt}>
+                  {order?.products[0].cartQuantity} x&nbsp;
+                  {order?.products[0].product.currentPrice}
+                </span>
+              </p>
+            </div>
+          </div>
+          <div className={styles.price}>
+            <p className={styles.graytxt}>
+              <s>{order?.products[0].product.previousPrice}₴</s>
+            </p>
+            <p className={styles.redtxt}>
+              {order?.products[0].product.currentPrice}₴
+            </p>
+          </div>
         </div>
       </div>
     </>
