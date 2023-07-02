@@ -6,6 +6,7 @@ import { Typography, Box, CircularProgress } from "@mui/material";
 import { getOrderByOrderNo } from "../../store/actionCreator/orders.actionCreator";
 import { selectOrders } from "../../store/selectors/orders.selector";
 import AddressBook from "../../components/Dashboard/Description/AddressBook";
+import styles from "./OrderDetailsPage.module.scss";
 
 const OrderDetailsPage = () => {
   const { orderNo } = useParams();
@@ -37,17 +38,30 @@ const OrderDetailsPage = () => {
         </p>
         <p>Статус замовлення: Відправлене</p>
       </div>
-      <div>
+      <div className={styles.mainInfo}>
         <AddressBook
           address={order || "You have not set a default billing address."}
         />
         <div>
-          <h3>Payment method</h3>
+          <h3 className={styles.title}>Method of delivery</h3>
+          <p>{order?.postOffice}</p>
+        </div>
+        <div>
+          <h3 className={styles.title}>Payment method</h3>
           <p>{order?.paymentMethod}</p>
         </div>
       </div>
       <div>
-        <h3>Ordered products</h3>
+        <h3 className={styles.title}>Ordered products</h3>
+        <div className={styles.sellerLabel}>
+          <span>
+            <b className="seller-name">TechnoKit</b> order
+          </span>
+          <span className="custom-label-additional">
+            <span className="store-order-number">№ {orderNo}</span> -
+            Відправлене
+          </span>
+        </div>
       </div>
     </>
   );

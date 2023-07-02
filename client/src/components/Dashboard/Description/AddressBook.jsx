@@ -1,7 +1,6 @@
 /* eslint-disable react/prop-types */
 import { Box } from "@mui/material";
 import PropTypes from "prop-types";
-import Button from "../../Button/Button";
 import styles from "./AddressBook.module.scss";
 
 // eslint-disable-next-line react/prop-types
@@ -27,15 +26,6 @@ const AddressBook = ({ activeComponent, address }) => {
           <br />
         </div>
       </Box>
-      {!activeComponent && (
-        <div>
-          <h4 className={styles.address}>Additional Addresses</h4>
-          <div className={styles["wrapper-address"]}>
-            <p className={styles.text}>You have not set an address.</p>
-            <Button className={styles["btn-account"]}>Edit Address</Button>
-          </div>
-        </div>
-      )}
     </Box>
   );
 };
