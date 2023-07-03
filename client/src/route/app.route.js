@@ -26,9 +26,13 @@ import AddNewProductForm from "../components/Admin/Products/AddNewProductForm/Ad
 import AdminFilters from "../pages/AdminPanel/Filters/AdminFilters";
 import FiltersTable from "../components/Admin/Filters/FiltersTable/FiltersTable";
 import AddNewFiltersForm from "../components/Admin/Filters/AddNewFiltersForm/AddNewFiltersForm";
+import AdminNews from "../pages/AdminPanel/News/AdminNews";
+import NewsTable from "../components/Admin/News/NewsTable/NewsTable";
+import AddNewsForm from "../components/Admin/News/AddNewsForm/AddNewsForm";
+import AdminOrders from "../pages/AdminPanel/Orders/AdminOrders";
 
 const AppRoute = () => {
-  const { isLogin } = useSelector(selectCustomers);
+  const { isLogin, data } = useSelector(selectCustomers);
 
   return (
     <Routes>
@@ -60,7 +64,16 @@ const AppRoute = () => {
         />
         <Route path="/error" element={<NotFoundPage />} />
       </Route>
-      <Route path="/admin" element={<AdminPanel />}>
+      <Route
+        path="/admin"
+        element={
+          Object.keys(data).length > 0 && data.isAdmin ? (
+            <AdminPanel />
+          ) : (
+            <Navigate to="/" />
+          )
+        }
+      >
         <Route path="categories" element={<AdminCategories />}>
           <Route path="" element={<CollectionTable />} />
           <Route path="new" element={<AddNewForm />} />
@@ -76,6 +89,12 @@ const AppRoute = () => {
           <Route path="new" element={<AddNewFiltersForm />} />
           <Route path=":filter" element={<AddNewFiltersForm />} />
         </Route>
+        <Route path={"news"} element={<AdminNews />}>
+          <Route path="" element={<NewsTable />} />
+          <Route path="new" element={<AddNewsForm />} />
+          <Route path=":news" element={<AddNewsForm />} />
+        </Route>
+        <Route path={"orders"} element={<AdminOrders />} />
       </Route>
     </Routes>
   );

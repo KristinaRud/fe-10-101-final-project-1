@@ -6,6 +6,8 @@ import WebStoriesIcon from "@mui/icons-material/WebStories";
 import DashboardIcon from "@mui/icons-material/Dashboard";
 import CategoryIcon from "@mui/icons-material/Category";
 import FilterAltIcon from "@mui/icons-material/FilterAlt";
+import NewspaperIcon from "@mui/icons-material/Newspaper";
+import TocIcon from "@mui/icons-material/Toc";
 import { ReactComponent as Logo } from "../../../../components/Header/icons/logo-blue.svg";
 import { DrawerHeader, Drawer } from "./DrawerStyle";
 import SidebarListItem from "./SidebarListItem/SidebarListItem";
@@ -41,7 +43,7 @@ const DrawerApp = ({ open, handleDrawerToggle }) => {
           marginLeft={1}
           marginTop={2}
         >
-          Collections
+          Admin panel
         </Typography>
         <Divider />
         <SidebarListItem
@@ -62,6 +64,12 @@ const DrawerApp = ({ open, handleDrawerToggle }) => {
           link="/filters"
           icon={<FilterAltIcon />}
         />
+        <SidebarListItem
+          title="News"
+          open={open}
+          link="/news"
+          icon={<NewspaperIcon />}
+        />
         <Typography
           variant="body2"
           noWrap
@@ -76,7 +84,7 @@ const DrawerApp = ({ open, handleDrawerToggle }) => {
           title="Orders"
           open={open}
           link="/orders"
-          icon={<WebStoriesIcon />}
+          icon={<TocIcon />}
         />
       </List>
     </Drawer>

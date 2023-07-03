@@ -5,11 +5,13 @@ import PropTypes from "prop-types";
 import { useParams } from "react-router-dom";
 import { useSelector } from "react-redux";
 import { allCategoriesSelector } from "../../../../../store/selectors/catalog.selector";
+import { selectNews } from "../../../../../store/selectors/news.selector";
 
 const CategoryImage = ({ setFieldValue, imgUrl, setImgUrl }) => {
   const [loading, setLoading] = useState(false);
   const params = useParams();
   const data = useSelector(allCategoriesSelector);
+  const news = useSelector(selectNews);
 
   const onDrop = useCallback(
     (acceptedFiles) => {
@@ -40,7 +42,14 @@ const CategoryImage = ({ setFieldValue, imgUrl, setImgUrl }) => {
       setFieldValue("imgUrl", category?.imgUrl);
       setFieldValue("name", category?.name);
     }
-  }, [params, data, setFieldValue, setImgUrl]);
+
+    if (params?.news) {
+      const selectNews = news.find((item) => item.customId === params.news);
+      setImgUrl(selectNews?.imageUrl);
+      setFieldValue("imgUrl", selectNews?.imageUrl);
+      setFieldValue("customId", selectNews?.customId);
+    }
+  }, [params, data, setFieldValue, setImgUrl, news]);
   const {
     getRootProps,
     getInputProps,
