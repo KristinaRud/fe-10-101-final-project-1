@@ -1,4 +1,4 @@
-import { List } from "@mui/material";
+import { List, Box, CircularProgress } from "@mui/material";
 import { useDispatch, useSelector } from "react-redux";
 import { useEffect } from "react";
 import { allCategoriesSelector } from "../../../store/selectors/catalog.selector";
@@ -16,15 +16,22 @@ const CategoriesList = () => {
   }, [dispatch]);
 
   return (
-    <List className={s.list}>
-      {catalog.length > 0 &&
-        catalog.map(({ id, name, imgUrl }) => (
-          <div key={id} className={s.wrapper}>
-            <CategoryItem name={name} imgUrl={imgUrl} id={id} />
-            <ProductsList category={name} />
-          </div>
-        ))}
-    </List>
+    <>
+      {catalog.length > 3 ? (
+        <List className={s.list}>
+          {catalog.map(({ id, name, imgUrl }) => (
+            <div key={id} className={s.wrapper}>
+              <CategoryItem name={name} imgUrl={imgUrl} id={id} />
+              <ProductsList category={name} />
+            </div>
+          ))}
+        </List>
+      ) : (
+        <Box sx={{ width: "50px", height: "50px" }}>
+          <CircularProgress />
+        </Box>
+      )}
+    </>
   );
 };
 

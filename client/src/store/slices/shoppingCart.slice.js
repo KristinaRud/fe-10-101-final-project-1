@@ -1,11 +1,9 @@
 import { createSlice } from "@reduxjs/toolkit";
 import {
-  createShoppingCart,
   deleteProductFromCart,
   editProductFromCart,
   fetchShoppingCart,
   deleteShoppingCart,
-  editShoppingCart,
   decreaseProductFromCart,
   putProductsToCartLogin,
 } from "../actionCreator/shoppingCart.actionCreator";
@@ -36,6 +34,19 @@ const shoppingCartSlice = createSlice({
       } else {
         state.itemsCart[itemIndex].cartQuantity += 1;
       }
+      localStorage.setItem("shoppingCart", JSON.stringify(state.itemsCart));
+    },
+    addAllToCart: (state, action) => {
+      action.payload.forEach((item) => {
+        const itemIndex = state.itemsCart?.findIndex((el) => el.id === item.id);
+
+        if (itemIndex === -1) {
+          state.itemsCart.push({ ...item, cartQuantity: 1 });
+        } else {
+          state.itemsCart[itemIndex].cartQuantity += 1;
+        }
+      });
+
       localStorage.setItem("shoppingCart", JSON.stringify(state.itemsCart));
     },
 
@@ -77,10 +88,6 @@ const shoppingCartSlice = createSlice({
     builder.addCase(fetchShoppingCart.fulfilled, (state, action) => {
       state.itemsCart = structureDataToStore(action.payload.products);
     });
-    builder.addCase(createShoppingCart.fulfilled, (state, action) => {
-      state.itemsCart = structureDataToStore(action.payload.products);
-      localStorage.removeItem("shoppingCart");
-    });
     builder.addCase(editProductFromCart.fulfilled, (state, action) => {
       state.itemsCart = structureDataToStore(action.payload.products);
     });
@@ -89,10 +96,6 @@ const shoppingCartSlice = createSlice({
     });
     builder.addCase(deleteShoppingCart.fulfilled, (state) => {
       state.itemsCart = [];
-    });
-    builder.addCase(editShoppingCart.fulfilled, (state, action) => {
-      state.itemsCart = structureDataToStore(action.payload.products);
-      localStorage.removeItem("shoppingCart");
     });
     builder.addCase(decreaseProductFromCart.fulfilled, (state, action) => {
       state.itemsCart = structureDataToStore(action.payload.products);
@@ -111,6 +114,7 @@ export const {
   decrementCartItem,
   deleteCartItem,
   deleteCart,
+  addAllToCart,
 } = shoppingCartSlice.actions;
 
 export default shoppingCartSlice.reducer;

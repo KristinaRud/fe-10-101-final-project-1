@@ -7,6 +7,7 @@ import {
   updateCustomer,
   signUp,
   loginGoogle,
+  forgotPassword,
 } from "../actionCreator/customers.actionCreator";
 import { checkToken } from "../../utils/api/checkToken";
 
@@ -14,9 +15,11 @@ const customersSlice = createSlice({
   name: "customers",
   initialState: {
     data: {},
+    isLoading: false,
     isLogin: checkToken(window.localStorage.getItem("token")),
     token: window.localStorage.getItem("token") || null,
     error: null,
+    successSentForgotPassword: false,
     successSignup: true,
   },
   reducers: {},
@@ -33,7 +36,12 @@ const customersSlice = createSlice({
       state.isLogin = false;
       state.data = {};
     });
+    builder.addCase(getCustomer.pending, (state) => {
+      state.isLoading = true;
+      state.error = null;
+    });
     builder.addCase(getCustomer.fulfilled, (state, action) => {
+      state.isLoading = false;
       state.data = action.payload;
     });
     builder.addCase(editPasswordCustomer.fulfilled, (state, action) => {
@@ -64,6 +72,21 @@ const customersSlice = createSlice({
     builder.addCase(loginGoogle.fulfilled, (state, action) => {
       state.token = action.payload;
       state.isLogin = true;
+    });
+    builder.addCase(forgotPassword.fulfilled, (state) => {
+      state.successSentForgotPassword = true;
+      state.error = null;
+      state.isLoading = false;
+    });
+    builder.addCase(forgotPassword.rejected, (state, action) => {
+      state.successSentForgotPassword = false;
+      state.error = action.error.message;
+      state.isLoading = false;
+    });
+    builder.addCase(forgotPassword.pending, (state) => {
+      state.successSentForgotPassword = false;
+      state.error = null;
+      state.isLoading = true;
     });
   },
 });

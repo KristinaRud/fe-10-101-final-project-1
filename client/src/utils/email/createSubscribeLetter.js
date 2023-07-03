@@ -138,7 +138,13 @@ export const createSubscribeLetter = () => {
                                                                          </a>
                                                                          <![endif]--><!--[if !mso]><!-- --><span class="msohide es-button-border" style="border-style:solid;border-color:#2CB543;background:#D98B8B;border-width:0px;display:inline-block;border-radius:30px;width:auto;mso-border-alt:10px;mso-hide:all"><a href="http://localhost:3001/login" class="es-button" target="_blank" style="mso-style-priority:100 !important;text-decoration:none;-webkit-text-size-adjust:none;-ms-text-size-adjust:none;mso-line-height-rule:exactly;color:#042326;font-size:18px;display:inline-block;background:#D98B8B;border-radius:30px;font-family:Sora, Arial, sans-serif;font-weight:normal;font-style:normal;line-height:22px;width:auto;text-align:center;padding:15px 35px 15px 35px">Log in</a></span><!--<![endif]-->
                                                                       </td>
+                                                                      
                                                                    </tr>
+                                                                   <tr>
+                                                                   <td align="center" style="Margin:0;padding-top:5px;padding-left:10px;padding-right:10px;padding-bottom:25px">
+                                                                     <span class="msohide es-button-border" style="border-style:solid;border-color:#2CB543;background:#D98B8B;border-width:0px;display:inline-block;border-radius:30px;width:auto;mso-border-alt:10px;mso-hide:all"><a href="http://localhost:3000/unsubscribe" class="es-button" target="_blank" style="mso-style-priority:100 !important;text-decoration:none;-webkit-text-size-adjust:none;-ms-text-size-adjust:none;mso-line-height-rule:exactly;color:#042326;font-size:12px;display:inline-block;background:#D98B8B;border-radius:30px;font-family:Sora, Arial, sans-serif;font-weight:normal;font-style:normal;line-height:14px;width:auto;text-align:center;padding:5px 15px 5px 15px">Unsubscribe</a></span><!--<![endif]-->
+                                                                      </td>
+</tr>
                                                                 </tbody>
                                                              </table>
                                                           </td>

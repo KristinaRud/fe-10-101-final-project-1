@@ -14,6 +14,7 @@ import WishList from "../pages/WishList/WishList";
 import ContactUs from "../pages/ContactUs/ContactUs";
 import TermsAndConditions from "../components/TermsAndConditions/TermsAndConditions";
 import ComparisonProducts from "../pages/ComparisonProducts/ComparisonProducts";
+import CheckoutConfirmPage from "../pages/CheckoutConfirm/CheckoutConfirmPage";
 import NotFoundPage from "../pages/NotFound/NotFound";
 import Layout from "../pages/Layout/Loyaut";
 import AdminPanel from "../pages/AdminPanel/AdminPanel";
@@ -30,6 +31,7 @@ import AdminNews from "../pages/AdminPanel/News/AdminNews";
 import NewsTable from "../components/Admin/News/NewsTable/NewsTable";
 import AddNewsForm from "../components/Admin/News/AddNewsForm/AddNewsForm";
 import AdminOrders from "../pages/AdminPanel/Orders/AdminOrders";
+import UnsubscribePage from "../pages/Unsubscribe/UnsubscribePage";
 
 const AppRoute = () => {
   const { isLogin, data } = useSelector(selectCustomers);
@@ -62,7 +64,12 @@ const AppRoute = () => {
           path="/compare-products"
           element={isLogin ? <ComparisonProducts /> : <Navigate to="/" />}
         />
+        <Route
+          path="/checkout-confirm-page"
+          element={isLogin ? <CheckoutConfirmPage /> : <Navigate to="/" />}
+        />
         <Route path="/error" element={<NotFoundPage />} />
+        <Route path="/unsubscribe" element={<UnsubscribePage />} />
       </Route>
       <Route
         path="/admin"
