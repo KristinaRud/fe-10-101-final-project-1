@@ -72,14 +72,16 @@ const filtersSlice = createSlice({
   extraReducers: (builder) => {
     builder.addCase(fetchFiltersData.fulfilled, (state, action) => {
       const objByType = {};
-      action.payload.forEach((obj) => {
-        const { type } = obj;
-        if (type in objByType) {
-          objByType[type].push(obj);
-        } else {
-          objByType[type] = [obj];
-        }
-      });
+      if (Array.isArray(action.payload)) {
+        action.payload.forEach((obj) => {
+          const { type } = obj;
+          if (type in objByType) {
+            objByType[type].push(obj);
+          } else {
+            objByType[type] = [obj];
+          }
+        });
+      }
       state.filtersData = Object.values(objByType);
       state.isLoading = false;
       state.error = null;
