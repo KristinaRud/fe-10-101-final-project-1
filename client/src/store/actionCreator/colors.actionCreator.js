@@ -14,4 +14,42 @@ const fetchColors = createAsyncThunk(
   },
 );
 
-export { fetchColors };
+const deleteColor = createAsyncThunk("colors/deleteColor", async (id) => {
+  const { res, err } = await request({
+    url: `/colors/${id}`,
+    method: "DELETE",
+  });
+  if (res) {
+    return id;
+  }
+  throw new Error(`Couldn't delete color: ${err.data}`);
+});
+
+const addColor = createAsyncThunk("colors/addColor", async (color) => {
+  const { res, err } = await request({
+    url: "/colors",
+    method: "POST",
+    body: color,
+  });
+  if (res) {
+    return res;
+  }
+  throw new Error(`Couldn't add color: ${err.data}`);
+});
+
+const updateColor = createAsyncThunk(
+  "colors/updateColor",
+  async ({ color, id }) => {
+    const { res, err } = await request({
+      url: `/colors/${id}`,
+      method: "PUT",
+      body: color,
+    });
+    if (res) {
+      return res;
+    }
+    throw new Error(`Couldn't update color: ${err.data}`);
+  },
+);
+
+export { fetchColors, deleteColor, addColor, updateColor };
