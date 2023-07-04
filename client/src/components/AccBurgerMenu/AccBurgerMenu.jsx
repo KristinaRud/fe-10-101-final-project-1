@@ -5,11 +5,12 @@ import Menu from "@mui/material/Menu";
 import PersonIcon from "@mui/icons-material/Person";
 import MenuItem from "@mui/material/MenuItem";
 import { useDispatch, useSelector } from "react-redux";
-import { Avatar, Divider } from "@mui/material";
+import { Avatar, Box, Divider } from "@mui/material";
 import SettingsSuggestIcon from "@mui/icons-material/SettingsSuggest";
 import FavoriteBorderIcon from "@mui/icons-material/FavoriteBorder";
 import BarChartIcon from "@mui/icons-material/BarChart";
 import LogoutIcon from "@mui/icons-material/Logout";
+import AdminPanelSettingsIcon from "@mui/icons-material/AdminPanelSettings";
 import Button from "../Button/Button";
 import styles from "./AccBurgerMenu.module.scss";
 import { selectCustomers } from "../../store/selectors/customers.selector";
@@ -95,25 +96,35 @@ const AccBurgerMenu = ({ counterWishList }) => {
     <>
       {isLogin ? (
         <>
-          <Button
-            className={styles["btn-account"]}
-            open={Boolean(anchorAccBurgMenu)}
-            onClose={handleCloseAccMenu}
-            onClick={handleOpenAccMenu}
-          >
-            {Object.keys(data).length !== 0 ? (
-              <Avatar
-                {...stringAvatar(`${data.firstName} ${data.lastName}`)}
-                sx={{ width: 34, height: 34, fontSize: 16 }}
-              />
-            ) : (
-              <PersonIcon
-                sx={{
-                  color: { xs: "#FFFFFF", md: "#FFFFFF", lg: "#000000" },
-                }}
-              />
+          <Box display={"flex"} gap={2}>
+            <Button
+              className={styles["btn-account"]}
+              open={Boolean(anchorAccBurgMenu)}
+              onClose={handleCloseAccMenu}
+              onClick={handleOpenAccMenu}
+            >
+              {Object.keys(data).length !== 0 ? (
+                <Avatar
+                  {...stringAvatar(`${data.firstName} ${data.lastName}`)}
+                  sx={{ width: 34, height: 34, fontSize: 16 }}
+                />
+              ) : (
+                <PersonIcon
+                  sx={{
+                    color: { xs: "#FFFFFF", md: "#FFFFFF", lg: "#000000" },
+                  }}
+                />
+              )}
+            </Button>
+            {Object.keys(data).length > 0 && data.isAdmin && (
+              <Button
+                onClick={() => navigate("/admin")}
+                className={styles.adminBtn}
+              >
+                <AdminPanelSettingsIcon />
+              </Button>
             )}
-          </Button>
+          </Box>
           <Menu
             anchorEl={anchorAccBurgMenu}
             id="account-menu"

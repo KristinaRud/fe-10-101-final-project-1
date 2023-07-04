@@ -14,4 +14,45 @@ const fetchFiltersData = createAsyncThunk(
   },
 );
 
-export { fetchFiltersData };
+const deleteFilterData = createAsyncThunk(
+  "filters/deleteFilter",
+  async (id) => {
+    const { res, err } = await request({
+      url: `/filters/${id}`,
+      method: "DELETE",
+    });
+    if (res) {
+      return id;
+    }
+    throw new Error(`Couldn't delete filter: ${JSON.stringify(err.data)}`);
+  },
+);
+
+const addFilterData = createAsyncThunk("filters/addFilter", async (filter) => {
+  const { res, err } = await request({
+    url: "/filters",
+    method: "POST",
+    body: filter,
+  });
+
+  if (res) {
+    return res;
+  }
+  throw new Error(`Couldn't add filter: ${JSON.stringify(err.data)}`);
+});
+
+const updateFilterData = createAsyncThunk(
+  "filters/updateFilter",
+  async ({ filter, id }) => {
+    const { res, err } = await request({
+      url: `/filters/${id}`,
+      method: "PUT",
+      body: filter,
+    });
+    if (res) {
+      return res;
+    }
+    throw new Error(`Couldn't update filter: ${JSON.stringify(err.data)}`);
+  },
+);
+export { fetchFiltersData, deleteFilterData, addFilterData, updateFilterData };

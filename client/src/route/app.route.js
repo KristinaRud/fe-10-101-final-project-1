@@ -18,10 +18,23 @@ import CheckoutConfirmPage from "../pages/CheckoutConfirm/CheckoutConfirmPage";
 import NotFoundPage from "../pages/NotFound/NotFound";
 import Layout from "../pages/Layout/Loyaut";
 import AdminPanel from "../pages/AdminPanel/AdminPanel";
+import AdminCategories from "../pages/AdminPanel/Categories/AdminCategories";
+import CollectionTable from "../components/Admin/Category/CollectionTable/CollectionTable";
+import AddNewForm from "../components/Admin/Category/AddNewForm/AddNewForm";
+import AdminProducts from "../pages/AdminPanel/Products/AdminProducts";
+import ProductsTable from "../components/Admin/Products/ProductsTable/ProductsTable";
+import AddNewProductForm from "../components/Admin/Products/AddNewProductForm/AddNewProductForm";
+import AdminFilters from "../pages/AdminPanel/Filters/AdminFilters";
+import FiltersTable from "../components/Admin/Filters/FiltersTable/FiltersTable";
+import AddNewFiltersForm from "../components/Admin/Filters/AddNewFiltersForm/AddNewFiltersForm";
+import AdminNews from "../pages/AdminPanel/News/AdminNews";
+import NewsTable from "../components/Admin/News/NewsTable/NewsTable";
+import AddNewsForm from "../components/Admin/News/AddNewsForm/AddNewsForm";
+import AdminOrders from "../pages/AdminPanel/Orders/AdminOrders";
 import UnsubscribePage from "../pages/Unsubscribe/UnsubscribePage";
 
 const AppRoute = () => {
-  const { isLogin } = useSelector(selectCustomers);
+  const { isLogin, data } = useSelector(selectCustomers);
 
   return (
     <Routes>
@@ -58,7 +71,38 @@ const AppRoute = () => {
         <Route path="/error" element={<NotFoundPage />} />
         <Route path="/unsubscribe" element={<UnsubscribePage />} />
       </Route>
-      <Route path="/admin" element={<AdminPanel />} />
+      <Route
+        path="/admin"
+        element={
+          Object.keys(data).length > 0 && data.isAdmin ? (
+            <AdminPanel />
+          ) : (
+            <Navigate to="/" />
+          )
+        }
+      >
+        <Route path="categories" element={<AdminCategories />}>
+          <Route path="" element={<CollectionTable />} />
+          <Route path="new" element={<AddNewForm />} />
+          <Route path=":category" element={<AddNewForm />} />
+        </Route>
+        <Route path="products" element={<AdminProducts />}>
+          <Route path="" element={<ProductsTable />} />
+          <Route path="new" element={<AddNewProductForm />} />
+          <Route path=":product" element={<AddNewProductForm />} />
+        </Route>
+        <Route path={"filters"} element={<AdminFilters />}>
+          <Route path="" element={<FiltersTable />} />
+          <Route path="new" element={<AddNewFiltersForm />} />
+          <Route path=":filter" element={<AddNewFiltersForm />} />
+        </Route>
+        <Route path={"news"} element={<AdminNews />}>
+          <Route path="" element={<NewsTable />} />
+          <Route path="new" element={<AddNewsForm />} />
+          <Route path=":news" element={<AddNewsForm />} />
+        </Route>
+        <Route path={"orders"} element={<AdminOrders />} />
+      </Route>
     </Routes>
   );
 };

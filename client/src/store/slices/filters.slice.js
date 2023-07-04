@@ -1,6 +1,11 @@
 import { createSlice } from "@reduxjs/toolkit";
 import { urlParser } from "../../utils/queryParams/urlParser";
-import { fetchFiltersData } from "../actionCreator/filters.actionCreator";
+import {
+  fetchFiltersData,
+  deleteFilterData,
+  addFilterData,
+  updateFilterData,
+} from "../actionCreator/filters.actionCreator";
 
 const searchParams = new URLSearchParams(window.location.search);
 const initialState = {
@@ -92,6 +97,40 @@ const filtersSlice = createSlice({
     });
     builder.addCase(fetchFiltersData.pending, (state) => {
       state.isLoading = true;
+    });
+    builder.addCase(deleteFilterData.fulfilled, (state, action) => {
+      state.filtersData = state.filtersData.map((arr) => {
+        return arr.filter((obj) => {
+          return obj._id !== action.payload;
+        });
+      });
+    });
+    builder.addCase(addFilterData.fulfilled, (state, action) => {
+      let isTypeExist = false;
+      state.filtersData.forEach((arr) => {
+        if (arr[0].type === action.payload.type) {
+          isTypeExist = true;
+        }
+      });
+      if (isTypeExist) {
+        state.filtersData.forEach((arr) => {
+          if (arr[0].type === action.payload.type) {
+            arr.push(action.payload);
+          }
+        });
+      } else {
+        state.filtersData.push([action.payload]);
+      }
+    });
+    builder.addCase(updateFilterData.fulfilled, (state, action) => {
+      state.filtersData = state.filtersData.map((arr) => {
+        return arr.map((obj) => {
+          if (obj._id === action.payload._id) {
+            return action.payload;
+          }
+          return obj;
+        });
+      });
     });
   },
 });
