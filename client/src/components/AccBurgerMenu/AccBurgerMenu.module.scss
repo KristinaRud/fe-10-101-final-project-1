@@ -28,3 +28,11 @@
     }
   }
 }
+
+.adminBtn {
+  border-radius: 50px;
+
+  &:hover {
+    background-color: #A2A6B0;
+  }
+}

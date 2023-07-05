@@ -39,4 +39,37 @@ const debouncedFetchProductsForSearch = debounce((data, dispatch) => {
 const debouncedSearch = (arg) => (dispatch) =>
   debouncedFetchProductsForSearch(arg, dispatch);
 
-export { fetchProducts, fetchProductsForSearch, debouncedSearch };
+const addProduct = createAsyncThunk("products/addProduct", async (data) => {
+  const { res, err } = await request({
+    url: "/products",
+    method: "POST",
+    body: data,
+  });
+  if (res) {
+    return res;
+  }
+  throw new Error(`Couldn't add product: ${JSON.stringify(err.data)}`);
+});
+
+const updateProduct = createAsyncThunk(
+  "products/updateProduct",
+  async ({ id, data }) => {
+    const { res, err } = await request({
+      url: `/products/${id}`,
+      method: "PUT",
+      body: data,
+    });
+    if (res) {
+      return res;
+    }
+    throw new Error(`Couldn't update product: ${JSON.stringify(err.data)}`);
+  },
+);
+
+export {
+  fetchProducts,
+  fetchProductsForSearch,
+  debouncedSearch,
+  addProduct,
+  updateProduct,
+};

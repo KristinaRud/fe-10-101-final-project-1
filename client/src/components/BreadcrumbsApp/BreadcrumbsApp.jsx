@@ -7,7 +7,7 @@ import s from "./BreadcrumbsApp.module.scss";
 import { formatString } from "../../utils/string/formatString";
 import { replaceDashWithSpace } from "../../utils/string/replaceDashWithSpace";
 
-const BreadcrumbsApp = ({ breadcrumbsCustomData }) => {
+const BreadcrumbsApp = ({ breadcrumbsCustomData, sx }) => {
   const location = useLocation();
   const { pathname } = location;
   const breadcrumbsData = breadcrumbsCustomData || parseBreadcrumbUrl(pathname);
@@ -18,6 +18,7 @@ const BreadcrumbsApp = ({ breadcrumbsCustomData }) => {
         separator={<NavigateNextIcon fontSize="small" />}
         aria-label="breadcrumb"
         className={s.list}
+        sx={{ padding: "20px 20px 0", ...sx }}
       >
         {breadcrumbsData.map(({ url, label }) => (
           <Link to={url} key={label} className={s.link}>
@@ -38,4 +39,6 @@ BreadcrumbsApp.propTypes = {
       url: PropTypes.string,
     }),
   ),
+  // eslint-disable-next-line react/forbid-prop-types
+  sx: PropTypes.object,
 };
