@@ -25,7 +25,7 @@ const SearchItem = ({
           {name}
         </Typography>
         <Typography variant="h5" component="div" fontSize="12px">
-          {currentPrice}.00 ₴
+          {currentPrice.toLocaleString()}.00 ₴
         </Typography>
       </ListItem>
     </Link>
