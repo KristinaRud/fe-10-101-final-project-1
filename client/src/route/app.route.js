@@ -34,8 +34,8 @@ import AdminOrders from "../pages/AdminPanel/Orders/AdminOrders";
 import UnsubscribePage from "../pages/Unsubscribe/UnsubscribePage";
 
 const AppRoute = () => {
-  const { isLogin, data } = useSelector(selectCustomers);
-
+  const { isLogin } = useSelector(selectCustomers);
+  const isAdmin = window.localStorage.getItem("isAdmin");
   return (
     <Routes>
       <Route path="/" element={<Layout />}>
@@ -73,13 +73,7 @@ const AppRoute = () => {
       </Route>
       <Route
         path="/admin"
-        element={
-          Object.keys(data).length > 0 && data.isAdmin ? (
-            <AdminPanel />
-          ) : (
-            <Navigate to="/" />
-          )
-        }
+        element={isAdmin ? <AdminPanel /> : <Navigate to="/" />}
       >
         <Route path="categories" element={<AdminCategories />}>
           <Route path="" element={<CollectionTable />} />

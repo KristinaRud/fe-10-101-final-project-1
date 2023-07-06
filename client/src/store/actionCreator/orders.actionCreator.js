@@ -67,4 +67,23 @@ const getProductsFromCart = createAsyncThunk(
   },
 );
 
-export { fetchOrders, createOrder, getProductsFromCart, getOrderByOrderNo };
+const getFilteredOrders = createAsyncThunk(
+  "orders/getFilteredOrders",
+  async (queryStr) => {
+    const { res, err } = await request({
+      url: `/orders/filter${queryStr}`,
+    });
+    if (res) {
+      return res;
+    }
+    throw new Error(`Couldn't get orders: ${err.data}`);
+  },
+);
+
+export {
+  fetchOrders,
+  createOrder,
+  getProductsFromCart,
+  getOrderByOrderNo,
+  getFilteredOrders,
+};

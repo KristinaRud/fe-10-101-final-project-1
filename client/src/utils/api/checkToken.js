@@ -10,6 +10,7 @@ export const checkToken = (token) => {
       return true;
     }
     window.localStorage.removeItem("token");
+    window.localStorage.removeItem("isAdmin");
     setAuthToken(false);
     return false;
   }

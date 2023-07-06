@@ -41,6 +41,7 @@ const loginGoogle = createAsyncThunk(
 const logout = createAsyncThunk("customers/logout", async () => {
   setAuthToken(null);
   window.localStorage.removeItem("token");
+  window.localStorage.removeItem("isAdmin");
 });
 
 const getCustomer = createAsyncThunk("customers/getCustomer", async () => {
@@ -49,6 +50,9 @@ const getCustomer = createAsyncThunk("customers/getCustomer", async () => {
   });
 
   if (res) {
+    if (res.isAdmin) {
+      window.localStorage.setItem("isAdmin", res.isAdmin);
+    }
     return res;
   }
   throw new Error(`Couldn't get customer: ${err.data}`);

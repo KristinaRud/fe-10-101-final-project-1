@@ -83,7 +83,7 @@ const DrawerApp = ({ open, handleDrawerToggle }) => {
         <SidebarListItem
           title="Orders"
           open={open}
-          link="/orders"
+          link="/orders?perPage=10&startPage=1&sort=-date"
           icon={<TocIcon />}
         />
       </List>

@@ -38,7 +38,9 @@
     "sass": "^1.62.1",
     "slick-carousel": "^1.8.1",
     "web-vitals": "^2.1.4",
-    "yup": "^1.1.1"
+    "yup": "^1.1.1",
+    "react-date-range": "^1.4.0",
+    "react-export-table-to-excel": "^1.0.6"
   },
   "scripts": {
     "start": "react-scripts start",
