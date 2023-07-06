@@ -1,9 +1,7 @@
-/* eslint-disable react/prop-types */
 import { Box } from "@mui/material";
 import PropTypes from "prop-types";
 import styles from "./AddressBook.module.scss";
 
-// eslint-disable-next-line react/prop-types
 const AddressBook = ({ activeComponent, address }) => {
   return (
     <Box>
@@ -32,6 +30,13 @@ const AddressBook = ({ activeComponent, address }) => {
 
 AddressBook.propTypes = {
   activeComponent: PropTypes.string,
+  address: PropTypes.shape({
+    postOfficeBranch: PropTypes.shape({
+      CityDescription: PropTypes.string,
+      Description: PropTypes.string,
+    }),
+    postOffice: PropTypes.string,
+  }),
 };
 
 AddressBook.defaultProps = {

@@ -1,7 +1,7 @@
 /* eslint-disable jsx-a11y/anchor-is-valid */
 // eslint-disable-next-line no-unused-vars
 import { useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
+import { useParams, Link } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { Typography, Box, CircularProgress } from "@mui/material";
 import { getOrderByOrderNo } from "../../store/actionCreator/orders.actionCreator";
@@ -17,6 +17,7 @@ const OrderDetailsPage = () => {
   useEffect(() => {
     dispatch(getOrderByOrderNo(orderNo));
   }, [dispatch, orderNo]);
+
   if (isLoading) {
     return (
       <Box sx={{ margin: "40px" }} display="flex" justifyContent="center">
@@ -24,6 +25,47 @@ const OrderDetailsPage = () => {
       </Box>
     );
   }
+
+  const orderProducts = order?.products?.map(({ product, cartQuantity }) => {
+    return (
+      <div key={product._id} className={styles.order}>
+        <div className={styles.orderList}>
+          <div>
+            <img
+              className={styles.images}
+              src={product.imageUrls[0]}
+              alt="product"
+            />
+          </div>
+          <div className={styles.orderInfo}>
+            <h3 className={styles.orderTitle}>{product.brand}</h3>
+            <Link
+              to={`/${product.categories}/${product._id}`}
+              className={styles.graytxt}
+            >
+              {product.name}
+            </Link>
+            <p>
+              Quantity:
+              <span className={styles.graytxt}>
+                {cartQuantity} x&nbsp;
+                {product.currentPrice}
+              </span>
+            </p>
+          </div>
+        </div>
+        <div className={styles.price}>
+          <p className={styles.graytxt}>
+            <s>{order?.products[0].product.previousPrice} ₴</s>
+          </p>
+          <p className={styles.redtxt}>
+            {order?.products[0].product.currentPrice} ₴
+          </p>
+        </div>
+      </div>
+    );
+  });
+
   return (
     <>
       <Typography variant="h5" gutterBottom>
@@ -31,12 +73,12 @@ const OrderDetailsPage = () => {
       </Typography>
       <div>
         <p>
-          Дата оформлення замовлення:{" "}
+          Order placement date:{" "}
           {order?.date !== undefined
             ? order?.date.replace(/T.*/, "")
             : "Date is undefined"}
         </p>
-        <p>Статус замовлення: Відправлене</p>
+        <p>Order status: Sent</p>
       </div>
       <div className={styles.mainInfo}>
         <AddressBook
@@ -58,44 +100,10 @@ const OrderDetailsPage = () => {
             <b className="seller-name">TechnoKit</b> order
           </span>
           <span className="custom-label-additional">
-            <span className="store-order-number">№ {orderNo}</span> -
-            Відправлене
+            <span className="store-order-number">№ {orderNo}</span> - Sent
           </span>
         </div>
-        <div className={styles.order}>
-          <div className={styles.orderList}>
-            <div>
-              <img
-                className={styles.images}
-                src={order?.products[0].product.imageUrls[0]}
-                alt="product"
-              />
-            </div>
-            <div className={styles.orderInfo}>
-              <h3 className={styles.orderTitle}>
-                {order?.products[0].product.brand}
-              </h3>
-              <a href="#" className={styles.graytxt}>
-                {order?.products[0].product.name}
-              </a>
-              <p>
-                Quantity:
-                <span className={styles.graytxt}>
-                  {order?.products[0].cartQuantity} x&nbsp;
-                  {order?.products[0].product.currentPrice}
-                </span>
-              </p>
-            </div>
-          </div>
-          <div className={styles.price}>
-            <p className={styles.graytxt}>
-              <s>{order?.products[0].product.previousPrice}₴</s>
-            </p>
-            <p className={styles.redtxt}>
-              {order?.products[0].product.currentPrice}₴
-            </p>
-          </div>
-        </div>
+        {orderProducts}
       </div>
     </>
   );

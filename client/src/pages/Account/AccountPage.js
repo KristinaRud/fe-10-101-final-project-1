@@ -25,7 +25,6 @@ const AccountPage = () => {
   const { itemsWishList } = useSelector(selectWishList);
   const { isLogin } = useSelector(selectCustomers);
   const { allOrders } = useSelector(selectOrders);
-
   useEffect(() => {
     if (isLogin) {
       dispatch(getCustomer());
@@ -43,12 +42,11 @@ const AccountPage = () => {
   if (activeComponent === "Account Dashboard") {
     componentToRender = (
       <>
-        <AccountOrders
-          title="Last order"
-          arrayOrders={
-            allOrders.length > 0 ? [allOrders[allOrders.length - 1]] : []
-          }
-        />
+        <Routes>
+          <Route path="/" element={<AccountOrders title="Last order" />} />
+          <Route path="/orders/:orderNo" element={<OrderDetailsPage />} />
+        </Routes>
+
         <div className={styles.accinfo}>
           <UserInformation activeComponent={activeComponent} />
           <AddressBook
@@ -80,12 +78,7 @@ const AccountPage = () => {
       <Routes>
         <Route
           path="/orders"
-          element={
-            <AccountOrders
-              title="Order history"
-              arrayOrders={allOrders.length > 0 ? allOrders : []}
-            />
-          }
+          element={<AccountOrders title="Order history" />}
         />
         <Route path="/orders/:orderNo" element={<OrderDetailsPage />} />
       </Routes>

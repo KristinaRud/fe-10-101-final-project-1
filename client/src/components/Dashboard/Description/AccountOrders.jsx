@@ -1,20 +1,39 @@
-import { Box } from "@mui/material";
 import { Link } from "react-router-dom";
-import Table from "@mui/material/Table";
-import TableBody from "@mui/material/TableBody";
-import TableCell from "@mui/material/TableCell";
-import TableHead from "@mui/material/TableHead";
-import TableRow from "@mui/material/TableRow";
-import Typography from "@mui/material/Typography";
+import {
+  Table,
+  TableBody,
+  TableCell,
+  TableHead,
+  TableRow,
+  Typography,
+  Box,
+  CircularProgress,
+} from "@mui/material";
+import { useSelector } from "react-redux";
+import PropTypes from "prop-types";
 import styles from "./AccountOrders.module.scss";
+import { selectOrders } from "../../../store/selectors/orders.selector";
 
-// eslint-disable-next-line react/prop-types
-const AccountOrders = ({ title, arrayOrders }) => {
+const AccountOrders = ({ title }) => {
+  const { allOrders, isLoading } = useSelector(selectOrders);
+
+  if (isLoading) {
+    return (
+      <Box sx={{ margin: "40px" }} display="flex" justifyContent="center">
+        <CircularProgress />
+      </Box>
+    );
+  }
   let itemMenu;
+  let arrayOrders;
 
-  // eslint-disable-next-line react/prop-types
+  if (title === "Last order") {
+    arrayOrders = allOrders.length > 0 ? [allOrders[allOrders.length - 1]] : [];
+  } else {
+    arrayOrders = allOrders.length > 0 ? allOrders : [];
+  }
+
   if (arrayOrders.length > 0) {
-    // eslint-disable-next-line react/prop-types
     itemMenu = arrayOrders.map((el) => {
       return (
         <TableRow key={el._id}>
@@ -22,11 +41,11 @@ const AccountOrders = ({ title, arrayOrders }) => {
           <TableCell sx={{ color: "gray" }}>
             {el.date.replace(/T.*/, "")}
           </TableCell>
-          <TableCell sx={{ color: "gray" }}>${el.totalSum}</TableCell>
-          <TableCell sx={{ color: "gray" }}>Відправлене</TableCell>
+          <TableCell sx={{ color: "gray" }}>₴ {el.totalSum}</TableCell>
+          <TableCell sx={{ color: "gray" }}>Sent</TableCell>
           <TableCell sx={{ color: "#0156ff" }}>
             <Link to={`/account/orders/${el.orderNo}`} className={styles.link}>
-              Перевірити деталі
+              Check the details
             </Link>
           </TableCell>
         </TableRow>
@@ -62,3 +81,11 @@ const AccountOrders = ({ title, arrayOrders }) => {
   );
 };
 export default AccountOrders;
+
+AccountOrders.propTypes = {
+  title: PropTypes.string,
+};
+
+AccountOrders.defaultProps = {
+  title: " ",
+};

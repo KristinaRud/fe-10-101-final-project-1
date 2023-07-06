@@ -52,7 +52,7 @@ const SingleProduct = () => {
 
   useEffect(() => {
     if (products) {
-      const currentProduct = products.find((product) => product._id === id);
+      const currentProduct = products?.find((product) => product._id === id);
       const list = getDetailsList(currentProduct.characteristics);
       setCurrentProduct(currentProduct);
       setDetailsList(list);
