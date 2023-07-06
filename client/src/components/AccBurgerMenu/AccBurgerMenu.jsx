@@ -18,6 +18,7 @@ import SignInButton from "../Checkout/SignInButton/SignInButton";
 import {
   getCustomer,
   logout,
+  updateCustomer,
 } from "../../store/actionCreator/customers.actionCreator";
 import AlertDialog from "../Header/AlertDialog/AlertDialog";
 import { stringAvatar } from "../../utils/avatar/stringAvatar";
@@ -51,6 +52,9 @@ const AccBurgerMenu = ({ counterWishList }) => {
   };
 
   const handleActionDialog = () => {
+    if (data?.isAdmin) {
+      dispatch(updateCustomer({ lastVisit: Date.now() }));
+    }
     dispatch(logout());
     dispatch(deleteComparison());
     setOpenDialog(false);
@@ -91,6 +95,18 @@ const AccBurgerMenu = ({ counterWishList }) => {
       }
     }
   }, [dispatch, isLogin]);
+
+  useEffect(() => {
+    if (data?.isAdmin) {
+      const handleBeforeUnload = () => {
+        dispatch(updateCustomer({ lastVisit: Date.now() }));
+      };
+      window.addEventListener("beforeunload", handleBeforeUnload);
+      return () => {
+        window.removeEventListener("beforeunload", handleBeforeUnload);
+      };
+    }
+  }, [data?.isAdmin, dispatch]);
 
   return (
     <>

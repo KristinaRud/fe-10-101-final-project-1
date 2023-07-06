@@ -30,7 +30,7 @@ const CategoryImage = ({ setFieldValue, imgUrl, setImgUrl }) => {
           setLoading(false);
           setFieldValue("imgUrl", data.url);
         })
-        .catch((err) => console.log(err));
+        .catch(() => setLoading(true));
     },
     [setFieldValue, setImgUrl],
   );

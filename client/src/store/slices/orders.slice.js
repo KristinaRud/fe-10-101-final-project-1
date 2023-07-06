@@ -2,6 +2,7 @@ import { createSlice } from "@reduxjs/toolkit";
 import {
   createOrder,
   fetchOrders,
+  getFilteredOrders,
   getProductsFromCart,
 } from "../actionCreator/orders.actionCreator";
 
@@ -46,6 +47,10 @@ const ordersSlice = createSlice({
     });
     builder.addCase(createOrder.rejected, (state, action) => {
       state.error = action.error.message;
+    });
+    builder.addCase(getFilteredOrders.fulfilled, (state, action) => {
+      state.orders = action.payload;
+      state.error = null;
     });
   },
 });

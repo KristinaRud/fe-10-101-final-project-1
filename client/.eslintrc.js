@@ -26,6 +26,7 @@ module.exports = {
   plugins: ["react", "prettier"],
   rules: {
     "consistent-return": 0,
+    "func-names": 0,
     "import/no-extraneous-dependencies": 0,
     "no-param-reassign": 0,
     "import/prefer-default-export": 0,
