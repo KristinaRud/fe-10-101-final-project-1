@@ -3,11 +3,14 @@ import {
   createOrder,
   fetchOrders,
   getProductsFromCart,
+  getOrderByOrderNo,
 } from "../actionCreator/orders.actionCreator";
 
 const ordersSlice = createSlice({
   name: "orders",
   initialState: {
+    allOrders: [],
+    order: {},
     orders: {},
     products: [],
     isLoading: false,
@@ -16,6 +19,8 @@ const ordersSlice = createSlice({
   reducers: {
     clearOrders: (state) => {
       state.orders = {};
+      state.allOrders = [];
+      state.order = {};
       state.products = [];
       state.isLoading = false;
       state.error = null;
@@ -31,9 +36,20 @@ const ordersSlice = createSlice({
     });
     builder.addCase(fetchOrders.fulfilled, (state, action) => {
       state.isLoading = false;
-      state.orders = action.payload;
+      state.allOrders = action.payload;
     });
     builder.addCase(fetchOrders.rejected, (state, action) => {
+      state.isLoading = false;
+      state.error = action.payload;
+    });
+    builder.addCase(getOrderByOrderNo.pending, (state) => {
+      state.isLoading = true;
+    });
+    builder.addCase(getOrderByOrderNo.fulfilled, (state, action) => {
+      state.isLoading = false;
+      state.order = action.payload;
+    });
+    builder.addCase(getOrderByOrderNo.rejected, (state, action) => {
       state.isLoading = false;
       state.error = action.payload;
     });
