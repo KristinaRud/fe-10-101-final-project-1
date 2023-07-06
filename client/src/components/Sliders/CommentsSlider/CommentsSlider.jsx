@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
+import { Link } from "react-router-dom";
 import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
@@ -29,10 +30,16 @@ const CommentsSlider = () => {
           <Slider {...CommentsConfig}>
             {lastComments.map((item) => (
               <div key={item._id}>
-                <div className={styles.text_comment}>{item.content}</div>
-                <div className={styles.text_author}>
-                  - {item.customer.firstName} {item.customer.lastName}
-                </div>
+                <Link
+                  to={`/${item.product.categories.toLowerCase()}/${
+                    item.product._id
+                  }`}
+                >
+                  <div className={styles.text_comment}>{item.content}</div>
+                  <div className={styles.text_author}>
+                    - {item.customer.firstName} {item.customer.lastName}
+                  </div>
+                </Link>
               </div>
             ))}
           </Slider>

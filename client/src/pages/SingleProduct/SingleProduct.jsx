@@ -98,14 +98,10 @@ const SingleProduct = () => {
 
   useEffect(() => {
     if (products) {
-      const currentProduct = products.find((product) => product._id === id);
-      if (!currentProduct) {
-        window.location.href = "/error";
-      } else {
-        const list = getDetailsList(currentProduct.characteristics);
-        setCurrentProduct(currentProduct);
-        setDetailsList(list);
-      }
+      const currentProduct = products?.find((product) => product._id === id);
+      const list = getDetailsList(currentProduct.characteristics);
+      setCurrentProduct(currentProduct);
+      setDetailsList(list);
     }
   }, [id, products]);
 
@@ -212,7 +208,7 @@ const SingleProduct = () => {
                 <p className={styles.count__text}>
                   On Sale from{" "}
                   <span className={styles["count__text--bold"]}>
-                    {`${currentPrice}.00 ₴`}
+                    {`${currentPrice.toLocaleString()}.00 ₴`}
                   </span>
                 </p>
               </div>

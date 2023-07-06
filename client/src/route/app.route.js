@@ -52,7 +52,7 @@ const AppRoute = () => {
         <Route path="/contact" element={<ContactUs />} />
         <Route path="/terms-of-use" element={<TermsAndConditions />} />
         <Route
-          path="/account"
+          path="/account/*"
           element={isLogin ? <AccountPage /> : <LoginPage />}
         />
         <Route

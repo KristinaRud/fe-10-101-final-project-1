@@ -1,40 +1,91 @@
-import { Box } from "@mui/material";
+import { Link } from "react-router-dom";
+import {
+  Table,
+  TableBody,
+  TableCell,
+  TableHead,
+  TableRow,
+  Typography,
+  Box,
+  CircularProgress,
+} from "@mui/material";
 import { useSelector } from "react-redux";
+import PropTypes from "prop-types";
 import styles from "./AccountOrders.module.scss";
 import { selectOrders } from "../../../store/selectors/orders.selector";
 
-const AccountOrders = () => {
-  const { orders } = useSelector(selectOrders);
+const AccountOrders = ({ title }) => {
+  const { allOrders, isLoading } = useSelector(selectOrders);
+
+  if (isLoading) {
+    return (
+      <Box sx={{ margin: "40px" }} display="flex" justifyContent="center">
+        <CircularProgress />
+      </Box>
+    );
+  }
   let itemMenu;
-  if (orders.length) {
-    itemMenu = orders?.map((el) => {
+  let arrayOrders;
+
+  if (title === "Last order") {
+    arrayOrders = allOrders.length > 0 ? [allOrders[allOrders.length - 1]] : [];
+  } else {
+    arrayOrders = allOrders.length > 0 ? allOrders : [];
+  }
+
+  if (arrayOrders.length > 0) {
+    itemMenu = arrayOrders.map((el) => {
       return (
-        <li key={el._id} className={styles.item}>
-          <p>{el.date.replace(/T.*/, "")}</p>
-          <p>{el._id}</p>
-          <p>${el.totalSum}</p>
-        </li>
+        <TableRow key={el._id}>
+          <TableCell className={styles.noOrder}>{el.orderNo}</TableCell>
+          <TableCell sx={{ color: "gray" }}>
+            {el.date.replace(/T.*/, "")}
+          </TableCell>
+          <TableCell sx={{ color: "gray" }}>₴ {el.totalSum}</TableCell>
+          <TableCell sx={{ color: "gray" }}>Sent</TableCell>
+          <TableCell sx={{ color: "#0156ff" }}>
+            <Link to={`/account/orders/${el.orderNo}`} className={styles.link}>
+              Check the details
+            </Link>
+          </TableCell>
+        </TableRow>
       );
     });
+  } else {
+    itemMenu = "No your order";
   }
 
   return (
-    <Box>
-      <h3 className={styles.title}>Order history</h3>
-      <Box
-        sx={{
-          display: "flex",
-          gap: "30px",
-          flexWrap: "wrap",
-          justifyContent: "space-between",
-        }}
+    <Box sx={{ margin: 1 }}>
+      <Typography
+        variant="h6"
+        gutterBottom
+        component="div"
+        className={styles.title}
       >
-        <h4 className={styles.description}>Date ordered</h4>
-        <h4 className={styles.description}>Order No</h4>
-        <h4 className={styles.description}>Total amount</h4>
-      </Box>
-      <ul>{itemMenu}</ul>
+        {title}
+      </Typography>
+      <Table size="small" aria-label="purchases">
+        <TableHead>
+          <TableRow>
+            <TableCell>Order No</TableCell>
+            <TableCell>Date ordered</TableCell>
+            <TableCell>Total amount</TableCell>
+            <TableCell>Status order</TableCell>
+            <TableCell>Details</TableCell>
+          </TableRow>
+        </TableHead>
+        <TableBody>{itemMenu}</TableBody>
+      </Table>
     </Box>
   );
 };
 export default AccountOrders;
+
+AccountOrders.propTypes = {
+  title: PropTypes.string,
+};
+
+AccountOrders.defaultProps = {
+  title: " ",
+};

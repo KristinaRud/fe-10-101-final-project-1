@@ -2,6 +2,7 @@ import { Box, Typography } from "@mui/material";
 import { useSelector, useDispatch } from "react-redux";
 import { useEffect, useState } from "react";
 import useMediaQuery from "@mui/material/useMediaQuery";
+import { Routes, Route } from "react-router-dom";
 import styles from "./AccountPage.module.scss";
 import LeftSideMenu from "../../components/Dashboard/LeftSideMenu/LeftSideMenu";
 import AddressBook from "../../components/Dashboard/Description/AddressBook";
@@ -13,7 +14,9 @@ import CompareProducts from "../../components/LeftSidear/CompareProducts/Compare
 import { selectWishList } from "../../store/selectors/wishList.selector";
 import { selectCustomers } from "../../store/selectors/customers.selector";
 import { fetchWishList } from "../../store/actionCreator/wishList.actionCreator";
+import { selectOrders } from "../../store/selectors/orders.selector";
 import BreadcrumbsApp from "../../components/BreadcrumbsApp/BreadcrumbsApp";
+import OrderDetailsPage from "../OrderDetails/OrderDetailsPage";
 
 const AccountPage = () => {
   const dispatch = useDispatch();
@@ -21,7 +24,7 @@ const AccountPage = () => {
   const mediaMobile = useMediaQuery("(max-width: 480px)");
   const { itemsWishList } = useSelector(selectWishList);
   const { isLogin } = useSelector(selectCustomers);
-
+  const { allOrders } = useSelector(selectOrders);
   useEffect(() => {
     if (isLogin) {
       dispatch(getCustomer());
@@ -39,54 +42,86 @@ const AccountPage = () => {
   if (activeComponent === "Account Dashboard") {
     componentToRender = (
       <>
-        <UserInformation activeComponent={activeComponent} />
-        <AddressBook activeComponent={activeComponent} />
-        <AccountOrders />
+        <Routes>
+          <Route path="/" element={<AccountOrders title="Last order" />} />
+          <Route path="/orders/:orderNo" element={<OrderDetailsPage />} />
+        </Routes>
+
+        <div className={styles.accinfo}>
+          <UserInformation activeComponent={activeComponent} />
+          <AddressBook
+            activeComponent={activeComponent}
+            address={
+              allOrders.length > 0 || allOrders !== undefined
+                ? allOrders[allOrders.length - 1]
+                : "You have not set a default billing address."
+            }
+          />
+        </div>
       </>
     );
   } else if (activeComponent === "Account Information") {
     componentToRender = <UserInformation />;
   } else if (activeComponent === "Address Book") {
-    componentToRender = <AddressBook />;
+    componentToRender = (
+      <AddressBook
+        activeComponent={activeComponent}
+        address={
+          allOrders.length > 0 || allOrders !== undefined
+            ? allOrders[allOrders.length - 1]
+            : "You have not set a default billing address."
+        }
+      />
+    );
   } else if (activeComponent === "My Orders") {
-    componentToRender = <AccountOrders />;
+    componentToRender = (
+      <Routes>
+        <Route
+          path="/orders"
+          element={<AccountOrders title="Order history" />}
+        />
+        <Route path="/orders/:orderNo" element={<OrderDetailsPage />} />
+      </Routes>
+    );
   }
 
   return (
-    <Box
-      sx={{
-        margin: "10px auto",
-        maxWidth: "1400px",
-        padding: { xs: "0 15px", sm: "0 15px", xlg: "0" },
-      }}
-    >
-      {" "}
-      <BreadcrumbsApp />
-      <Typography variant="h2" className={styles.title}>
-        My Dashboard
-      </Typography>
+    <>
       <Box
         sx={{
-          display: { md: "flex", xl: "flex" },
-          gap: { sm: "40px", md: "40px", xl: "80px" },
+          margin: "10px auto",
+          maxWidth: "1400px",
+          padding: { xs: "0 15px", sm: "0 15px", xlg: "0" },
         }}
       >
-        <LeftSideMenu onItemClick={handleMenuItemClick} />
-        <Box sx={{ marginBottom: "50px", width: "100%" }}>
-          {componentToRender}
+        {" "}
+        <BreadcrumbsApp />
+        <Typography variant="h2" className={styles.title}>
+          My Dashboard
+        </Typography>
+        <Box
+          sx={{
+            display: { md: "flex", xl: "flex" },
+            gap: { sm: "40px", md: "40px", xl: "80px" },
+          }}
+        >
+          <LeftSideMenu onItemClick={handleMenuItemClick} />
+          <Box sx={{ marginBottom: "50px", width: "100%" }}>
+            {componentToRender}
+          </Box>
+          {mediaMobile && (
+            <CompareProducts classname={styles["wrapper-compare"]} />
+          )}
+          {mediaMobile && (
+            <CompareProducts
+              isFavourite
+              data={itemsWishList}
+              classname={styles["wrapper-compare"]}
+            />
+          )}
         </Box>
-        {mediaMobile && (
-          <CompareProducts classname={styles["wrapper-compare"]} />
-        )}
-        {mediaMobile && (
-          <CompareProducts
-            isFavourite
-            data={itemsWishList}
-            classname={styles["wrapper-compare"]}
-          />
-        )}
       </Box>
-    </Box>
+    </>
   );
 };
 

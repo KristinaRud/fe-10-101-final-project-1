@@ -1,6 +1,19 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
 import request from "../../utils/api/request";
 
+const getOrderByOrderNo = createAsyncThunk(
+  "orders/getOrderByOrderNo",
+  async (orderNo) => {
+    const { res, err } = await request({
+      url: `/orders/${orderNo}`,
+    });
+    if (res) {
+      return res;
+    }
+    throw new Error(`Couldn't get order: ${err.data}`);
+  },
+);
+
 const fetchOrders = createAsyncThunk("orders/fetchOrders", async () => {
   const { res, err } = await request({
     url: `/orders`,
@@ -67,4 +80,10 @@ const getFilteredOrders = createAsyncThunk(
   },
 );
 
-export { fetchOrders, createOrder, getProductsFromCart, getFilteredOrders };
+export {
+  fetchOrders,
+  createOrder,
+  getProductsFromCart,
+  getOrderByOrderNo,
+  getFilteredOrders,
+};
