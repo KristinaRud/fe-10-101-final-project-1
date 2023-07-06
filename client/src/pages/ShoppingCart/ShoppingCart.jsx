@@ -97,7 +97,7 @@ const ShoppingCart = () => {
       : 0;
 
   const tax = subtotalAmount * 0.08;
-  const shipping = 100;
+  const shipping = subtotalAmount > 0 ? 100 : 0;
   const totalAmount = subtotalAmount + tax + shipping;
 
   const handleDeleteItem = async (id) => {
@@ -191,7 +191,7 @@ const ShoppingCart = () => {
                   className={classes.boxContainer}
                 >
                   <Typography align="right">
-                    {item.currentPrice}.00 ₴
+                    {item.currentPrice.toLocaleString()}.00 ₴
                   </Typography>
                   <TextField
                     type="number"
@@ -231,7 +231,8 @@ const ShoppingCart = () => {
                     }
                   />
                   <Typography align="right">
-                    {item.currentPrice * item.cartQuantity}.00 ₴
+                    {(item.currentPrice * item.cartQuantity).toLocaleString()}
+                    .00 ₴
                   </Typography>
                   <IconButton
                     aria-label="Delete"
@@ -330,7 +331,7 @@ const ShoppingCart = () => {
               <Button
                 variant="contained"
                 className={classes.checkoutButton}
-                disabled={!itemsCart}
+                disabled={subtotalAmount === 0}
                 onClick={() => navigate("/checkout")}
               >
                 Proceed to Checkout

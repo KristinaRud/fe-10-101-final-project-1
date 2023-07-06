@@ -42,7 +42,21 @@ const Header = ({ open, handleDrawerToggle }) => {
       <Box display="flex" gap="20px">
         <Notification />
         <Link to={"/"}>
-          <Button variant={"outlined"}>Go to website</Button>
+          <Button
+            variant={"outlined"}
+            sx={{
+              border: "2px solid #0156FF",
+              borderRadius: "50px",
+              color: "#0156FF",
+              "&:hover": {
+                border: "2px solid #0156FF",
+                backgroundColor: "#0156FF",
+                color: "white",
+              },
+            }}
+          >
+            Go to website
+          </Button>
         </Link>
       </Box>
     </Toolbar>

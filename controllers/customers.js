@@ -6,6 +6,8 @@ const getConfigs = require("../config/getConfigs");
 const uniqueRandom = require("unique-random");
 const rand = uniqueRandom(10000000, 99999999);
 const verifyGoogleToken = require("../commonHelpers/verifyGoogleToken");
+const generatePassword = require("../commonHelpers/generatePassword");
+const letterForgotPassword = require("../commonHelpers/letterForgotPassword");
 
 // Load Customer model
 const Customer = require("../models/Customer");
@@ -15,6 +17,7 @@ const validateRegistrationForm = require("../validation/validationHelper");
 
 // Load helper for creating correct query to save customer to DB
 const queryCreator = require("../commonHelpers/queryCreator");
+const sendMail = require("../commonHelpers/mailSender");
 
 // Controller for creating customer and saving to DB
 exports.createCustomer = (req, res, next) => {
@@ -317,3 +320,48 @@ exports.updatePassword = (req, res) => {
         });
     });
 };
+
+// Controller for forgot password
+exports.forgotPassword = async (req, res) => {
+const email = req.body.email;
+    let customer = await Customer.findOne({email: email});
+    if(!customer){
+        return res.status(404).json({message: 'Customer not found. Please, check your email'})
+    }
+    let newPassword = generatePassword();
+
+    const letterSubject = "Password recovery";
+    const letterHtml = letterForgotPassword(newPassword);
+
+    bcrypt.genSalt(10, (err, salt) => {
+        bcrypt.hash(newPassword, salt, (err, hash) => {
+            if (err) throw err;
+            newPassword = hash;
+            Customer.findOneAndUpdate(
+                {email: email},
+                {
+                    $set: {
+                        password: newPassword
+                    }
+                },
+                {new: true}
+            )
+                .then( async customer => {
+                    const letter = await sendMail(
+                        email,
+                        letterSubject,
+                        letterHtml,
+                        res
+                    );
+                    res.json({
+                        message: "New password successfully sent to email",
+                    });
+                })
+                .catch(err =>
+                    res.status(400).json({
+                        message: `Error happened on server: "${err}" `
+                    })
+                );
+        });
+    });
+}

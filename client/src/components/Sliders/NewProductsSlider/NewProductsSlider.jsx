@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
+import { Box, CircularProgress } from "@mui/material";
 import { useSelector } from "react-redux";
 import { selectProducts } from "../../../store/selectors/products.selector";
 import ProductCard from "../../ProductCard/ProductCard";
@@ -27,20 +28,27 @@ const NewProductSlider = () => {
       <Slider {...NewProductsConfig}>
         {newProducts.map((item) => (
           <div key={item.itemNo} className={styles.card}>
-            <ProductCard
-              id={item._id}
-              image={item.imageUrls[0]}
-              title=""
-              description={item.name}
-              oldPrice={item.previousPrice}
-              currentPrice={item.currentPrice}
-              available={item.quantity > 5}
-              rating={Number(item.rating)}
-              alt={item.name}
-              categories={item.categories}
-              name={item.name}
-              itemNo={item.itemNo}
-            />
+            {newProducts.length > 0 ? (
+              <ProductCard
+                id={item._id}
+                image={item.imageUrls[0]}
+                title=""
+                description={item.name}
+                oldPrice={item.previousPrice}
+                currentPrice={item.currentPrice}
+                available={item.quantity > 5}
+                rating={Number(item.rating)}
+                alt={item.name}
+                categories={item.categories}
+                name={item.name}
+                itemNo={item.itemNo}
+                enabled={item.enabled}
+              />
+            ) : (
+              <Box sx={{ margin: "40px" }} justifyContent="center">
+                <CircularProgress />
+              </Box>
+            )}
           </div>
         ))}
       </Slider>

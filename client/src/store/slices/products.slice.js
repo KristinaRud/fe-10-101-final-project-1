@@ -2,6 +2,8 @@ import { createSlice } from "@reduxjs/toolkit";
 import {
   fetchProductsForSearch,
   fetchProducts,
+  addProduct,
+  updateProduct,
 } from "../actionCreator/products.actionCreator";
 
 const productsSlice = createSlice({
@@ -37,6 +39,32 @@ const productsSlice = createSlice({
     });
     builder.addCase(fetchProductsForSearch.pending, (state) => {
       state.isSearchLoading = true;
+    });
+    builder.addCase(addProduct.fulfilled, (state, action) => {
+      state.products.products.push(action.payload);
+      state.isLoading = false;
+      state.error = null;
+    });
+    builder.addCase(addProduct.pending, (state) => {
+      state.isLoading = true;
+    });
+    builder.addCase(addProduct.rejected, (state, action) => {
+      state.isLoading = false;
+      state.error = action.error.message;
+    });
+    builder.addCase(updateProduct.fulfilled, (state, action) => {
+      state.products.products = state.products.products.map((product) =>
+        product._id === action.payload._id ? action.payload : product,
+      );
+      state.isLoading = false;
+      state.error = null;
+    });
+    builder.addCase(updateProduct.pending, (state) => {
+      state.isLoading = true;
+    });
+    builder.addCase(updateProduct.rejected, (state, action) => {
+      state.isLoading = false;
+      state.error = action.error.message;
     });
   },
 });

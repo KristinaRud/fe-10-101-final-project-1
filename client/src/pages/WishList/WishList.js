@@ -3,9 +3,6 @@ import {
   Button,
   Divider,
   Grid,
-  Step,
-  StepLabel,
-  Stepper,
   Typography,
   useMediaQuery,
 } from "@mui/material";
@@ -18,12 +15,13 @@ import { selectWishList } from "../../store/selectors/wishList.selector";
 import ProductCard from "../../components/ProductCard/ProductCard";
 import BreadcrumbsApp from "../../components/BreadcrumbsApp/BreadcrumbsApp";
 import { setItems, deleteWish } from "../../store/slices/wishList.slice";
+import { addAllToCart } from "../../store/slices/shoppingCart.slice";
 import { selectCustomers } from "../../store/selectors/customers.selector";
 import {
   fetchWishList,
   deleteWishList,
 } from "../../store/actionCreator/wishList.actionCreator";
-import s from "../../components/Checkout/OrderSummary/OrderSummary.module.scss";
+import { putProductsToCartLogin } from "../../store/actionCreator/shoppingCart.actionCreator";
 
 const WishList = () => {
   const dispatch = useDispatch();
@@ -47,6 +45,13 @@ const WishList = () => {
       await dispatch(deleteWishList());
     } else {
       dispatch(deleteWish());
+    }
+  };
+  const handleAllToCart = async () => {
+    if (isLogin) {
+      await dispatch(putProductsToCartLogin(itemsWishList));
+    } else {
+      dispatch(addAllToCart(itemsWishList));
     }
   };
 
@@ -112,22 +117,6 @@ const WishList = () => {
           </Grid>
         </Box>
         <Box className={classes.summaryWrapper}>
-          <Stepper alternativeLabel className={s.stepper}>
-            <Step>
-              <Link to={"/shopping-cart"}>
-                <StepLabel className={s.stepLast} sx={{ cursor: "pointer" }}>
-                  Shopping Cart
-                </StepLabel>
-              </Link>
-            </Step>
-
-            <Step>
-              <StepLabel className={s.stepLast}>Shipping</StepLabel>
-            </Step>
-            <Step>
-              <StepLabel className={s.stepLast}>Review & Payments</StepLabel>
-            </Step>
-          </Stepper>
           <Box className={classes.summary}>
             <Typography
               variant="h5"
@@ -179,11 +168,14 @@ const WishList = () => {
                   .replace(/\B(?=(\d{3})+(?!\d))/g, " ")} ₴`}
               </Typography>
             </div>
-            <Link to={"/shopping-cart"}>
-              <Button variant="contained" className={classes.checkoutButton}>
-                Continue Checkout
-              </Button>
-            </Link>
+
+            <Button
+              variant="contained"
+              className={classes.checkoutButton}
+              onClick={handleAllToCart}
+            >
+              Add all to cart
+            </Button>
           </Box>
         </Box>
       </Box>

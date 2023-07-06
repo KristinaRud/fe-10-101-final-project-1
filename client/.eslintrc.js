@@ -27,6 +27,7 @@ module.exports = {
   rules: {
     "consistent-return": 0,
     "import/no-extraneous-dependencies": 0,
+    "import/no-unresolved": "off",
     "no-param-reassign": 0,
     "import/prefer-default-export": 0,
     "linebreak-style": 0,
