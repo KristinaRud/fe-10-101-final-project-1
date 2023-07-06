@@ -18,10 +18,10 @@ const Reviews = ({ productId }) => {
   }, [dispatch, productId]);
 
   return (
-    <Box sx={{ maxHeight: "400px", overflow: "auto" }}>
+    <Box className={styles.review_box}>
       {comments.length > 0 ? (
-        comments.map((comment) => (
-          <Card key={comment._id} sx={{ mt: 1, mb: 1, p: 2 }}>
+        comments.map((comment, index) => (
+          <Card key={comment._id} sx={{ p: 2, mt: index !== 0 ? 1 : 0 }}>
             <Rating
               name="products-small"
               value={comment.rating}

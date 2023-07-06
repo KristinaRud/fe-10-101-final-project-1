@@ -212,7 +212,7 @@ const SingleProduct = () => {
                 <p className={styles.count__text}>
                   On Sale from{" "}
                   <span className={styles["count__text--bold"]}>
-                    {`${currentPrice}.00 ₴`}
+                    {`${currentPrice.toLocaleString()}.00 ₴`}
                   </span>
                 </p>
               </div>

@@ -60,9 +60,11 @@ const ComparisonHeaderCell = ({ column }) => {
         color="text.secondary"
         sx={{ textDecoration: "line-through" }}
       >
-        {column.previousPrice}.00 ₴
+        {column.previousPrice.toLocaleString()}.00 ₴
       </Typography>
-      <Typography variant={"body1"}>{column.currentPrice}.00 ₴</Typography>
+      <Typography variant={"body1"}>
+        {column.currentPrice.toLocaleString()}.00 ₴
+      </Typography>
       <Link to={`/${column.categories.toLowerCase()}/${column._id}`}>
         <Typography variant={"body1"} className={styles.textLimit}>
           {column.name}
