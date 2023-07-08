@@ -63,11 +63,15 @@ const ProductCardFull = ({
   };
 
   useEffect(() => {
+    let cleanupFunction = false;
     dispatch(fetchCommentsByProduct(id))
       .unwrap()
       .then((comments) => {
-        setComments(comments);
+        if (!cleanupFunction) setComments(comments);
       });
+    return () => {
+      cleanupFunction = true;
+    };
   }, [dispatch, id]);
 
   const averageRating = calculateAverageRating(comments);
@@ -268,7 +272,6 @@ const ProductCardFull = ({
                         available,
                         rating,
                         oldPrice,
-                        enabled,
                       },
                       itemsWishList,
                       isLogin,
@@ -305,7 +308,7 @@ ProductCardFull.propTypes = {
   name: PropTypes.string.isRequired,
   oldPrice: PropTypes.number.isRequired,
   currentPrice: PropTypes.number.isRequired,
-  description: PropTypes.string.isRequired,
+  description: PropTypes.arrayOf(PropTypes.string),
   categories: PropTypes.string.isRequired,
   id: PropTypes.string.isRequired,
   itemNo: PropTypes.string,

@@ -23,6 +23,7 @@ const PageParams = () => {
     const searchParams = new URLSearchParams(location.search);
     searchParams.set("perPage", page);
     navigate(`?${searchParams.toString()}`);
+    window.scrollTo({ top: 0 });
   }, [location.search, navigate, page]);
 
   useEffect(() => {

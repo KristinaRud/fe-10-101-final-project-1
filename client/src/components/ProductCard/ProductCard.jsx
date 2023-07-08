@@ -80,15 +80,18 @@ const ProductCard = ({
   }, [isAdded, isWishList]);
 
   useEffect(() => {
+    let cleanupFunction = false;
     dispatch(fetchCommentsByProduct(id))
       .unwrap()
       .then((comments) => {
-        setComments(comments);
+        if (!cleanupFunction) setComments(comments);
       });
+    return () => {
+      cleanupFunction = true;
+    };
   }, [dispatch, id]);
 
   const averageRating = calculateAverageRating(comments);
-
   return (
     <>
       {enabled ? (

@@ -41,7 +41,7 @@ export const NewProductsConfig = {
   autoplay: true,
   speed: 500,
   swipeToSlide: true,
-  lazyLoad: true,
+  lazyLoad: false,
   responsive: [
     {
       breakpoint: 1410,
@@ -84,7 +84,6 @@ export const NewProductsConfig = {
 
 export const NewsConfig = {
   dots: false,
-  variableWidth: true,
   infinite: true,
   slidesToShow: 1,
   slidesToScroll: 1,
@@ -102,7 +101,7 @@ export const CategoriesProducts = {
   autoplay: false,
   speed: 500,
   swipeToSlide: true,
-  lazyLoad: true,
+  lazyLoad: false,
   responsive: [
     {
       breakpoint: 1380,

@@ -92,7 +92,7 @@
 .selector__wrapper {
   display: none;
 
-  @media (width <= 375px) {
+  @media (width <= 700px) {
     display: block;
     background-color: #f5f7ff;
     font-weight: bold;

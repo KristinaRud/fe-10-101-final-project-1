@@ -4,11 +4,11 @@
   margin-left: 30px;
 
   @media (width <= 768px) {
-    min-width: 262px;
+    min-width: 212px;
     margin-left: 19px;
   }
 
-  @media (width <= 375px) {
+  @media (width <= 700px) {
     display: none;
   }
 
