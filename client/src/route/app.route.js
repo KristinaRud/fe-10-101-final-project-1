@@ -97,7 +97,7 @@ const AppRoute = () => {
           <Route path=":news" element={<AddNewsForm />} />
         </Route>
         <Route path={"orders"} element={<AdminOrders />} />
-        <Route path={"analytics"} element={<Graphics />} />
+        <Route path={""} element={<Graphics />} />
       </Route>
     </Routes>
   );

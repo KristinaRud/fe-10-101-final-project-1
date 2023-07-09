@@ -1,3 +1,4 @@
+/* eslint-disable react/forbid-prop-types */
 import {
   Chart as ChartJS,
   CategoryScale,
@@ -9,6 +10,7 @@ import {
   Legend,
 } from "chart.js";
 import { Line } from "react-chartjs-2";
+import PropTypes from "prop-types";
 import style from "./LineGraph.module.scss";
 
 ChartJS.register(
@@ -34,7 +36,6 @@ export const options = {
   },
 };
 
-// eslint-disable-next-line react/prop-types
 const LineGraph = ({ dataSum, labels }) => {
   const data = {
     labels,
@@ -52,6 +53,11 @@ const LineGraph = ({ dataSum, labels }) => {
       <Line options={options} data={data} />
     </div>
   );
+};
+
+LineGraph.propTypes = {
+  dataSum: PropTypes.array,
+  labels: PropTypes.array,
 };
 
 export default LineGraph;

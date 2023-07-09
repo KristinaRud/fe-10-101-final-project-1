@@ -1,7 +1,4 @@
 /* eslint-disable no-sequences */
-/* eslint-disable no-undef */
-/* eslint-disable react/jsx-no-undef */
-// попередні імпорти та код...
 import {
   Chart as ChartJS,
   CategoryScale,
@@ -93,8 +90,6 @@ const Graphics = () => {
         if (index === -1) {
           updatedLabels.push(day);
         }
-
-        // eslint-disable-next-line no-restricted-syntax, guard-for-in
         // eslint-disable-next-line no-restricted-syntax, guard-for-in
         for (const key in category) {
           const datasetIndex = updatedDatasets.findIndex(
@@ -110,7 +105,6 @@ const Graphics = () => {
                 Math.random() * 256,
               )}, 0.5)`,
             });
-            // eslint-disable-next-line no-dupe-else-if
           } else if (
             index !== -1 &&
             datasetIndex !== -1 &&
@@ -170,8 +164,7 @@ const Graphics = () => {
                 <Bar options={options} data={data} />
               </div>
               <PieGraph
-                // eslint-disable-next-line no-unsafe-optional-chaining
-                quantity={+orders?.ordersQuantity}
+                quantity={orders?.ordersQuantity}
                 countAuth={countAuth}
               />
             </div>

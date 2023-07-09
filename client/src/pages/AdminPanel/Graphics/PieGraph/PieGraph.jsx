@@ -23,8 +23,7 @@ const PieGraph = ({ quantity, countAuth }) => {
     labels: ["Authorize", "Non authorize"],
     datasets: [
       {
-        label: "# Quality",
-        // eslint-disable-next-line no-unsafe-optional-chaining
+        label: "# Number of customers",
         data: [countAuth, quantity - countAuth],
         backgroundColor: ["rgba(255, 99, 132, 0.2)", "rgba(54, 162, 235, 0.2)"],
         borderColor: ["rgba(255, 99, 132, 1)", "rgba(54, 162, 235, 1)"],
