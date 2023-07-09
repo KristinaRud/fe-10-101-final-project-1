@@ -1,4 +1,7 @@
-/* eslint-disable no-return-assign */
+/* eslint-disable no-sequences */
+/* eslint-disable no-undef */
+/* eslint-disable react/jsx-no-undef */
+// попередні імпорти та код...
 import {
   Chart as ChartJS,
   CategoryScale,
@@ -9,7 +12,6 @@ import {
   Legend,
 } from "chart.js";
 import { Bar } from "react-chartjs-2";
-// import faker from "faker";
 import { useDispatch, useSelector } from "react-redux";
 import { useEffect, useState } from "react";
 import { Container, Box, CircularProgress } from "@mui/material";
@@ -38,6 +40,10 @@ export const options = {
   },
 };
 
+const numberOfCategories = ({ categories }, category) => {
+  category[categories] += 1;
+};
+
 const Graphics = () => {
   const { orders } = useSelector((state) => state.orders);
   const catalogs = useSelector(allCategoriesSelector);
@@ -46,10 +52,77 @@ const Graphics = () => {
 
   useEffect(() => {
     dispatch(fetchCategories());
-  }, [dispatch, isLoading]);
+  }, [dispatch]);
 
   const [labels, setLabels] = useState([]);
   const [datasets, setDatasets] = useState([]);
+
+  useEffect(() => {
+    if (catalogs?.length > 0 && orders?.orders?.length > 0) {
+      const updatedLabels = [];
+      const updatedDatasets = [];
+
+      orders?.orders?.forEach((el) => {
+        const category = catalogs.reduce(
+          // eslint-disable-next-line no-return-assign, prettier/prettier
+          (catalogs, n) => ((catalogs[n.name] = 0), catalogs),
+          {},
+        );
+        const day = el.date.replace(/T.*/, "");
+        orders?.orders?.forEach((el) => {
+          const dayCompare = el.date.replace(/T.*/, "");
+          if (dayCompare === day) {
+            el.products?.forEach(({ product }) => {
+              numberOfCategories(product, category);
+            });
+          }
+        });
+
+        const index = updatedLabels.findIndex((d) => d === day);
+        if (index === -1) {
+          updatedLabels.push(day);
+        }
+
+        // eslint-disable-next-line no-restricted-syntax, guard-for-in
+        console.log(category);
+        // eslint-disable-next-line no-restricted-syntax, guard-for-in
+        for (const key in category) {
+          const datasetIndex = updatedDatasets.findIndex(
+            (d) => d.label === key,
+          );
+          if (index === -1 && datasetIndex === -1) {
+            updatedDatasets.push({
+              label: key,
+              data: [category[key]],
+              backgroundColor: `rgba(${Math.floor(
+                Math.random() * 256,
+              )}, ${Math.floor(Math.random() * 256)}, ${Math.floor(
+                Math.random() * 256,
+              )}, 0.5)`,
+            });
+            // eslint-disable-next-line no-dupe-else-if
+          } else if (
+            index !== -1 &&
+            datasetIndex !== -1 &&
+            updatedDatasets[datasetIndex].data.findIndex(
+              (d) => d === category[key],
+            ) === -1
+          ) {
+            updatedDatasets[datasetIndex].data.push(category[key]);
+          }
+        }
+      });
+
+      setLabels(updatedLabels);
+      setDatasets(updatedDatasets);
+    }
+  }, [catalogs, orders]);
+
+  console.log(labels, datasets);
+  const data = {
+    labels,
+    datasets,
+  };
 
   if (isLoading || (!catalogs?.length > 0 && !orders?.orders?.length > 0)) {
     return (
@@ -59,64 +132,7 @@ const Graphics = () => {
     );
   }
 
-  const numberOfCategories = ({ categories }, category) => {
-    category[categories] += 1;
-  };
-
-  if (catalogs?.length > 0 && orders?.orders?.length > 0) {
-    orders?.orders?.forEach((el) => {
-      const category = catalogs.reduce(
-        // eslint-disable-next-line no-sequences, prettier/prettier
-        (catalogs, n) => ((catalogs[n.name] = 0), catalogs),
-        {},
-      );
-      const day = el.date.replace(/T.*/, "");
-      orders?.orders?.forEach((el) => {
-        const dayCompare = el.date.replace(/T.*/, "");
-        if (dayCompare === day) {
-          el.products?.forEach(({ product }) => {
-            numberOfCategories(product, category);
-          });
-        }
-      });
-      // category.day = day;
-      // const index = labels?.some((d) => d === day);
-      if (labels?.findIndex((d) => d === day) === -1) {
-        setLabels((prev) => [...prev, day]);
-        // eslint-disable-next-line no-restricted-syntax, guard-for-in
-        for (const key in category) {
-          setDatasets((current) => {
-            const dataSet = [...current];
-            const index = dataSet?.findIndex((d) => d.label === key);
-            if (index === -1) {
-              dataSet.push({
-                label: key,
-                data: [category[key]],
-                // eslint-disable-next-line prettier/prettier
-                backgroundColor: `rgba(${Math.floor(
-                  Math.random() * 256,
-                )}, ${Math.floor(Math.random() * 256)}, ${Math.floor(
-                  Math.random() * 256,
-                )}, 0.5)`,
-              });
-            } else {
-              dataSet[index].data.push(category[key]);
-            }
-            return dataSet;
-          });
-        }
-      }
-      // const sortArr = arr.filter((it, index) => index === arr.indexOf(it = it.trim()));
-    });
-  }
-
-  console.log(labels, datasets);
-  const data = {
-    labels,
-    datasets,
-  };
-
-  if (!datasets && !labels) {
+  if (!data) {
     return <div>Loading...</div>;
     // eslint-disable-next-line no-else-return
   } else {

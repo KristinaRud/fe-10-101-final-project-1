@@ -86,6 +86,12 @@ const DrawerApp = ({ open, handleDrawerToggle }) => {
           link="/orders?perPage=10&startPage=1&sort=-date"
           icon={<TocIcon />}
         />
+        <SidebarListItem
+          title="Analytics"
+          open={open}
+          link="/analytics"
+          icon={<TocIcon />}
+        />
       </List>
     </Drawer>
   );
