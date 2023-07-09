@@ -1,5 +1,10 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { fetchPartners } from "../actionCreator/partners.actionCreator";
+import {
+  fetchPartners,
+  addPartners,
+  updatePartners,
+  deletePartners,
+} from "../actionCreator/partners.actionCreator";
 
 const partnersSlice = createSlice({
   name: "partners",
@@ -9,7 +14,19 @@ const partnersSlice = createSlice({
     builder.addCase(fetchPartners.fulfilled, (state, action) => {
       return action.payload;
     });
+    builder.addCase(addPartners.fulfilled, (state, action) => {
+      state.push(action.payload);
+    });
+    builder.addCase(updatePartners.fulfilled, (state, action) => {
+      return state.map((item) =>
+        item._id === action.payload._id ? action.payload : item,
+      );
+    });
+    builder.addCase(deletePartners.fulfilled, (state, action) => {
+      return state.filter((item) => {
+        return item.customId !== action.payload;
+      });
+    });
   },
 });
-
 export default partnersSlice.reducer;

@@ -34,7 +34,7 @@ export const CommentsConfig = {
 
 export const NewProductsConfig = {
   dots: false,
-  variableWidth: true,
+  variableWidth: false,
   infinite: true,
   slidesToShow: 6,
   slidesToScroll: 1,
@@ -101,7 +101,7 @@ export const CategoriesProducts = {
   autoplay: false,
   speed: 500,
   swipeToSlide: true,
-  lazyLoad: false,
+  lazyLoad: true,
   responsive: [
     {
       breakpoint: 1380,

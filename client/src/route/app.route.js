@@ -30,6 +30,9 @@ import AddNewFiltersForm from "../components/Admin/Filters/AddNewFiltersForm/Add
 import AdminNews from "../pages/AdminPanel/News/AdminNews";
 import NewsTable from "../components/Admin/News/NewsTable/NewsTable";
 import AddNewsForm from "../components/Admin/News/AddNewsForm/AddNewsForm";
+import AdminPartners from "../pages/AdminPanel/Partners/AdminPartners";
+import PartnersTable from "../components/Admin/Partners/PartnersTable/PartnersTable";
+import AddPartnersForm from "../components/Admin/Partners/AddPartnersForm/AddPartnersForm";
 import AdminOrders from "../pages/AdminPanel/Orders/AdminOrders";
 import UnsubscribePage from "../pages/Unsubscribe/UnsubscribePage";
 
@@ -94,6 +97,11 @@ const AppRoute = () => {
           <Route path="" element={<NewsTable />} />
           <Route path="new" element={<AddNewsForm />} />
           <Route path=":news" element={<AddNewsForm />} />
+        </Route>
+        <Route path={"partners"} element={<AdminPartners />}>
+          <Route path="" element={<PartnersTable />} />
+          <Route path="new" element={<AddPartnersForm />} />
+          <Route path=":partners" element={<AddPartnersForm />} />
         </Route>
         <Route path={"orders"} element={<AdminOrders />} />
       </Route>
