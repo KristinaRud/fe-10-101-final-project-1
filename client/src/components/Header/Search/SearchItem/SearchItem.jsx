@@ -9,8 +9,11 @@ const SearchItem = ({
   image,
   name,
   currentPrice,
-  handleClickItem,
+  setListOpen,
 }) => {
+  const handleClickItem = () => {
+    setListOpen(false);
+  };
   return (
     <Link to={`/${categories.toLowerCase()}/${id}`} onClick={handleClickItem}>
       <ListItem className={s.card}>
@@ -38,7 +41,7 @@ SearchItem.propTypes = {
   image: PropTypes.string.isRequired,
   name: PropTypes.string.isRequired,
   currentPrice: PropTypes.number.isRequired,
-  handleClickItem: PropTypes.func.isRequired,
+  setListOpen: PropTypes.func.isRequired,
 };
 
 export default SearchItem;
