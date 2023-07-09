@@ -39,7 +39,7 @@ export const options = {
     },
     title: {
       display: true,
-      text: "Chart.js Bar Chart",
+      text: "Sold goods by category per day",
     },
   },
 };
@@ -61,12 +61,14 @@ const Graphics = () => {
   const [labels, setLabels] = useState([]);
   const [datasets, setDatasets] = useState([]);
   const [countAuth, setCountAuth] = useState(0);
+  const [totalSum, setTotalSum] = useState(0);
 
   useEffect(() => {
     if (catalogs?.length > 0 && orders?.orders?.length > 0) {
       const updatedLabels = [];
       const updatedDatasets = [];
       let countAuthorizeCustom = 0;
+      const price = [];
       orders?.orders?.forEach((el) => {
         countAuthorizeCustom =
           el.customerId !== undefined
@@ -119,11 +121,29 @@ const Graphics = () => {
             updatedDatasets[datasetIndex].data.push(category[key]);
           }
         }
+
+        orders?.orders?.forEach((el) => {
+          updatedLabels?.forEach((d, index) => {
+            const dayCompare = el.date.replace(/T.*/, "");
+            if (
+              d === dayCompare &&
+              price.findIndex((d) => d === price[index]) !== -1
+            ) {
+              price[index] += el.totalSum;
+            } else if (
+              d === dayCompare &&
+              price.findIndex((d) => d === price[index]) === -1
+            ) {
+              price.push(el.totalSum);
+            }
+          });
+        });
       });
 
       setLabels(updatedLabels);
       setDatasets(updatedDatasets);
       setCountAuth(countAuthorizeCustom);
+      setTotalSum(price);
     }
   }, [catalogs, orders]);
 
@@ -134,30 +154,30 @@ const Graphics = () => {
 
   return (
     <Container>
-      <div>
-        {(isLoading || (labels.length === 0 && datasets.length === 0)) && (
-          <Box sx={{ margin: "40px" }} display="flex" justifyContent="center">
-            <CircularProgress />
-          </Box>
+      {(isLoading ||
+        (labels.length === 0 && datasets.length === 0 && totalSum === 0)) && (
+        <Box sx={{ margin: "40px" }} display="flex" justifyContent="center">
+          <CircularProgress />
+        </Box>
+      )}
+      {!isLoading &&
+        labels.length > 0 &&
+        datasets.length > 0 &&
+        totalSum.length > 0 && (
+          <>
+            <div className={style.group}>
+              <div className={style.bar}>
+                <Bar options={options} data={data} />
+              </div>
+              <PieGraph
+                // eslint-disable-next-line no-unsafe-optional-chaining
+                quantity={+orders?.ordersQuantity}
+                countAuth={countAuth}
+              />
+            </div>
+            <LineGraph dataSum={totalSum} labels={labels} />
+          </>
         )}
-        {labels.length > 0 && datasets.length > 0 && (
-          <div className={style.bar}>
-            <Bar options={options} data={data} />
-          </div>
-        )}
-        {(isLoading ||
-          (orders?.ordersQuantity === undefined &&
-            countAuth === undefined)) && (
-          <Box sx={{ margin: "40px" }} display="flex" justifyContent="center">
-            <CircularProgress />
-          </Box>
-        )}
-        {orders?.ordersQuantity !== undefined && countAuth !== undefined && (
-          // eslint-disable-next-line no-unsafe-optional-chaining
-          <PieGraph quantity={+orders?.ordersQuantity} countAuth={countAuth} />
-        )}
-      </div>
-      <LineGraph />
     </Container>
   );
 };

@@ -5,6 +5,19 @@ import styles from "./PieGraph.module.scss";
 
 ChartJS.register(ArcElement, Tooltip, Legend);
 
+export const options = {
+  responsive: true,
+  plugins: {
+    legend: {
+      position: "top",
+    },
+    title: {
+      display: true,
+      text: "Which customers shopped",
+    },
+  },
+};
+
 const PieGraph = ({ quantity, countAuth }) => {
   const data = {
     labels: ["Authorize", "Non authorize"],
@@ -21,7 +34,7 @@ const PieGraph = ({ quantity, countAuth }) => {
   };
   return (
     <div className={styles.pie}>
-      <Pie data={data} />
+      <Pie data={data} options={options} />
     </div>
   );
 };
