@@ -32,6 +32,7 @@ import NewsTable from "../components/Admin/News/NewsTable/NewsTable";
 import AddNewsForm from "../components/Admin/News/AddNewsForm/AddNewsForm";
 import AdminOrders from "../pages/AdminPanel/Orders/AdminOrders";
 import UnsubscribePage from "../pages/Unsubscribe/UnsubscribePage";
+import Graphics from "../pages/AdminPanel/Graphics/Graphics";
 
 const AppRoute = () => {
   const { isLogin } = useSelector(selectCustomers);
@@ -96,6 +97,7 @@ const AppRoute = () => {
           <Route path=":news" element={<AddNewsForm />} />
         </Route>
         <Route path={"orders"} element={<AdminOrders />} />
+        <Route path={"analytics"} element={<Graphics />} />
       </Route>
     </Routes>
   );

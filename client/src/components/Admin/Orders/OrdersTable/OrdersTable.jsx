@@ -18,6 +18,10 @@ const breadcrumbs = [
     url: "/admin/orders",
     label: "Orders",
   },
+  {
+    url: "/admin/analytics",
+    label: "Analytics",
+  },
 ];
 
 const OrdersTable = () => {
