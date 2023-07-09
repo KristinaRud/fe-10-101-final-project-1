@@ -10,6 +10,7 @@ import {
   Title,
   Tooltip,
   Legend,
+  ArcElement,
 } from "chart.js";
 import { Bar } from "react-chartjs-2";
 import { useDispatch, useSelector } from "react-redux";
@@ -17,6 +18,9 @@ import { useEffect, useState } from "react";
 import { Container, Box, CircularProgress } from "@mui/material";
 import { allCategoriesSelector } from "../../../store/selectors/catalog.selector";
 import { fetchCategories } from "../../../store/actionCreator/catalog.actionCreator";
+import PieGraph from "./PieGraph/PieGraph";
+import LineGraph from "./LineGraph/LineGraph";
+import style from "./Graphics.module.scss";
 
 ChartJS.register(
   CategoryScale,
@@ -25,8 +29,8 @@ ChartJS.register(
   Title,
   Tooltip,
   Legend,
+  ArcElement,
 );
-
 export const options = {
   responsive: true,
   plugins: {
@@ -56,13 +60,18 @@ const Graphics = () => {
 
   const [labels, setLabels] = useState([]);
   const [datasets, setDatasets] = useState([]);
+  const [countAuth, setCountAuth] = useState(0);
 
   useEffect(() => {
     if (catalogs?.length > 0 && orders?.orders?.length > 0) {
       const updatedLabels = [];
       const updatedDatasets = [];
-
+      let countAuthorizeCustom = 0;
       orders?.orders?.forEach((el) => {
+        countAuthorizeCustom =
+          el.customerId !== undefined
+            ? countAuthorizeCustom + 1
+            : countAuthorizeCustom;
         const category = catalogs.reduce(
           // eslint-disable-next-line no-return-assign, prettier/prettier
           (catalogs, n) => ((catalogs[n.name] = 0), catalogs),
@@ -84,7 +93,6 @@ const Graphics = () => {
         }
 
         // eslint-disable-next-line no-restricted-syntax, guard-for-in
-        console.log(category);
         // eslint-disable-next-line no-restricted-syntax, guard-for-in
         for (const key in category) {
           const datasetIndex = updatedDatasets.findIndex(
@@ -115,33 +123,43 @@ const Graphics = () => {
 
       setLabels(updatedLabels);
       setDatasets(updatedDatasets);
+      setCountAuth(countAuthorizeCustom);
     }
   }, [catalogs, orders]);
 
-  console.log(labels, datasets);
   const data = {
     labels,
     datasets,
   };
 
-  if (isLoading || (!catalogs?.length > 0 && !orders?.orders?.length > 0)) {
-    return (
-      <Box sx={{ margin: "40px" }} display="flex" justifyContent="center">
-        <CircularProgress />
-      </Box>
-    );
-  }
-
-  if (!data) {
-    return <div>Loading...</div>;
-    // eslint-disable-next-line no-else-return
-  } else {
-    return (
-      <Container>
-        <Bar options={options} data={data} />
-      </Container>
-    );
-  }
+  return (
+    <Container>
+      <div>
+        {(isLoading || (labels.length === 0 && datasets.length === 0)) && (
+          <Box sx={{ margin: "40px" }} display="flex" justifyContent="center">
+            <CircularProgress />
+          </Box>
+        )}
+        {labels.length > 0 && datasets.length > 0 && (
+          <div className={style.bar}>
+            <Bar options={options} data={data} />
+          </div>
+        )}
+        {(isLoading ||
+          (orders?.ordersQuantity === undefined &&
+            countAuth === undefined)) && (
+          <Box sx={{ margin: "40px" }} display="flex" justifyContent="center">
+            <CircularProgress />
+          </Box>
+        )}
+        {orders?.ordersQuantity !== undefined && countAuth !== undefined && (
+          // eslint-disable-next-line no-unsafe-optional-chaining
+          <PieGraph quantity={+orders?.ordersQuantity} countAuth={countAuth} />
+        )}
+      </div>
+      <LineGraph />
+    </Container>
+  );
 };
 
 export default Graphics;
