@@ -126,7 +126,7 @@ const NewsTableRow = ({ row }) => {
         aria-describedby="alert-dialog-description"
       >
         <DialogTitle id="alert-dialog-title">
-          Delete filter {row.customId}?
+          Delete news {row.customId}?
         </DialogTitle>
         <DialogContent>
           <DialogContentText id="alert-dialog-description">

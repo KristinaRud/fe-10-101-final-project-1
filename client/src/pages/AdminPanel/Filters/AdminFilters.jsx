@@ -17,7 +17,7 @@ const AdminFilters = () => {
   }, [dispatch]);
   return (
     <Container>
-      <TitleOfCollections collection={"Filers"} />
+      <TitleOfCollections collection={"Filters"} />
       <Outlet />
     </Container>
   );
