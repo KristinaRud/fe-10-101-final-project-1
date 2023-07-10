@@ -35,6 +35,7 @@ import PartnersTable from "../components/Admin/Partners/PartnersTable/PartnersTa
 import AddPartnersForm from "../components/Admin/Partners/AddPartnersForm/AddPartnersForm";
 import AdminOrders from "../pages/AdminPanel/Orders/AdminOrders";
 import UnsubscribePage from "../pages/Unsubscribe/UnsubscribePage";
+import Graphics from "../pages/AdminPanel/Graphics/Graphics";
 
 const AppRoute = () => {
   const { isLogin } = useSelector(selectCustomers);
@@ -104,6 +105,7 @@ const AppRoute = () => {
           <Route path=":partners" element={<AddPartnersForm />} />
         </Route>
         <Route path={"orders"} element={<AdminOrders />} />
+        <Route path={""} element={<Graphics />} />
       </Route>
     </Routes>
   );
