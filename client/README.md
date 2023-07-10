@@ -1,75 +1,65 @@
-# Getting Started with Create React App
+# _TechnoKit_
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+### Project Description
 
-# Actions Status
+_The Online Tech Store is an e-commerce website developed using React. It allows users to browse and purchase a wide range of technology products. The project includes features such as product search, wish list, product comparison, detailed product pages with sliders and rating/review functionality, newsletter subscription, user account dashboard, and an administrative panel with charts and data management._
 
-![Continuous Integration](https://github.com/KristinaRud/fe-10-101-final-project-1/actions/workflows/CI.yml/badge.svg)
-![Continuous Deployment](https://github.com/KristinaRud/fe-10-101-final-project-1/actions/workflows/CD.yml/badge.svg)
+### Project Deploy
 
-## Available Scripts
+Deploy pf this project you can find <a href="https://technokit-store-0fet.onrender.com/">here</a>.
 
-In the project directory, you can run:
+## Tools and Libraries
 
-### `npm start`
+### Main Tools
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+<div>
+<img src="https://moduscreate.com/wp-content/uploads/2014/03/react-opti.png" width="60%">
+<img src="https://upload.wikimedia.org/wikipedia/commons/3/30/Redux_Logo.png" width="60%">
+<img src="https://miro.medium.com/v2/resize:fit:1358/0*uPdUx0n3GLndmHRQ.jpg" width="60%">
+<img src="https://upload.wikimedia.org/wikipedia/commons/thumb/c/c8/Axios_logo_%282020%29.svg/2560px-Axios_logo_%282020%29.svg.png" width="60%">
+</div>
+<p> 
+ <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript" title="JavaScript" target="_blank" rel="noreferrer"> <img src="https://raw.githubusercontent.com/devicons/devicon/master/icons/javascript/javascript-original.svg" alt="javascript" width="45" height="45"/> </a> 
+  <a href="https://www.w3.org/html/" title="HTML" target="_blank" rel="noreferrer"> <img src="https://raw.githubusercontent.com/devicons/devicon/master/icons/html5/html5-original-wordmark.svg" alt="html5" width="50" height="50"/> </a>
+</p>
 
-The page will reload when you make changes.\
+### Additional Tools
+
+- Emotion
+- Material-UI
+- Formik
+- Chart.js
+- React Google Maps API
+- React OAuth Google
+- reduxjs/toolkit
+- React Slick
+- Yup
+
+## How to run project:
+
+To start the project, you need to:
+
+### `npm install`
+
+Run this command in `root` directory and in `cd client` directory
+
+### `npm start server`
+
+Run this command in `root` directory\
+Runs the server.\
+The server will reload when you make changes.\
 You may also see any lint errors in the console.
 
-### `npm test`
+### `npm run start`
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+Run this command in `cd client` directory\
+Runs the app in the development mode.
+Open [http://localhost:3000](http://localhost:3000) to view it in your browser.\
+The page will reload when you make changes.\
+You may also see any lint errors in the console.
 
 ### `npm run build`
 
 Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
-
+It correctly bundles React in production mode and optimizes the build for the best performance.\
 The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
-
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
-
-### `npm run eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
-
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
-
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)

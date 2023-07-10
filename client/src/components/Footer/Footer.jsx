@@ -254,7 +254,7 @@ const Footer = () => {
             </div>
           </div>
           <div className={`${styles["utility-copy"]} ${styles.copy}`}>
-            <p>Copyright © 2020 Shop Pty. Ltd.</p>
+            <p>Copyright © 2023 Shop Pty. Ltd.</p>
           </div>
         </div>
       </Container>

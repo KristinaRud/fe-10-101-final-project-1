@@ -4,6 +4,8 @@
   max-width: 1400px;
   gap: 30px;
   padding: 15px;
+  margin: 0 auto;
+  justify-content: space-between;
 
   @media screen and (width <= 480px) {
     flex-direction: column;
@@ -13,7 +15,7 @@
 
 .form-wrapper {
   width: 100%;
-  max-width: 916px;
+  max-width: 565px;
 }
 
 .title-wrapper {
