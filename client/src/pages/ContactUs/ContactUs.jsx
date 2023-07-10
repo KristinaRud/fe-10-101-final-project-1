@@ -7,6 +7,7 @@ import Modal from "@mui/material/Modal";
 import Backdrop from "@mui/material/Backdrop";
 import Fade from "@mui/material/Fade";
 import Box from "@mui/material/Box";
+import { Link } from "react-router-dom";
 import ShopInfoStatic from "../../components/ShopInfoStatic/ShopInfoStatic";
 import styles from "./ContactUs.module.scss";
 import { initialValues, validationSchema } from "./ContactUs.helpers-config";
@@ -124,6 +125,9 @@ const ContactUs = () => {
               Our agent will call you during 1 hour.
               <br />
               Please, be patient.
+              <Link to="/" className={styles.button}>
+                Back home
+              </Link>
             </Typography>
           </Box>
         </Fade>
