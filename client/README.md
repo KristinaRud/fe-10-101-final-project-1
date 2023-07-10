@@ -13,10 +13,10 @@ Deploy pf this project you can find <a href="https://technokit-store-0fet.onrend
 ### Main Tools
 
 <div>
-<img src="https://moduscreate.com/wp-content/uploads/2014/03/react-opti.png" width="60%">
-<img src="https://upload.wikimedia.org/wikipedia/commons/3/30/Redux_Logo.png" width="60%">
-<img src="https://miro.medium.com/v2/resize:fit:1358/0*uPdUx0n3GLndmHRQ.jpg" width="60%">
-<img src="https://upload.wikimedia.org/wikipedia/commons/thumb/c/c8/Axios_logo_%282020%29.svg/2560px-Axios_logo_%282020%29.svg.png" width="60%">
+<img src="https://moduscreate.com/wp-content/uploads/2014/03/react-opti.png" width="100px">
+<img src="https://upload.wikimedia.org/wikipedia/commons/3/30/Redux_Logo.png" width="100px">
+<img src="https://miro.medium.com/v2/resize:fit:1358/0*uPdUx0n3GLndmHRQ.jpg" width="100px">
+<img src="https://upload.wikimedia.org/wikipedia/commons/thumb/c/c8/Axios_logo_%282020%29.svg/2560px-Axios_logo_%282020%29.svg.png" width="100px">
 </div>
 <p> 
  <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript" title="JavaScript" target="_blank" rel="noreferrer"> <img src="https://raw.githubusercontent.com/devicons/devicon/master/icons/javascript/javascript-original.svg" alt="javascript" width="45" height="45"/> </a> 
