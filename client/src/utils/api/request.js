@@ -9,6 +9,7 @@ const request = async ({ url, method = "GET", body, headers } = {}) => {
       ? "http://localhost:4000/api"
       : "https://technokit-store-0fet.onrender.com/api"
   }`;
+
   axios.defaults.headers.post["Content-Type"] = "application/json";
 
   if (token) {

@@ -3,9 +3,14 @@ import CatalogComponent from "../components/Footer/CatalogComponent/CatalogCompo
 
 const data = [
   {
-    title: `About Us`,
+    title: `Details`,
     details: (
       <>
+        <li>
+          <Link to="/about" color="inherit">
+            About Us
+          </Link>
+        </li>
         <li>
           <Link to="/terms-of-use" color="inherit">
             Terms and Conditions

@@ -92,6 +92,7 @@ const WishList = () => {
                   available={el.available}
                   rating={Number(el.rating)}
                   oldPrice={el.oldPrice}
+                  enabled={el.enabled}
                 />
               </li>
             ))}

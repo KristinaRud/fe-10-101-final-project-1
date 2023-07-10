@@ -4,7 +4,7 @@ import cn from "classnames";
 import PropTypes from "prop-types";
 import s from "./SignInButton.module.scss";
 
-const SignInButton = ({ className, to = "/sign-in" }) => {
+const SignInButton = ({ className, to = "/login" }) => {
   return (
     <Link to={to}>
       <Button variant="outlined" className={cn(s.btn, className)}>

@@ -20,7 +20,7 @@ const MiniCart = ({ onClick }) => {
     .reduce((prev, curr) => prev + curr, 0);
   const tax = subtotalAmount * 0.08;
   const shipping = 100;
-  const totalAmount = (subtotalAmount + tax + shipping).toFixed(2);
+  const totalAmount = (subtotalAmount + tax + shipping).toLocaleString();
 
   return (
     <div className={styles.cart}>
@@ -64,8 +64,7 @@ const MiniCart = ({ onClick }) => {
               <Typography component="span" fontSize={14} color="#A2A6B0">
                 Subtotal:
               </Typography>
-              {" $"}
-              {totalAmount}
+              {` ${totalAmount} ₴`}
             </p>
             <Link
               to={"/checkout"}

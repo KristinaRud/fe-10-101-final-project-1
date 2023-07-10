@@ -30,12 +30,16 @@ import AddNewFiltersForm from "../components/Admin/Filters/AddNewFiltersForm/Add
 import AdminNews from "../pages/AdminPanel/News/AdminNews";
 import NewsTable from "../components/Admin/News/NewsTable/NewsTable";
 import AddNewsForm from "../components/Admin/News/AddNewsForm/AddNewsForm";
+import AdminPartners from "../pages/AdminPanel/Partners/AdminPartners";
+import PartnersTable from "../components/Admin/Partners/PartnersTable/PartnersTable";
+import AddPartnersForm from "../components/Admin/Partners/AddPartnersForm/AddPartnersForm";
 import AdminOrders from "../pages/AdminPanel/Orders/AdminOrders";
 import UnsubscribePage from "../pages/Unsubscribe/UnsubscribePage";
+import Graphics from "../pages/AdminPanel/Graphics/Graphics";
 
 const AppRoute = () => {
-  const { isLogin, data } = useSelector(selectCustomers);
-
+  const { isLogin } = useSelector(selectCustomers);
+  const isAdmin = window.localStorage.getItem("isAdmin");
   return (
     <Routes>
       <Route path="/" element={<Layout />}>
@@ -52,7 +56,7 @@ const AppRoute = () => {
         <Route path="/contact" element={<ContactUs />} />
         <Route path="/terms-of-use" element={<TermsAndConditions />} />
         <Route
-          path="/account"
+          path="/account/*"
           element={isLogin ? <AccountPage /> : <LoginPage />}
         />
         <Route
@@ -73,13 +77,7 @@ const AppRoute = () => {
       </Route>
       <Route
         path="/admin"
-        element={
-          Object.keys(data).length > 0 && data.isAdmin ? (
-            <AdminPanel />
-          ) : (
-            <Navigate to="/" />
-          )
-        }
+        element={isAdmin ? <AdminPanel /> : <Navigate to="/" />}
       >
         <Route path="categories" element={<AdminCategories />}>
           <Route path="" element={<CollectionTable />} />
@@ -101,7 +99,13 @@ const AppRoute = () => {
           <Route path="new" element={<AddNewsForm />} />
           <Route path=":news" element={<AddNewsForm />} />
         </Route>
+        <Route path={"partners"} element={<AdminPartners />}>
+          <Route path="" element={<PartnersTable />} />
+          <Route path="new" element={<AddPartnersForm />} />
+          <Route path=":partners" element={<AddPartnersForm />} />
+        </Route>
         <Route path={"orders"} element={<AdminOrders />} />
+        <Route path={""} element={<Graphics />} />
       </Route>
     </Routes>
   );

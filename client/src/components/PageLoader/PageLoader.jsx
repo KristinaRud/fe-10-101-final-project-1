@@ -20,7 +20,6 @@ const PageLoader = () => {
           <Box className={styles.loader__wrapper}>
             <LogoBlue className={styles.loader__logo} />
             <Typography className={styles.loader__text}>TechnoKit</Typography>
-            <></>
           </Box>
         </Container>
       )}

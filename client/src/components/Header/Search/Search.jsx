@@ -47,21 +47,16 @@ const Search = () => {
   };
 
   const handleClear = () => {
-    setFirstSubmit(false);
     formik.setFieldValue("searchQuery", "");
   };
 
   const handleBlur = (event) => {
-    setFirstSubmit(false);
     formik.setFieldValue("searchQuery", "");
     setMenuOpen(false);
     if (!listRef.current?.contains(event.relatedTarget)) {
       setListOpen(false);
+      setFirstSubmit(false);
     }
-  };
-
-  const handleClickItem = () => {
-    setListOpen(false);
   };
 
   return (
@@ -98,18 +93,22 @@ const Search = () => {
       {(menuOpen || listOpen) && firstSubmit && (
         <div ref={listRef}>
           <List className={styles.searchList}>
-            {productsForSearch?.map((product) => (
-              <>
-                <SearchItem
-                  key={product._id}
-                  id={product._id}
-                  image={product.imageUrls[0]}
-                  handleClickItem={handleClickItem}
-                  {...product}
-                />
-                <Divider />
-              </>
-            ))}
+            {productsForSearch?.map((product) => {
+              if (product.enabled) {
+                return (
+                  <Box key={product._id}>
+                    <SearchItem
+                      id={product._id}
+                      image={product.imageUrls[0]}
+                      setListOpen={setListOpen}
+                      {...product}
+                    />
+                    <Divider />
+                  </Box>
+                );
+              }
+              return null;
+            })}
             {productsForSearch?.length === 0 && (
               <Typography variant="body1" sx={{ textAlign: "center" }}>
                 No results found

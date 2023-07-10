@@ -6,13 +6,14 @@ import { useParams } from "react-router-dom";
 import { useSelector } from "react-redux";
 import { allCategoriesSelector } from "../../../../../store/selectors/catalog.selector";
 import { selectNews } from "../../../../../store/selectors/news.selector";
+import { selectPartners } from "../../../../../store/selectors/partners.selector";
 
 const CategoryImage = ({ setFieldValue, imgUrl, setImgUrl }) => {
   const [loading, setLoading] = useState(false);
   const params = useParams();
   const data = useSelector(allCategoriesSelector);
   const news = useSelector(selectNews);
-
+  const partners = useSelector(selectPartners);
   const onDrop = useCallback(
     (acceptedFiles) => {
       setLoading(true);
@@ -30,7 +31,7 @@ const CategoryImage = ({ setFieldValue, imgUrl, setImgUrl }) => {
           setLoading(false);
           setFieldValue("imgUrl", data.url);
         })
-        .catch((err) => console.log(err));
+        .catch(() => setLoading(true));
     },
     [setFieldValue, setImgUrl],
   );
@@ -49,7 +50,17 @@ const CategoryImage = ({ setFieldValue, imgUrl, setImgUrl }) => {
       setFieldValue("imgUrl", selectNews?.imageUrl);
       setFieldValue("customId", selectNews?.customId);
     }
-  }, [params, data, setFieldValue, setImgUrl, news]);
+    if (params?.partners) {
+      const partner = partners.find(
+        (item) => item.customId === params.partners,
+      );
+      setImgUrl(partner?.imageUrl);
+      setFieldValue("imageUrl", partner?.imageUrl);
+      setFieldValue("url", partner?.url);
+      setFieldValue("customId", partner?.customId);
+    }
+  }, [params, partners, data, setFieldValue, setImgUrl, news]);
+
   const {
     getRootProps,
     getInputProps,

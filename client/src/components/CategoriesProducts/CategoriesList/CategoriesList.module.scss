@@ -1,13 +1,14 @@
 .list {
   display: flex;
   flex-direction: column;
-  gap: 30px
+  gap: 30px;
+  max-height: 1496px;
 }
 
 .wrapper {
   display: flex;
 
   @media (width <= 480px) {
-   display: block;
+    display: block;
   }
 }

@@ -7,6 +7,7 @@ import DashboardIcon from "@mui/icons-material/Dashboard";
 import CategoryIcon from "@mui/icons-material/Category";
 import FilterAltIcon from "@mui/icons-material/FilterAlt";
 import NewspaperIcon from "@mui/icons-material/Newspaper";
+import HandshakeIcon from "@mui/icons-material/Handshake";
 import TocIcon from "@mui/icons-material/Toc";
 import { ReactComponent as Logo } from "../../../../components/Header/icons/logo-blue.svg";
 import { DrawerHeader, Drawer } from "./DrawerStyle";
@@ -70,6 +71,12 @@ const DrawerApp = ({ open, handleDrawerToggle }) => {
           link="/news"
           icon={<NewspaperIcon />}
         />
+        <SidebarListItem
+          title="Partners"
+          open={open}
+          link="/partners"
+          icon={<HandshakeIcon />}
+        />
         <Typography
           variant="body2"
           noWrap
@@ -83,7 +90,7 @@ const DrawerApp = ({ open, handleDrawerToggle }) => {
         <SidebarListItem
           title="Orders"
           open={open}
-          link="/orders"
+          link="/orders?perPage=10&startPage=1&sort=-date"
           icon={<TocIcon />}
         />
       </List>

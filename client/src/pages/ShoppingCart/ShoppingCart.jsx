@@ -191,7 +191,7 @@ const ShoppingCart = () => {
                   className={classes.boxContainer}
                 >
                   <Typography align="right">
-                    {item.currentPrice}.00 ₴
+                    {item.currentPrice.toLocaleString()}.00 ₴
                   </Typography>
                   <TextField
                     type="number"
@@ -231,7 +231,8 @@ const ShoppingCart = () => {
                     }
                   />
                   <Typography align="right">
-                    {item.currentPrice * item.cartQuantity}.00 ₴
+                    {(item.currentPrice * item.cartQuantity).toLocaleString()}
+                    .00 ₴
                   </Typography>
                   <IconButton
                     aria-label="Delete"

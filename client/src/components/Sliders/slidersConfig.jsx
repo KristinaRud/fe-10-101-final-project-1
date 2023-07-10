@@ -34,14 +34,14 @@ export const CommentsConfig = {
 
 export const NewProductsConfig = {
   dots: false,
-  variableWidth: true,
+  variableWidth: false,
   infinite: true,
   slidesToShow: 6,
   slidesToScroll: 1,
   autoplay: true,
   speed: 500,
   swipeToSlide: true,
-  lazyLoad: true,
+  lazyLoad: false,
   responsive: [
     {
       breakpoint: 1410,
@@ -84,7 +84,6 @@ export const NewProductsConfig = {
 
 export const NewsConfig = {
   dots: false,
-  variableWidth: true,
   infinite: true,
   slidesToShow: 1,
   slidesToScroll: 1,

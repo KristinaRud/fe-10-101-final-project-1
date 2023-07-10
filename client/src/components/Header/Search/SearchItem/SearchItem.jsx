@@ -9,8 +9,11 @@ const SearchItem = ({
   image,
   name,
   currentPrice,
-  handleClickItem,
+  setListOpen,
 }) => {
+  const handleClickItem = () => {
+    setListOpen(false);
+  };
   return (
     <Link to={`/${categories.toLowerCase()}/${id}`} onClick={handleClickItem}>
       <ListItem className={s.card}>
@@ -25,7 +28,7 @@ const SearchItem = ({
           {name}
         </Typography>
         <Typography variant="h5" component="div" fontSize="12px">
-          {currentPrice}.00 ₴
+          {currentPrice.toLocaleString()}.00 ₴
         </Typography>
       </ListItem>
     </Link>
@@ -38,7 +41,7 @@ SearchItem.propTypes = {
   image: PropTypes.string.isRequired,
   name: PropTypes.string.isRequired,
   currentPrice: PropTypes.number.isRequired,
-  handleClickItem: PropTypes.func.isRequired,
+  setListOpen: PropTypes.func.isRequired,
 };
 
 export default SearchItem;

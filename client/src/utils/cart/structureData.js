@@ -10,6 +10,7 @@ const structureDataToStore = (action) => {
         cartQuantity: item.cartQuantity,
         itemNo: item.product.itemNo,
         categories: item.product.categories,
+        enabled: item.product.enabled,
       };
     });
     return [...itemsCart];
@@ -29,6 +30,7 @@ const structureDataWishList = (action) => {
       rating: item.rating,
       available: item.enabled,
       categories: item.categories,
+      enabled: item.enabled,
     };
   });
   return [...itemsWishList];

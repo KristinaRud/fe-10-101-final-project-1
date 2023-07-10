@@ -1,6 +1,7 @@
 import { useState } from "react";
 import PropTypes from "prop-types";
 import cx from "classnames";
+import { Link } from "react-router-dom";
 import { itemsDashboardConfig } from "./ItemsDashboardConfig";
 import styles from "./LeftSideMenu.module.scss";
 
@@ -18,7 +19,7 @@ const MenuDashboard = ({ onItemClick }) => {
       className={cx(styles.item, el === activeItem && styles.active)}
       onClick={() => handleItemClick(el)}
     >
-      {el.item}
+      <Link to={`/account${el.link}`}>{el.item}</Link>
     </li>
   ));
 
