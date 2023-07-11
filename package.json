@@ -4,7 +4,7 @@
   "description": "Back End code for final projects of Front End groups\u001b[D\u001b[D\u001b[D\u001b[D\u001b[D\u001b[D\u001b[D\u001b[D\u001b[D\u001b[D\u001b[D\u001b[D\u001b[D\u001b[D\u001b[D\u001b[DDANIT\u001b[3~ Front End groups",
   "main": "server.js",
   "scripts": {
-    "build": "cd ./client && npm install && npm run build && cd ../ && npm install",
+    "build": "npm install && npm start && cd ./client && npm i && npm i react-chartjs-2 && npm run build",
     "test": "echo \"Error: no test specified\" && exit 1",
     "server": "nodemon server.js",
     "start": "node server.js",
