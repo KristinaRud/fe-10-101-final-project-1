@@ -1,10 +1,10 @@
 {
   "name": "fe-final-backend",
   "version": "1.0.0",
-  "description": "Back End code for final projects of Front End groups\u001b[D\u001b[D\u001b[D\u001b[D\u001b[D\u001b[D\u001b[D\u001b[D\u001b[D\u001b[D\u001b[D\u001b[D\u001b[D\u001b[D\u001b[D\u001b[DDANIT\u001b[3~ Front End groups",
+  "description": "The Online Tech Store is an e-commerce website developed using React. It allows users to browse and purchase a wide range of technology products. The project includes features such as product search, wish list, product comparison, detailed product pages with sliders and rating/review functionality, newsletter subscription, user account dashboard, and an administrative panel with charts and data management.",
   "main": "server.js",
   "scripts": {
-    "build": "npm install && npm start && cd ./client && npm i react-chartjs-2 && npm i && npm run build",
+    "build": "npm install && cd ./client && npm i && npm run build",
     "test": "echo \"Error: no test specified\" && exit 1",
     "server": "nodemon server.js",
     "start": "node server.js",
